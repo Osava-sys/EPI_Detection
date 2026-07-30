@@ -1,0 +1,82 @@
+# ---------------------------------------------------------------------------
+# Configuration d'entrainement — detection EPI
+#
+# Cible materielle de reference : NVIDIA RTX 5080 Laptop (16 Go VRAM),
+# 64 Go de RAM, 24 coeurs logiques, Windows 11.
+# Toutes ces valeurs sont surchargeables en ligne de commande, par exemple :
+#   python -m ppe_detection.train --epochs 150 --batch 24
+# ---------------------------------------------------------------------------
+
+# --- Donnees ---------------------------------------------------------------
+# Dataset DERIVE (labels normalises a 5 champs), jamais l'export original.
+data: artifacts/dataset_detection/data.yaml
+
+# --- Modele ----------------------------------------------------------------
+# yolo26s = compromis vitesse/precision retenu comme baseline. Alternatives :
+# yolo26n (plus rapide), yolo26m / yolo26l (plus precis, plus gourmands).
+model: yolo26s.pt
+pretrained: true
+
+# --- Boucle d'entrainement -------------------------------------------------
+imgsz: 640
+epochs: 100
+# batch: -1 laisse Ultralytics calibrer automatiquement (~60 % de la VRAM).
+# Sur RTX 5080 16 Go a imgsz=640, une valeur mesuree de 32 est un bon point de
+# depart si l'auto-batch se montre trop agressif.
+batch: -1
+device: auto            # auto | cpu | cuda | 0 | 0,1
+# Sous Windows, chaque worker DataLoader est un processus complet : au-dela de
+# 8 le cout de demarrage depasse le gain. 8 convient a 24 coeurs logiques.
+workers: 8
+seed: 42
+deterministic: true
+patience: 25            # early stopping
+val: true
+plots: true
+save_period: -1         # -1 = ne sauvegarde que best.pt et last.pt
+resume: false
+
+# --- Optimisation ----------------------------------------------------------
+optimizer: auto         # auto | SGD | Adam | AdamW | NAdam | RMSProp
+lr0: 0.01
+lrf: 0.01               # lr final = lr0 * lrf
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 3.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+cos_lr: false
+
+# --- Performance -----------------------------------------------------------
+amp: true               # precision mixte : indispensable sur Blackwell
+# cache: false | 'disk' | 'ram'. Le dataset fait ~860 Mo d'images ; 'ram' est
+# envisageable avec 64 Go, mais reste desactive par defaut car le cache RAM
+# d'Ultralytics decompresse les images (empreinte bien superieure a la taille
+# sur disque). Activez 'disk' pour accelerer sans saturer la memoire.
+cache: false
+fraction: 1.0           # fraction du train set utilisee (1.0 = tout)
+
+# --- Augmentations ---------------------------------------------------------
+# Choix guides par l'audit : beaucoup de petits objets (35 % des boites font
+# moins de 1 % de l'image). On evite donc les transformations qui font
+# disparaitre les petits EPI (casques, gants, masques).
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0            # pas de rotation : les EPI ont une orientation stable
+translate: 0.1
+scale: 0.5
+shear: 0.0
+perspective: 0.0
+flipud: 0.0             # pas de retournement vertical (casque toujours en haut)
+fliplr: 0.5
+mosaic: 1.0
+close_mosaic: 10        # desactive la mosaique sur les 10 dernieres epoques
+mixup: 0.0              # melange deux images : nuit aux petits objets
+copy_paste: 0.0         # necessite des masques de segmentation
+erasing: 0.0            # effacement aleatoire : risque de supprimer un petit EPI
+
+# --- Sorties ---------------------------------------------------------------
+project: artifacts/runs
+name: ppe_yolo26s
+exist_ok: false

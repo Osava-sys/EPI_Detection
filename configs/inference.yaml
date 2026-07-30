@@ -1,0 +1,95 @@
+# ---------------------------------------------------------------------------
+# Configuration d'inference et de conformite EPI
+# ---------------------------------------------------------------------------
+
+inference:
+  weights: artifacts/models/best.pt
+  conf: 0.25
+  iou: 0.45
+  imgsz: 640
+  device: auto          # auto | cpu | cuda | 0
+  max_det: 300
+  half: false           # FP16 : accelere sur GPU, sans effet sur CPU
+  agnostic_nms: false
+
+  # Tracker utilise avec --track (video/webcam).
+  #   bytetrack.yaml : rapide, suffisant si les personnes se croisent peu
+  #   botsort.yaml   : plus robuste aux occlusions (re-identification visuelle)
+  tracker: bytetrack.yaml
+
+  # Seuils par classe. Ils ne peuvent que DURCIR le seuil global `conf`
+  # (Ultralytics filtre deja a `conf` avant que ces seuils s'appliquent).
+  # Pour reellement abaisser un seuil par classe, baissez `conf` puis remontez
+  # les autres classes ici.
+  class_conf: {}
+  # Exemple :
+  # class_conf:
+  #   Face Mask: 0.35
+  #   Safety Gloves: 0.40
+
+  # Rendu
+  show_labels: true
+  show_conf: true
+  line_width: null      # null = epaisseur deduite de la taille de l'image
+  font_scale: 0.5
+
+# ---------------------------------------------------------------------------
+# Couche metier : association geometrique EPI <-> personne.
+#
+# AVERTISSEMENT : il s'agit d'une HEURISTIQUE geometrique, pas d'une mesure
+# certaine. Le modele detecte des objets independamment ; rien ne relie
+# formellement un casque a une personne. Les limites sont documentees dans le
+# README (section « Limites de la logique de conformite »).
+# ---------------------------------------------------------------------------
+compliance:
+  enabled: false
+  person_class: Person
+
+  # EPI exiges pour qu'une personne soit declaree conforme.
+  required_ppe:
+    - Safety Helmet
+    - Safety Vest
+
+  association:
+    # Fraction minimale de l'aire de la boite EPI devant se trouver dans la
+    # region attendue de la personne.
+    containment_threshold: 0.50
+    # Hauteur relative de la zone « tete » (depuis le haut de la personne).
+    helmet_region: 0.35
+    # Hauteur relative de la zone « pieds » (depuis le bas de la personne).
+    shoes_region: 0.30
+    # Bornes relatives de la zone « torse ».
+    torso_region: [0.20, 0.80]
+
+  # --- Observabilite : quand peut-on AFFIRMER qu'un EPI manque ? -------------
+  # Ne pas detecter un gilet ne prouve pas son absence. Si la zone concernee
+  # n'est pas observable, le verdict devient « indetermine » au lieu de
+  # « non conforme ». C'est ce qui evite les fausses alertes en masse.
+
+  # Hauteur en pixels minimale d'une zone (tete/torse/pieds) pour que l'absence
+  # d'un EPI y soit affirmable. En dessous, le detecteur ne peut pas resoudre
+  # l'objet, donc son silence n'apprend rien.
+  min_region_height_px: 24
+
+  # Distance au bord du cadre en deca de laquelle une zone est jugee tronquee.
+  # Cas typique : une personne dont la tete depasse par le haut de l'image.
+  edge_margin_px: 2
+
+  # --- Lissage temporel (option --track sur video/webcam) --------------------
+  # Un verdict calcule frame par frame clignote. On ne tranche qu'apres
+  # plusieurs observations concordantes sur une meme personne suivie.
+  temporal_window: 15          # verdicts conserves par personne
+  temporal_min_ratio: 0.70     # majorite exigee pour conclure
+  temporal_min_observations: 5 # verdicts exploitables minimaux avant de conclure
+
+  # Zone attendue par classe d'EPI : head | torso | feet | any
+  region_by_class:
+    Safety Helmet: head
+    Face Mask: head
+    Safety Vest: torso
+    Safety Harness: torso
+    Safety Gloves: any
+    Safety Shoes: feet
+
+  min_person_conf: 0.25
+  min_ppe_conf: 0.25

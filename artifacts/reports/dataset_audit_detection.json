@@ -1,0 +1,1181 @@
+{
+  "generated_at": "2026-07-30T10:01:40.524690+00:00",
+  "environment": {
+    "timestamp_utc": "2026-07-30T10:01:40.524690+00:00",
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_total_memory_gb": 15.92,
+    "ultralytics": "8.4.112",
+    "cv2": "5.0.0",
+    "numpy": "2.4.4",
+    "onnxruntime": "1.28.0"
+  },
+  "dataset": {
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\data.yaml",
+    "root": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection",
+    "num_classes": 7,
+    "class_names": [
+      "Face Mask",
+      "Person",
+      "Safety Gloves",
+      "Safety Harness",
+      "Safety Helmet",
+      "Safety Shoes",
+      "Safety Vest"
+    ],
+    "splits_found": [
+      "test",
+      "train",
+      "valid"
+    ],
+    "splits_expected": [
+      "test",
+      "train",
+      "valid"
+    ],
+    "missing_splits": []
+  },
+  "splits": {
+    "train": {
+      "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\train\\images",
+      "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\train\\labels",
+      "counts": {
+        "images": 4903,
+        "label_files": 4903,
+        "annotations": 17873,
+        "detection_lines": 17873,
+        "polygon_lines": 0,
+        "malformed_lines": 0,
+        "empty_label_files": 0,
+        "images_without_objects": 0,
+        "total_size": "606.5 Mo"
+      },
+      "pairing": {
+        "images_missing_label": 0,
+        "labels_without_image": 0,
+        "missing_label_examples": [],
+        "orphan_label_examples": [],
+        "perfect_match": true
+      },
+      "images": {
+        "extensions": {
+          ".jpg": 4791,
+          ".jpeg": 8,
+          ".png": 104
+        },
+        "unreadable": [],
+        "distinct_resolutions": 256,
+        "most_common_resolutions": [
+          [
+            "640x640",
+            2128
+          ],
+          [
+            "478x850",
+            1103
+          ],
+          [
+            "416x416",
+            629
+          ],
+          [
+            "848x478",
+            174
+          ],
+          [
+            "1204x1600",
+            83
+          ]
+        ],
+        "min_resolution": [
+          62,
+          85
+        ],
+        "max_resolution": [
+          2160,
+          3840
+        ],
+        "aspect_ratio_min": 0.45,
+        "aspect_ratio_max": 2.7955
+      },
+      "classes": {
+        "total_instances": 17873,
+        "per_class": {
+          "Face Mask": 551,
+          "Person": 5389,
+          "Safety Gloves": 1528,
+          "Safety Harness": 811,
+          "Safety Helmet": 3800,
+          "Safety Shoes": 4058,
+          "Safety Vest": 1736
+        },
+        "share_percent": {
+          "Face Mask": 3.08,
+          "Person": 30.15,
+          "Safety Gloves": 8.55,
+          "Safety Harness": 4.54,
+          "Safety Helmet": 21.26,
+          "Safety Shoes": 22.7,
+          "Safety Vest": 9.71
+        },
+        "absent_classes": [],
+        "max_over_min_ratio": 9.78,
+        "majority_class": "Person",
+        "minority_class": "Face Mask"
+      },
+      "issues": {
+        "clamped_minor": 246,
+        "tiny_box": 3
+      },
+      "issue_examples": [
+        {
+          "category": "clamped_minor",
+          "file": "-1001-_png_jpg.rf.QkyeYknf9kTQhUCwKlmN.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1019-_png_jpg.rf.GjypVrKFxMOXH2XCVjGc.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1272-_png_jpg.rf.EEEELmku6x1loRzKqGvK.txt",
+          "line": 10,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1319-_png_jpg.rf.oCQgK6JvufVZPQ7z2w5Q.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1367-_png_jpg.rf.ZTEmByUPJhIvQONYRVS0.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1397-_png_jpg.rf.C1xaQHECnTjBHZtOA5Uq.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1397-_png_jpg.rf.C1xaQHECnTjBHZtOA5Uq.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-173-_png_jpg.rf.otFd1L53vbirUCN1kavq.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2057-_png_jpg.rf.t5LImemRtiyaZD5Qt2Nz.txt",
+          "line": 12,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2156-_png_jpg.rf.AzqgLAmYOgoqgej8JXR1.txt",
+          "line": 10,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-22-_png_jpg.rf.cdlmHyqnybVKPE8PLx2p.txt",
+          "line": 6,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-221-_png_jpg.rf.xyPBp23Sc72lAj3LY178.txt",
+          "line": 12,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2214-_png_jpg.rf.z8A8dAnEmOWB8DmQf2VB.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2232-_png_jpg.rf.jrmpOwQrYNu7WKy4V4OW.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-225-_png_jpg.rf.cgJpqFVyo5sdWKUEMOuv.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2261-_png_jpg.rf.7fyXiLVF6uISBvSiag4h.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2267-_png_jpg.rf.YGTnSS37uTkONkgFLDJM.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2311-_png_jpg.rf.Y1GZiHTCVkMNMX8YKae6.txt",
+          "line": 22,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-237-_png_jpg.rf.20ekib8Lxoxr0u4gKJe5.txt",
+          "line": 6,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2546-_png_jpg.rf.YwRngQUKYYJYQfjzIgGH.txt",
+          "line": 6,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2566-_png_jpg.rf.CaGtEh6cOO0qh4QY46zb.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2721-_png_jpg.rf.dcpsR43EyIuS00NQAF4a.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2774-_png_jpg.rf.A1SF13c9MLlqrsNLRENS.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2774-_png_jpg.rf.A1SF13c9MLlqrsNLRENS.txt",
+          "line": 6,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2961-_png_jpg.rf.jLsEjfDB7uW3XQRu2Ywb.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "tiny_box",
+          "file": "117kallis_jpg.rf.qUzcxu9wvN3lt7EyqLs7.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "tiny_box",
+          "file": "28a5d16eb36d024182adf59f5b2621c7_jpg.rf.PoNjwqB94SrDezAyEp5b.txt",
+          "line": 11,
+          "detail": ""
+        },
+        {
+          "category": "tiny_box",
+          "file": "467_jpg.rf.A49Es47kZUGnIC8rDIOV.txt",
+          "line": 30,
+          "detail": ""
+        }
+      ],
+      "box_stats": {
+        "count": 17873,
+        "area_min": 4.307e-05,
+        "area_p05": 0.001704,
+        "area_median": 0.022062,
+        "area_p95": 0.375851,
+        "area_max": 1.0,
+        "small_objects_share_percent": 35.2
+      }
+    },
+    "valid": {
+      "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\valid\\images",
+      "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\valid\\labels",
+      "counts": {
+        "images": 1399,
+        "label_files": 1399,
+        "annotations": 5197,
+        "detection_lines": 5197,
+        "polygon_lines": 0,
+        "malformed_lines": 0,
+        "empty_label_files": 0,
+        "images_without_objects": 0,
+        "total_size": "168.1 Mo"
+      },
+      "pairing": {
+        "images_missing_label": 0,
+        "labels_without_image": 0,
+        "missing_label_examples": [],
+        "orphan_label_examples": [],
+        "perfect_match": true
+      },
+      "images": {
+        "extensions": {
+          ".jpg": 1365,
+          ".png": 33,
+          ".jpeg": 1
+        },
+        "unreadable": [],
+        "distinct_resolutions": 103,
+        "most_common_resolutions": [
+          [
+            "640x640",
+            648
+          ],
+          [
+            "478x850",
+            286
+          ],
+          [
+            "416x416",
+            182
+          ],
+          [
+            "848x478",
+            49
+          ],
+          [
+            "1204x1600",
+            28
+          ]
+        ],
+        "min_resolution": [
+          55,
+          87
+        ],
+        "max_resolution": [
+          5178,
+          3884
+        ],
+        "aspect_ratio_min": 0.45,
+        "aspect_ratio_max": 2.0705
+      },
+      "classes": {
+        "total_instances": 5197,
+        "per_class": {
+          "Face Mask": 152,
+          "Person": 1536,
+          "Safety Gloves": 445,
+          "Safety Harness": 252,
+          "Safety Helmet": 1140,
+          "Safety Shoes": 1203,
+          "Safety Vest": 469
+        },
+        "share_percent": {
+          "Face Mask": 2.92,
+          "Person": 29.56,
+          "Safety Gloves": 8.56,
+          "Safety Harness": 4.85,
+          "Safety Helmet": 21.94,
+          "Safety Shoes": 23.15,
+          "Safety Vest": 9.02
+        },
+        "absent_classes": [],
+        "max_over_min_ratio": 10.11,
+        "majority_class": "Person",
+        "minority_class": "Face Mask"
+      },
+      "issues": {
+        "clamped_minor": 74,
+        "tiny_box": 1
+      },
+      "issue_examples": [
+        {
+          "category": "clamped_minor",
+          "file": "-106-_png_jpg.rf.aViXmm7EhCMMbNYctm0c.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-1327-_png_jpg.rf.u9XXrWOiCzUmasOn1LtM.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-168-_png_jpg.rf.pUODXOb0MmChN3ZXJ3vR.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2491-_png_jpg.rf.eqt93e3lI7pbJMuOXvp6.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2605-_png_jpg.rf.qpwnfCYLLAfKB0oUVtqJ.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2612-_png_jpg.rf.RgMfsz3Ru3ke3euqms1J.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-262-_png_jpg.rf.QjwpUjEL0XJ1cYWcDzcp.txt",
+          "line": 8,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2850-_png_jpg.rf.Qzp4addhFmBBuHVMUQ6l.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-2952-_png_jpg.rf.6nsgUmXfW85hJjJ6u7T5.txt",
+          "line": 8,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-3046-_png_jpg.rf.zEBRLvWihOTaVXyleXGm.txt",
+          "line": 13,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-3082-_png_jpg.rf.M2nyJqks8nmeWCRoT6nY.txt",
+          "line": 8,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-3186-_png_jpg.rf.mwVUhHmgQvPsgxlz0MEL.txt",
+          "line": 7,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-4189-_png_jpg.rf.Q9jpdMv2we5FwbI8OKTT.txt",
+          "line": 13,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "-4421-_png_jpg.rf.u39XeTy84phx646fPacz.txt",
+          "line": 4,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+          "line": 8,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+          "line": 20,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "001172_0eedbfad6c2a57c241867edbaf76d272_jpg.rf.YvH3bO7WF6CKVpJdYDR1.txt",
+          "line": 6,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "002380_jpg.rf.0jLZqFQBjHSISEJip0eo.txt",
+          "line": 14,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "002626_6d0f0a520f99444119d4e0f3d01eff6d_jpg.rf.kJwc2hDGs7HCqNpcOBV5.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "0058_jpg.rf.IWoE5GhBxwc3uLCplKcX.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "101-with-mask_jpg.rf.AUtuFmRbmGZuPmGFrKXQ.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "1166176656_jpg.rf.HmvSo4IzRtNWgL7r6Vp0.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "13365510684735956913_jpg.rf.rz9YLqWEx0cR48cEPMgT.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "tiny_box",
+          "file": "233_jpg.rf.mnD7KdjXjXly4q0UGvHf.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "269_jpg.rf.PpacGIlJdPijQ4xFLgRC.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "4100 (8)_jpg.rf.wrNs5UxrRdD21yxh2iDe.txt",
+          "line": 3,
+          "detail": ""
+        }
+      ],
+      "box_stats": {
+        "count": 5197,
+        "area_min": 1.157e-05,
+        "area_p05": 0.001718,
+        "area_median": 0.021503,
+        "area_p95": 0.388689,
+        "area_max": 0.97051,
+        "small_objects_share_percent": 35.04
+      }
+    },
+    "test": {
+      "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\test\\images",
+      "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\test\\labels",
+      "counts": {
+        "images": 698,
+        "label_files": 698,
+        "annotations": 2472,
+        "detection_lines": 2472,
+        "polygon_lines": 0,
+        "malformed_lines": 0,
+        "empty_label_files": 0,
+        "images_without_objects": 0,
+        "total_size": "82.6 Mo"
+      },
+      "pairing": {
+        "images_missing_label": 0,
+        "labels_without_image": 0,
+        "missing_label_examples": [],
+        "orphan_label_examples": [],
+        "perfect_match": true
+      },
+      "images": {
+        "extensions": {
+          ".jpg": 680,
+          ".png": 18
+        },
+        "unreadable": [],
+        "distinct_resolutions": 71,
+        "most_common_resolutions": [
+          [
+            "640x640",
+            309
+          ],
+          [
+            "478x850",
+            144
+          ],
+          [
+            "416x416",
+            97
+          ],
+          [
+            "848x478",
+            29
+          ],
+          [
+            "1204x1600",
+            16
+          ]
+        ],
+        "min_resolution": [
+          64,
+          82
+        ],
+        "max_resolution": [
+          2160,
+          3840
+        ],
+        "aspect_ratio_min": 0.45,
+        "aspect_ratio_max": 2.1503
+      },
+      "classes": {
+        "total_instances": 2472,
+        "per_class": {
+          "Face Mask": 85,
+          "Person": 724,
+          "Safety Gloves": 199,
+          "Safety Harness": 112,
+          "Safety Helmet": 509,
+          "Safety Shoes": 614,
+          "Safety Vest": 229
+        },
+        "share_percent": {
+          "Face Mask": 3.44,
+          "Person": 29.29,
+          "Safety Gloves": 8.05,
+          "Safety Harness": 4.53,
+          "Safety Helmet": 20.59,
+          "Safety Shoes": 24.84,
+          "Safety Vest": 9.26
+        },
+        "absent_classes": [],
+        "max_over_min_ratio": 8.52,
+        "majority_class": "Person",
+        "minority_class": "Face Mask"
+      },
+      "issues": {
+        "clamped_minor": 18
+      },
+      "issue_examples": [
+        {
+          "category": "clamped_minor",
+          "file": "-1540-_png_jpg.rf.IxHOS7LNYwKUKS1F1S48.txt",
+          "line": 9,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "Screenshot 2025-05-07 181627_png_png.rf.HDdRdVNNRSy8u3r8N6M0.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "download (9)_jpg.rf.DnuHbnRYlBOS2LZZtoOs.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "ec5100d0-istockphoto-482856483-612x612_jpg.rf.GlSWkGyYxN8SZQX7T4OX.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "full-body-harness-33-_jpg.rf.Z54qlUdr20sSzFch1OQn.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "image_49_jpg.rf.ivMD3P16QkvO1V6UK0Tk.txt",
+          "line": 8,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "maksssksksss241_png_png.rf.Wgmwg0hhEvQ3H86v5XRB.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_131_jpg.rf.44MGUtEZYn51XfjOCiaA.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_1365_jpg.rf.WmgaNyPgpOpmluNDmkLp.txt",
+          "line": 3,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_1719_jpg.rf.KnlhjwlmQqXySlH3C71q.txt",
+          "line": 5,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_338_jpg.rf.ki4lz0eZxAVJw4WIAAOk.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_409_jpg.rf.b7a3p2g4PgWxOpFuCJzj.txt",
+          "line": 2,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_517_jpg.rf.4ddfpD6uu5fShs42qAdM.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "pos_728_jpg.rf.ME5BNhoerZ1p95nWXCMY.txt",
+          "line": 11,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "ppe_0849_jpg.rf.Cdw66ru2RAbDefdPRLzP.txt",
+          "line": 7,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "with_mask_31_jpg.rf.CBSUkPaG7HxLdcNNFkFH.txt",
+          "line": 1,
+          "detail": ""
+        },
+        {
+          "category": "clamped_minor",
+          "file": "with_mask_49_jpg.rf.ml77TQTsd6eLKc0LE9h8.txt",
+          "line": 1,
+          "detail": ""
+        }
+      ],
+      "box_stats": {
+        "count": 2472,
+        "area_min": 0.00026109,
+        "area_p05": 0.00149,
+        "area_median": 0.02026,
+        "area_p95": 0.387974,
+        "area_max": 0.970368,
+        "small_objects_share_percent": 36.57
+      }
+    }
+  },
+  "totals": {
+    "images": 7000,
+    "label_files": 7000,
+    "annotations": 25542,
+    "detection_lines": 25542,
+    "polygon_lines": 0,
+    "malformed_lines": 0,
+    "empty_label_files": 0,
+    "images_missing_label": 0,
+    "labels_without_image": 0,
+    "unreadable_images": 0,
+    "classes": {
+      "total_instances": 25542,
+      "per_class": {
+        "Face Mask": 788,
+        "Person": 7649,
+        "Safety Gloves": 2172,
+        "Safety Harness": 1175,
+        "Safety Helmet": 5449,
+        "Safety Shoes": 5875,
+        "Safety Vest": 2434
+      },
+      "share_percent": {
+        "Face Mask": 3.09,
+        "Person": 29.95,
+        "Safety Gloves": 8.5,
+        "Safety Harness": 4.6,
+        "Safety Helmet": 21.33,
+        "Safety Shoes": 23.0,
+        "Safety Vest": 9.53
+      },
+      "absent_classes": [],
+      "max_over_min_ratio": 9.71,
+      "majority_class": "Person",
+      "minority_class": "Face Mask"
+    },
+    "issues": {
+      "clamped_minor": 338,
+      "tiny_box": 4
+    }
+  },
+  "duplicates": {
+    "exact_duplicate_groups": 0,
+    "exact_duplicate_files": 0,
+    "exact_duplicate_examples": [],
+    "exact_cross_split_groups": 0,
+    "exact_cross_split_examples": [],
+    "perceptual_hash_available": false,
+    "near_duplicate_distance": 3,
+    "near_duplicate_pairs": 0,
+    "near_duplicate_clusters": 0,
+    "near_duplicate_images": 0,
+    "near_duplicate_largest_cluster": 0,
+    "near_duplicate_cross_split_pairs": 0,
+    "near_duplicate_cross_split_clusters": 0,
+    "near_duplicate_cross_split_images": 0,
+    "near_duplicate_cluster_examples": [],
+    "shared_source_stem_groups": 390,
+    "shared_source_stem_files": 1252,
+    "shared_source_stem_examples": [
+      {
+        "source_stem": "000190_jpg",
+        "files": [
+          "train/000190_jpg.rf.RiJRoAPUM25KLC2fd1XJ.jpg",
+          "valid/000190_jpg.rf.EKh0K7gFp6kspU6RN8Yy.jpg"
+        ]
+      },
+      {
+        "source_stem": "101307074_544e234e97_jpg",
+        "files": [
+          "test/101307074_544e234e97_jpg.rf.4tnURj8OiD1QOti150Rf.jpg",
+          "train/101307074_544e234e97_jpg.rf.8XqidcoPpI2XRYNtVEHZ.jpg",
+          "train/101307074_544e234e97_jpg.rf.F6lJ6g1qramzCGawXf6o.jpg",
+          "train/101307074_544e234e97_jpg.rf.JSavjjYtVYlD9DSWw5Ij.jpg",
+          "train/101307074_544e234e97_jpg.rf.LSUd4vg8oFMyFyoLkMeP.jpg",
+          "train/101307074_544e234e97_jpg.rf.QZYoCvTbTz6NFhpguB3E.jpg",
+          "train/101307074_544e234e97_jpg.rf.p5sd9cjoPnkYwFYeXvEQ.jpg",
+          "train/101307074_544e234e97_jpg.rf.ws9fdYfFEIqJ9C2fXeuR.jpg",
+          "valid/101307074_544e234e97_jpg.rf.mIIDZEfAXDJaJokgusAL.jpg"
+        ]
+      },
+      {
+        "source_stem": "101307082_0e17782b1d_jpg",
+        "files": [
+          "train/101307082_0e17782b1d_jpg.rf.dRWUZlYfO5rUOvZH4u0x.jpg",
+          "valid/101307082_0e17782b1d_jpg.rf.jT5WVzmCHXuQpXopqWOO.jpg"
+        ]
+      },
+      {
+        "source_stem": "10_jpg",
+        "files": [
+          "train/10_jpg.rf.q6HHR0lIYVBKHUW1lrBm.jpg",
+          "valid/10_jpg.rf.7qbRNHfCkdPqgvC03UFh.jpg"
+        ]
+      },
+      {
+        "source_stem": "12_jpg",
+        "files": [
+          "train/12_jpg.rf.z4qV4OwfYEgenXkJz6KY.jpg",
+          "valid/12_jpg.rf.nDZA4x5t4st6ZvR0kNmZ.jpg"
+        ]
+      },
+      {
+        "source_stem": "13360237544897430511_jpg",
+        "files": [
+          "train/13360237544897430511_jpg.rf.LjhwrluTP4dV4kYNfuWm.jpg",
+          "train/13360237544897430511_jpg.rf.rpmb7GVmeXuo0nNVBKKt.jpg",
+          "valid/13360237544897430511_jpg.rf.eakzB0BLDXcDC2V3MRRc.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068007372001_jpg",
+        "files": [
+          "test/1336551068007372001_jpg.rf.5sFJfuNcE5gSBDFumAqm.jpg",
+          "train/1336551068007372001_jpg.rf.nh2wApDnPXz3H92iNchO.jpg",
+          "valid/1336551068007372001_jpg.rf.y32nRVDBAsobade1Hdkv.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068012062973_jpg",
+        "files": [
+          "train/1336551068012062973_jpg.rf.vSZtEVBOQqnviaGXxFTp.jpg",
+          "valid/1336551068012062973_jpg.rf.N3JR65HufTDOSsZ8Rqx1.jpg",
+          "valid/1336551068012062973_jpg.rf.mfb0G78HV7CZL2aS4Bt0.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068016751195_jpg",
+        "files": [
+          "train/1336551068016751195_jpg.rf.MYB0CkseeNnv6aC42CSl.jpg",
+          "train/1336551068016751195_jpg.rf.nk0IoDeXMnjzeA6HRg88.jpg",
+          "valid/1336551068016751195_jpg.rf.qrQlT6ZDo3dKuI3gGw1R.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068026122739_jpg",
+        "files": [
+          "train/1336551068026122739_jpg.rf.LKtmpNXvB3f6zaXVLe6K.jpg",
+          "train/1336551068026122739_jpg.rf.MuMaOL4jC25eLe08ZZnH.jpg",
+          "valid/1336551068026122739_jpg.rf.JwCIlrBVmLcvngKX9sfu.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068328280805_jpg",
+        "files": [
+          "train/1336551068328280805_jpg.rf.9debqY8f6l2kTAbdaxVz.jpg",
+          "train/1336551068328280805_jpg.rf.rEPQhCvLqRtNKqNTkXTY.jpg",
+          "valid/1336551068328280805_jpg.rf.E9UN4eahfhFIGIAy7OQf.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068334530817_jpg",
+        "files": [
+          "test/1336551068334530817_jpg.rf.ZJ3Pvxp0qZdFx879pDZQ.jpg",
+          "train/1336551068334530817_jpg.rf.I3Uym0JGj1PwtbtOjshX.jpg",
+          "train/1336551068334530817_jpg.rf.XUnvEGzNrJTN8fj7KF4e.jpg"
+        ]
+      },
+      {
+        "source_stem": "13365510683501579413_jpg",
+        "files": [
+          "test/13365510683501579413_jpg.rf.fVboFvJ3hdDXwq0stUCm.jpg",
+          "train/13365510683501579413_jpg.rf.43bLehTq6Er3Fhs9VjqP.jpg",
+          "valid/13365510683501579413_jpg.rf.LPcv4O0rVx3mw5xJbXJ5.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068378283131_jpg",
+        "files": [
+          "train/1336551068378283131_jpg.rf.ogULRbs2jmtD74NOCy0G.jpg",
+          "train/1336551068378283131_jpg.rf.ooug5oQVAG6D6grxcF44.jpg",
+          "valid/1336551068378283131_jpg.rf.5NwRMMDE5udxdYvHwt1O.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068390780995_jpg",
+        "files": [
+          "test/1336551068390780995_jpg.rf.eyeSvN2RwPPONrHPMNZ0.jpg",
+          "train/1336551068390780995_jpg.rf.fBQEv3KA26r36HxsokNY.jpg",
+          "train/1336551068390780995_jpg.rf.oSm6MIhFBjvHS6sUnkse.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551068453284145_jpg",
+        "files": [
+          "test/1336551068453284145_jpg.rf.N1jYSUvdiYOa1DEylDkp.jpg",
+          "train/1336551068453284145_jpg.rf.XcRiapwS9IcEQRmldrDU.jpg",
+          "train/1336551068453284145_jpg.rf.x6bIjXNQTuE9TKFZvggU.jpg"
+        ]
+      },
+      {
+        "source_stem": "13365510684735956913_jpg",
+        "files": [
+          "test/13365510684735956913_jpg.rf.2fT38gYaHWgQ2xuHevgJ.jpg",
+          "train/13365510684735956913_jpg.rf.IQ1Y4ZTLu2DZrZml3WgW.jpg",
+          "valid/13365510684735956913_jpg.rf.rz9YLqWEx0cR48cEPMgT.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551069134530765_jpg",
+        "files": [
+          "test/1336551069134530765_jpg.rf.txvXvQC1IP8nG0kZtAln.jpg",
+          "train/1336551069134530765_jpg.rf.FVe1nb3d2YSNjV8tbuk1.jpg",
+          "train/1336551069134530765_jpg.rf.OFyUnzcvActCLqOzBzT5.jpg"
+        ]
+      },
+      {
+        "source_stem": "13365510691454699711_jpg",
+        "files": [
+          "train/13365510691454699711_jpg.rf.m6oeg0CcVCck6gA3BQ5m.jpg",
+          "valid/13365510691454699711_jpg.rf.bR1D03295KXaRK0AuJgl.jpg",
+          "valid/13365510691454699711_jpg.rf.iEeQJYKUz6YrmjA1vy8h.jpg"
+        ]
+      },
+      {
+        "source_stem": "13365510691532821415_jpg",
+        "files": [
+          "test/13365510691532821415_jpg.rf.NiRq0mbJ1m5WBCyd0GzO.jpg",
+          "train/13365510691532821415_jpg.rf.Yk8433IHBQsUt9yBcOpm.jpg",
+          "valid/13365510691532821415_jpg.rf.vZV6DFbCpoHYvGNQY7cK.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551069576717867_jpg",
+        "files": [
+          "train/1336551069576717867_jpg.rf.1nRYwatrXRVwoW1ZVZQb.jpg",
+          "valid/1336551069576717867_jpg.rf.KuRYHESVvfsDMiyX44vX.jpg",
+          "valid/1336551069576717867_jpg.rf.Xtyx0WISshxwhovRCCuy.jpg"
+        ]
+      },
+      {
+        "source_stem": "13365510695985955815_jpg",
+        "files": [
+          "train/13365510695985955815_jpg.rf.SvW0bCrsX7YpRVHVf8Fk.jpg",
+          "train/13365510695985955815_jpg.rf.anFJcFhoX5zsMlhZlMpm.jpg",
+          "valid/13365510695985955815_jpg.rf.ImHyotmXdyE6QkA6gyrx.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551069759530661_jpg",
+        "files": [
+          "train/1336551069759530661_jpg.rf.riBjuPY4Ttae3xfFgi39.jpg",
+          "train/1336551069759530661_jpg.rf.zkS13mXbVrB2fy9REJWu.jpg",
+          "valid/1336551069759530661_jpg.rf.J8v5zcSrYg7m55SjaBE2.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551069764220673_jpg",
+        "files": [
+          "train/1336551069764220673_jpg.rf.H04Zk6SZGYlbP8thPC1Q.jpg",
+          "train/1336551069764220673_jpg.rf.t6ZcuVNkHFuiv0ktgsVh.jpg",
+          "valid/1336551069764220673_jpg.rf.08D5ViAjhG3f7aZCMj3S.jpg"
+        ]
+      },
+      {
+        "source_stem": "1336551069778280699_jpg",
+        "files": [
+          "test/1336551069778280699_jpg.rf.ELR1W9lXW3mrL4XQ6wLT.jpg",
+          "train/1336551069778280699_jpg.rf.fPdUpqiQjOHVTgBLGi69.jpg",
+          "valid/1336551069778280699_jpg.rf.Kb4EtLgL45WlGvXrNVpP.jpg"
+        ]
+      }
+    ],
+    "sequence_prefixes": 275,
+    "sequence_prefixes_crossing_splits": 58,
+    "sequence_images_crossing_splits": 3241,
+    "sequence_crossing_examples": [
+      {
+        "prefix": "frame_",
+        "images": 1785,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "pos_",
+        "images": 582,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "image_",
+        "images": 355,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "S2-N2301M",
+        "images": 97,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "front_crawling_",
+        "images": 68,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "ppe_",
+        "images": 68,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "with_mask_",
+        "images": 65,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "Manoj_Herness2_annotation_",
+        "images": 33,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "dig-pickaxe-working-street-reconstruction-",
+        "images": 12,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      },
+      {
+        "prefix": "img_",
+        "images": 11,
+        "splits": [
+          "test",
+          "train",
+          "valid"
+        ]
+      }
+    ]
+  },
+  "problems": [
+    {
+      "severity": "warning",
+      "code": "clamped_minor",
+      "message": "[train] 246 boite(s) corrigee(s) : clamped_minor."
+    },
+    {
+      "severity": "warning",
+      "code": "clamped_minor",
+      "message": "[valid] 74 boite(s) corrigee(s) : clamped_minor."
+    },
+    {
+      "severity": "warning",
+      "code": "clamped_minor",
+      "message": "[test] 18 boite(s) corrigee(s) : clamped_minor."
+    },
+    {
+      "severity": "warning",
+      "code": "shared_source_images",
+      "message": "390 image(s) source Roboflow (1252 fichiers) presente(s) dans plusieurs splits : meme prefixe avant '.rf.' — variantes augmentees d'une meme photo reparties entre entrainement et evaluation."
+    },
+    {
+      "severity": "warning",
+      "code": "video_sequences_across_splits",
+      "message": "58 sequence(s) d'images numerotees (3241 images de type 'frame_000324') reparties entre plusieurs splits : les frames consecutives d'une meme video sont quasi identiques."
+    }
+  ],
+  "conclusion": {
+    "n_errors": 0,
+    "n_warnings": 5,
+    "detection_ready": true,
+    "requires_conversion": false,
+    "summary": "7000 images, 25542 annotations, 0 ligne(s) polygonale(s) a convertir, 0 erreur(s), 5 avertissement(s), 0 groupe(s) de doublons exacts."
+  }
+}

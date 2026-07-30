@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 7
+names: ['Face Mask', 'Person', 'Safety Gloves', 'Safety Harness', 'Safety Helmet', 'Safety Shoes', 'Safety Vest']
+
+roboflow:
+  workspace: ousmane-savadogo
+  project: ppe-detection-project-jeezl-p9ncg
+  version: dataset
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/ousmane-savadogo/ppe-detection-project-jeezl-p9ncg/dataset/dataset

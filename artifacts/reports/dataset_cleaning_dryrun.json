@@ -1,0 +1,2553 @@
+{
+  "generated_at": "2026-07-30T09:59:56.238902+00:00",
+  "environment": {
+    "timestamp_utc": "2026-07-30T09:59:56.238902+00:00",
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_total_memory_gb": 15.92,
+    "ultralytics": "8.4.112",
+    "cv2": "5.0.0",
+    "numpy": "2.4.4",
+    "onnxruntime": "1.28.0"
+  },
+  "source": {
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\data.yaml",
+    "root": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26",
+    "splits": {
+      "train": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\train\\images",
+      "valid": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\valid\\images",
+      "test": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\test\\images"
+    }
+  },
+  "output": {
+    "root": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection",
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\data.yaml",
+    "mode": "copy",
+    "dry_run": true,
+    "images_per_split": {
+      "train": 4903,
+      "valid": 1399,
+      "test": 698
+    }
+  },
+  "parameters": {
+    "clamp_tolerance": 0.001,
+    "min_box_side": 0.0001,
+    "strict": false,
+    "regroup_by_source": false,
+    "seed": 42
+  },
+  "statistics": {
+    "images_copied": 7000,
+    "images_skipped_no_label": 0,
+    "label_files_written": 7000,
+    "lines_read": 25542,
+    "lines_kept": 25542,
+    "lines_converted_from_polygon": 349,
+    "lines_clamped_minor": 457,
+    "lines_clipped_to_bounds": 0,
+    "lines_dropped": 0,
+    "empty_label_files": 0
+  },
+  "class_counts": {
+    "Person": 7649,
+    "Safety Vest": 2434,
+    "Safety Shoes": 5875,
+    "Safety Helmet": 5449,
+    "Safety Gloves": 2172,
+    "Safety Harness": 1175,
+    "Face Mask": 788
+  },
+  "class_counts_per_split": {
+    "train": {
+      "Person": 5389,
+      "Safety Vest": 1736,
+      "Safety Shoes": 4058,
+      "Safety Helmet": 3800,
+      "Safety Gloves": 1528,
+      "Safety Harness": 811,
+      "Face Mask": 551
+    },
+    "valid": {
+      "Person": 1536,
+      "Safety Helmet": 1140,
+      "Safety Shoes": 1203,
+      "Safety Vest": 469,
+      "Safety Gloves": 445,
+      "Safety Harness": 252,
+      "Face Mask": 152
+    },
+    "test": {
+      "Person": 724,
+      "Safety Helmet": 509,
+      "Safety Gloves": 199,
+      "Safety Vest": 229,
+      "Safety Shoes": 614,
+      "Safety Harness": 112,
+      "Face Mask": 85
+    }
+  },
+  "issue_counts": {
+    "converted_polygon": 349
+  },
+  "events": [
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-1013-_png_jpg.rf.TgF97cwTfIx3l5TcgxIm.txt",
+      "line": 12,
+      "detail": "48 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3058-_png_jpg.rf.oySRYRnbJFEojJSK6PUa.txt",
+      "line": 3,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3058-_png_jpg.rf.oySRYRnbJFEojJSK6PUa.txt",
+      "line": 4,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3058-_png_jpg.rf.oySRYRnbJFEojJSK6PUa.txt",
+      "line": 5,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3136-_png_jpg.rf.39nBpvq3BEn7pHy0ntoK.txt",
+      "line": 2,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3163-_png_jpg.rf.7rI5peLPBqrxa9orIjcc.txt",
+      "line": 4,
+      "detail": "77 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 6,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 7,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 8,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 9,
+      "detail": "7 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 10,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 11,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 12,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 13,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3175-_png_jpg.rf.i93Vr4ciRdELCUcnyuzh.txt",
+      "line": 14,
+      "detail": "8 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3181-_png_jpg.rf.JsAinO6lKc2QInVAxhbF.txt",
+      "line": 2,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3181-_png_jpg.rf.JsAinO6lKc2QInVAxhbF.txt",
+      "line": 3,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3181-_png_jpg.rf.JsAinO6lKc2QInVAxhbF.txt",
+      "line": 4,
+      "detail": "192 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3181-_png_jpg.rf.JsAinO6lKc2QInVAxhbF.txt",
+      "line": 5,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3187-_png_jpg.rf.RRZdIexKgdqV9YW7SpgU.txt",
+      "line": 2,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3187-_png_jpg.rf.RRZdIexKgdqV9YW7SpgU.txt",
+      "line": 3,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 6,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 7,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 8,
+      "detail": "41 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 9,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 10,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 11,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 12,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 13,
+      "detail": "41 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 14,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-323-_png_jpg.rf.hOu1TZrD996mYV7uD2pX.txt",
+      "line": 15,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3235-_png_jpg.rf.Dfg788d6HMffmAQjPkqZ.txt",
+      "line": 6,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3235-_png_jpg.rf.Dfg788d6HMffmAQjPkqZ.txt",
+      "line": 7,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3235-_png_jpg.rf.Dfg788d6HMffmAQjPkqZ.txt",
+      "line": 8,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3235-_png_jpg.rf.Dfg788d6HMffmAQjPkqZ.txt",
+      "line": 10,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 5,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 6,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 7,
+      "detail": "44 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 8,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 9,
+      "detail": "33 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3436-_png_jpg.rf.wZChl8Ifsj8XxAU5vuqR.txt",
+      "line": 10,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3567-_png_jpg.rf.9zui5AnJUdHqJbwwfxnK.txt",
+      "line": 8,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3567-_png_jpg.rf.9zui5AnJUdHqJbwwfxnK.txt",
+      "line": 9,
+      "detail": "67 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 11,
+      "detail": "35 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 12,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 13,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 14,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 15,
+      "detail": "42 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 16,
+      "detail": "34 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 17,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 18,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 19,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 20,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 21,
+      "detail": "65 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 22,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 23,
+      "detail": "91 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 24,
+      "detail": "154 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 25,
+      "detail": "83 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 26,
+      "detail": "91 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 27,
+      "detail": "100 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3799-_png_jpg.rf.ljfxhQjfY6mf33Cymqg3.txt",
+      "line": 28,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3854-_png_jpg.rf.j2LamVjBhB9bdL23CTWt.txt",
+      "line": 6,
+      "detail": "5 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3854-_png_jpg.rf.j2LamVjBhB9bdL23CTWt.txt",
+      "line": 7,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3854-_png_jpg.rf.j2LamVjBhB9bdL23CTWt.txt",
+      "line": 8,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3854-_png_jpg.rf.j2LamVjBhB9bdL23CTWt.txt",
+      "line": 9,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-3854-_png_jpg.rf.j2LamVjBhB9bdL23CTWt.txt",
+      "line": 10,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4394-_png_jpg.rf.NiXta7QlCD6G7YcSaD4X.txt",
+      "line": 3,
+      "detail": "64 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4394-_png_jpg.rf.NiXta7QlCD6G7YcSaD4X.txt",
+      "line": 4,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4394-_png_jpg.rf.NiXta7QlCD6G7YcSaD4X.txt",
+      "line": 5,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4596-_png_jpg.rf.UJ5alnIcSUbPmKlyZixO.txt",
+      "line": 1,
+      "detail": "99 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4596-_png_jpg.rf.UJ5alnIcSUbPmKlyZixO.txt",
+      "line": 2,
+      "detail": "44 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4596-_png_jpg.rf.UJ5alnIcSUbPmKlyZixO.txt",
+      "line": 3,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 4,
+      "detail": "46 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 5,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 6,
+      "detail": "50 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 7,
+      "detail": "31 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 8,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 9,
+      "detail": "36 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 10,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 11,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-4814-_png_jpg.rf.n5z6bhvYWhdzSzQ28XYI.txt",
+      "line": 12,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-605-_png_jpg.rf.xh42DofgSm9HEgOBBsmE.txt",
+      "line": 4,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-605-_png_jpg.rf.xh42DofgSm9HEgOBBsmE.txt",
+      "line": 5,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 7,
+      "detail": "51 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 8,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 9,
+      "detail": "60 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 10,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 11,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 12,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 13,
+      "detail": "49 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 14,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 15,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "-638-_png_jpg.rf.JEzgjRNNkCUg1jl0YzQt.txt",
+      "line": 16,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "000037_jpg.rf.QmVt1COcTHNRtkShLSut.txt",
+      "line": 2,
+      "detail": "59 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "000037_jpg.rf.QmVt1COcTHNRtkShLSut.txt",
+      "line": 3,
+      "detail": "97 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "000441_jpg.rf.1L1rgTZ5eFjyW20xhpCb.txt",
+      "line": 5,
+      "detail": "59 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "000441_jpg.rf.1L1rgTZ5eFjyW20xhpCb.txt",
+      "line": 6,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001020_jpg.rf.RoIVSIkEF7g4BqfyGlVv.txt",
+      "line": 3,
+      "detail": "38 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001020_jpg.rf.RoIVSIkEF7g4BqfyGlVv.txt",
+      "line": 4,
+      "detail": "90 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001020_jpg.rf.RoIVSIkEF7g4BqfyGlVv.txt",
+      "line": 5,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001020_jpg.rf.RoIVSIkEF7g4BqfyGlVv.txt",
+      "line": 6,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001020_jpg.rf.RoIVSIkEF7g4BqfyGlVv.txt",
+      "line": 7,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001859_jpg.rf.GXYhB03PAMa3wO1UEncD.txt",
+      "line": 4,
+      "detail": "35 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "001859_jpg.rf.GXYhB03PAMa3wO1UEncD.txt",
+      "line": 5,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 1,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 2,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 3,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 4,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 5,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "08165739_jpg.rf.OVB7uZYjCthujn1kqbld.txt",
+      "line": 6,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 1,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 2,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 3,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 5,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 6,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1000x-1_jpg.rf.bX4XfUVUKwg1VQOH9lHR.txt",
+      "line": 7,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "101307074_544e234e97_jpg.rf.F6lJ6g1qramzCGawXf6o.txt",
+      "line": 3,
+      "detail": "203 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "101307074_544e234e97_jpg.rf.JSavjjYtVYlD9DSWw5Ij.txt",
+      "line": 3,
+      "detail": "196 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "101307074_544e234e97_jpg.rf.p5sd9cjoPnkYwFYeXvEQ.txt",
+      "line": 3,
+      "detail": "252 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "101307074_544e234e97_jpg.rf.QZYoCvTbTz6NFhpguB3E.txt",
+      "line": 3,
+      "detail": "195 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "101307074_544e234e97_jpg.rf.ws9fdYfFEIqJ9C2fXeuR.txt",
+      "line": 3,
+      "detail": "207 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 1,
+      "detail": "31 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 2,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 3,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 4,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 5,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 6,
+      "detail": "36 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 7,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "1024x737_09186876046_jpg.rf.vsrcxOrZTIpCp7RV9O6O.txt",
+      "line": 8,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Climbing-Utility-Heights-1821434_jpg.rf.6339r2Q8PyU9IgnDnSbA.txt",
+      "line": 4,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Climbing-Utility-Heights-1821434_jpg.rf.6339r2Q8PyU9IgnDnSbA.txt",
+      "line": 5,
+      "detail": "73 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Climbing-Utility-Pole-546024_jpg.rf.LkVOVshb3hTlLw9zs7VL.txt",
+      "line": 3,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Climbing-Utility-Pole-546024_jpg.rf.LkVOVshb3hTlLw9zs7VL.txt",
+      "line": 4,
+      "detail": "58 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Colorful-Urban-Maintenance-1004882_jpg.rf.0wK8pXRkPbocTGlZJMBc.txt",
+      "line": 4,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Colorful-Urban-Maintenance-1004882_jpg.rf.0wK8pXRkPbocTGlZJMBc.txt",
+      "line": 5,
+      "detail": "61 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (2)_jpg.rf.MoubEe36lpGDtU4QV0y2.txt",
+      "line": 3,
+      "detail": "137 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (2)_jpg.rf.MoubEe36lpGDtU4QV0y2.txt",
+      "line": 4,
+      "detail": "65 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (21)_jpg.rf.RD7Ot2OoeNKC4VBrOi78.txt",
+      "line": 1,
+      "detail": "119 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (21)_jpg.rf.RD7Ot2OoeNKC4VBrOi78.txt",
+      "line": 2,
+      "detail": "110 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (21)_jpg.rf.RD7Ot2OoeNKC4VBrOi78.txt",
+      "line": 3,
+      "detail": "219 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (22)_jpg.rf.9nYZiTM0VglgwHLY34DV.txt",
+      "line": 2,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (22)_jpg.rf.9nYZiTM0VglgwHLY34DV.txt",
+      "line": 3,
+      "detail": "56 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (22)_jpg.rf.9nYZiTM0VglgwHLY34DV.txt",
+      "line": 4,
+      "detail": "70 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (22)_jpg.rf.9nYZiTM0VglgwHLY34DV.txt",
+      "line": 5,
+      "detail": "102 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (24)_jpg.rf.U9Qz6cF0g070p0aBjrd9.txt",
+      "line": 1,
+      "detail": "219 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (24)_jpg.rf.U9Qz6cF0g070p0aBjrd9.txt",
+      "line": 2,
+      "detail": "217 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (24)_jpg.rf.U9Qz6cF0g070p0aBjrd9.txt",
+      "line": 3,
+      "detail": "60 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (26)_jpg.rf.f9lR9zUKbSpyA8pItBN3.txt",
+      "line": 1,
+      "detail": "56 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (26)_jpg.rf.f9lR9zUKbSpyA8pItBN3.txt",
+      "line": 2,
+      "detail": "80 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (34)_jpg.rf.ZMnuMvKFTkcrM7J15sAc.txt",
+      "line": 1,
+      "detail": "45 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (34)_jpg.rf.ZMnuMvKFTkcrM7J15sAc.txt",
+      "line": 2,
+      "detail": "60 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (38)_jpg.rf.0AXWuzvT5X3RphfnSKX7.txt",
+      "line": 1,
+      "detail": "115 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (41)_jpg.rf.hPvqAjzNyBbNbDqTV9XR.txt",
+      "line": 1,
+      "detail": "210 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (41)_jpg.rf.hPvqAjzNyBbNbDqTV9XR.txt",
+      "line": 2,
+      "detail": "155 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "download (41)_jpg.rf.hPvqAjzNyBbNbDqTV9XR.txt",
+      "line": 3,
+      "detail": "190 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 8,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 9,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 10,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 11,
+      "detail": "33 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 12,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Elevated-infrastructure-work-3253605_jpg.rf.bKn3B1OXZ84ffxtkKzEk.txt",
+      "line": 13,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Focused-construction-worker-557477_jpg.rf.sgcmw2i5cCv6wubr96v3.txt",
+      "line": 3,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Focused-construction-worker-557477_jpg.rf.sgcmw2i5cCv6wubr96v3.txt",
+      "line": 4,
+      "detail": "86 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Focused-Rope-Technician-453986_jpg.rf.SQiKar5dJAdiRTGUkK7Y.txt",
+      "line": 3,
+      "detail": "53 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Focused-Rope-Technician-453986_jpg.rf.SQiKar5dJAdiRTGUkK7Y.txt",
+      "line": 4,
+      "detail": "205 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "frame_000112_jpg.rf.R2zEJL2Lre0T2pk8xATg.txt",
+      "line": 4,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "frame_2985_jpg.rf.ExZjnQ0UeB2V4BMOvlON.txt",
+      "line": 1,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "frame_2995_jpg.rf.FAIUFvpJSH7TnqsBYDM9.txt",
+      "line": 1,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00093_jpg.rf.haMclutkbysvAm5fj2EI.txt",
+      "line": 2,
+      "detail": "31 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00093_jpg.rf.haMclutkbysvAm5fj2EI.txt",
+      "line": 3,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00093_jpg.rf.haMclutkbysvAm5fj2EI.txt",
+      "line": 4,
+      "detail": "87 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00516_jpg.rf.JwbCFbl3Z3KACXR6sV4J.txt",
+      "line": 2,
+      "detail": "137 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00516_jpg.rf.JwbCFbl3Z3KACXR6sV4J.txt",
+      "line": 3,
+      "detail": "43 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "front_crawling_00516_jpg.rf.JwbCFbl3Z3KACXR6sV4J.txt",
+      "line": 4,
+      "detail": "28 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_131_jpg.rf.VCRDAUb2iuvbtygfg0xd.txt",
+      "line": 3,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_131_jpg.rf.VCRDAUb2iuvbtygfg0xd.txt",
+      "line": 4,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_131_jpg.rf.VCRDAUb2iuvbtygfg0xd.txt",
+      "line": 5,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_163_jpg.rf.ARnUzGlXtjLdR6TkjzZl.txt",
+      "line": 4,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_163_jpg.rf.ARnUzGlXtjLdR6TkjzZl.txt",
+      "line": 5,
+      "detail": "49 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_163_jpg.rf.ARnUzGlXtjLdR6TkjzZl.txt",
+      "line": 6,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_163_jpg.rf.ARnUzGlXtjLdR6TkjzZl.txt",
+      "line": 7,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_37_jpg.rf.cp3TKW1d7QHDhF9Cw5jW.txt",
+      "line": 2,
+      "detail": "72 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_37_jpg.rf.cp3TKW1d7QHDhF9Cw5jW.txt",
+      "line": 3,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "image_37_jpg.rf.cp3TKW1d7QHDhF9Cw5jW.txt",
+      "line": 4,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "images (69)_jpg.rf.jJyF1C3rMPV3ZZFQq9Km.txt",
+      "line": 2,
+      "detail": "163 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "images (69)_jpg.rf.jJyF1C3rMPV3ZZFQq9Km.txt",
+      "line": 3,
+      "detail": "18 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Lineman-at-Work-358968_jpg.rf.wntyiC4O7ovZS9UJjp9V.txt",
+      "line": 4,
+      "detail": "48 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Lineman-at-Work-358968_jpg.rf.wntyiC4O7ovZS9UJjp9V.txt",
+      "line": 5,
+      "detail": "36 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Offshore-Platform-Worker-3636944_jpg.rf.b2ljkjGZ6lxnMBTWBZDm.txt",
+      "line": 5,
+      "detail": "41 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Offshore-Platform-Worker-3636944_jpg.rf.b2ljkjGZ6lxnMBTWBZDm.txt",
+      "line": 6,
+      "detail": "89 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1726_jpg.rf.WxDJik3tjJ6ocjkRC1MK.txt",
+      "line": 1,
+      "detail": "46 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1726_jpg.rf.WxDJik3tjJ6ocjkRC1MK.txt",
+      "line": 2,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 4,
+      "detail": "33 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 5,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 6,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 7,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 8,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 9,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 11,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 12,
+      "detail": "8 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 13,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 14,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_172_jpg.rf.pnk4F8MU2Qc142iR702g.txt",
+      "line": 15,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1734_jpg.rf.IkqmuNH8r1LmSqwUwvZx.txt",
+      "line": 3,
+      "detail": "27 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1734_jpg.rf.IkqmuNH8r1LmSqwUwvZx.txt",
+      "line": 4,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1734_jpg.rf.IkqmuNH8r1LmSqwUwvZx.txt",
+      "line": 5,
+      "detail": "97 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1734_jpg.rf.IkqmuNH8r1LmSqwUwvZx.txt",
+      "line": 6,
+      "detail": "74 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1753_jpg.rf.Mxp77AOJipVBSYkgOjLz.txt",
+      "line": 5,
+      "detail": "86 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1753_jpg.rf.Mxp77AOJipVBSYkgOjLz.txt",
+      "line": 6,
+      "detail": "43 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1815_jpg.rf.K9VmBrKBp87Oa1rdmS03.txt",
+      "line": 1,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1815_jpg.rf.K9VmBrKBp87Oa1rdmS03.txt",
+      "line": 2,
+      "detail": "62 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1964_jpg.rf.UKUTqr1BnXrhi1wqwjn5.txt",
+      "line": 4,
+      "detail": "87 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1964_jpg.rf.UKUTqr1BnXrhi1wqwjn5.txt",
+      "line": 5,
+      "detail": "48 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_1964_jpg.rf.UKUTqr1BnXrhi1wqwjn5.txt",
+      "line": 6,
+      "detail": "54 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_339_jpg.rf.I5Mhw56mxRS5urcBT4nz.txt",
+      "line": 1,
+      "detail": "102 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_352_jpg.rf.2GsGpUM5clSVLiEriHUv.txt",
+      "line": 1,
+      "detail": "150 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_354_jpg.rf.UCGDaDHlH08tDM2FhDcH.txt",
+      "line": 1,
+      "detail": "116 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_361_jpg.rf.tIXUjtzK2X8Yzgkhk031.txt",
+      "line": 1,
+      "detail": "131 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_361_jpg.rf.tIXUjtzK2X8Yzgkhk031.txt",
+      "line": 2,
+      "detail": "42 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_361_jpg.rf.tIXUjtzK2X8Yzgkhk031.txt",
+      "line": 3,
+      "detail": "92 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_472_jpg.rf.uhgqRgRlqWOIFhhyjD3V.txt",
+      "line": 1,
+      "detail": "116 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_472_jpg.rf.uhgqRgRlqWOIFhhyjD3V.txt",
+      "line": 2,
+      "detail": "123 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "pos_493_jpg.rf.y2P6EIbRNoeM3Jk1BXRs.txt",
+      "line": 1,
+      "detail": "146 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Power-Line-Hero-2369247_jpg.rf.KoIxMfOwspPiSTPi16Gs.txt",
+      "line": 6,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0000_jpg.rf.HqaveDtCYlF9c7hdxbXU.txt",
+      "line": 3,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0700_jpg.rf.9u4dvJWlawms9U0X4EIp.txt",
+      "line": 1,
+      "detail": "92 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0700_jpg.rf.9u4dvJWlawms9U0X4EIp.txt",
+      "line": 2,
+      "detail": "28 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0807_jpg.rf.3FWXNn5pBOp8jT0wHcPn.txt",
+      "line": 1,
+      "detail": "36 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0807_jpg.rf.3FWXNn5pBOp8jT0wHcPn.txt",
+      "line": 2,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0807_jpg.rf.3FWXNn5pBOp8jT0wHcPn.txt",
+      "line": 3,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0869_jpg.rf.TEd60yoXlh1Ex9CMcb9V.txt",
+      "line": 1,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0869_jpg.rf.TEd60yoXlh1Ex9CMcb9V.txt",
+      "line": 2,
+      "detail": "28 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0869_jpg.rf.TEd60yoXlh1Ex9CMcb9V.txt",
+      "line": 3,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0869_jpg.rf.TEd60yoXlh1Ex9CMcb9V.txt",
+      "line": 4,
+      "detail": "58 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_0869_jpg.rf.TEd60yoXlh1Ex9CMcb9V.txt",
+      "line": 5,
+      "detail": "87 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1295_jpg.rf.nlLg7ME3NwAgZKTdOmdI.txt",
+      "line": 6,
+      "detail": "23 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1295_jpg.rf.nlLg7ME3NwAgZKTdOmdI.txt",
+      "line": 7,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1295_jpg.rf.nlLg7ME3NwAgZKTdOmdI.txt",
+      "line": 8,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1295_jpg.rf.nlLg7ME3NwAgZKTdOmdI.txt",
+      "line": 9,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1295_jpg.rf.nlLg7ME3NwAgZKTdOmdI.txt",
+      "line": 10,
+      "detail": "29 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1296_jpg.rf.5qh3cKIQz5zmQFMjKyMt.txt",
+      "line": 3,
+      "detail": "44 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "ppe_1296_jpg.rf.5qh3cKIQz5zmQFMjKyMt.txt",
+      "line": 4,
+      "detail": "34 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Skyscraper-Construction-Work-310711_jpg.rf.NnAzLAIoUHGv7EaVMr2H.txt",
+      "line": 4,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Solar-Panel-Installation-484793_jpg.rf.xEMVooLc4xVDtApVC0kB.txt",
+      "line": 5,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "stock-photo-construction-workers-wearing-safety-harness-belt-during-training-at-high-place-709824829_jpg.rf.WcWIiNiABwJ8gLHhcItg.txt",
+      "line": 1,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "stock-photo-construction-workers-wearing-safety-harness-belt-during-training-at-high-place-709824829_jpg.rf.WcWIiNiABwJ8gLHhcItg.txt",
+      "line": 2,
+      "detail": "153 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "stock-photo-construction-workers-wearing-safety-harness-belt-during-training-at-high-place-709824829_jpg.rf.WcWIiNiABwJ8gLHhcItg.txt",
+      "line": 3,
+      "detail": "8 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "stock-photo-construction-workers-wearing-safety-harness-belt-during-training-at-high-place-709824829_jpg.rf.WcWIiNiABwJ8gLHhcItg.txt",
+      "line": 4,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Technician-adjusting-satellite-1310992_jpg.rf.KKOQb36a7Q9zjTDmzNoV.txt",
+      "line": 4,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Telecom-Tower-Technician-2641341_jpg.rf.tW7zhdNtY34ftwgF0rYM.txt",
+      "line": 2,
+      "detail": "35 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Telecom-Tower-Technician-2641341_jpg.rf.tW7zhdNtY34ftwgF0rYM.txt",
+      "line": 3,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "test1122_jpg.rf.TBVTiqd77i7cPOUW0mxG.txt",
+      "line": 2,
+      "detail": "46 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "test12_jpg.rf.5gInkWoEqA8G4L1HQJSO.txt",
+      "line": 2,
+      "detail": "36 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testimage2_jpg.rf.lBYiDS5ZICvhmHIXgsvT.txt",
+      "line": 4,
+      "detail": "69 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testimage2_jpg.rf.lBYiDS5ZICvhmHIXgsvT.txt",
+      "line": 5,
+      "detail": "63 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testimages1_jpg.rf.scGYiEEXWO1wAOelGaA2.txt",
+      "line": 2,
+      "detail": "62 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testimages1_jpg.rf.scGYiEEXWO1wAOelGaA2.txt",
+      "line": 3,
+      "detail": "71 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testImages_jpg.rf.oeF2gwkygwbJQqRHdlg6.txt",
+      "line": 4,
+      "detail": "43 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "testImages_jpg.rf.oeF2gwkygwbJQqRHdlg6.txt",
+      "line": 5,
+      "detail": "80 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Maintenance-Work-456876_jpg.rf.AQyn3clCqL70haWeI6HW.txt",
+      "line": 7,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Maintenance-Work-456876_jpg.rf.AQyn3clCqL70haWeI6HW.txt",
+      "line": 8,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Sunset-Technician-2491537_jpg.rf.UPQpzdtqyby0OwjJEawK.txt",
+      "line": 6,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Sunset-Technician-2491537_jpg.rf.UPQpzdtqyby0OwjJEawK.txt",
+      "line": 7,
+      "detail": "39 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Technician-Working-560995_jpg.rf.HtlA9KMr56MjYIPdLQFJ.txt",
+      "line": 4,
+      "detail": "35 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Technician-Working-560995_jpg.rf.HtlA9KMr56MjYIPdLQFJ.txt",
+      "line": 5,
+      "detail": "45 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Technician-Working-560995_jpg.rf.HtlA9KMr56MjYIPdLQFJ.txt",
+      "line": 6,
+      "detail": "33 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Worker-Ascending-1977240_jpg.rf.5JIRx1bjSQrXC6D2vrce.txt",
+      "line": 3,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Worker-Ascending-1977240_jpg.rf.5JIRx1bjSQrXC6D2vrce.txt",
+      "line": 4,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Tower-Worker-Ascending-1977240_jpg.rf.5JIRx1bjSQrXC6D2vrce.txt",
+      "line": 5,
+      "detail": "46 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Progress-3847007_jpg.rf.t7UQC1vM6ac9gGyyVYLl.txt",
+      "line": 4,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Progress-3847007_jpg.rf.t7UQC1vM6ac9gGyyVYLl.txt",
+      "line": 5,
+      "detail": "41 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 13,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 14,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 15,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 16,
+      "detail": "8 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 17,
+      "detail": "9 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Site-980390_jpg.rf.62UX9nG85nhUelSd3866.txt",
+      "line": 18,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 8,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 9,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 11,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 12,
+      "detail": "8 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 13,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Urban-Construction-Workers-460678_jpg.rf.TwFGtYn7GyItNFa6CneH.txt",
+      "line": 14,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Windmill-Maintenance-Work-455736_jpg.rf.Rl93mpMrUa1XbAuw9lNm.txt",
+      "line": 5,
+      "detail": "20 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "train",
+      "file": "Windmill-Maintenance-Work-455736_jpg.rf.Rl93mpMrUa1XbAuw9lNm.txt",
+      "line": 6,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "-3154-_png_jpg.rf.A27HYXDi2HV7KXWSMH3l.txt",
+      "line": 2,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "-4189-_png_jpg.rf.Q9jpdMv2we5FwbI8OKTT.txt",
+      "line": 10,
+      "detail": "48 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "-4189-_png_jpg.rf.Q9jpdMv2we5FwbI8OKTT.txt",
+      "line": 11,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "-4189-_png_jpg.rf.Q9jpdMv2we5FwbI8OKTT.txt",
+      "line": 12,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 11,
+      "detail": "28 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 12,
+      "detail": "14 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 13,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 14,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 15,
+      "detail": "22 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 16,
+      "detail": "19 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 17,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 18,
+      "detail": "17 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 19,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "000010_jpg.rf.6M5rK87U59YtNaqJAH16.txt",
+      "line": 20,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 3,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 4,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 7,
+      "detail": "11 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 8,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 9,
+      "detail": "12 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 10,
+      "detail": "10 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "002525_jpg.rf.uY21OUWhorJChb27PUQu.txt",
+      "line": 11,
+      "detail": "13 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "003179_jpg.rf.pjZ6EStiHsYuPlwjTD2G.txt",
+      "line": 4,
+      "detail": "72 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "003179_jpg.rf.pjZ6EStiHsYuPlwjTD2G.txt",
+      "line": 5,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "003179_jpg.rf.pjZ6EStiHsYuPlwjTD2G.txt",
+      "line": 6,
+      "detail": "15 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "003179_jpg.rf.pjZ6EStiHsYuPlwjTD2G.txt",
+      "line": 7,
+      "detail": "26 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "003179_jpg.rf.pjZ6EStiHsYuPlwjTD2G.txt",
+      "line": 8,
+      "detail": "31 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Climbing-Industrial-Heights-1707257_jpg.rf.MU3zhmgkAXhA4gTqVvYo.txt",
+      "line": 7,
+      "detail": "24 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Construction-Work-Progress-108661_jpg.rf.QIVYKNuXf4aMToNPVZIu.txt",
+      "line": 4,
+      "detail": "16 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Construction-Work-Progress-108661_jpg.rf.QIVYKNuXf4aMToNPVZIu.txt",
+      "line": 5,
+      "detail": "85 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "download (5)_jpg.rf.RUhpNkmgv1GzheBL8YV1.txt",
+      "line": 2,
+      "detail": "77 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "download (5)_jpg.rf.RUhpNkmgv1GzheBL8YV1.txt",
+      "line": 3,
+      "detail": "40 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "image_jpg.rf.EsTSAN75bU2avbaxbEXn.txt",
+      "line": 3,
+      "detail": "61 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "image_jpg.rf.EsTSAN75bU2avbaxbEXn.txt",
+      "line": 4,
+      "detail": "115 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "images (67)_jpg.rf.5dUF2RnZRlqKdAeny6Pg.txt",
+      "line": 1,
+      "detail": "234 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "images1234_jpg.rf.cDbvD9IwwDA3a17MFAez.txt",
+      "line": 4,
+      "detail": "59 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "img_jpg.rf.mOsfz0IB925X7tWMdd3m.txt",
+      "line": 5,
+      "detail": "110 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_1708_jpg.rf.sc1jWllseFfXeqEgCngN.txt",
+      "line": 5,
+      "detail": "38 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_1708_jpg.rf.sc1jWllseFfXeqEgCngN.txt",
+      "line": 6,
+      "detail": "53 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_1728_jpg.rf.LVy8AqaWh2GOKcqNVnzO.txt",
+      "line": 1,
+      "detail": "42 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_1728_jpg.rf.LVy8AqaWh2GOKcqNVnzO.txt",
+      "line": 2,
+      "detail": "43 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_342_jpg.rf.zZKBmxsU0WSy8qr9VZcg.txt",
+      "line": 1,
+      "detail": "127 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "pos_390_jpg.rf.ThAPXPftEhzxxYQU822D.txt",
+      "line": 1,
+      "detail": "91 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Technician-repairing-wiring-1390833_jpg.rf.eqqnXZPVFvvB3imzbu16.txt",
+      "line": 3,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Technician-repairing-wiring-1390833_jpg.rf.eqqnXZPVFvvB3imzbu16.txt",
+      "line": 4,
+      "detail": "37 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Urban-Rope-Access-82937_jpg.rf.vMR5N8RYiGq4fpIIAvKe.txt",
+      "line": 4,
+      "detail": "33 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "valid",
+      "file": "Urban-Rope-Access-82937_jpg.rf.vMR5N8RYiGq4fpIIAvKe.txt",
+      "line": 5,
+      "detail": "104 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "101307074_544e234e97_jpg.rf.4tnURj8OiD1QOti150Rf.txt",
+      "line": 3,
+      "detail": "254 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "Data-Center-Expert-3746732_jpg.rf.eoIenlmqfdq3muo1EPsw.txt",
+      "line": 4,
+      "detail": "32 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "Data-Center-Expert-3746732_jpg.rf.eoIenlmqfdq3muo1EPsw.txt",
+      "line": 5,
+      "detail": "67 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 21,
+      "detail": "92 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 22,
+      "detail": "99 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 23,
+      "detail": "100 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 24,
+      "detail": "112 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 25,
+      "detail": "104 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "images (75)_jpg.rf.bjxqoEqCs7SdWY6WKMsn.txt",
+      "line": 26,
+      "detail": "85 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "Industrial-maintenance-work-580893_jpg.rf.OSYOueGrVkm9bNtTPx7h.txt",
+      "line": 5,
+      "detail": "21 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+      "line": 4,
+      "detail": "54 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+      "line": 5,
+      "detail": "30 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+      "line": 6,
+      "detail": "79 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+      "line": 7,
+      "detail": "101 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_524_jpg.rf.q4eFi9Welq8DaQFoy4zM.txt",
+      "line": 8,
+      "detail": "25 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_648_jpg.rf.aJyvVvlhliWy5AHjALlG.txt",
+      "line": 1,
+      "detail": "135 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "pos_648_jpg.rf.aJyvVvlhliWy5AHjALlG.txt",
+      "line": 2,
+      "detail": "95 sommets -> boite"
+    },
+    {
+      "kind": "converted_polygon",
+      "split": "test",
+      "file": "ppe_1283_jpg.rf.Vs48R4V0SVC1bFEGfC1L.txt",
+      "line": 2,
+      "detail": "10 sommets -> boite"
+    }
+  ],
+  "regrouping": {
+    "regroup_applied": false,
+    "groups_spanning_splits": 390,
+    "files_reassigned": 0,
+    "moves": []
+  }
+}

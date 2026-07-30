@@ -1,0 +1,74 @@
+# ---------------------------------------------------------------------------
+# Environnements Python
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# ---------------------------------------------------------------------------
+# Outils
+# ---------------------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+.tox/
+
+# ---------------------------------------------------------------------------
+# Donnees du dataset — volumineuses, distribuees par Roboflow (CC BY 4.0).
+# Les fichiers de description restent versionnes.
+# ---------------------------------------------------------------------------
+train/
+valid/
+test/
+!**/README*.txt
+
+# ---------------------------------------------------------------------------
+# Artefacts generes : poids, datasets derives, predictions, exports.
+# Seuls les rapports (JSON/Markdown) sont conserves pour la tracabilite.
+# ---------------------------------------------------------------------------
+artifacts/dataset_detection/
+artifacts/dataset_detection_*/
+artifacts/models/
+artifacts/runs/
+artifacts/predictions/
+artifacts/exports/
+artifacts/logs/
+artifacts/samples/
+runs/
+
+# Poids ou l'on se trouve (racine incluse : Ultralytics telecharge ici)
+*.pt
+*.onnx
+*.engine
+*.torchscript
+*.mlpackage
+*_openvino_model/
+
+# ---------------------------------------------------------------------------
+# Secrets et configuration locale
+# ---------------------------------------------------------------------------
+.env
+.env.local
+*.key
+*.pem
+
+# ---------------------------------------------------------------------------
+# Systeme et editeurs
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
