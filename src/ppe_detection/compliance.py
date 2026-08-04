@@ -148,18 +148,31 @@ def containment_ratio(inner: Box, outer: Box) -> float:
 
 
 def person_region(
-    person_box: Box, region: str, config: ComplianceConfig
+    person_box: Box,
+    region: str,
+    config: ComplianceConfig,
+    pose_regions: Mapping[str, Sequence[float]] | None = None,
 ) -> tuple[float, float, float, float]:
     """Sous-region attendue d'un EPI a l'interieur de la boite d'une personne.
 
+    Si des regions issues de l'estimation de pose sont fournies et couvrent la
+    zone demandee, elles priment : elles donnent la position reelle de la partie
+    du corps, sans supposer que la personne est debout et vue de face. Sinon on
+    retombe sur le decoupage par fractions de la boite.
+
     Args:
         person_box: Boite de la personne ``(x1, y1, x2, y2)``.
-        region: ``"head"``, ``"torso"``, ``"feet"`` ou ``"any"``.
+        region: ``"head"``, ``"torso"``, ``"feet"``, ``"hands"`` ou ``"any"``.
         config: Parametres de zones.
+        pose_regions: Regions issues des points cles, indexees par nom.
 
     Returns:
         La sous-boite correspondante.
     """
+    if pose_regions and region in pose_regions:
+        box = pose_regions[region]
+        return (float(box[0]), float(box[1]), float(box[2]), float(box[3]))
+
     x1, y1, x2, y2 = (float(v) for v in person_box)
     height = y2 - y1
     if region == REGION_HEAD:
@@ -177,6 +190,7 @@ def region_observability(
     region: str,
     config: ComplianceConfig,
     image_size: tuple[int, int] | None,
+    pose_regions: Mapping[str, Sequence[float]] | None = None,
 ) -> RegionObservability:
     """Determine si une zone du corps permet de conclure a l'absence d'un EPI.
 
@@ -195,11 +209,12 @@ def region_observability(
         config: Seuils d'observabilite.
         image_size: ``(largeur, hauteur)`` de l'image; si ``None``, le test de
             troncature est ignore (dimensions inconnues).
+        pose_regions: Regions issues des points cles, si disponibles.
 
     Returns:
         L'observabilite de la zone, avec une raison lisible si negative.
     """
-    x1, y1, x2, y2 = person_region(person_box, region, config)
+    x1, y1, x2, y2 = person_region(person_box, region, config, pose_regions)
     height = y2 - y1
 
     if height < config.min_region_height_px:
@@ -295,7 +310,7 @@ def evaluate_compliance(
             person_box = person.get("bbox_xyxy")
             if person_box is None:
                 continue
-            target = person_region(person_box, region, config)
+            target = person_region(person_box, region, config, person.get("pose_regions"))
             ratio = containment_ratio(ppe_box, target)
             if ratio > best_ratio:
                 best_ratio = ratio
@@ -321,12 +336,15 @@ def evaluate_compliance(
         missing: list[str] = []
         indeterminate: list[str] = []
         reasons: list[str] = []
+        pose_regions = person.get("pose_regions")
 
         for required in config.required_ppe:
             if required in detected_names:
                 continue
             region = config.region_by_class.get(required, REGION_ANY)
-            observability = region_observability(person_box, region, config, image_size)
+            observability = region_observability(
+                person_box, region, config, image_size, pose_regions
+            )
             if observability.observable:
                 missing.append(required)
             else:
@@ -355,21 +373,23 @@ def evaluate_compliance(
             verdict_conf = person_conf
 
         track_id = person.get("track_id")
-        results.append(
-            PersonCompliance(
-                person_index=person_index,
-                bbox_xyxy=[float(v) for v in person_box],
-                confidence=person_conf,
-                status=status,
-                detected_ppe=detected_names,
-                missing_ppe=missing,
-                indeterminate_ppe=indeterminate,
-                matched=matched,
-                verdict_confidence=verdict_conf,
-                reasons=reasons,
-                track_id=int(track_id) if track_id is not None else None,
-            ).to_dict()
-        )
+        entry = PersonCompliance(
+            person_index=person_index,
+            bbox_xyxy=[float(v) for v in person_box],
+            confidence=person_conf,
+            status=status,
+            detected_ppe=detected_names,
+            missing_ppe=missing,
+            indeterminate_ppe=indeterminate,
+            matched=matched,
+            verdict_confidence=verdict_conf,
+            reasons=reasons,
+            track_id=int(track_id) if track_id is not None else None,
+        ).to_dict()
+        # Tracabilite : indique si le verdict repose sur les points cles du corps
+        # ou sur le decoupage par fractions, dont les hypotheses sont plus fortes.
+        entry["association_method"] = "pose" if pose_regions else "bbox_fractions"
+        results.append(entry)
     return results
 
 

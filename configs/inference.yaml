@@ -21,11 +21,21 @@ inference:
   # (Ultralytics filtre deja a `conf` avant que ces seuils s'appliquent).
   # Pour reellement abaisser un seuil par classe, baissez `conf` puis remontez
   # les autres classes ici.
-  class_conf: {}
-  # Exemple :
-  # class_conf:
-  #   Face Mask: 0.35
-  #   Safety Gloves: 0.40
+  #
+  # Valeurs ci-dessous obtenues par balayage sur le split de VALIDATION
+  # uniquement (jamais sur le test), en maximisant le F1 par classe :
+  #   python -m ppe_detection.calibrate --split valid
+  # Gain mesure : +0.0067 de F1 macro, dont +0.018 sur Safety Helmet et
+  # +0.016 sur Safety Vest, les deux classes les plus bruyantes a 0.25.
+  # Rapport detaille : artifacts/reports/threshold_calibration.md
+  class_conf:
+    Face Mask: 0.25
+    Person: 0.35
+    Safety Gloves: 0.30
+    Safety Harness: 0.40
+    Safety Helmet: 0.30
+    Safety Shoes: 0.30
+    Safety Vest: 0.45
 
   # Rendu
   show_labels: true
@@ -60,6 +70,14 @@ compliance:
     shoes_region: 0.30
     # Bornes relatives de la zone « torse ».
     torso_region: [0.20, 0.80]
+
+  # Classes que le detecteur ne reconnait pas assez bien pour fonder une alerte.
+  # Mesure sur le split de test assaini : Safety Gloves plafonne a 0.55 de
+  # mAP@0.50 et 0.57 de rappel — plus d'un gant sur quatre est manque. Une regle
+  # « gants obligatoires » produirait donc une majorite de fausses alertes.
+  # Les inscrire malgre tout dans required_ppe declenche un avertissement.
+  unreliable_ppe:
+    - Safety Gloves
 
   # --- Observabilite : quand peut-on AFFIRMER qu'un EPI manque ? -------------
   # Ne pas detecter un gilet ne prouve pas son absence. Si la zone concernee

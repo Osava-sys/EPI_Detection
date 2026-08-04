@@ -1,6 +1,6 @@
 # Rapport d'evaluation — split `test`
 
-- **Genere le** : 2026-07-30T12:42:19.841840+00:00
+- **Genere le** : 2026-08-04T15:11:18.700074+00:00
 - **Poids** : `C:\Users\LENOVO LEGION\Downloads\PPE Detection Project.yolo26\artifacts\models\best.pt` (19.4 Mo)
 - **Parametres** : 9467889
 - **Dataset** : `C:\Users\LENOVO LEGION\Downloads\PPE Detection Project.yolo26\artifacts\dataset_detection\data.yaml`
@@ -10,55 +10,55 @@
 
 | Metrique            | Valeur |
 |---------------------|--------|
-| Precision (moyenne) | 0.8184 |
-| Rappel (moyen)      | 0.7869 |
-| **mAP@0.50**        | 0.8319 |
-| **mAP@0.50:0.95**   | 0.4696 |
-| mAP@0.75            | 0.4628 |
+| Precision (moyenne) | 0.8086 |
+| Rappel (moyen)      | 0.7539 |
+| **mAP@0.50**        | 0.7992 |
+| **mAP@0.50:0.95**   | 0.4326 |
+| mAP@0.75            | 0.4078 |
 
 ## Metriques par classe
 
 | Classe         | Precision | Rappel | mAP@0.50 | mAP@0.50:0.95 |
 |----------------|-----------|--------|----------|---------------|
-| Face Mask      | 0.8673    | 0.769  | 0.9149   | 0.5649        |
-| Person         | 0.8696    | 0.884  | 0.9009   | 0.5364        |
-| Safety Gloves  | 0.7193    | 0.6784 | 0.6695   | 0.3338        |
-| Safety Harness | 0.8285    | 0.7143 | 0.7834   | 0.3962        |
-| Safety Helmet  | 0.7734    | 0.7878 | 0.7987   | 0.3589        |
-| Safety Shoes   | 0.8527    | 0.7883 | 0.8691   | 0.5545        |
-| Safety Vest    | 0.8179    | 0.8865 | 0.8869   | 0.5423        |
+| Face Mask      | 0.8606    | 0.8033 | 0.9224   | 0.5595        |
+| Person         | 0.8757    | 0.8754 | 0.8927   | 0.5306        |
+| Safety Gloves  | 0.6725    | 0.5547 | 0.5483   | 0.221         |
+| Safety Harness | 0.8274    | 0.7117 | 0.7821   | 0.4003        |
+| Safety Helmet  | 0.7761    | 0.7842 | 0.7961   | 0.3524        |
+| Safety Shoes   | 0.7983    | 0.6793 | 0.7751   | 0.4296        |
+| Safety Vest    | 0.8495    | 0.8684 | 0.8777   | 0.5347        |
 
 ## Vitesse
 
 | Etape       | Temps par image |
 |-------------|-----------------|
-| preprocess  | 0.711 ms        |
-| inference   | 2.828 ms        |
-| loss        | 0.0 ms          |
-| postprocess | 0.087 ms        |
-| **Debit**   | 275.79 images/s |
+| preprocess  | 0.705 ms        |
+| inference   | 2.732 ms        |
+| loss        | 0.006 ms        |
+| postprocess | 0.164 ms        |
+| **Debit**   | 277.24 images/s |
 
 ## Analyse d'erreurs
 
-Realisee au seuil operationnel `conf=0.25` et `IoU>=0.5` sur 698 image(s).
+Realisee au seuil operationnel `conf=0.25` et `IoU>=0.5` sur 578 image(s).
 
 | Indicateur     | Total |
 |----------------|-------|
-| Vrais positifs | 2074  |
-| Faux positifs  | 564   |
-| Faux negatifs  | 398   |
+| Vrais positifs | 1734  |
+| Faux positifs  | 486   |
+| Faux negatifs  | 408   |
 
 ### Detail par classe
 
 | Classe         | VP  | FP  | FN  | Precision | Rappel | F1     |
 |----------------|-----|-----|-----|-----------|--------|--------|
-| Face Mask      | 77  | 13  | 8   | 0.8556    | 0.9059 | 0.88   |
-| Person         | 657 | 144 | 67  | 0.8202    | 0.9075 | 0.8616 |
-| Safety Gloves  | 141 | 66  | 58  | 0.6812    | 0.7085 | 0.6946 |
-| Safety Harness | 80  | 23  | 32  | 0.7767    | 0.7143 | 0.7442 |
-| Safety Helmet  | 414 | 155 | 95  | 0.7276    | 0.8134 | 0.7681 |
-| Safety Shoes   | 500 | 100 | 114 | 0.8333    | 0.8143 | 0.8237 |
-| Safety Vest    | 205 | 63  | 24  | 0.7649    | 0.8952 | 0.8249 |
+| Face Mask      | 55  | 12  | 6   | 0.8209    | 0.9016 | 0.8594 |
+| Person         | 643 | 133 | 71  | 0.8286    | 0.9006 | 0.8631 |
+| Safety Gloves  | 78  | 44  | 59  | 0.6393    | 0.5693 | 0.6023 |
+| Safety Harness | 79  | 23  | 32  | 0.7745    | 0.7117 | 0.7418 |
+| Safety Helmet  | 401 | 148 | 94  | 0.7304    | 0.8101 | 0.7682 |
+| Safety Shoes   | 278 | 73  | 118 | 0.792     | 0.702  | 0.7443 |
+| Safety Vest    | 200 | 53  | 28  | 0.7905    | 0.8772 | 0.8316 |
 
 ### Confusions entre classes
 
@@ -77,18 +77,18 @@ Realisee au seuil operationnel `conf=0.25` et `IoU>=0.5` sur 698 image(s).
 
 ### Pires exemples (a inspecter en priorite)
 
-| Image                                                                                  | Reference | Predictions | VP | FP | FN | Score |
-|----------------------------------------------------------------------------------------|-----------|-------------|----|----|----|-------|
-| Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.QSoK4kkwN4jlDtUxxl8y.jpg | 2         | 0           | 0  | 0  | 2  | 0.0   |
-| construction_jpg.rf.SMFRMj2KMSOkXT1rBaBp.jpg                                           | 7         | 0           | 0  | 0  | 7  | 0.0   |
-| full-body-harness-63-_jpg.rf.SJRgWmzNcAlu5RVSPt4a.jpg                                  | 1         | 3           | 0  | 3  | 1  | 0.0   |
-| images (22)_jpg.rf.1zGj1VXyvSUDzNTtHBiB.jpg                                            | 2         | 3           | 0  | 3  | 1  | 0.0   |
-| images (27)_jpg.rf.ElFcrFQLkv1GPeQBaZeR.jpg                                            | 1         | 3           | 0  | 3  | 1  | 0.0   |
-| images (6)_jpg.rf.mtqUILPYBu7WhA6xKhRh.jpg                                             | 1         | 2           | 0  | 2  | 0  | 0.0   |
-| istockphoto-1484904613-612x612_jpg.rf.cP0UMDjL5cIDNOyOiqSU.jpg                         | 2         | 0           | 0  | 0  | 2  | 0.0   |
-| istockphoto-1484904613-612x612_jpg.rf.iB382fTOqdI27HmlZSkG.jpg                         | 2         | 0           | 0  | 0  | 2  | 0.0   |
-| pos_1854_jpg.rf.ucHPyNN8jDiXvnuP9pmv.jpg                                               | 1         | 0           | 0  | 0  | 1  | 0.0   |
-| pos_2083_jpg.rf.tNhPzNcZwCmusUSg6S2X.jpg                                               | 1         | 9           | 0  | 9  | 0  | 0.0   |
+| Image                                                                                             | Reference | Predictions | VP | FP | FN | Score |
+|---------------------------------------------------------------------------------------------------|-----------|-------------|----|----|----|-------|
+| Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.QSoK4kkwN4jlDtUxxl8y.jpg            | 2         | 0           | 0  | 0  | 2  | 0.0   |
+| Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.Z88wKwYsIgJPMvg56sWB.jpg            | 3         | 0           | 0  | 0  | 3  | 0.0   |
+| Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.mL1277Me2sg2oLKmUCRF.jpg            | 3         | 0           | 0  | 0  | 3  | 0.0   |
+| construction_jpg.rf.SMFRMj2KMSOkXT1rBaBp.jpg                                                      | 7         | 0           | 0  | 0  | 7  | 0.0   |
+| dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg.rf.Sv7mCwrlQT2axIjgcJBc.jpg | 1         | 2           | 0  | 2  | 1  | 0.0   |
+| full-body-harness-63-_jpg.rf.SJRgWmzNcAlu5RVSPt4a.jpg                                             | 1         | 3           | 0  | 3  | 1  | 0.0   |
+| images (22)_jpg.rf.1zGj1VXyvSUDzNTtHBiB.jpg                                                       | 2         | 3           | 0  | 3  | 1  | 0.0   |
+| images (27)_jpg.rf.ElFcrFQLkv1GPeQBaZeR.jpg                                                       | 1         | 3           | 0  | 3  | 1  | 0.0   |
+| images (6)_jpg.rf.mtqUILPYBu7WhA6xKhRh.jpg                                                        | 1         | 2           | 0  | 2  | 0  | 0.0   |
+| istockphoto-1484904613-612x612_jpg.rf.RjASIHlOnAC2hag8uloA.jpg                                    | 2         | 0           | 0  | 0  | 2  | 0.0   |
 
 ### Meilleurs exemples
 

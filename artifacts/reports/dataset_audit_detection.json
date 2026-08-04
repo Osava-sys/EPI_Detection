@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T10:01:40.524690+00:00",
+  "generated_at": "2026-08-04T11:08:44.610213+00:00",
   "environment": {
-    "timestamp_utc": "2026-07-30T10:01:40.524690+00:00",
+    "timestamp_utc": "2026-08-04T11:08:44.610213+00:00",
     "python": "3.12.10",
     "platform": "Windows-11-10.0.26200-SP0",
     "machine": "AMD64",
@@ -49,15 +49,15 @@
       "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\train\\images",
       "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\train\\labels",
       "counts": {
-        "images": 4903,
-        "label_files": 4903,
-        "annotations": 17873,
-        "detection_lines": 17873,
+        "images": 5145,
+        "label_files": 5145,
+        "annotations": 18552,
+        "detection_lines": 18552,
         "polygon_lines": 0,
         "malformed_lines": 0,
         "empty_label_files": 0,
         "images_without_objects": 0,
-        "total_size": "606.5 Mo"
+        "total_size": "620.0 Mo"
       },
       "pairing": {
         "images_missing_label": 0,
@@ -68,16 +68,16 @@
       },
       "images": {
         "extensions": {
-          ".jpg": 4791,
+          ".jpg": 5033,
           ".jpeg": 8,
           ".png": 104
         },
         "unreadable": [],
-        "distinct_resolutions": 256,
+        "distinct_resolutions": 255,
         "most_common_resolutions": [
           [
             "640x640",
-            2128
+            2255
           ],
           [
             "478x850",
@@ -85,7 +85,7 @@
           ],
           [
             "416x416",
-            629
+            748
           ],
           [
             "848x478",
@@ -93,7 +93,7 @@
           ],
           [
             "1204x1600",
-            83
+            82
           ]
         ],
         "min_resolution": [
@@ -108,32 +108,32 @@
         "aspect_ratio_max": 2.7955
       },
       "classes": {
-        "total_instances": 17873,
+        "total_instances": 18552,
         "per_class": {
-          "Face Mask": 551,
-          "Person": 5389,
-          "Safety Gloves": 1528,
-          "Safety Harness": 811,
-          "Safety Helmet": 3800,
-          "Safety Shoes": 4058,
-          "Safety Vest": 1736
+          "Face Mask": 596,
+          "Person": 5435,
+          "Safety Gloves": 1625,
+          "Safety Harness": 815,
+          "Safety Helmet": 3842,
+          "Safety Shoes": 4487,
+          "Safety Vest": 1752
         },
         "share_percent": {
-          "Face Mask": 3.08,
-          "Person": 30.15,
-          "Safety Gloves": 8.55,
-          "Safety Harness": 4.54,
-          "Safety Helmet": 21.26,
-          "Safety Shoes": 22.7,
-          "Safety Vest": 9.71
+          "Face Mask": 3.21,
+          "Person": 29.3,
+          "Safety Gloves": 8.76,
+          "Safety Harness": 4.39,
+          "Safety Helmet": 20.71,
+          "Safety Shoes": 24.19,
+          "Safety Vest": 9.44
         },
         "absent_classes": [],
-        "max_over_min_ratio": 9.78,
+        "max_over_min_ratio": 9.12,
         "majority_class": "Person",
         "minority_class": "Face Mask"
       },
       "issues": {
-        "clamped_minor": 246,
+        "clamped_minor": 254,
         "tiny_box": 3
       },
       "issue_examples": [
@@ -307,28 +307,28 @@
         }
       ],
       "box_stats": {
-        "count": 17873,
+        "count": 18552,
         "area_min": 4.307e-05,
-        "area_p05": 0.001704,
-        "area_median": 0.022062,
-        "area_p95": 0.375851,
+        "area_p05": 0.001748,
+        "area_median": 0.021778,
+        "area_p95": 0.375784,
         "area_max": 1.0,
-        "small_objects_share_percent": 35.2
+        "small_objects_share_percent": 35.51
       }
     },
     "valid": {
       "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\valid\\images",
       "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\valid\\labels",
       "counts": {
-        "images": 1399,
-        "label_files": 1399,
-        "annotations": 5197,
-        "detection_lines": 5197,
+        "images": 1277,
+        "label_files": 1277,
+        "annotations": 4848,
+        "detection_lines": 4848,
         "polygon_lines": 0,
         "malformed_lines": 0,
         "empty_label_files": 0,
         "images_without_objects": 0,
-        "total_size": "168.1 Mo"
+        "total_size": "161.5 Mo"
       },
       "pairing": {
         "images_missing_label": 0,
@@ -339,7 +339,7 @@
       },
       "images": {
         "extensions": {
-          ".jpg": 1365,
+          ".jpg": 1243,
           ".png": 33,
           ".jpeg": 1
         },
@@ -348,7 +348,7 @@
         "most_common_resolutions": [
           [
             "640x640",
-            648
+            586
           ],
           [
             "478x850",
@@ -356,7 +356,7 @@
           ],
           [
             "416x416",
-            182
+            119
           ],
           [
             "848x478",
@@ -364,7 +364,7 @@
           ],
           [
             "1204x1600",
-            28
+            29
           ]
         ],
         "min_resolution": [
@@ -379,32 +379,32 @@
         "aspect_ratio_max": 2.0705
       },
       "classes": {
-        "total_instances": 5197,
+        "total_instances": 4848,
         "per_class": {
-          "Face Mask": 152,
-          "Person": 1536,
-          "Safety Gloves": 445,
-          "Safety Harness": 252,
-          "Safety Helmet": 1140,
-          "Safety Shoes": 1203,
-          "Safety Vest": 469
+          "Face Mask": 131,
+          "Person": 1500,
+          "Safety Gloves": 410,
+          "Safety Harness": 249,
+          "Safety Helmet": 1112,
+          "Safety Shoes": 992,
+          "Safety Vest": 454
         },
         "share_percent": {
-          "Face Mask": 2.92,
-          "Person": 29.56,
-          "Safety Gloves": 8.56,
-          "Safety Harness": 4.85,
-          "Safety Helmet": 21.94,
-          "Safety Shoes": 23.15,
-          "Safety Vest": 9.02
+          "Face Mask": 2.7,
+          "Person": 30.94,
+          "Safety Gloves": 8.46,
+          "Safety Harness": 5.14,
+          "Safety Helmet": 22.94,
+          "Safety Shoes": 20.46,
+          "Safety Vest": 9.36
         },
         "absent_classes": [],
-        "max_over_min_ratio": 10.11,
+        "max_over_min_ratio": 11.45,
         "majority_class": "Person",
         "minority_class": "Face Mask"
       },
       "issues": {
-        "clamped_minor": 74,
+        "clamped_minor": 66,
         "tiny_box": 1
       },
       "issue_examples": [
@@ -542,7 +542,7 @@
         },
         {
           "category": "clamped_minor",
-          "file": "13365510684735956913_jpg.rf.rz9YLqWEx0cR48cEPMgT.txt",
+          "file": "1336551069893905541_jpg.rf.HyHOR7Ca2Dn4HNZywANQ.txt",
           "line": 1,
           "detail": ""
         },
@@ -566,28 +566,28 @@
         }
       ],
       "box_stats": {
-        "count": 5197,
+        "count": 4848,
         "area_min": 1.157e-05,
-        "area_p05": 0.001718,
-        "area_median": 0.021503,
-        "area_p95": 0.388689,
+        "area_p05": 0.001629,
+        "area_median": 0.021707,
+        "area_p95": 0.386156,
         "area_max": 0.97051,
-        "small_objects_share_percent": 35.04
+        "small_objects_share_percent": 34.86
       }
     },
     "test": {
       "images_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\test\\images",
       "labels_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\test\\labels",
       "counts": {
-        "images": 698,
-        "label_files": 698,
-        "annotations": 2472,
-        "detection_lines": 2472,
+        "images": 578,
+        "label_files": 578,
+        "annotations": 2142,
+        "detection_lines": 2142,
         "polygon_lines": 0,
         "malformed_lines": 0,
         "empty_label_files": 0,
         "images_without_objects": 0,
-        "total_size": "82.6 Mo"
+        "total_size": "75.7 Mo"
       },
       "pairing": {
         "images_missing_label": 0,
@@ -598,15 +598,15 @@
       },
       "images": {
         "extensions": {
-          ".jpg": 680,
+          ".jpg": 560,
           ".png": 18
         },
         "unreadable": [],
-        "distinct_resolutions": 71,
+        "distinct_resolutions": 72,
         "most_common_resolutions": [
           [
             "640x640",
-            309
+            244
           ],
           [
             "478x850",
@@ -614,7 +614,7 @@
           ],
           [
             "416x416",
-            97
+            41
           ],
           [
             "848x478",
@@ -637,27 +637,27 @@
         "aspect_ratio_max": 2.1503
       },
       "classes": {
-        "total_instances": 2472,
+        "total_instances": 2142,
         "per_class": {
-          "Face Mask": 85,
-          "Person": 724,
-          "Safety Gloves": 199,
-          "Safety Harness": 112,
-          "Safety Helmet": 509,
-          "Safety Shoes": 614,
-          "Safety Vest": 229
+          "Face Mask": 61,
+          "Person": 714,
+          "Safety Gloves": 137,
+          "Safety Harness": 111,
+          "Safety Helmet": 495,
+          "Safety Shoes": 396,
+          "Safety Vest": 228
         },
         "share_percent": {
-          "Face Mask": 3.44,
-          "Person": 29.29,
-          "Safety Gloves": 8.05,
-          "Safety Harness": 4.53,
-          "Safety Helmet": 20.59,
-          "Safety Shoes": 24.84,
-          "Safety Vest": 9.26
+          "Face Mask": 2.85,
+          "Person": 33.33,
+          "Safety Gloves": 6.4,
+          "Safety Harness": 5.18,
+          "Safety Helmet": 23.11,
+          "Safety Shoes": 18.49,
+          "Safety Vest": 10.64
         },
         "absent_classes": [],
-        "max_over_min_ratio": 8.52,
+        "max_over_min_ratio": 11.7,
         "majority_class": "Person",
         "minority_class": "Face Mask"
       },
@@ -775,13 +775,13 @@
         }
       ],
       "box_stats": {
-        "count": 2472,
+        "count": 2142,
         "area_min": 0.00026109,
-        "area_p05": 0.00149,
-        "area_median": 0.02026,
-        "area_p95": 0.387974,
+        "area_p05": 0.001366,
+        "area_median": 0.021538,
+        "area_p95": 0.405535,
         "area_max": 0.970368,
-        "small_objects_share_percent": 36.57
+        "small_objects_share_percent": 34.55
       }
     }
   },
@@ -842,215 +842,12 @@
     "near_duplicate_cross_split_clusters": 0,
     "near_duplicate_cross_split_images": 0,
     "near_duplicate_cluster_examples": [],
-    "shared_source_stem_groups": 390,
-    "shared_source_stem_files": 1252,
-    "shared_source_stem_examples": [
-      {
-        "source_stem": "000190_jpg",
-        "files": [
-          "train/000190_jpg.rf.RiJRoAPUM25KLC2fd1XJ.jpg",
-          "valid/000190_jpg.rf.EKh0K7gFp6kspU6RN8Yy.jpg"
-        ]
-      },
-      {
-        "source_stem": "101307074_544e234e97_jpg",
-        "files": [
-          "test/101307074_544e234e97_jpg.rf.4tnURj8OiD1QOti150Rf.jpg",
-          "train/101307074_544e234e97_jpg.rf.8XqidcoPpI2XRYNtVEHZ.jpg",
-          "train/101307074_544e234e97_jpg.rf.F6lJ6g1qramzCGawXf6o.jpg",
-          "train/101307074_544e234e97_jpg.rf.JSavjjYtVYlD9DSWw5Ij.jpg",
-          "train/101307074_544e234e97_jpg.rf.LSUd4vg8oFMyFyoLkMeP.jpg",
-          "train/101307074_544e234e97_jpg.rf.QZYoCvTbTz6NFhpguB3E.jpg",
-          "train/101307074_544e234e97_jpg.rf.p5sd9cjoPnkYwFYeXvEQ.jpg",
-          "train/101307074_544e234e97_jpg.rf.ws9fdYfFEIqJ9C2fXeuR.jpg",
-          "valid/101307074_544e234e97_jpg.rf.mIIDZEfAXDJaJokgusAL.jpg"
-        ]
-      },
-      {
-        "source_stem": "101307082_0e17782b1d_jpg",
-        "files": [
-          "train/101307082_0e17782b1d_jpg.rf.dRWUZlYfO5rUOvZH4u0x.jpg",
-          "valid/101307082_0e17782b1d_jpg.rf.jT5WVzmCHXuQpXopqWOO.jpg"
-        ]
-      },
-      {
-        "source_stem": "10_jpg",
-        "files": [
-          "train/10_jpg.rf.q6HHR0lIYVBKHUW1lrBm.jpg",
-          "valid/10_jpg.rf.7qbRNHfCkdPqgvC03UFh.jpg"
-        ]
-      },
-      {
-        "source_stem": "12_jpg",
-        "files": [
-          "train/12_jpg.rf.z4qV4OwfYEgenXkJz6KY.jpg",
-          "valid/12_jpg.rf.nDZA4x5t4st6ZvR0kNmZ.jpg"
-        ]
-      },
-      {
-        "source_stem": "13360237544897430511_jpg",
-        "files": [
-          "train/13360237544897430511_jpg.rf.LjhwrluTP4dV4kYNfuWm.jpg",
-          "train/13360237544897430511_jpg.rf.rpmb7GVmeXuo0nNVBKKt.jpg",
-          "valid/13360237544897430511_jpg.rf.eakzB0BLDXcDC2V3MRRc.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068007372001_jpg",
-        "files": [
-          "test/1336551068007372001_jpg.rf.5sFJfuNcE5gSBDFumAqm.jpg",
-          "train/1336551068007372001_jpg.rf.nh2wApDnPXz3H92iNchO.jpg",
-          "valid/1336551068007372001_jpg.rf.y32nRVDBAsobade1Hdkv.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068012062973_jpg",
-        "files": [
-          "train/1336551068012062973_jpg.rf.vSZtEVBOQqnviaGXxFTp.jpg",
-          "valid/1336551068012062973_jpg.rf.N3JR65HufTDOSsZ8Rqx1.jpg",
-          "valid/1336551068012062973_jpg.rf.mfb0G78HV7CZL2aS4Bt0.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068016751195_jpg",
-        "files": [
-          "train/1336551068016751195_jpg.rf.MYB0CkseeNnv6aC42CSl.jpg",
-          "train/1336551068016751195_jpg.rf.nk0IoDeXMnjzeA6HRg88.jpg",
-          "valid/1336551068016751195_jpg.rf.qrQlT6ZDo3dKuI3gGw1R.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068026122739_jpg",
-        "files": [
-          "train/1336551068026122739_jpg.rf.LKtmpNXvB3f6zaXVLe6K.jpg",
-          "train/1336551068026122739_jpg.rf.MuMaOL4jC25eLe08ZZnH.jpg",
-          "valid/1336551068026122739_jpg.rf.JwCIlrBVmLcvngKX9sfu.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068328280805_jpg",
-        "files": [
-          "train/1336551068328280805_jpg.rf.9debqY8f6l2kTAbdaxVz.jpg",
-          "train/1336551068328280805_jpg.rf.rEPQhCvLqRtNKqNTkXTY.jpg",
-          "valid/1336551068328280805_jpg.rf.E9UN4eahfhFIGIAy7OQf.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068334530817_jpg",
-        "files": [
-          "test/1336551068334530817_jpg.rf.ZJ3Pvxp0qZdFx879pDZQ.jpg",
-          "train/1336551068334530817_jpg.rf.I3Uym0JGj1PwtbtOjshX.jpg",
-          "train/1336551068334530817_jpg.rf.XUnvEGzNrJTN8fj7KF4e.jpg"
-        ]
-      },
-      {
-        "source_stem": "13365510683501579413_jpg",
-        "files": [
-          "test/13365510683501579413_jpg.rf.fVboFvJ3hdDXwq0stUCm.jpg",
-          "train/13365510683501579413_jpg.rf.43bLehTq6Er3Fhs9VjqP.jpg",
-          "valid/13365510683501579413_jpg.rf.LPcv4O0rVx3mw5xJbXJ5.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068378283131_jpg",
-        "files": [
-          "train/1336551068378283131_jpg.rf.ogULRbs2jmtD74NOCy0G.jpg",
-          "train/1336551068378283131_jpg.rf.ooug5oQVAG6D6grxcF44.jpg",
-          "valid/1336551068378283131_jpg.rf.5NwRMMDE5udxdYvHwt1O.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068390780995_jpg",
-        "files": [
-          "test/1336551068390780995_jpg.rf.eyeSvN2RwPPONrHPMNZ0.jpg",
-          "train/1336551068390780995_jpg.rf.fBQEv3KA26r36HxsokNY.jpg",
-          "train/1336551068390780995_jpg.rf.oSm6MIhFBjvHS6sUnkse.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551068453284145_jpg",
-        "files": [
-          "test/1336551068453284145_jpg.rf.N1jYSUvdiYOa1DEylDkp.jpg",
-          "train/1336551068453284145_jpg.rf.XcRiapwS9IcEQRmldrDU.jpg",
-          "train/1336551068453284145_jpg.rf.x6bIjXNQTuE9TKFZvggU.jpg"
-        ]
-      },
-      {
-        "source_stem": "13365510684735956913_jpg",
-        "files": [
-          "test/13365510684735956913_jpg.rf.2fT38gYaHWgQ2xuHevgJ.jpg",
-          "train/13365510684735956913_jpg.rf.IQ1Y4ZTLu2DZrZml3WgW.jpg",
-          "valid/13365510684735956913_jpg.rf.rz9YLqWEx0cR48cEPMgT.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551069134530765_jpg",
-        "files": [
-          "test/1336551069134530765_jpg.rf.txvXvQC1IP8nG0kZtAln.jpg",
-          "train/1336551069134530765_jpg.rf.FVe1nb3d2YSNjV8tbuk1.jpg",
-          "train/1336551069134530765_jpg.rf.OFyUnzcvActCLqOzBzT5.jpg"
-        ]
-      },
-      {
-        "source_stem": "13365510691454699711_jpg",
-        "files": [
-          "train/13365510691454699711_jpg.rf.m6oeg0CcVCck6gA3BQ5m.jpg",
-          "valid/13365510691454699711_jpg.rf.bR1D03295KXaRK0AuJgl.jpg",
-          "valid/13365510691454699711_jpg.rf.iEeQJYKUz6YrmjA1vy8h.jpg"
-        ]
-      },
-      {
-        "source_stem": "13365510691532821415_jpg",
-        "files": [
-          "test/13365510691532821415_jpg.rf.NiRq0mbJ1m5WBCyd0GzO.jpg",
-          "train/13365510691532821415_jpg.rf.Yk8433IHBQsUt9yBcOpm.jpg",
-          "valid/13365510691532821415_jpg.rf.vZV6DFbCpoHYvGNQY7cK.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551069576717867_jpg",
-        "files": [
-          "train/1336551069576717867_jpg.rf.1nRYwatrXRVwoW1ZVZQb.jpg",
-          "valid/1336551069576717867_jpg.rf.KuRYHESVvfsDMiyX44vX.jpg",
-          "valid/1336551069576717867_jpg.rf.Xtyx0WISshxwhovRCCuy.jpg"
-        ]
-      },
-      {
-        "source_stem": "13365510695985955815_jpg",
-        "files": [
-          "train/13365510695985955815_jpg.rf.SvW0bCrsX7YpRVHVf8Fk.jpg",
-          "train/13365510695985955815_jpg.rf.anFJcFhoX5zsMlhZlMpm.jpg",
-          "valid/13365510695985955815_jpg.rf.ImHyotmXdyE6QkA6gyrx.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551069759530661_jpg",
-        "files": [
-          "train/1336551069759530661_jpg.rf.riBjuPY4Ttae3xfFgi39.jpg",
-          "train/1336551069759530661_jpg.rf.zkS13mXbVrB2fy9REJWu.jpg",
-          "valid/1336551069759530661_jpg.rf.J8v5zcSrYg7m55SjaBE2.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551069764220673_jpg",
-        "files": [
-          "train/1336551069764220673_jpg.rf.H04Zk6SZGYlbP8thPC1Q.jpg",
-          "train/1336551069764220673_jpg.rf.t6ZcuVNkHFuiv0ktgsVh.jpg",
-          "valid/1336551069764220673_jpg.rf.08D5ViAjhG3f7aZCMj3S.jpg"
-        ]
-      },
-      {
-        "source_stem": "1336551069778280699_jpg",
-        "files": [
-          "test/1336551069778280699_jpg.rf.ELR1W9lXW3mrL4XQ6wLT.jpg",
-          "train/1336551069778280699_jpg.rf.fPdUpqiQjOHVTgBLGi69.jpg",
-          "valid/1336551069778280699_jpg.rf.Kb4EtLgL45WlGvXrNVpP.jpg"
-        ]
-      }
-    ],
+    "shared_source_stem_groups": 0,
+    "shared_source_stem_files": 0,
+    "shared_source_stem_examples": [],
     "sequence_prefixes": 275,
-    "sequence_prefixes_crossing_splits": 58,
-    "sequence_images_crossing_splits": 3241,
+    "sequence_prefixes_crossing_splits": 19,
+    "sequence_images_crossing_splits": 3109,
     "sequence_crossing_examples": [
       {
         "prefix": "frame_",
@@ -1125,8 +922,8 @@
         ]
       },
       {
-        "prefix": "dig-pickaxe-working-street-reconstruction-",
-        "images": 12,
+        "prefix": "img_",
+        "images": 11,
         "splits": [
           "test",
           "train",
@@ -1134,10 +931,9 @@
         ]
       },
       {
-        "prefix": "img_",
-        "images": 11,
+        "prefix": "Onsite PhotoVideo_",
+        "images": 8,
         "splits": [
-          "test",
           "train",
           "valid"
         ]
@@ -1148,12 +944,12 @@
     {
       "severity": "warning",
       "code": "clamped_minor",
-      "message": "[train] 246 boite(s) corrigee(s) : clamped_minor."
+      "message": "[train] 254 boite(s) corrigee(s) : clamped_minor."
     },
     {
       "severity": "warning",
       "code": "clamped_minor",
-      "message": "[valid] 74 boite(s) corrigee(s) : clamped_minor."
+      "message": "[valid] 66 boite(s) corrigee(s) : clamped_minor."
     },
     {
       "severity": "warning",
@@ -1162,20 +958,15 @@
     },
     {
       "severity": "warning",
-      "code": "shared_source_images",
-      "message": "390 image(s) source Roboflow (1252 fichiers) presente(s) dans plusieurs splits : meme prefixe avant '.rf.' — variantes augmentees d'une meme photo reparties entre entrainement et evaluation."
-    },
-    {
-      "severity": "warning",
       "code": "video_sequences_across_splits",
-      "message": "58 sequence(s) d'images numerotees (3241 images de type 'frame_000324') reparties entre plusieurs splits : les frames consecutives d'une meme video sont quasi identiques."
+      "message": "19 sequence(s) d'images numerotees (3109 images de type 'frame_000324') reparties entre plusieurs splits : les frames consecutives d'une meme video sont quasi identiques."
     }
   ],
   "conclusion": {
     "n_errors": 0,
-    "n_warnings": 5,
+    "n_warnings": 4,
     "detection_ready": true,
     "requires_conversion": false,
-    "summary": "7000 images, 25542 annotations, 0 ligne(s) polygonale(s) a convertir, 0 erreur(s), 5 avertissement(s), 0 groupe(s) de doublons exacts."
+    "summary": "7000 images, 25542 annotations, 0 ligne(s) polygonale(s) a convertir, 0 erreur(s), 4 avertissement(s), 0 groupe(s) de doublons exacts."
   }
 }

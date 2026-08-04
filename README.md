@@ -87,6 +87,8 @@ heuristique geometrique, pas une mesure certaine : voir la
 │   ├── dataset_cleaner.py        # Construction du dataset de detection normalise
 │   ├── train.py                  # Entrainement
 │   ├── evaluate.py               # Evaluation + analyse d'erreurs
+│   ├── calibrate.py              # Calibration des seuils par classe (validation)
+│   ├── pose.py                   # Association EPI/personne par points cles
 │   ├── predict.py                # Inference unifiee (image/dossier/video/webcam/flux)
 │   ├── video.py                  # Boucle video et webcam
 │   ├── compliance.py             # Association geometrique EPI <-> personne
@@ -95,6 +97,7 @@ heuristique geometrique, pas une mesure certaine : voir la
 │   └── api.py                    # API REST FastAPI
 │
 ├── app/streamlit_app.py          # Interface locale
+├── docs/plan_ecart_terrain.md    # Plan de collecte pour le deploiement reel
 ├── scripts/*.ps1                 # Scripts PowerShell de bout en bout
 ├── tests/                        # 116 tests unitaires et d'integration
 └── artifacts/                    # Sorties generees (hors Git)
@@ -298,6 +301,40 @@ Ou, en une seule commande avec audit avant/apres :
 .\scripts\audit_dataset.ps1
 ```
 
+### Regroupement anti-fuite (actif par defaut)
+
+L'export Roboflow place des **variantes augmentees d'une meme photo** dans des
+splits differents : 390 photos sources se retrouvaient reparties entre train,
+valid et test. Un modele evalue dans ces conditions est note sur des images
+qu'il a deja apprises.
+
+Le nettoyeur regroupe donc, **par defaut**, toutes les variantes d'une meme
+photo source dans un seul split. Le split retenu est celui ou reside deja la
+majorite des fichiers ; les egalites sont tranchees par un hachage stable, donc
+reproductible.
+
+Effet mesure sur ce projet :
+
+| | Decoupage Roboflow | Regroupe (defaut) |
+|---|---|---|
+| Repartition train/valid/test | 4903 / 1399 / 698 | 5145 / 1277 / 578 |
+| Photos sources a cheval sur plusieurs splits | 390 | **0** |
+| mAP@0.50 rapportee sur le test | 0.8319 | **0.7992** |
+| mAP@0.50:0.95 rapportee | 0.4696 | **0.4326** |
+
+Les chiffres de droite sont les vrais. L'ecart de +0.033 mesurait une fuite, pas
+une performance : 139 des 698 images de test (19,9 %) figuraient dans le train.
+
+Pour reproduire le decoupage d'origine — par exemple afin de comparer a des
+resultats publies sur le dataset Roboflow — utilisez `--allow-source-leak`, en
+sachant que les metriques obtenues seront optimistes.
+
+**Fuite residuelle assumee** : 78 clusters de quasi-doublons traversent encore
+les splits. Ce sont des frames video consecutives (`frame_000324`,
+`frame_000325`...), formellement des images sources distinctes que le
+regroupement par nom ne peut pas rapprocher. Les eliminer demanderait de
+re-stratifier par sequence video, ce qui releve d'une decision de protocole.
+
 ### Regle de conversion
 
 Pour une ligne polygonale `class_id x1 y1 x2 y2 …` :
@@ -477,7 +514,125 @@ inference / post-traitement, debit en images/s, taille des poids, nombre de
 parametres, analyse d'erreurs (VP / FP / FN par classe), confusions entre
 classes, meilleurs et pires exemples, et limites connues.
 
+### Resultats de reference (`yolo26s`, 640 px, dataset sans fuite)
+
+| Metrique | Validation | Test |
+|----------|-----------|------|
+| mAP@0.50 | 0.7789 | 0.7992 |
+| mAP@0.50:0.95 | 0.4294 | 0.4326 |
+| Precision | 0.7855 | 0.8086 |
+| Rappel | 0.7333 | 0.7539 |
+
+Par classe, sur le test :
+
+| Classe | Instances | Taille mediane @640 | mAP@0.50 | mAP@0.50:0.95 |
+|--------|-----------|--------------------|----------|---------------|
+| Face Mask | 788 | 46 px | **0.922** | 0.560 |
+| Person | 7 649 | 200 px | 0.893 | 0.531 |
+| Safety Vest | 2 434 | 136 px | 0.878 | 0.535 |
+| Safety Helmet | 5 449 | 50 px | 0.796 | 0.352 |
+| Safety Harness | 1 175 | 155 px | 0.782 | 0.400 |
+| Safety Shoes | 5 875 | 73 px | 0.775 | 0.430 |
+| Safety Gloves | 2 172 | 50 px | **0.548** | 0.221 |
+
+**La performance suit la taille des objets, pas leur frequence.** `Face Mask` est
+la classe la plus rare (3,1 % des annotations) et la mieux detectee ; `Safety
+Helmet` est la deuxieme plus frequente (21,3 %) et plafonne, car 25 % des casques
+font moins de 32 px a 640. Rééquilibrer les classes serait donc inutile ici — le
+levier est la resolution.
+
+### Le reentrainement a 960 px : hypothese testee, resultat negatif
+
+L'hypothese etait qu'entrainer a 960 px ferait progresser les classes a petits
+objets. Elle a ete testee jusqu'au bout — un entrainement complet de 3 h 36
+(97 epoques, early stopping, meilleure epoque 72) — et **elle n'est pas
+confirmee au niveau global**.
+
+Comparaison sur le meme split de test, chaque modele evalue a sa resolution
+d'entrainement :
+
+| | 640 px | 960 px | Ecart |
+|---|--------|--------|-------|
+| mAP@0.50 | **0.7992** | 0.7980 | −0.0012 |
+| mAP@0.50:0.95 | **0.4326** | 0.4276 | −0.0050 |
+| Precision | **0.8086** | 0.8059 | −0.0027 |
+| Rappel | 0.7539 | **0.7572** | +0.0033 |
+| Inference | **2.76 ms** | 5.83 ms | ×2.1 |
+| Debit | **271 img/s** | 130 img/s | ÷2.1 |
+
+Par classe, la prediction se verifie **partiellement** — les deux classes que
+l'analyse designait progressent bien :
+
+| Classe | % objets < 32 px | mAP@0.50 640 | mAP@0.50 960 | Ecart |
+|--------|------------------|--------------|--------------|-------|
+| Safety Gloves | 13 % | 0.5483 | **0.5757** | **+0.0274** |
+| Person | 0 % | 0.8927 | **0.9152** | +0.0225 |
+| Safety Helmet | 25 % | 0.7961 | **0.8096** | +0.0135 |
+| Safety Vest | 2 % | 0.8777 | 0.8733 | −0.0044 |
+| Safety Shoes | 9 % | 0.7751 | 0.7673 | −0.0078 |
+| Safety Harness | 2 % | 0.7821 | 0.7553 | −0.0268 |
+| Face Mask | 18 % | 0.9224 | 0.8892 | −0.0332 |
+
+`Safety Gloves`, la classe la plus faible, gagne 5 % en relatif. Mais le signal
+reste faible et bruite : les classes a petits objets gagnent +0.0026 en moyenne,
+les autres perdent −0.0041. Surtout, **`Face Mask` regresse le plus fortement
+alors que 18 % de ses objets sont minuscules**, ce qui contredit une explication
+purement fondee sur la taille.
+
+**Decision : `best.pt` reste le modele 640 px.** Il est meilleur ou equivalent
+sur toutes les metriques globales et deux fois plus rapide. Le modele 960 est
+conserve sous `artifacts/models/best_960.pt` : il peut se justifier si la
+detection des gants devient prioritaire, au prix du debit.
+
+Ce que cela apprend : **la resolution seule ne compense pas un manque de
+diversite dans les donnees.** Le levier restant est la collecte de donnees de
+terrain — voir [`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
+
+À noter egalement : evaluer les poids 640 px a 960 px sans reentrainer degrade
+le resultat (0.780 vs 0.799). **Augmenter la resolution a l'inference seule ne
+fonctionne pas** — le modele attend l'echelle sur laquelle il a ete entraine.
+
 ---
+
+### Calibration des seuils par classe
+
+Un seuil unique pour toutes les classes est un compromis mediocre : chaque
+classe a sa propre distribution de scores. La commande suivante balaie les
+seuils et retient, pour chaque classe, celui qui maximise le F1 :
+
+```powershell
+python -m ppe_detection.calibrate --weights artifacts/models/best.pt `
+  --data artifacts/dataset_detection/data.yaml --split valid
+```
+
+Ajoutez `--apply` pour ecrire directement les seuils dans
+`configs/inference.yaml` (attention : la reecriture YAML supprime les
+commentaires du fichier ; le rapport fournit toujours l'extrait a recopier).
+
+**Protocole** : la calibration s'effectue sur la **validation** uniquement.
+Choisir des seuils sur le test reviendrait a ajuster le modele sur les donnees
+censees l'evaluer — la commande refuse d'ailleurs `--split test` sauf
+`--allow-test-split` assume explicitement.
+
+Resultats obtenus sur ce projet (seuils deja reportes dans `inference.yaml`) :
+
+| Classe | Seuil retenu | Gain de F1 sur le **test** |
+|--------|--------------|---------------------------|
+| Face Mask | 0.25 | +0.0000 |
+| Person | 0.35 | +0.0076 |
+| Safety Gloves | 0.30 | +0.0025 |
+| Safety Harness | 0.40 | **+0.0235** |
+| Safety Helmet | 0.30 | +0.0116 |
+| Safety Shoes | 0.30 | −0.0001 |
+| Safety Vest | 0.45 | +0.0127 |
+| **F1 macro** | | **+0.0083** |
+
+Concretement sur le split de test : **120 faux positifs en moins** pour 52 vrais
+positifs perdus. Les seuils choisis sur la validation generalisent donc bien
+(+0.0067 attendu, +0.0083 constate).
+
+Une contrainte metier de rappel minimal est disponible via `--min-recall` :
+utile lorsque manquer un EPI coute plus cher qu'une fausse alerte.
 
 ## 11. Inference
 
@@ -590,25 +745,60 @@ compliance:
   temporal_min_observations: 5
 ```
 
+### Association par points cles du corps (recommande)
+
+Le decoupage par fractions suppose une personne **debout et vue de face**. Cette
+hypothese tombe des que la personne est accroupie, penchee, assise, ou filmee en
+plongee — le cas courant en videosurveillance.
+
+L'option `--pose` remplace ce decoupage par la position **reelle** des parties du
+corps, obtenue via un modele d'estimation de pose (17 points cles COCO,
+`yolo26n-pose.pt`, telecharge automatiquement) :
+
+```powershell
+python -m ppe_detection.predict --weights artifacts/models/best.pt `
+  --source chemin\image.jpg --compliance --pose --save --save-json
+```
+
+| Zone | Points cles utilises | Remplace |
+|------|---------------------|----------|
+| `head` | nez, yeux, oreilles + echelle du buste | 35 % superieurs de la boite |
+| `torso` | epaules et hanches | tranche 20–80 % |
+| `feet` | chevilles | 30 % inferieurs |
+| `hands` | poignets | boite entiere |
+
+Un casque masque le crane : la zone « tete » est donc extrapolee **au-dessus**
+des points du visage, a partir de la longueur du buste.
+
+Mesure sur une ouvriere accroupie (frame reelle) — la zone du torse passe de
+`x[387-1133] y[144-576]` (fractions) a `x[719-999] y[262-679]` (pose), soit un
+recentrage conforme a sa posture.
+
+**Repli automatique** : si les points cles necessaires manquent (personne de dos,
+trop petite, occultee), le systeme revient au decoupage par fractions pour cette
+zone. Le champ `association_method` de chaque verdict indique la methode
+reellement employee, `pose` ou `bbox_fractions`.
+
+Cout : un second modele en memoire et une inference supplementaire par image.
+
 ### Trois etats, pas deux
 
 Un detecteur qui ne voit pas un gilet ne prouve pas son absence. Declarer
 « non conforme » une personne dont la zone concernee n'est pas observable
 produit des fausses alertes en masse. Le systeme distingue donc :
 
-| Statut | Signification | Couleur |
-|--------|---------------|---------|
-| `compliant` | Tous les EPI requis sont detectes et attribues | vert |
-| `non_compliant` | Un EPI requis manque **dans une zone reellement observable** | rouge |
-| `indeterminate` | La zone n'est pas observable — aucune conclusion | ambre |
+| Statut            | Signification                                                     | Couleur |
+| ----------------- | ----------------------------------------------------------------- | ------- |
+| `compliant`     | Tous les EPI requis sont detectes et attribues                    | vert    |
+| `non_compliant` | Un EPI requis manque**dans une zone reellement observable** | rouge   |
+| `indeterminate` | La zone n'est pas observable — aucune conclusion                 | ambre   |
 
 Une zone est jugee non observable dans deux cas : elle **touche un bord du
 cadre** (personne tronquee, typiquement la tete qui depasse par le haut), ou
 elle est **trop petite en pixels** pour que le detecteur y resolve un objet.
 
 Le champ `reasons` de chaque personne indique precisement pourquoi un EPI est
-indetermine, par exemple `Safety Helmet : zone 'head' tronquee par le bord haut
-du cadre`.
+indetermine, par exemple `Safety Helmet : zone 'head' tronquee par le bord haut du cadre`.
 
 Le taux de conformite est calcule sur les seules personnes **jugeables** :
 inclure les indetermines au denominateur ferait baisser artificiellement le taux
@@ -635,12 +825,12 @@ Le rapport distingue alors deux vues :
 
 Effet mesure sur une video de chantier de 122 frames :
 
-| Vue | Sans suivi | Avec `--track` |
-|-----|-----------|----------------|
-| Unites comptees | 194 detections de personne | **6 personnes suivies** |
-| Non conformes | 147 | 4 |
-| Indetermines (retenus par le niveau 1) | 35 | 2 |
-| Alertes emises | 147 | **5** |
+| Vue                                    | Sans suivi                 | Avec`--track`               |
+| -------------------------------------- | -------------------------- | ----------------------------- |
+| Unites comptees                        | 194 detections de personne | **6 personnes suivies** |
+| Non conformes                          | 147                        | 4                             |
+| Indetermines (retenus par le niveau 1) | 35                         | 2                             |
+| Alertes emises                         | 147                        | **5**                   |
 
 ### Limites persistantes
 
@@ -656,7 +846,13 @@ l'heuristique reste faillible :
 - **Faux negatif de detection dans une zone observable** : un gilet bien visible
   mais non detecte produit toujours un « non conforme » a tort. C'est
   aujourd'hui la principale source d'erreur restante, et elle releve du
-  detecteur, pas de la regle metier.
+  detecteur, pas de la regle metier. L'option `--pose` ne la corrige pas : en
+  rendant l'evaluation de l'observabilite plus juste, elle a meme tendance a
+  **exposer** ces echecs plutot qu'a les masquer derriere un « indetermine ».
+- **Classes peu fiables** : `Safety Gloves` plafonne a 0.55 de mAP@0.50 et 0.57
+  de rappel. Elle figure dans `unreliable_ppe` : l'inscrire dans `required_ppe`
+  declenche un avertissement au chargement, car la regle produirait une majorite
+  de fausses alertes.
 - Le champ `verdict_confidence` porte sur la **detection**, pas sur la justesse
   de la regle metier.
 - Une personne qui se met en conformite puis redevient non conforme genere
@@ -739,12 +935,12 @@ Puis [http://localhost:8501](http://localhost:8501).
 
 L'interface comporte quatre onglets.
 
-| Onglet | Fonction |
-|--------|----------|
-| **Image** | Televersement d'une photo, image annotee, tableau des detections, conformite, telechargement JSON/JPEG. |
-| **Video** | Televersement d'un fichier, traitement, **lecture directe de la video annotee**, journal des alertes, telechargements. |
-| **Webcam (direct)** | Inference **en continu** sur la camera locale, avec FPS, suivi, alertes en temps reel et enregistrement optionnel. Un mode « photo ponctuelle » est aussi disponible. |
-| **Resultats** | Relecture de toutes les videos annotees deja produites dans `artifacts/predictions/`. |
+| Onglet                    | Fonction                                                                                                                                                                     |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Image**           | Televersement d'une photo, image annotee, tableau des detections, conformite, telechargement JSON/JPEG.                                                                      |
+| **Video**           | Televersement d'un fichier, traitement,**lecture directe de la video annotee**, journal des alertes, telechargements.                                                  |
+| **Webcam (direct)** | Inference**en continu** sur la camera locale, avec FPS, suivi, alertes en temps reel et enregistrement optionnel. Un mode « photo ponctuelle » est aussi disponible. |
+| **Resultats**       | Relecture de toutes les videos annotees deja produites dans`artifacts/predictions/`.                                                                                       |
 
 Reglages communs dans la barre laterale : poids, device, seuils de confiance et
 d'IoU, activation de la conformite, choix des EPI obligatoires et activation du
@@ -960,60 +1156,97 @@ silence.
 
 ### Donnees
 
-1. **Fuite entre splits.** 390 groupes d'images issues d'une meme photo source
-   (1 252 fichiers) et 58 sequences video (3 241 images) sont repartis sur
-   plusieurs splits. **Les metriques obtenues sur ce decoupage surestiment la
-   performance reelle.** L'option `--regroup-by-source` corrige le premier
-   mecanisme, pas le second.
+1. **Fuite residuelle par sequence video.** Le regroupement par photo source est
+   desormais actif par defaut et supprime les 390 groupes concernes. Il reste
+   **78 clusters de quasi-doublons a cheval sur les splits** : des frames video
+   consecutives, formellement distinctes, que le regroupement par nom ne peut
+   pas rapprocher. Les metriques restent donc legerement optimistes.
 2. **Documentation source inexacte.** Le README Roboflow annonce « No
    pre-processing or augmentation was applied », ce que l'analyse pixel
    contredit (variantes pivotees d'une meme photo).
-3. **Desequilibre des classes.** Rapport de 9,71 entre `Person` (7 649) et
-   `Face Mask` (788). `Safety Harness` (1 175) est egalement peu representee.
-   Attendez-vous a un rappel plus faible sur ces classes.
+3. **Diversite reelle inferieure au volume affiche.** Sur 7 000 images, environ
+   1 785 sont des frames extraites de quelques sequences video, tres
+   redondantes entre elles.
 4. **Boites issues de polygones.** 349 boites proviennent d'une conversion
    min/max : la boite englobante d'un polygone est toujours au moins aussi
-   grande que l'objet reel, ce qui introduit un leger biais de taille.
-5. **Petits objets.** ~35 % des boites couvrent moins de 1 % de l'image. Les
-   gants, masques et chaussures sont intrinsequement difficiles a 640 px.
-6. **Domaine unique.** Le dataset ne couvre pas toutes les conditions reelles
-   (nuit, pluie, contre-jour, angles de camera de surveillance).
+   grande que l'objet reel. Cela contribue au faible mAP@0.50:0.95 (0.433
+   contre 0.799 a IoU 0.50).
+5. **Petits objets — facteur limitant principal.** 25 % des casques et 13 % des
+   gants font moins de 32 px a 640. Cela pese davantage que le desequilibre des
+   classes : `Face Mask`, la classe la plus rare, est la mieux detectee (0.922),
+   tandis que `Safety Helmet`, la deuxieme plus frequente, plafonne a 0.796.
+6. **Ecart au terrain non mesure.** Le dataset ne couvre ni la nuit, ni la
+   pluie, ni le contre-jour, ni les angles de videosurveillance. Sur une video
+   de chantier reelle, `Safety Vest` (0.878 de mAP@0.50 en test) n'a ete detecte
+   que 15 fois sur 122 images. Plan de correction :
+   [`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
 
 ### Modele et pipeline
 
-7. **Aucun entrainement complet n'a ete execute dans ce livrable.** Seul un
-   smoke test (2 epoques, 4 % des donnees) a tourne. Les poids
-   `artifacts/models/smoke_best.pt` **ne sont pas exploitables en production** :
-   mAP@0.50 = 0,095. La commande d'entrainement complet est en section 20.
-8. **La conformite EPI est une heuristique geometrique**, avec les limites
+7. **`Safety Gloves` n'est pas exploitable en production** : 0.548 de mAP@0.50 et
+   0.555 de rappel — plus d'un gant sur quatre est manque. La classe figure dans
+   `unreliable_ppe` et declenche un avertissement si elle est inscrite dans
+   `required_ppe`.
+8. **La conformite EPI reste une heuristique**, meme avec `--pose`. Les points
+   cles suppriment l'hypothese « personne debout vue de face », mais ni la pose
+   ni la geometrie ne prouvent qu'un EPI est effectivement **porte** : un casque
+   pose sur une table dans la zone tete sera compte comme porte. Limites
    detaillees en [section 12](#12-conformite-epi).
 9. **La verification ONNX porte sur une seule image.** Elle prouve la fidelite
    de la conversion, pas l'equivalence sur toute distribution d'entrees.
-10. **Pas de suivi d'objets.** Chaque frame est traitee independamment : une
-    meme personne est recomptee a chaque frame, sans identite persistante.
-11. **Les exports TensorRT et OpenVINO ne sont pas verifies automatiquement**
+10. **Les exports TensorRT et OpenVINO ne sont pas verifies automatiquement**
     (seul ONNX l'est) et n'ont pas ete testes ici.
-12. **Le mode `symlink` retombe silencieusement sur la copie** sous Windows si
+11. **Le mode `symlink` retombe silencieusement sur la copie** sous Windows si
     les droits ne permettent pas la creation de liens (mode developpeur requis).
+12. **Couverture de tests a 51 %.** Les chemins lourds (entrainement, export,
+    audit complet) sont peu couverts : les exercer demanderait un GPU et le
+    dataset complet.
+13. **Incoherence de l'option `--output`.** Elle designe un **repertoire** dans
+    `evaluate`, `export`, `predict` et `dataset_cleaner`, mais un **fichier**
+    dans `dataset_audit`. Piege a eviter tant que ce n'est pas uniformise.
 
 ---
 
 ## 20. Pistes d'amelioration
 
-**Donnees** — refaire un decoupage groupe par photo source *et* par sequence
-video ; enrichir `Face Mask` et `Safety Harness` ; verifier manuellement les
-349 boites issues de polygones ; ajouter des conditions difficiles.
+### Deja fait
 
-**Modele** — comparer `yolo26s` / `yolo26m` a resolution 640 et 768 ; entrainer
-en deux temps (640 puis affinage a 960) pour les petits objets ; n'envisager
-une ponderation de perte par classe qu'apres avoir mesure l'AP par classe.
+- Regroupement anti-fuite par photo source, **actif par defaut** (section 7).
+- Etat `indeterminate` : ne pas accuser une personne qu'on ne peut pas observer.
+- Suivi multi-objets et lissage temporel des verdicts (`--track`).
+- Association par points cles du corps (`--pose`).
+- Calibration des seuils par classe sur la validation (`calibrate`).
 
-**Conformite** — remplacer l'heuristique geometrique par une estimation de pose
-pour rattacher les EPI aux articulations ; ajouter un suivi multi-objets pour
-stabiliser les verdicts dans le temps et eviter les alertes clignotantes.
+### Priorites restantes
 
-**Industrialisation** — quantification INT8 pour l'embarque ; export TensorRT
+**1. Mesurer l'ecart au terrain.** Constituer un jeu de test de 150 a 200
+images issues des conditions reelles de deploiement, jamais melangees a
+l'entrainement. C'est le seul juge honnete de la performance en production, et
+le prealable a toute autre optimisation. Voir
+[`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
+
+**2. Resolution : piste testee, a ne pas relancer telle quelle.** Un
+entrainement complet a 960 px n'a apporte aucun gain global (voir section 10).
+Inutile d'y revenir sans changer autre chose. Restent a essayer :
+l'entrainement multi-echelle (`multi_scale: true`), qui expose le modele aux
+deux regimes plutot que d'en privilegier un, et un modele plus capacitaire
+(`yolo26m`) a 640 px, moins couteux a l'inference qu'un `yolo26s` a 960 px.
+
+**3. `Safety Gloves`.** Campagne d'annotation dediee, ou retrait assume des
+regles de conformite. En l'etat, la classe ne supporte aucune decision.
+
+**4. Stratification par sequence video.** Eliminer les 78 clusters de
+quasi-doublons restants exige de repartir les splits par sequence source, et non
+par nom de fichier.
+
+**5. Conformite avancee.** Verifier qu'un EPI est *porte* et non simplement
+present dans la zone (coherence temporelle du port, orientation du casque).
+
+**6. Industrialisation.** Quantification INT8 pour l'embarque ; export TensorRT
 verifie ; conteneurisation de l'API ; supervision de la derive du modele.
+
+**7. Dette technique.** Uniformiser la semantique de `--output` ; monter la
+couverture de tests sur `train.py` et `export.py`.
 
 ---
 

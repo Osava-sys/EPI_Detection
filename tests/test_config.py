@@ -89,6 +89,43 @@ def test_train_config_ignores_none_overrides() -> None:
     assert config.epochs == 100
 
 
+# --------------------------------------------------------------------------- #
+# Resolution de la taille de lot
+# --------------------------------------------------------------------------- #
+def test_resolve_batch_converts_integral_float_to_int() -> None:
+    """argparse fournit 12.0 ; le DataLoader PyTorch exige un entier strict.
+
+    Sans cette conversion l'entrainement echoue au demarrage sur
+    ``ValueError: batch_size should be a positive integer value``.
+    """
+    from ppe_detection.train import _resolve_batch
+
+    resolved = _resolve_batch(load_train_config(None, batch=12.0), "0")
+    assert resolved == 12
+    assert isinstance(resolved, int)
+
+
+def test_resolve_batch_preserves_vram_fraction() -> None:
+    """Une valeur dans ]0, 1[ designe une fraction de VRAM : ne pas l'arrondir."""
+    from ppe_detection.train import _resolve_batch
+
+    resolved = _resolve_batch(load_train_config(None, batch=0.7), "0")
+    assert resolved == pytest.approx(0.7)
+
+
+def test_resolve_batch_keeps_auto_sentinel() -> None:
+    from ppe_detection.train import _resolve_batch
+
+    assert _resolve_batch(load_train_config(None, batch=-1), "0") == -1
+
+
+def test_resolve_batch_falls_back_on_cpu() -> None:
+    """L'auto-batch mesure la VRAM : sans GPU, une valeur explicite s'impose."""
+    from ppe_detection.train import _resolve_batch
+
+    assert _resolve_batch(load_train_config(None, batch=-1), "cpu") == 4
+
+
 def test_project_train_yaml_is_valid() -> None:
     """La configuration livree doit se charger sans erreur."""
     from ppe_detection.config import default_config_path

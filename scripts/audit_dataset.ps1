@@ -18,23 +18,26 @@
 .PARAMETER SkipPerceptualHash
     Desactive la recherche de quasi-doublons visuels (audit plus rapide).
 
-.PARAMETER RegroupBySource
-    Regroupe les variantes d'une meme image source dans un seul split afin de
-    supprimer la fuite inter-splits detectee par l'audit.
+.PARAMETER AllowSourceLeak
+    Reproduit la repartition train/valid/test exacte de l'export Roboflow, au
+    lieu du regroupement anti-fuite applique par defaut. Les metriques obtenues
+    seront optimistes : a n'utiliser que pour comparer a des resultats publies
+    sur le decoupage d'origine.
 
 .PARAMETER Overwrite
     Remplace un dataset derive existant.
 
 .EXAMPLE
     .\scripts\audit_dataset.ps1
-    .\scripts\audit_dataset.ps1 -RegroupBySource -Output artifacts/dataset_detection_nokeak
+    .\scripts\audit_dataset.ps1 -Overwrite
+    .\scripts\audit_dataset.ps1 -AllowSourceLeak -Output artifacts/dataset_detection_roboflow
 #>
 [CmdletBinding()]
 param(
     [string]$Data = "data.yaml",
     [string]$Output = "artifacts/dataset_detection",
     [switch]$SkipPerceptualHash,
-    [switch]$RegroupBySource,
+    [switch]$AllowSourceLeak,
     [switch]$Overwrite
 )
 
@@ -65,7 +68,7 @@ $cleanArgs = @(
     "--mode", "copy"
 )
 if ($Overwrite)        { $cleanArgs += "--overwrite" }
-if ($RegroupBySource)  { $cleanArgs += "--regroup-by-source" }
+if ($AllowSourceLeak)  { $cleanArgs += "--allow-source-leak" }
 & $Python @cleanArgs
 if ($LASTEXITCODE -ne 0) { throw "La normalisation du dataset a echoue." }
 

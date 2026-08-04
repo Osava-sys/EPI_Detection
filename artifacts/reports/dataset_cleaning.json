@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T10:00:51.312267+00:00",
+  "generated_at": "2026-08-04T11:07:55.896457+00:00",
   "environment": {
-    "timestamp_utc": "2026-07-30T10:00:51.312267+00:00",
+    "timestamp_utc": "2026-08-04T11:07:55.896457+00:00",
     "python": "3.12.10",
     "platform": "Windows-11-10.0.26200-SP0",
     "machine": "AMD64",
@@ -34,16 +34,16 @@
     "mode": "copy",
     "dry_run": false,
     "images_per_split": {
-      "train": 4903,
-      "valid": 1399,
-      "test": 698
+      "train": 5145,
+      "valid": 1277,
+      "test": 578
     }
   },
   "parameters": {
     "clamp_tolerance": 0.001,
     "min_box_side": 0.0001,
     "strict": false,
-    "regroup_by_source": false,
+    "regroup_by_source": true,
     "seed": 42
   },
   "statistics": {
@@ -69,31 +69,31 @@
   },
   "class_counts_per_split": {
     "train": {
-      "Person": 5389,
-      "Safety Vest": 1736,
-      "Safety Shoes": 4058,
-      "Safety Helmet": 3800,
-      "Safety Gloves": 1528,
-      "Safety Harness": 811,
-      "Face Mask": 551
+      "Person": 5435,
+      "Safety Vest": 1752,
+      "Safety Shoes": 4487,
+      "Safety Helmet": 3842,
+      "Safety Gloves": 1625,
+      "Safety Harness": 815,
+      "Face Mask": 596
     },
     "valid": {
-      "Person": 1536,
-      "Safety Helmet": 1140,
-      "Safety Shoes": 1203,
-      "Safety Vest": 469,
-      "Safety Gloves": 445,
-      "Safety Harness": 252,
-      "Face Mask": 152
+      "Safety Helmet": 1112,
+      "Safety Harness": 249,
+      "Safety Gloves": 410,
+      "Person": 1500,
+      "Safety Shoes": 992,
+      "Safety Vest": 454,
+      "Face Mask": 131
     },
     "test": {
-      "Person": 724,
-      "Safety Helmet": 509,
-      "Safety Gloves": 199,
-      "Safety Vest": 229,
-      "Safety Shoes": 614,
-      "Safety Harness": 112,
-      "Face Mask": 85
+      "Safety Shoes": 396,
+      "Person": 714,
+      "Safety Helmet": 495,
+      "Safety Harness": 111,
+      "Safety Vest": 228,
+      "Safety Gloves": 137,
+      "Face Mask": 61
     }
   },
   "issue_counts": {
@@ -2545,9 +2545,2938 @@
     }
   ],
   "regrouping": {
-    "regroup_applied": false,
+    "regroup_applied": true,
     "groups_spanning_splits": 390,
-    "files_reassigned": 0,
-    "moves": []
+    "files_reassigned": 488,
+    "moves": [
+      {
+        "file": "000190_jpg.rf.RiJRoAPUM25KLC2fd1XJ.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "000190_jpg"
+      },
+      {
+        "file": "101307074_544e234e97_jpg.rf.mIIDZEfAXDJaJokgusAL.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "101307074_544e234e97_jpg"
+      },
+      {
+        "file": "101307074_544e234e97_jpg.rf.4tnURj8OiD1QOti150Rf.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "101307074_544e234e97_jpg"
+      },
+      {
+        "file": "101307082_0e17782b1d_jpg.rf.jT5WVzmCHXuQpXopqWOO.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "101307082_0e17782b1d_jpg"
+      },
+      {
+        "file": "10_jpg.rf.q6HHR0lIYVBKHUW1lrBm.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "10_jpg"
+      },
+      {
+        "file": "12_jpg.rf.z4qV4OwfYEgenXkJz6KY.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "12_jpg"
+      },
+      {
+        "file": "13360237544897430511_jpg.rf.eakzB0BLDXcDC2V3MRRc.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "13360237544897430511_jpg"
+      },
+      {
+        "file": "1336551068007372001_jpg.rf.nh2wApDnPXz3H92iNchO.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551068007372001_jpg"
+      },
+      {
+        "file": "1336551068007372001_jpg.rf.5sFJfuNcE5gSBDFumAqm.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "1336551068007372001_jpg"
+      },
+      {
+        "file": "1336551068012062973_jpg.rf.vSZtEVBOQqnviaGXxFTp.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551068012062973_jpg"
+      },
+      {
+        "file": "1336551068016751195_jpg.rf.qrQlT6ZDo3dKuI3gGw1R.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551068016751195_jpg"
+      },
+      {
+        "file": "1336551068026122739_jpg.rf.JwCIlrBVmLcvngKX9sfu.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551068026122739_jpg"
+      },
+      {
+        "file": "1336551068328280805_jpg.rf.E9UN4eahfhFIGIAy7OQf.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551068328280805_jpg"
+      },
+      {
+        "file": "1336551068334530817_jpg.rf.ZJ3Pvxp0qZdFx879pDZQ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551068334530817_jpg"
+      },
+      {
+        "file": "13365510683501579413_jpg.rf.LPcv4O0rVx3mw5xJbXJ5.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "13365510683501579413_jpg"
+      },
+      {
+        "file": "13365510683501579413_jpg.rf.fVboFvJ3hdDXwq0stUCm.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "13365510683501579413_jpg"
+      },
+      {
+        "file": "1336551068378283131_jpg.rf.5NwRMMDE5udxdYvHwt1O.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551068378283131_jpg"
+      },
+      {
+        "file": "1336551068390780995_jpg.rf.eyeSvN2RwPPONrHPMNZ0.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551068390780995_jpg"
+      },
+      {
+        "file": "1336551068453284145_jpg.rf.N1jYSUvdiYOa1DEylDkp.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551068453284145_jpg"
+      },
+      {
+        "file": "13365510684735956913_jpg.rf.rz9YLqWEx0cR48cEPMgT.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "13365510684735956913_jpg"
+      },
+      {
+        "file": "13365510684735956913_jpg.rf.2fT38gYaHWgQ2xuHevgJ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "13365510684735956913_jpg"
+      },
+      {
+        "file": "1336551069134530765_jpg.rf.txvXvQC1IP8nG0kZtAln.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551069134530765_jpg"
+      },
+      {
+        "file": "13365510691454699711_jpg.rf.m6oeg0CcVCck6gA3BQ5m.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "13365510691454699711_jpg"
+      },
+      {
+        "file": "13365510691532821415_jpg.rf.vZV6DFbCpoHYvGNQY7cK.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "13365510691532821415_jpg"
+      },
+      {
+        "file": "13365510691532821415_jpg.rf.NiRq0mbJ1m5WBCyd0GzO.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "13365510691532821415_jpg"
+      },
+      {
+        "file": "1336551069576717867_jpg.rf.1nRYwatrXRVwoW1ZVZQb.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551069576717867_jpg"
+      },
+      {
+        "file": "13365510695985955815_jpg.rf.ImHyotmXdyE6QkA6gyrx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "13365510695985955815_jpg"
+      },
+      {
+        "file": "1336551069759530661_jpg.rf.J8v5zcSrYg7m55SjaBE2.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551069759530661_jpg"
+      },
+      {
+        "file": "1336551069764220673_jpg.rf.08D5ViAjhG3f7aZCMj3S.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "1336551069764220673_jpg"
+      },
+      {
+        "file": "1336551069778280699_jpg.rf.fPdUpqiQjOHVTgBLGi69.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551069778280699_jpg"
+      },
+      {
+        "file": "1336551069778280699_jpg.rf.ELR1W9lXW3mrL4XQ6wLT.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "1336551069778280699_jpg"
+      },
+      {
+        "file": "1336551069893905541_jpg.rf.HyHOR7Ca2Dn4HNZywANQ.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551069893905541_jpg"
+      },
+      {
+        "file": "1336551069901720383_jpg.rf.cCCLufPrxXdB6N2H27Hx.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1336551069901720383_jpg"
+      },
+      {
+        "file": "13365510711235956815_jpg.rf.IzS8gLACHesH3pwYn9UV.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "13365510711235956815_jpg"
+      },
+      {
+        "file": "1336551071165780731_jpg.rf.BcIiahGbgAcoLJ9Bc7wg.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551071165780731_jpg"
+      },
+      {
+        "file": "1336551071181405287_jpg.rf.gyc6m1JcUbu8uW6QADLV.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "1336551071181405287_jpg"
+      },
+      {
+        "file": "1336551071181405287_jpg.rf.tNI8di5aoYF0bSWMiOlt.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "1336551071181405287_jpg"
+      },
+      {
+        "file": "1336551071186095709_jpg.rf.6sHgER7hgec6M0ILQREA.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "1336551071186095709_jpg"
+      },
+      {
+        "file": "1_jpg.rf.hIrxYB0l7NsSy6Xhwowx.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1_jpg"
+      },
+      {
+        "file": "1_jpg.rf.zhIqCQb600wguEZhPq8l.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "1_jpg"
+      },
+      {
+        "file": "20220621_132901_jpg.rf.TIhMQpjLLnSoFc6iuvyQ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "20220621_132901_jpg"
+      },
+      {
+        "file": "20220621_132901_jpg.rf.TVD8QJIbN78a2SrQjCFI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "20220621_132901_jpg"
+      },
+      {
+        "file": "21_jpg.rf.UVtUzXKXg8A9CQtXrBU5.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "21_jpg"
+      },
+      {
+        "file": "22_jpg.rf.FafVvGUkgV5G23UeA31L.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "22_jpg"
+      },
+      {
+        "file": "25dcf9372876633a632c6a10711b2520--construction-worker-profes_jpg.rf.gkFJrDxM2y1C1ocVPf1f.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "25dcf9372876633a632c6a10711b2520--construction-worker-profes_jpg"
+      },
+      {
+        "file": "29_jpg.rf.lYBtJeN3acFD90ezCXDx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "29_jpg"
+      },
+      {
+        "file": "2NvJBz6L-1k7CGGgdo6m-wLBPYCUMYIHRJxJ_ACkIE_PoYpb4MTniNnSoik6_jpeg_jpg.rf.KNaWVF7tKs7MNNNnBMFo.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "2NvJBz6L-1k7CGGgdo6m-wLBPYCUMYIHRJxJ_ACkIE_PoYpb4MTniNnSoik6_jpeg_jpg"
+      },
+      {
+        "file": "2_jpg.rf.2wequ6RCtfHgE8qrHvE4.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "2_jpg"
+      },
+      {
+        "file": "31_jpg.rf.el0A1PwEIVZijE4CSCsI.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "31_jpg"
+      },
+      {
+        "file": "40_jpg.rf.QAnFvPYEyIqwg67nHMEU.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "40_jpg"
+      },
+      {
+        "file": "418hyllengren1_png_jpg.rf.8swO6abSJMFfiQvOtWcR.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "418hyllengren1_png_jpg"
+      },
+      {
+        "file": "41_jpg.rf.9BZJ2jdPkCZK9sD3H8Ag.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "41_jpg"
+      },
+      {
+        "file": "42_jpg.rf.FB7uNcbswIUynmd8PunU.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "42_jpg"
+      },
+      {
+        "file": "45_jpg.rf.cpBmjJbxyIUS4SF2j7PJ.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "45_jpg"
+      },
+      {
+        "file": "48_jpg.rf.s7jxixRtL6Q44bJQGyoM.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "48_jpg"
+      },
+      {
+        "file": "5-1_jpg.rf.jljqHOO3tV76MGIzUccm.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "5-1_jpg"
+      },
+      {
+        "file": "5-1_jpg.rf.ADHOuRw1zAVWXL73NGsV.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "5-1_jpg"
+      },
+      {
+        "file": "5-1_jpg.rf.fiQ0R3QR4cthYPtcH9ju.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "5-1_jpg"
+      },
+      {
+        "file": "5-1_jpg.rf.NXL58ns5lycoW16FSOMG.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "5-1_jpg"
+      },
+      {
+        "file": "51SNnlEtXxS-_SX522__jpg.rf.jkd6Jhvs9M5qtZYIhET6.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "51SNnlEtXxS-_SX522__jpg"
+      },
+      {
+        "file": "51SNnlEtXxS-_SX522__jpg.rf.igR4nS483wckGBJ4Lp57.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "51SNnlEtXxS-_SX522__jpg"
+      },
+      {
+        "file": "51SzcxDyOlL-_SY695__jpg.rf.ygPtI9hm9acjW1P4zWZK.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "51SzcxDyOlL-_SY695__jpg"
+      },
+      {
+        "file": "51_jpg.rf.Mul5dNb2pqKnD7fO0FU7.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "51_jpg"
+      },
+      {
+        "file": "51t9XX5xW0S-_SX522__jpg.rf.5yaEqCmUdIRqr5ysArRt.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "51t9XX5xW0S-_SX522__jpg"
+      },
+      {
+        "file": "53_jpg.rf.NSTO1QRQQmoYl4bOUkPZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "53_jpg"
+      },
+      {
+        "file": "54_jpg.rf.nHYYNX6mZj54wPpIgLvZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "54_jpg"
+      },
+      {
+        "file": "5d929c417e2b352ac5c3ebc990eb1245b79bb675_original_jpeg_jpg.rf.dCCwkkLsnkRQTGDgOcYw.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "5d929c417e2b352ac5c3ebc990eb1245b79bb675_original_jpeg_jpg"
+      },
+      {
+        "file": "60_jpg.rf.zxnGb02P15pLE2hP0bPu.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "60_jpg"
+      },
+      {
+        "file": "61-4qztUedL_jpg.rf.PvXfR6FNANIfEbL3k1oZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61-4qztUedL_jpg"
+      },
+      {
+        "file": "61B640cwALL-_SX522__jpg.rf.Zl011iWRTR9XrHxm8gUi.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "61B640cwALL-_SX522__jpg"
+      },
+      {
+        "file": "61CEPPyaXdL-_SY695__jpg.rf.XkuRX6LBJBjyFuwBSBUG.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61CEPPyaXdL-_SY695__jpg"
+      },
+      {
+        "file": "61RV6CWvnAL-_SX522__jpg.rf.r9jtw30ZLwc1QERHahM0.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "61RV6CWvnAL-_SX522__jpg"
+      },
+      {
+        "file": "61RV6CWvnAL-_SX522__jpg.rf.MxbG1qmSyloYIJoPY3XU.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "61RV6CWvnAL-_SX522__jpg"
+      },
+      {
+        "file": "61VWCPW9RyL-_SX522__jpg.rf.Q1878JDBtFYYyLC8bjzr.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61VWCPW9RyL-_SX522__jpg"
+      },
+      {
+        "file": "61XsED8fuAL-_SX522__jpg.rf.Bm67P77DKS0EGvtd9ZK4.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "61XsED8fuAL-_SX522__jpg"
+      },
+      {
+        "file": "61paXDV9cDS-_SX522__jpg.rf.TFqKJXtAGNb8o0Vox6wC.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61paXDV9cDS-_SX522__jpg"
+      },
+      {
+        "file": "61qWwEwz4IL-_SX522__jpg.rf.ldA8SEKR2TS2Fgm5wXG4.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61qWwEwz4IL-_SX522__jpg"
+      },
+      {
+        "file": "61scnu02PYS-_SX522__jpg.rf.QqQSLJGyXWUfsHMXECbT.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "61scnu02PYS-_SX522__jpg"
+      },
+      {
+        "file": "63_jpg.rf.5ZjzFukGeB8USDoVZKAP.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "63_jpg"
+      },
+      {
+        "file": "6_jpg.rf.2eYShjXzDfYRoFoZruJr.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "6_jpg"
+      },
+      {
+        "file": "6e2c756d74b3282c2bcc0bab4a0ce9b7-jpg_1000x1000q80-jpg_320x32_jpg.rf.AudLy8rDSjaVBzC3i8lm.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "6e2c756d74b3282c2bcc0bab4a0ce9b7-jpg_1000x1000q80-jpg_320x32_jpg"
+      },
+      {
+        "file": "6e2c756d74b3282c2bcc0bab4a0ce9b7-jpg_1000x1000q80-jpg_320x32_jpg.rf.Hmddo1BEoM6UcllVzWJc.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "6e2c756d74b3282c2bcc0bab4a0ce9b7-jpg_1000x1000q80-jpg_320x32_jpg"
+      },
+      {
+        "file": "7122kwoPW-L_jpg.rf.4EALIL3RvQYw4kE6Ev2S.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "7122kwoPW-L_jpg"
+      },
+      {
+        "file": "714ubMQQmHL-_SX522__jpg.rf.D0lteS04n4WixKKkXroP.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "714ubMQQmHL-_SX522__jpg"
+      },
+      {
+        "file": "715L-mkIuwL_jpg.rf.AUPcaqZ3p7CthX4Vx9EZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "715L-mkIuwL_jpg"
+      },
+      {
+        "file": "716WPQ0NhCL-_SX522__jpg.rf.2vJfXFGeX1GbDriLXb5q.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "716WPQ0NhCL-_SX522__jpg"
+      },
+      {
+        "file": "716WPQ0NhCL-_SX522__jpg.rf.orLbcoVEefzWVZJ6Ytnl.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "716WPQ0NhCL-_SX522__jpg"
+      },
+      {
+        "file": "71WfppUCYPL_jpg.rf.YROQu8utQsIzltwjuGKs.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "71WfppUCYPL_jpg"
+      },
+      {
+        "file": "71XgiwPhMxL_jpg.rf.1pESDdY2IkkBe4UbE1TJ.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "71XgiwPhMxL_jpg"
+      },
+      {
+        "file": "71XgiwPhMxL_jpg.rf.cL7L2JyiK4SlPxxl2Pux.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "71XgiwPhMxL_jpg"
+      },
+      {
+        "file": "81CZsTfxf8L_jpg.rf.qy9OfZLSTClKJXiUqnon.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "81CZsTfxf8L_jpg"
+      },
+      {
+        "file": "81KhWS-68mL_jpg.rf.IPWzjLVQDhJd1d5Gap5x.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "81KhWS-68mL_jpg"
+      },
+      {
+        "file": "81KhWS-68mL_jpg.rf.srwzmjSl3uYlOOaJ8WK7.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "81KhWS-68mL_jpg"
+      },
+      {
+        "file": "81irdXbJQ-L_jpg.rf.fiohBTU3QtAEQxYlZBi0.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "81irdXbJQ-L_jpg"
+      },
+      {
+        "file": "81o84aUBBhL_jpg.rf.JQLJUqu2jzlfKyt6G1Gl.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "81o84aUBBhL_jpg"
+      },
+      {
+        "file": "9_jpg.rf.sAPfjSB25meYqkfrGHbg.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "9_jpg"
+      },
+      {
+        "file": "A1A1g69gVdL_jpg.rf.3nQeDNQhpaRSBxo0RLMm.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "A1A1g69gVdL_jpg"
+      },
+      {
+        "file": "Aitin1170_jpg.rf.Vcwn3wpy6NaQZ3ugpbHg.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Aitin1170_jpg"
+      },
+      {
+        "file": "Aitin2742_jpg.rf.9OZ3emMERwyS84EI7UCB.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "Aitin2742_jpg"
+      },
+      {
+        "file": "Builder-Operating-Circular-Saw-Roofing_jpg.rf.Glv3CYDL9f93t42SgSCC.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Builder-Operating-Circular-Saw-Roofing_jpg"
+      },
+      {
+        "file": "C1pnbx3xBDS_jpg.rf.0WnlfSVXQq1uXg2MxTGr.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "C1pnbx3xBDS_jpg"
+      },
+      {
+        "file": "Co-abA8QiKYSZQ9T_FzA_QIcoAxxysFc6lAm6gSnZ6SVGggvVn9bMoOsnCqB_jpeg_jpg.rf.eeXq9UqR8VhRaeIHKOhf.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "Co-abA8QiKYSZQ9T_FzA_QIcoAxxysFc6lAm6gSnZ6SVGggvVn9bMoOsnCqB_jpeg_jpg"
+      },
+      {
+        "file": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.Z88wKwYsIgJPMvg56sWB.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg"
+      },
+      {
+        "file": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.mL1277Me2sg2oLKmUCRF.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg"
+      },
+      {
+        "file": "D984_57_887_1200_jpg.rf.nb8nrUnCoGfE4MHHBBS5.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "D984_57_887_1200_jpg"
+      },
+      {
+        "file": "Diverse-Team-of-Workers_jpg.rf.rYl8USCij3Qc55KJE5ak.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Diverse-Team-of-Workers_jpg"
+      },
+      {
+        "file": "INDUSTRIAL-SAFETY-BOOTS_jpg.rf.cWISf5gnQcRUoIyEJUZa.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "INDUSTRIAL-SAFETY-BOOTS_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001219713_15_jpg.rf.GwnuwzVrap1e7r7WG6Pn.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001219713_15_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001219713_24_jpg.rf.FX3M9j3wjzojIz8fDJw7.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001219713_24_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001312059_02_jpg.rf.tHEJpmzDmryidTpAMjgS.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001312059_02_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001425789_07_jpg.rf.A84XGizBk0DjIK7zBHTJ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001425789_07_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001605157_12_jpg.rf.wUfSlfqXUNaih47j09Q7.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001605157_12_jpg"
+      },
+      {
+        "file": "KakaoTalk_20221018_001726988_01_jpg.rf.1MZBpHpUST0vScjTX1yB.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "KakaoTalk_20221018_001726988_01_jpg"
+      },
+      {
+        "file": "MILFORD_jpg.rf.cDpSCgsi2PwDM4uPkcaN.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "MILFORD_jpg"
+      },
+      {
+        "file": "MILFORD_jpg.rf.Zy7QhZNRKPvUmngxH8dj.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "MILFORD_jpg"
+      },
+      {
+        "file": "Man-in-Hard-Hat-Wearing-Work-Boots_jpeg_jpg.rf.ruThcQ4WtEhXwIF8wHhQ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Man-in-Hard-Hat-Wearing-Work-Boots_jpeg_jpg"
+      },
+      {
+        "file": "Man-in-Hard-Hat-Wearing-Work-Boots_jpeg_jpg.rf.lmdWYyARstCD4FuFj7Ia.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "Man-in-Hard-Hat-Wearing-Work-Boots_jpeg_jpg"
+      },
+      {
+        "file": "Men-Work-Boots_jpeg_jpg.rf.z8BMLC3P0149B9OvSTIH.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Men-Work-Boots_jpeg_jpg"
+      },
+      {
+        "file": "Men-Work-Boots_jpeg_jpg.rf.it1PYBg4aGtCmQ8wzCls.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "Men-Work-Boots_jpeg_jpg"
+      },
+      {
+        "file": "Men-Work-Boots_jpeg_jpg.rf.khmj6P5Y0wE4x2QYqRe3.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "Men-Work-Boots_jpeg_jpg"
+      },
+      {
+        "file": "Reasons-to-Wear-Safety-Toe-Shoes-2000x1200_jpg.rf.JbPuC1V5qzm9pWBAnRJW.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "Reasons-to-Wear-Safety-Toe-Shoes-2000x1200_jpg"
+      },
+      {
+        "file": "The-Best-Work-Boots-For-A-Trademan-2_jpg.rf.Mi8JJx79JiwDj1CgHGZM.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "The-Best-Work-Boots-For-A-Trademan-2_jpg"
+      },
+      {
+        "file": "Top-15-Best-Work-Boots-for-Construction-in-2020_jpg.rf.OG8DedjzrQWz4mGebPkC.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "Top-15-Best-Work-Boots-for-Construction-in-2020_jpg"
+      },
+      {
+        "file": "Top-15-Best-Work-Boots-for-Construction-in-2020_jpg.rf.jJuK8e0EJyTRPfj9tzGy.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "Top-15-Best-Work-Boots-for-Construction-in-2020_jpg"
+      },
+      {
+        "file": "Untitled2_png_jpg.rf.LLAZgjtpndls19wdMd43.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Untitled2_png_jpg"
+      },
+      {
+        "file": "Worker-wearing-steel-toe-boots-and-gloves-scaled-1-1200x726_jpeg_jpg.rf.0wuP1GG9MQovV9VsrtXm.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "Worker-wearing-steel-toe-boots-and-gloves-scaled-1-1200x726_jpeg_jpg"
+      },
+      {
+        "file": "Worker-wearing-steel-toe-boots-and-gloves-scaled-1-1200x726_jpeg_jpg.rf.OJlggHUeUlgTbzJMx68A.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "Worker-wearing-steel-toe-boots-and-gloves-scaled-1-1200x726_jpeg_jpg"
+      },
+      {
+        "file": "attractive-man-work-clothes-shoes-26075194-1-_jpg.rf.mmox9xBq3BfOZqNPypxK.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "attractive-man-work-clothes-shoes-26075194-1-_jpg"
+      },
+      {
+        "file": "boots-safety-worker-construction-site-1988981_jpg.rf.zeHiSQfmvxplTq3qZH9p.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "boots-safety-worker-construction-site-1988981_jpg"
+      },
+      {
+        "file": "building-worker-18902639--1-_jpg.rf.VJQdnwOPy2rNxWj4lpJA.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "building-worker-18902639--1-_jpg"
+      },
+      {
+        "file": "building-worker-18902639--1-_jpg.rf.fzgYA9jyD8SOfcmRTNUh.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "building-worker-18902639--1-_jpg"
+      },
+      {
+        "file": "carpenter-wearing-safety-equipment-cutting-wooden-plank-hand--1-_jpg.rf.OPwQf4rEg5fwoSOdYb8F.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "carpenter-wearing-safety-equipment-cutting-wooden-plank-hand--1-_jpg"
+      },
+      {
+        "file": "chainsaw-cutting-plank-construction-site-worker-building-551--1-_jpg.rf.0CUNRmDHaaFVUHgVxGO5.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "chainsaw-cutting-plank-construction-site-worker-building-551--1-_jpg"
+      },
+      {
+        "file": "chainsaw-cutting-plank-construction-site-worker-building-551-1-_jpg.rf.b3jAp7Zmh28OQx14Cslf.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "chainsaw-cutting-plank-construction-site-worker-building-551-1-_jpg"
+      },
+      {
+        "file": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg.rf.ddTZna0p8kySfe41SFjQ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg"
+      },
+      {
+        "file": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg.rf.YGxqgyaesK9TQRlliCu4.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg"
+      },
+      {
+        "file": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg.rf.5gm6116fj04iZfupJN8g.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "cleaning-construction-site-worker-safety-shoes-building-pavi_jpg"
+      },
+      {
+        "file": "close-man-wearing-safety-shoes-260nw-766848937_jpg.rf.kHHfHPuZ0xTvXjmMCRSj.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "close-man-wearing-safety-shoes-260nw-766848937_jpg"
+      },
+      {
+        "file": "close-up-handy-repair-man-standing-steel-ladder-against-cons--3-_jpg.rf.fgy2ZtYgXQdQgaAUmaTd.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "close-up-handy-repair-man-standing-steel-ladder-against-cons--3-_jpg"
+      },
+      {
+        "file": "close-up-male-boots-dirty-work-construction-site-hammer-5801--1-_jpg.rf.qYmt5oAFskKtE1qYlH7v.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "close-up-male-boots-dirty-work-construction-site-hammer-5801--1-_jpg"
+      },
+      {
+        "file": "close-up-male-boots-dirty-work-construction-site-hammer-5801--1-_jpg.rf.gJ3o7TWOmU0IqYxdge3X.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "close-up-male-boots-dirty-work-construction-site-hammer-5801--1-_jpg"
+      },
+      {
+        "file": "close-up-male-boots-dirty-work-construction-site-hammer-5801-1-_jpg.rf.Y0ea3O73elmelPvxES36.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "close-up-male-boots-dirty-work-construction-site-hammer-5801-1-_jpg"
+      },
+      {
+        "file": "close-up-work-shoes-builder-construction-site-copy-space-clo--11-_jpg.rf.CRUcN8yGyvHvgqo8M6Jg.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "close-up-work-shoes-builder-construction-site-copy-space-clo--11-_jpg"
+      },
+      {
+        "file": "close-up-work-shoes-builder-construction-site-copy-space-clo--9-_jpg.rf.5nxE5JUj6GhuCbFF3Wga.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "close-up-work-shoes-builder-construction-site-copy-space-clo--9-_jpg"
+      },
+      {
+        "file": "construction-concept-worker-stepladder-horizontal-sheet-orie--1-_jpg.rf.it6Ou7REXW9tEJg9vo2F.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-concept-worker-stepladder-horizontal-sheet-orie--1-_jpg"
+      },
+      {
+        "file": "construction-crack-146741_jpg.rf.boBhGf6B8kjY4jLrReUp.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-crack-146741_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun--3-_jpg.rf.xRdqyJhSROcwb3bvYQm2.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun--3-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun--4-_jpg.rf.YB5tbnuw9Gnytul4nCQI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun--4-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun--5-_jpg.rf.mdTbwUOtmRRu0H6eewcr.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun--5-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun-3-_jpg.rf.kev99WOubjy0LA1hiDFu.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun-3-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun-3-_jpg.rf.RdFopLaSIeEKjN10wt7x.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun-3-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun-4-_jpg.rf.A3gRPhxWvAJXiF6hRGGd.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun-4-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-red-stairs-isolated-white-backgroun-5-_jpg.rf.vnZOAf5xr1Q3ppSqQLCI.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-feet-red-stairs-isolated-white-backgroun-5-_jpg"
+      },
+      {
+        "file": "construction-worker-feet-yellow-helmet-wide-picture-isolated--1-_jpg.rf.o1wCtYahjaovT6KKiTDU.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-feet-yellow-helmet-wide-picture-isolated--1-_jpg"
+      },
+      {
+        "file": "construction-worker-hands-gloves-working-hammer-chisel-to-re--1-_jpg.rf.zvCludyWalSPhSmIVmUF.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-hands-gloves-working-hammer-chisel-to-re--1-_jpg"
+      },
+      {
+        "file": "construction-worker-has-accident-walks-site-debris-stepping---3-_jpg.rf.lSW1be70tmkyitHlp5wM.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "construction-worker-has-accident-walks-site-debris-stepping---3-_jpg"
+      },
+      {
+        "file": "construction-worker-has-accident-walks-site-debris-stepping---3-_jpg.rf.qN1GOAuVAUgfxGaMsLYU.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "construction-worker-has-accident-walks-site-debris-stepping---3-_jpg"
+      },
+      {
+        "file": "construction-worker-on-construction-site-picture-id495776444_jpeg_jpg.rf.VetFT3Jh9qnJpEzWueJS.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "construction-worker-on-construction-site-picture-id495776444_jpeg_jpg"
+      },
+      {
+        "file": "construction-worker-shoveling-dirt-ground-shovel-selective-f--1-_jpg.rf.WYeKRxIgeHhMZhnAMXU4.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "construction-worker-shoveling-dirt-ground-shovel-selective-f--1-_jpg"
+      },
+      {
+        "file": "construction-worker-shoveling-dirt-ground-shovel-selective-f-1-_jpg.rf.hmT7giCNjXOgvjxhrv0h.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-shoveling-dirt-ground-shovel-selective-f-1-_jpg"
+      },
+      {
+        "file": "construction-worker-standing-aluminium-stairs-wear-jean-pant--1-_jpg.rf.IZtMXyBev9u7eonTof1a.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-worker-standing-aluminium-stairs-wear-jean-pant--1-_jpg"
+      },
+      {
+        "file": "construction-worker-wearing-heavy-duty-steel-cap-boot-using-_jpg.rf.DyUUs64p5uLhOoAA5dTI.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-wearing-heavy-duty-steel-cap-boot-using-_jpg"
+      },
+      {
+        "file": "construction-worker-wooden-ladder-shoes-closeup-photo-worker--1-_jpg.rf.vuwh7IQEeW7JVMNdVzTb.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "construction-worker-wooden-ladder-shoes-closeup-photo-worker--1-_jpg"
+      },
+      {
+        "file": "construction-workers-use-machines-to-cut-concrete-roads-park--1-_jpg.rf.RaVIVN1sxk8Kdpt281Qj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-workers-use-machines-to-cut-concrete-roads-park--1-_jpg"
+      },
+      {
+        "file": "construction-workers-wearing-ppe_jpg.rf.5ydUPUZhQOQatw6a5XGm.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-workers-wearing-ppe_jpg"
+      },
+      {
+        "file": "construction-workers-working-covid-times-all-wearing-masks-s--1-_jpg.rf.fLagguJSqIprTZ6wXJcV.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "construction-workers-working-covid-times-all-wearing-masks-s--1-_jpg"
+      },
+      {
+        "file": "construction_jpg.rf.hvaBxZg9JWpkInc4mLPy.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "construction_jpg"
+      },
+      {
+        "file": "construction_jpg.rf.LNRJ3lNOWiB35KfZOqkd.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "construction_jpg"
+      },
+      {
+        "file": "craftsman-works-electric-grinding-machine-man-cutting-stone---1-_jpg.rf.GnBO24ahsYXgUmW4RfhG.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "craftsman-works-electric-grinding-machine-man-cutting-stone---1-_jpg"
+      },
+      {
+        "file": "craftsman-works-electric-grinding-machine-man-cutting-stone---8-_jpg.rf.yi4Gbl9ifADZ9zVCwDMC.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "craftsman-works-electric-grinding-machine-man-cutting-stone---8-_jpg"
+      },
+      {
+        "file": "craftsman-works-electric-grinding-machine-man-cutting-stone-1-_jpg.rf.lxtxFWQewOsa5AXSvIVj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "craftsman-works-electric-grinding-machine-man-cutting-stone-1-_jpg"
+      },
+      {
+        "file": "craftsman-works-electric-grinding-machine-man-cutting-stone-8-_jpg.rf.LiSOxaM2yPc3gBrw6cVF.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "craftsman-works-electric-grinding-machine-man-cutting-stone-8-_jpg"
+      },
+      {
+        "file": "depositphotos_103580422-stock-photo-group-of-construction-wo_jpg.rf.lVzjvpRXcLIugCKC1zw8.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "depositphotos_103580422-stock-photo-group-of-construction-wo_jpg"
+      },
+      {
+        "file": "depositphotos_103580422-stock-photo-group-of-construction-wo_jpg.rf.FxXMUhYYtiCabYrcVidP.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "depositphotos_103580422-stock-photo-group-of-construction-wo_jpg"
+      },
+      {
+        "file": "depositphotos_506465690-stock-photo-wear-safety-shoes-ensure_jpg.rf.L0KEQiINuGBW7vKb1mUL.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "depositphotos_506465690-stock-photo-wear-safety-shoes-ensure_jpg"
+      },
+      {
+        "file": "dig-pickaxe-working-street-reconstruction-46498730_jpg.rf.KUyUhpY1ho25QyyXbgUi.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "dig-pickaxe-working-street-reconstruction-46498730_jpg"
+      },
+      {
+        "file": "dig-pickaxe-working-street-reconstruction-46498730_jpg.rf.XKJq66TOb2u844kXDgLt.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "dig-pickaxe-working-street-reconstruction-46498730_jpg"
+      },
+      {
+        "file": "dig-pickaxe-working-street-reconstruction-46498730_jpg.rf.U2hJvZOf6qKQZxxyXLTP.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "dig-pickaxe-working-street-reconstruction-46498730_jpg"
+      },
+      {
+        "file": "dig-pickaxe-working-street-reconstruction-46498738_jpg.rf.xpCJkgTTUHSmmXAh62AG.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "dig-pickaxe-working-street-reconstruction-46498738_jpg"
+      },
+      {
+        "file": "download-1-_jpeg_jpg.rf.tZVOOrqqWnBJtyXPxcBt.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "download-1-_jpeg_jpg"
+      },
+      {
+        "file": "dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg.rf.t2eMqrmdn7cwv0nja1qR.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg"
+      },
+      {
+        "file": "dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg.rf.Sv7mCwrlQT2axIjgcJBc.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg"
+      },
+      {
+        "file": "electrical-pipe-bending-4047576--1-_jpg.rf.SNWU4TTHnxMi0cERUDrF.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "electrical-pipe-bending-4047576--1-_jpg"
+      },
+      {
+        "file": "electrician-bends-pipe-4047589--1-_jpg.rf.1RPUU90nOAMNI5yAVEqL.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "electrician-bends-pipe-4047589--1-_jpg"
+      },
+      {
+        "file": "electrician-technician-work-scissors-cable-residential-elect--1-_jpg.rf.Pn19AxM53gdUSJvO0txP.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "electrician-technician-work-scissors-cable-residential-elect--1-_jpg"
+      },
+      {
+        "file": "engineer-work-middle-age-asian-factory-manager-young-jeans-j--63-_jpg.rf.5rsyKnYXKiCafPYAxDKF.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "engineer-work-middle-age-asian-factory-manager-young-jeans-j--63-_jpg"
+      },
+      {
+        "file": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-62-_jpg.rf.GTNxOrmgBC34NEiVnrW6.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-62-_jpg"
+      },
+      {
+        "file": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-64-_jpg.rf.VyZYRuzWhk1g9K5mlBVP.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-64-_jpg"
+      },
+      {
+        "file": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-64-_jpg.rf.xolKBCYeBCnuAkP8UQfV.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-64-_jpg"
+      },
+      {
+        "file": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-7-_jpg.rf.OGHCDS1ch9XISVKH9zCt.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "engineer-work-middle-age-asian-factory-manager-young-jeans-j-7-_jpg"
+      },
+      {
+        "file": "feature-KEEN-photo-fortheweb_jpg.rf.jfvELXzkB474xxWtzSJB.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "feature-KEEN-photo-fortheweb_jpg"
+      },
+      {
+        "file": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho-5-_jpg.rf.IPx5RWmhFAtprrFOxyoj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho-5-_jpg"
+      },
+      {
+        "file": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho-7-_jpg.rf.XdxkI2U5xpfdZLCT0NEj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho-7-_jpg"
+      },
+      {
+        "file": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho_jpg.rf.VSG0z6SdtlWf83Mg4MGY.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "feet-worker-standing-floor-joists-wearing-dirty-old-boots-ho_jpg"
+      },
+      {
+        "file": "girl3-1432104_jpg.rf.dyphVGQ4FB5QM2MxGHyB.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "girl3-1432104_jpg"
+      },
+      {
+        "file": "girl3-1432104_jpg.rf.N4j1rhJeRj3h9b5Lim1H.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "girl3-1432104_jpg"
+      },
+      {
+        "file": "handyman-standing-his-electric-drill-clipping-path-young-han--3-_jpg.rf.yojp1ffG1YHvdEaTxWlO.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "handyman-standing-his-electric-drill-clipping-path-young-han--3-_jpg"
+      },
+      {
+        "file": "hard-worker-asphalting-works-shaker-closeup-worker-vibrating--1-_jpg.rf.BOEYGFh265PQTfKn1cJ6.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "hard-worker-asphalting-works-shaker-closeup-worker-vibrating--1-_jpg"
+      },
+      {
+        "file": "heavy-duty-boots-close-up-unrecognizable-construction-worker_jpg.rf.SPBu6Xw34EdPjoBn4IVZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "heavy-duty-boots-close-up-unrecognizable-construction-worker_jpg"
+      },
+      {
+        "file": "horizontal-banner-shot-men-wearing-heavy-work-industrial-boo-1-_jpg.rf.eh8zmeTn0zZdGaUlybyH.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "horizontal-banner-shot-men-wearing-heavy-work-industrial-boo-1-_jpg"
+      },
+      {
+        "file": "horizontal-banner-shot-men-wearing-heavy-work-industrial-boo-1-_jpg.rf.SyndsRpyOqLhgyz2N5vz.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "horizontal-banner-shot-men-wearing-heavy-work-industrial-boo-1-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller--4-_jpg.rf.vH2u7XDa71Soh66H3SLc.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller--4-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller--5-_jpg.rf.c6Kx0bM7B2z7sXghMZis.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller--5-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller--6-_jpg.rf.CmDiFDa9nNCekAQmNUGz.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller--6-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller--7-_jpg.rf.uuCrET9vNPr6m3mPzM22.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller--7-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-2-_jpg.rf.JIv3BUPrtDtCrT7B01CI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-2-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-2-_jpg.rf.aPyFEBpBL4AFblP9kFZm.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-2-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-4-_jpg.rf.TzVKVXUpWJTaFCUbL1Xo.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-4-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-8-_jpg.rf.gfK6ug5wESb8wJJHobO9.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-8-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-9-_jpg.rf.1x6rqu4ceIGa8TpqVpvo.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-9-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller-9-_jpg.rf.sURwk9IzfJyJ3w2XZf0K.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller-9-_jpg"
+      },
+      {
+        "file": "house-painter-worker-ladder-white-work-overalls-keeps-roller_jpg.rf.lDeUJE6OqVdaF5OWtOGZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "house-painter-worker-ladder-white-work-overalls-keeps-roller_jpg"
+      },
+      {
+        "file": "hpx29e8ciug01_jpg.rf.0OFPOW1zxyTnjsKN8OXi.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "hpx29e8ciug01_jpg"
+      },
+      {
+        "file": "human-hand-tying-shoelaces-on-260nw-231195790_jpg.rf.C0UrQLnzFVh9rRLzfqT4.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "human-hand-tying-shoelaces-on-260nw-231195790_jpg"
+      },
+      {
+        "file": "image--1-_jpeg_jpg.rf.oLaHKukf4QGKdoXp2oYR.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--1-_jpeg_jpg"
+      },
+      {
+        "file": "image--10-_jpeg_jpg.rf.vsEARJPwQq0yvyraWfPD.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--10-_jpeg_jpg"
+      },
+      {
+        "file": "image--14-_jpeg_jpg.rf.3KWSauiVOhYklrXOIGsP.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--14-_jpeg_jpg"
+      },
+      {
+        "file": "image--2-_jpeg_jpg.rf.jdCwYg0spdw2LDwqvrwa.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--2-_jpeg_jpg"
+      },
+      {
+        "file": "image--4-_jpeg_jpg.rf.HIQJBg2AJfiUKvYKkAIV.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image--4-_jpeg_jpg"
+      },
+      {
+        "file": "image--5-_jpeg_jpg.rf.ojaEiOmBgpvy9FZGMtmk.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image--5-_jpeg_jpg"
+      },
+      {
+        "file": "image--7-_jpeg_jpg.rf.4wdiCIWmzkoPDcsWMdiI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image--7-_jpeg_jpg"
+      },
+      {
+        "file": "image--8-_jpeg_jpg.rf.q7EKO2q6AuQrzzZgy0bt.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--8-_jpeg_jpg"
+      },
+      {
+        "file": "image--9-_jpeg_jpg.rf.h5Ndx8nOP0tgWXfJ5TxS.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image--9-_jpeg_jpg"
+      },
+      {
+        "file": "image-13-_jpeg_jpg.rf.i1vz3y1BX20wBrocaTbE.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image-13-_jpeg_jpg"
+      },
+      {
+        "file": "image-13-_jpeg_jpg.rf.uP7aF36Q9I0qqk49F5oU.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "image-13-_jpeg_jpg"
+      },
+      {
+        "file": "image-2-_jpeg_jpg.rf.28gHFUTV6fu1boWZwDQq.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image-2-_jpeg_jpg"
+      },
+      {
+        "file": "image-2-_jpeg_jpg.rf.VZ2Jg6e5Ka34EbpfCsAF.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image-2-_jpeg_jpg"
+      },
+      {
+        "file": "image-6-_jpeg_jpg.rf.7Io97C8Bdnop8SEvOckh.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image-6-_jpeg_jpg"
+      },
+      {
+        "file": "image-6-_jpeg_jpg.rf.7j9I02t8H32y9qMRYkyI.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image-6-_jpeg_jpg"
+      },
+      {
+        "file": "image-8-_jpeg_jpg.rf.RZKF6DoSKz59skbGjQ16.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image-8-_jpeg_jpg"
+      },
+      {
+        "file": "image-9-_jpeg_jpg.rf.2yrqdViFeBFNuiWQYihS.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image-9-_jpeg_jpg"
+      },
+      {
+        "file": "image_108_jpg.rf.sCmMYDjKE7rdd1Ii0yzI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_108_jpg"
+      },
+      {
+        "file": "image_111_jpg.rf.NxfNnZyqGRvvWL3GIuOK.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_111_jpg"
+      },
+      {
+        "file": "image_112_jpg.rf.d44DWQ8TFXO2eQJj2rlL.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_112_jpg"
+      },
+      {
+        "file": "image_117_jpg.rf.fzR47vAOdSBJn5YyKoro.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_117_jpg"
+      },
+      {
+        "file": "image_123_jpg.rf.xOb5EPlrgoKqxQD81E41.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_123_jpg"
+      },
+      {
+        "file": "image_139_jpg.rf.K5420xKmjkmZcVyfzlRY.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_139_jpg"
+      },
+      {
+        "file": "image_150_jpg.rf.0MJo5JT1ijXE2EkmD4qd.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_150_jpg"
+      },
+      {
+        "file": "image_150_jpg.rf.MAsVgR61wWPV6nErMtSy.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_150_jpg"
+      },
+      {
+        "file": "image_156_jpg.rf.vCOZHo41nDSw16QWdwLr.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_156_jpg"
+      },
+      {
+        "file": "image_159_jpg.rf.zwGYcpKVynLqXV7mvPhn.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_159_jpg"
+      },
+      {
+        "file": "image_165_jpg.rf.qHNEH4xCp4t4HLjOuG7R.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_165_jpg"
+      },
+      {
+        "file": "image_167_jpg.rf.mWuQol2U05NTvlO4WwNn.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_167_jpg"
+      },
+      {
+        "file": "image_167_jpg.rf.xXXeS91iPt5n0ijRJ65Y.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_167_jpg"
+      },
+      {
+        "file": "image_168_jpg.rf.8685BUluh5IKmV51exj1.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_168_jpg"
+      },
+      {
+        "file": "image_168_jpg.rf.u1JfvHNtaJxwKllYdUNx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_168_jpg"
+      },
+      {
+        "file": "image_169_jpg.rf.W75J4VqAAw96kpSUJheZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_169_jpg"
+      },
+      {
+        "file": "image_169_jpg.rf.Y9wL5u2yC5ETWi2u6XT0.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_169_jpg"
+      },
+      {
+        "file": "image_170_jpg.rf.RQti96IP2Pz3xFhlwH2l.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_170_jpg"
+      },
+      {
+        "file": "image_170_jpg.rf.uJhyAhOmvNzglhjZp1pO.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_170_jpg"
+      },
+      {
+        "file": "image_172_jpg.rf.HdHDGW6OtF7fiHigs8fb.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_172_jpg"
+      },
+      {
+        "file": "image_183_jpg.rf.rUYSQVs8PqDgCnJWLhnc.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_183_jpg"
+      },
+      {
+        "file": "image_184_jpg.rf.fCKrdvKibIweDYHJYhxj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_184_jpg"
+      },
+      {
+        "file": "image_184_jpg.rf.g9Lwj6O7ksmV26vCGtwt.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_184_jpg"
+      },
+      {
+        "file": "image_184_jpg.rf.8JHysyoU3c8oVGo46Kzg.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_184_jpg"
+      },
+      {
+        "file": "image_185_jpg.rf.rUIpvcPHg7L304GOOfMf.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_185_jpg"
+      },
+      {
+        "file": "image_185_jpg.rf.KgC2J6Di6AUke8zY106O.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_185_jpg"
+      },
+      {
+        "file": "image_185_jpg.rf.VYa5fNMCojfAprE2Rh9R.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_185_jpg"
+      },
+      {
+        "file": "image_186_jpg.rf.9Ix6OC5qiU6iiOuA8iPA.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_186_jpg"
+      },
+      {
+        "file": "image_186_jpg.rf.JpJFRHBM76NXqtJSUi8h.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_186_jpg"
+      },
+      {
+        "file": "image_186_jpg.rf.NwBNNd9tCGUwnrFnHSZG.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_186_jpg"
+      },
+      {
+        "file": "image_186_jpg.rf.LmvOeCy9My5YsL6RB1CT.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_186_jpg"
+      },
+      {
+        "file": "image_188_jpg.rf.Xf7XRPskqMpiLbAMe4xq.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_188_jpg"
+      },
+      {
+        "file": "image_188_jpg.rf.7C9usEM6HhMugTgIufnC.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_188_jpg"
+      },
+      {
+        "file": "image_189_jpg.rf.2Cnc3hgryKEe1hUznbj1.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_189_jpg"
+      },
+      {
+        "file": "image_189_jpg.rf.a1LR0FZ6jm7IIChFK0oT.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "image_189_jpg"
+      },
+      {
+        "file": "image_18_jpg.rf.xXQkROgm9U9w75V78xRb.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_18_jpg"
+      },
+      {
+        "file": "image_190_jpg.rf.i0L3jThHAHxJgb0u9TMT.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_190_jpg"
+      },
+      {
+        "file": "image_190_jpg.rf.jtjRWfDeGrJcvMC3swyD.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_190_jpg"
+      },
+      {
+        "file": "image_192_jpg.rf.9XJgjwszMoD6lwXTLOtb.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_192_jpg"
+      },
+      {
+        "file": "image_192_jpg.rf.N7BMXMwgnqJ6WasXSCx0.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_192_jpg"
+      },
+      {
+        "file": "image_193_jpg.rf.7MHmh7UInLVNOKrPtzNd.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_193_jpg"
+      },
+      {
+        "file": "image_193_jpg.rf.9A7VHvZ4bpk8y2dJfZJY.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_193_jpg"
+      },
+      {
+        "file": "image_193_jpg.rf.uxT620onYEULzeMAZVMx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_193_jpg"
+      },
+      {
+        "file": "image_193_jpg.rf.b9q7Lf5N2lzS4yxjD7rL.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_193_jpg"
+      },
+      {
+        "file": "image_195_jpg.rf.CKk1vdVo4XZSzHbycvmm.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_195_jpg"
+      },
+      {
+        "file": "image_195_jpg.rf.fseCmVgpOBQpGoXVKyxJ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_195_jpg"
+      },
+      {
+        "file": "image_196_jpg.rf.w056jAMR4BWiWhTqQGQk.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_196_jpg"
+      },
+      {
+        "file": "image_197_jpg.rf.LKNChQT3yKBDNp0SeWAw.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_197_jpg"
+      },
+      {
+        "file": "image_200_jpg.rf.svCDRpBRRQvnNgi8KM0T.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_200_jpg"
+      },
+      {
+        "file": "image_200_jpg.rf.ZDu7twU7GTu0xCUHBBkS.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_200_jpg"
+      },
+      {
+        "file": "image_201_jpg.rf.GcAo3NRKQAjTp6TecmzA.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_201_jpg"
+      },
+      {
+        "file": "image_202_jpg.rf.Q1kUxYBIe1qUWbYmelXG.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_202_jpg"
+      },
+      {
+        "file": "image_203_jpg.rf.FhrcW2VmnniIwPINwbhL.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_203_jpg"
+      },
+      {
+        "file": "image_209_jpg.rf.yxEGriCtJy2RQh5KyTZN.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_209_jpg"
+      },
+      {
+        "file": "image_213_jpg.rf.Musb21nHqfEwFESakApq.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_213_jpg"
+      },
+      {
+        "file": "image_214_jpg.rf.ZIlsi43xM4hQODWbWPbb.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_214_jpg"
+      },
+      {
+        "file": "image_215_jpg.rf.pE0KB8C4wSc2hoRg7oaq.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_215_jpg"
+      },
+      {
+        "file": "image_215_jpg.rf.68LQ7Qu2wyEvSbbvrEGM.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_215_jpg"
+      },
+      {
+        "file": "image_215_jpg.rf.Ea7j0hKnF40ahCK8Bmuy.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_215_jpg"
+      },
+      {
+        "file": "image_215_jpg.rf.iNQZKmhywq6Aqms3fP7m.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_215_jpg"
+      },
+      {
+        "file": "image_216_jpg.rf.rWXxYXGuGRFqiTR5EkyW.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_216_jpg"
+      },
+      {
+        "file": "image_217_jpg.rf.KMqszcIIYnFLVr9ZEnXt.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_217_jpg"
+      },
+      {
+        "file": "image_219_jpg.rf.Glh0pnsOiTkSsp6EQT0y.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_219_jpg"
+      },
+      {
+        "file": "image_219_jpg.rf.VAjGC6WSiarGvDOQHpyu.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_219_jpg"
+      },
+      {
+        "file": "image_221_jpg.rf.0CfoW9XlnjuVFuqGnKPc.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_221_jpg"
+      },
+      {
+        "file": "image_223_jpg.rf.lIxpEkQLwqRotrhjBG9j.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_223_jpg"
+      },
+      {
+        "file": "image_226_jpg.rf.HqtbQagYYtMLt0Xsq84t.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_226_jpg"
+      },
+      {
+        "file": "image_226_jpg.rf.qWVm7dPrOvzF4KXyZ9WZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_226_jpg"
+      },
+      {
+        "file": "image_227-1-_jpg.rf.SWg56kxnNzepvncYiNji.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_227-1-_jpg"
+      },
+      {
+        "file": "image_227-1-_jpg.rf.d5jftU6ZUXWcXP1SEDEj.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_227-1-_jpg"
+      },
+      {
+        "file": "image_227_jpg.rf.FXD3l7b7csnVI8FxmnWl.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_227_jpg"
+      },
+      {
+        "file": "image_229_jpg.rf.mZw7t3EhNwjk6H34aycn.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_229_jpg"
+      },
+      {
+        "file": "image_229_jpg.rf.XgMF2SCeWFIeHPuiuaBG.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_229_jpg"
+      },
+      {
+        "file": "image_230_jpg.rf.AxiQGV9c3FcRwyJq08Jm.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_230_jpg"
+      },
+      {
+        "file": "image_230_jpg.rf.JRaFa4NRmqmf3BHvmD62.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_230_jpg"
+      },
+      {
+        "file": "image_230_jpg.rf.tcyHf2gb7Y3BdzkpmIeB.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "image_230_jpg"
+      },
+      {
+        "file": "image_231_jpg.rf.pZOnHCBqygW7Vka1mQFj.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_231_jpg"
+      },
+      {
+        "file": "image_231_jpg.rf.xcZFb5gTMVHwO7istxHc.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_231_jpg"
+      },
+      {
+        "file": "image_233_jpg.rf.8Ci3IkR1oxW04u8EbwaY.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_233_jpg"
+      },
+      {
+        "file": "image_234_jpg.rf.7Q96EgFz5WoKdWE0iJLI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_234_jpg"
+      },
+      {
+        "file": "image_234_jpg.rf.fpB6FxEWt0KIYlYG5Sfe.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_234_jpg"
+      },
+      {
+        "file": "image_236_jpg.rf.RVk6fMFgWGJILQ7DMpwO.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_236_jpg"
+      },
+      {
+        "file": "image_238_jpg.rf.7P1zhER63Iupz1pJu17Q.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_238_jpg"
+      },
+      {
+        "file": "image_238_jpg.rf.XSC7OjDfsNY82aPbUaqC.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_238_jpg"
+      },
+      {
+        "file": "image_238_jpg.rf.yP9VhT6CpFrmUk7N1ZHj.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_238_jpg"
+      },
+      {
+        "file": "image_241_jpg.rf.WPScxMuv0DAqbRq41jAZ.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_241_jpg"
+      },
+      {
+        "file": "image_241_jpg.rf.pqgGqL1hcaO9sFgEgAC9.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "image_241_jpg"
+      },
+      {
+        "file": "image_242_jpg.rf.HFwvgoq0sBezZHUHFgs6.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_242_jpg"
+      },
+      {
+        "file": "image_245_jpg.rf.43RwP4jQiCbF6Rn2DMEZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_245_jpg"
+      },
+      {
+        "file": "image_252_jpg.rf.5LRxuSw7077OaD9wr884.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_252_jpg"
+      },
+      {
+        "file": "image_25_jpg.rf.Ka4GYvxbrSKzyLG5XySi.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_25_jpg"
+      },
+      {
+        "file": "image_261_jpg.rf.AEu5Ip2hPwvoy04DxFsZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_261_jpg"
+      },
+      {
+        "file": "image_26_jpg.rf.xu4yYFe1kQ0IFmGeltuA.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_26_jpg"
+      },
+      {
+        "file": "image_317_jpg.rf.D5yM8y7NT5PffiKzDhPS.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_317_jpg"
+      },
+      {
+        "file": "image_36_jpg.rf.Axro6AjLp8lVNqfQucSi.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_36_jpg"
+      },
+      {
+        "file": "image_37_jpg.rf.cp3TKW1d7QHDhF9Cw5jW.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_37_jpg"
+      },
+      {
+        "file": "image_39_jpg.rf.WXDPrlWfHku9b2a2OWb8.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_39_jpg"
+      },
+      {
+        "file": "image_42_jpg.rf.RmOKpAJblxxJNhCrdatZ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_42_jpg"
+      },
+      {
+        "file": "image_45_jpg.rf.qqLXEiDeFCnoSqNqs5pl.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_45_jpg"
+      },
+      {
+        "file": "image_45_jpg.rf.Rwi0JiZuZ9SPCCAS6ppb.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_45_jpg"
+      },
+      {
+        "file": "image_49_jpg.rf.s2IenWwWj0lSDGOm5exY.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "image_49_jpg"
+      },
+      {
+        "file": "image_50_jpg.rf.xv1l7JcXOAx96rBXcErq.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_50_jpg"
+      },
+      {
+        "file": "image_53_jpg.rf.RXdeSNBSxPnsDEzpLWvz.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_53_jpg"
+      },
+      {
+        "file": "image_70_jpg.rf.dgluSFjL0RFYslrw0nqu.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_70_jpg"
+      },
+      {
+        "file": "image_72_jpg.rf.cgDZfjetoZVBovodY7bh.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_72_jpg"
+      },
+      {
+        "file": "image_75_jpg.rf.Y6o1wMfsaSW7qJngT87p.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "image_75_jpg"
+      },
+      {
+        "file": "image_79_jpg.rf.N9duZ6rJZ6nYAqhUVcap.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_79_jpg"
+      },
+      {
+        "file": "image_84_jpg.rf.rIbNpxfJE8GUNgPWP3yW.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "image_84_jpg"
+      },
+      {
+        "file": "image_jpeg_jpg.rf.oSmIaKmx1TnnvbUEqXzl.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "image_jpeg_jpg"
+      },
+      {
+        "file": "images (2)_jpg.rf.3wpumVoMiSkWgbVxaK5X.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "images (2)_jpg"
+      },
+      {
+        "file": "images--5-_jpeg_jpg.rf.GshGgstQJqcTqgqFXKOR.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images--5-_jpeg_jpg"
+      },
+      {
+        "file": "images--6-_jpeg_jpg.rf.AEN9o6P4Q24QE4Q12saR.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images--6-_jpeg_jpg"
+      },
+      {
+        "file": "images--6-_jpeg_jpg.rf.UNirSSpNGZy5Xzq6MFq0.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "images--6-_jpeg_jpg"
+      },
+      {
+        "file": "images-2-_jpg.rf.rx5yqAJNPAY5yAyWfBY4.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images-2-_jpg"
+      },
+      {
+        "file": "images-2-_jpg.rf.hxqLKaMFJ6Ywj4aXpvyV.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "images-2-_jpg"
+      },
+      {
+        "file": "images-8-_jpeg_jpg.rf.F5EYkfFhOlODdMhsYX7k.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images-8-_jpeg_jpg"
+      },
+      {
+        "file": "images_jpeg_jpg.rf.a1UPLWrEUPu6FepveuAT.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images_jpeg_jpg"
+      },
+      {
+        "file": "images_jpeg_jpg.rf.aFD36NOi0Ytv0CqK4AmM.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "images_jpeg_jpg"
+      },
+      {
+        "file": "istockphoto-1025052474-612x612_jpg.rf.qcF6mhB8Bg5QIkM6hse3.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "istockphoto-1025052474-612x612_jpg"
+      },
+      {
+        "file": "istockphoto-1149773176-612x612_jpg.rf.eads2LlD2gzUdyyVdAao.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "istockphoto-1149773176-612x612_jpg"
+      },
+      {
+        "file": "istockphoto-1149773176-612x612_jpg.rf.x4mLLUInJM8WLybLehwo.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "istockphoto-1149773176-612x612_jpg"
+      },
+      {
+        "file": "istockphoto-1154071822-612x612_jpg.rf.7213WWw8kKZnXvgY1dZO.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "istockphoto-1154071822-612x612_jpg"
+      },
+      {
+        "file": "istockphoto-1484904613-612x612_jpg.rf.RjASIHlOnAC2hag8uloA.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "istockphoto-1484904613-612x612_jpg"
+      },
+      {
+        "file": "junk-yard-26437029--1-_jpg.rf.xSvdi4rCMvRdL8E2XHKe.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "junk-yard-26437029--1-_jpg"
+      },
+      {
+        "file": "laborer-working-construction-site-13430313_jpg.rf.2FP7Fn8sVvzJm9581uje.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "laborer-working-construction-site-13430313_jpg"
+      },
+      {
+        "file": "labourer-carrying-plank-wooden-32236679_jpg.rf.EoTHW7QxhN1wP1vqQUky.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "labourer-carrying-plank-wooden-32236679_jpg"
+      },
+      {
+        "file": "labourer-carrying-plank-wooden-32236679_jpg.rf.k42D8evuNnI67IGumJrC.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "labourer-carrying-plank-wooden-32236679_jpg"
+      },
+      {
+        "file": "lady-shoes-safety-helmet-red-89407703_jpg.rf.nbIguwFgEiYWHEciUAak.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "lady-shoes-safety-helmet-red-89407703_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--10-_jpg.rf.wUJDqt8VJbfT0EU1cXWZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--10-_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--12-_jpg.rf.tTmhbSoDCRXspFLYhYVM.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--12-_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--13-_jpg.rf.jBYKsYACBeDV7oTlOxLW.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--13-_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--13-_jpg.rf.7vOtXjUeexeEi1q7g9ZU.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--13-_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--8-_jpg.rf.Ghei3tSqau1RbNjJtIPM.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--8-_jpg"
+      },
+      {
+        "file": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--8-_jpg.rf.dEdSKa7htCJ1j4XwfNPS.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "large-pieces-asphalt-partially-cover-figure-man-under-rubble--8-_jpg"
+      },
+      {
+        "file": "laughing-construction-worker-broom-standing-sand-front-vehic--1-_jpg.rf.TxSUT8BsRMuDpo1pxnwz.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "laughing-construction-worker-broom-standing-sand-front-vehic--1-_jpg"
+      },
+      {
+        "file": "legs-worker-ladder-closeup-s-house-reconstruction-196154448--1-_jpg.rf.8zUYrc6Qm4dDGP5ProvN.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "legs-worker-ladder-closeup-s-house-reconstruction-196154448--1-_jpg"
+      },
+      {
+        "file": "legs-worker-ladder-closeup-s-house-reconstruction-196154448-1-_jpg.rf.XeoFW35ibGG5nOy95pFn.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "legs-worker-ladder-closeup-s-house-reconstruction-196154448-1-_jpg"
+      },
+      {
+        "file": "low-section-shot-of-legs-of-two-construction-workers-wearing_jpg.rf.cQLgygUv6iADjpUNzDx6.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "low-section-shot-of-legs-of-two-construction-workers-wearing_jpg"
+      },
+      {
+        "file": "low-section-shot-of-legs-of-two-construction-workers-wearing_jpg.rf.ReMBZeBLKLjMcmjOJTUp.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "low-section-shot-of-legs-of-two-construction-workers-wearing_jpg"
+      },
+      {
+        "file": "man-digging-trench-park-man-digging-trench-park-184426872--1-_jpg.rf.IrQE05IYGWI7iE5IiyKX.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "man-digging-trench-park-man-digging-trench-park-184426872--1-_jpg"
+      },
+      {
+        "file": "man-digging-trench-park-vertical-photo-man-digging-trench-pa--1-_jpg.rf.dxo7Ny0vOM90EevCVXN2.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "man-digging-trench-park-vertical-photo-man-digging-trench-pa--1-_jpg"
+      },
+      {
+        "file": "man-hiding-spider-scary-51770386--1-_jpg.rf.cbIqbIGKGly8g2PM10wq.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-hiding-spider-scary-51770386--1-_jpg"
+      },
+      {
+        "file": "man-overalls-plmuber-preparing-piece-pipe-36896348--1-_jpg.rf.NBTAOi2xcxi4diRYH1eY.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "man-overalls-plmuber-preparing-piece-pipe-36896348--1-_jpg"
+      },
+      {
+        "file": "man-s-construction-boot-front-cover-magazines-billboards-man_jpg.rf.VgBL4OKlbk9sXCSzw9V2.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-s-construction-boot-front-cover-magazines-billboards-man_jpg"
+      },
+      {
+        "file": "man-s-construction-boot-front-cover-magazines-man-s-boot-sho_jpg.rf.RgJtw7aTYdf8Xw6D1wFh.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "man-s-construction-boot-front-cover-magazines-man-s-boot-sho_jpg"
+      },
+      {
+        "file": "man-standing-ladder-89654165--1-_jpg.rf.Cw6uGaIqAUSrZqh6vzGI.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "man-standing-ladder-89654165--1-_jpg"
+      },
+      {
+        "file": "man-stands-ladder-89654360--1-_jpg.rf.Uh679QJ8V0BlH82l9U2b.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "man-stands-ladder-89654360--1-_jpg"
+      },
+      {
+        "file": "man-wearing-safety-shoes-black-color-standing-ground_416458---1-_jpg.rf.nTPSR4RxThjDmaNq0k2d.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-wearing-safety-shoes-black-color-standing-ground_416458---1-_jpg"
+      },
+      {
+        "file": "man-wearing-steel-toe-shoes-standing-mud-man-wearing-steel-t--2-_jpg.rf.V7e4vrUXccE70ct7PQ8g.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-wearing-steel-toe-shoes-standing-mud-man-wearing-steel-t--2-_jpg"
+      },
+      {
+        "file": "man-wearing-steel-toe-shoes-standing-mud-man-wearing-steel-t--3-_jpg.rf.QmYZzSj5lnq0Sda8XTEy.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-wearing-steel-toe-shoes-standing-mud-man-wearing-steel-t--3-_jpg"
+      },
+      {
+        "file": "man-work-orange-pants-worker-works-high-visibility-clothing---1-_jpg.rf.xlqL4ljDb4DP3PryAK7m.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-work-orange-pants-worker-works-high-visibility-clothing---1-_jpg"
+      },
+      {
+        "file": "man-working-construction-site-13413304_jpg.rf.4Twdxpp4zrj4tGiGsxI2.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-working-construction-site-13413304_jpg"
+      },
+      {
+        "file": "man-working-construction-site-13413311--1-_jpg.rf.Iwk7kvipqXeb9qbRGiUL.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "man-working-construction-site-13413311--1-_jpg"
+      },
+      {
+        "file": "man-workwear-working-ship-baltic-sea-poland-129708391_jpg.rf.V5zkK6yu4Z9UcpFMd9wO.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "man-workwear-working-ship-baltic-sea-poland-129708391_jpg"
+      },
+      {
+        "file": "men-wear-construction-boots-safety-footwear-worker-construct--2-_jpg.rf.0HKw0aBjl4PeDUxoQZP0.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "men-wear-construction-boots-safety-footwear-worker-construct--2-_jpg"
+      },
+      {
+        "file": "men-wear-construction-boots-safety-footwear-worker-site-engi_jpg.rf.gqolxHK8aEZxKtuNIfj4.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "men-wear-construction-boots-safety-footwear-worker-site-engi_jpg"
+      },
+      {
+        "file": "men-who-using-fiber-to-cut-steel-192749603_jpg.rf.cR95odN7qZojg0j15V7g.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "men-who-using-fiber-to-cut-steel-192749603_jpg"
+      },
+      {
+        "file": "men-who-using-fiber-to-cut-steel-192749603_jpg.rf.tYqLxMKNCAM0eJF9HlC6.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "men-who-using-fiber-to-cut-steel-192749603_jpg"
+      },
+      {
+        "file": "modern-construction-complete-manual-labor-222297286--1-_jpg.rf.PRhfLO4mtjfSZ06XqVrF.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "modern-construction-complete-manual-labor-222297286--1-_jpg"
+      },
+      {
+        "file": "modern-construction-complete-manual-labor-222297349--1-_jpg.rf.oiZ92S3Nz2aO6wNJc7Xa.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "modern-construction-complete-manual-labor-222297349--1-_jpg"
+      },
+      {
+        "file": "modern-construction-modern-construction-complete-manual-labo--1-_jpg.rf.IozAj1Grgz2dTd4ekLIZ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "modern-construction-modern-construction-complete-manual-labo--1-_jpg"
+      },
+      {
+        "file": "muddy-work-shoes-shoe-construction-industrial-95428589_jpg.rf.yTCpXc6CDhryVjgGw2Of.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "muddy-work-shoes-shoe-construction-industrial-95428589_jpg"
+      },
+      {
+        "file": "muddy-work-shoes-shoe-construction-industrial-95428651_jpg.rf.9ae5o8oXFEVTtyVU9iSg.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "muddy-work-shoes-shoe-construction-industrial-95428651_jpg"
+      },
+      {
+        "file": "oil-gas-fat-men-wearing-complete-personal-protective-equipme_jpg.rf.vRVzLeYA3zzt9m0lXYFQ.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "oil-gas-fat-men-wearing-complete-personal-protective-equipme_jpg"
+      },
+      {
+        "file": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--3-_jpg.rf.BHNILmBVTaNmbfb7re5T.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--3-_jpg"
+      },
+      {
+        "file": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--4-_jpg.rf.bebMdf99Orp2wAzFuzI9.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--4-_jpg"
+      },
+      {
+        "file": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--5-_jpg.rf.bFBrlVAaaAU9N6qXK3It.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--5-_jpg"
+      },
+      {
+        "file": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--7-_jpg.rf.GgB38z02MSojdCxNkcMM.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "person-climbing-ladder-indoors-closeup-person-climbing-ladde--7-_jpg"
+      },
+      {
+        "file": "person-climbing-ladder-indoors-closeup-person-climbing-ladde_jpg.rf.vPjk1ZSEQyvOVRl9VbJY.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "person-climbing-ladder-indoors-closeup-person-climbing-ladde_jpg"
+      },
+      {
+        "file": "person-on-construction-site-wearing-pictures_csp78817888_jpg.rf.LwdonkdYi86bj3wTw6WM.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "person-on-construction-site-wearing-pictures_csp78817888_jpg"
+      },
+      {
+        "file": "person-wearing-pair-of-brown-timberland-work-boots-and-black_jpg.rf.hnOP26c3NyopeaYlEGPJ.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "person-wearing-pair-of-brown-timberland-work-boots-and-black_jpg"
+      },
+      {
+        "file": "photo-worker-lacing-up-leather-boot-surface-protective-helme--1-_jpg.rf.Mff3UOjf8yxaEgDjfPJo.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "photo-worker-lacing-up-leather-boot-surface-protective-helme--1-_jpg"
+      },
+      {
+        "file": "pic_list_out_2285_jpg.rf.21D2VZ6B5hISOQP4SRvh.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "pic_list_out_2285_jpg"
+      },
+      {
+        "file": "professional-house-painter-work-painting-wall-caucasian-work_jpg.rf.OyV7IG3CO1BSL2FtATXh.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-house-painter-work-painting-wall-caucasian-work_jpg"
+      },
+      {
+        "file": "professional-house-painter-work-painting-wall-caucasian-work_jpg.rf.cQNyBzIXkH3SsEteZVEw.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "professional-house-painter-work-painting-wall-caucasian-work_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-indoors-closeup-profe_jpg.rf.UxGHgBCX9gkv6cao8GaV.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "professional-worker-climbing-up-ladder-indoors-closeup-profe_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-near-brick-wall-close_jpg.rf.NjT35ZElR2kHjlpIq4hn.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-climbing-up-ladder-near-brick-wall-close_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-near-brick-wall-profe_jpg.rf.K1jq1NRtXhJI3K6juF7c.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-climbing-up-ladder-near-brick-wall-profe_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-closeup-21274398--1-_jpg.rf.uxZkNY8ozwpnKfxiNHEA.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-climbing-up-ladder-room-closeup-21274398--1-_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-closeup-professi_jpg.rf.uy0Ds4eqJA2wAbM759SX.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "professional-worker-climbing-up-ladder-room-closeup-professi_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-professional-wor--2-_jpg.rf.O5iwIXZHMXnbrpiivm3F.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "professional-worker-climbing-up-ladder-room-professional-wor--2-_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-professional-wor--2-_jpg.rf.OlKtthiMmcvTHcD484ol.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "professional-worker-climbing-up-ladder-room-professional-wor--2-_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-professional-wor--3-_jpg.rf.Yn4XhfOGn5HzDy4uh3PB.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-climbing-up-ladder-room-professional-wor--3-_jpg"
+      },
+      {
+        "file": "professional-worker-climbing-up-ladder-room-professional-wor_jpg.rf.AEBIkK1B6A32v4ax6zMd.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-climbing-up-ladder-room-professional-wor_jpg"
+      },
+      {
+        "file": "professional-worker-standing-stairs-professional-worker-stan--1-_jpg.rf.f7K5fcoKWoU6WCWR2EGA.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "professional-worker-standing-stairs-professional-worker-stan--1-_jpg"
+      },
+      {
+        "file": "q9QkdKXKOSAqkaskgW0zmuvXV9hN196ed7fDrVoN5RgFPLSXAACMnvJ0cFkU_jpeg_jpg.rf.pG8TEtB2ISWDJEqwFP1U.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "q9QkdKXKOSAqkaskgW0zmuvXV9hN196ed7fDrVoN5RgFPLSXAACMnvJ0cFkU_jpeg_jpg"
+      },
+      {
+        "file": "q9QkdKXKOSAqkaskgW0zmuvXV9hN196ed7fDrVoN5RgFPLSXAACMnvJ0cFkU_jpeg_jpg.rf.91Iof1Gpa9LTu2WQpWnD.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "q9QkdKXKOSAqkaskgW0zmuvXV9hN196ed7fDrVoN5RgFPLSXAACMnvJ0cFkU_jpeg_jpg"
+      },
+      {
+        "file": "rail-worker-grinding-tramway-track-48054589--1-_jpg.rf.DuKWCXHI3cAHBxJplPT5.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "rail-worker-grinding-tramway-track-48054589--1-_jpg"
+      },
+      {
+        "file": "ready-to-work-unsafe-workplace-ready-to-work-unsafe-workplac--1-_jpg.rf.0y3d3wmdOdtSPPD8jGjC.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "ready-to-work-unsafe-workplace-ready-to-work-unsafe-workplac--1-_jpg"
+      },
+      {
+        "file": "right-construction-shoes-heavy-duty-safe-big-job-137538722_jpg.rf.sXMwH5g3Wmpn0xmqXP9I.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "right-construction-shoes-heavy-duty-safe-big-job-137538722_jpg"
+      },
+      {
+        "file": "road-worker-manual-asphalt-his-shovel-41475348--1-_jpg.rf.NwEiO6gXtKoH6pADQZQX.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "road-worker-manual-asphalt-his-shovel-41475348--1-_jpg"
+      },
+      {
+        "file": "road-worker-manual-leveling-asphalt-rake-41475355--1-_jpg.rf.2Ilqmy4dtuIycdWZxPOL.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "road-worker-manual-leveling-asphalt-rake-41475355--1-_jpg"
+      },
+      {
+        "file": "rubber-boots-work-use-gray-asphalt-road-street-lonely-man-ou--1-_jpg.rf.pTkF8C2faeF3K3zyEysQ.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "rubber-boots-work-use-gray-asphalt-road-street-lonely-man-ou--1-_jpg"
+      },
+      {
+        "file": "safety-rules-construction-site-concept-worker-injured-work-a_jpg.rf.X5rxMdWilgOfzd4nhIHe.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "safety-rules-construction-site-concept-worker-injured-work-a_jpg"
+      },
+      {
+        "file": "safety-work-heights-construction-protection-worker-working-b_jpg.rf.AiPuOGoQs6igI5DWSBnx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "safety-work-heights-construction-protection-worker-working-b_jpg"
+      },
+      {
+        "file": "sidewalk-paved-construction-workers-closeup-74283754_jpg.rf.HHsXAvSACFfESvNA5d3a.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "sidewalk-paved-construction-workers-closeup-74283754_jpg"
+      },
+      {
+        "file": "stock-photo-sleeping-work-boots-hard-day-at-work-constructio_jpg.rf.TNUEjMCWWA5fy3j18nAt.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "stock-photo-sleeping-work-boots-hard-day-at-work-constructio_jpg"
+      },
+      {
+        "file": "studio-shot-of-man-in-construction-gear-picture-id1035076790_jpeg_jpg.rf.hKPteNnqxcDh8ALT0sgq.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "studio-shot-of-man-in-construction-gear-picture-id1035076790_jpeg_jpg"
+      },
+      {
+        "file": "tools-floor-young-plumber-man-74304426_jpg.rf.PnKgOdqHipMQRT5nKyUl.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "tools-floor-young-plumber-man-74304426_jpg"
+      },
+      {
+        "file": "tools-floor-young-plumber-man-74304426_jpg.rf.tuS74EPrVkeYs2NS5FCu.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "tools-floor-young-plumber-man-74304426_jpg"
+      },
+      {
+        "file": "top-view-of-people-wearing-safety-shoes-sitting-on-a-steel-p--1-_jpeg_jpg.rf.6TpmdNxKs1ljP5sUiYYG.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "top-view-of-people-wearing-safety-shoes-sitting-on-a-steel-p--1-_jpeg_jpg"
+      },
+      {
+        "file": "top-view-of-people-wearing-safety-shoes-sitting-on-a-steel-p_jpeg_jpg.rf.6W7NUeEqc3ukj637N5bt.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "top-view-of-people-wearing-safety-shoes-sitting-on-a-steel-p_jpeg_jpg"
+      },
+      {
+        "file": "tradesman-ground-lying-31528905_jpg.rf.PRthAAPdn3hllhNbwL6Y.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "tradesman-ground-lying-31528905_jpg"
+      },
+      {
+        "file": "tradesman-ground-lying-31528905_jpg.rf.gm8iFRoBS7dpm3GTXfq3.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "tradesman-ground-lying-31528905_jpg"
+      },
+      {
+        "file": "tradesman-wearing-dark-glasses-sunglasses-to-look-cool-30483--1-_jpg.rf.1bQUPnnwoowobVAspWdH.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "tradesman-wearing-dark-glasses-sunglasses-to-look-cool-30483--1-_jpg"
+      },
+      {
+        "file": "tradeswoman-24498992_jpg.rf.TkF9iGTFkbSdbVOUdrR9.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "tradeswoman-24498992_jpg"
+      },
+      {
+        "file": "tradeswoman-pipe-wrench-27576233_jpg.rf.9sv3OCGiWubI7fHfQy4n.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "tradeswoman-pipe-wrench-27576233_jpg"
+      },
+      {
+        "file": "tradeswoman-sitting-toolbox-24219606_jpg.rf.WQYMGd2wNljUhau855e0.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "tradeswoman-sitting-toolbox-24219606_jpg"
+      },
+      {
+        "file": "two-people-overalls-black-shoes-go-green-background-large-me_jpg.rf.Tgnuj2kaXv04JGENpP9T.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "two-people-overalls-black-shoes-go-green-background-large-me_jpg"
+      },
+      {
+        "file": "two-people-overalls-black-shoes-go-green-background-large-me_jpg.rf.R7HPlqKQzsIheAzNlh5a.jpg",
+        "from": "valid",
+        "to": "test",
+        "source_stem": "two-people-overalls-black-shoes-go-green-background-large-me_jpg"
+      },
+      {
+        "file": "unrecognisable-skyscraper-window-cleaner-washing-window-city_jpg.rf.lxsFPbPyB4TUFcBh0zGw.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognisable-skyscraper-window-cleaner-washing-window-city_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--33-_jpg.rf.VoGaNPuGXYDzyW77cIYg.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--33-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--40-_jpg.rf.SPWzHXkLFm1so4Jhao4K.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--40-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--43-_jpg.rf.Q1EbRPHbLX23qqxSvaXE.jpg",
+        "from": "train",
+        "to": "test",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--43-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--46-_jpg.rf.BihZRaNmss9ooWmgIntH.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--46-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--46-_jpg.rf.D4KZZ4J5CuGkMT88rN5p.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--46-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--47-_jpg.rf.60GYfIHSTdOmLsUPoiFy.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--47-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--48-_jpg.rf.yPFp5SKbhJT9Gtyozrug.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--48-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--49-_jpg.rf.RdLIZO2ZbYrArKbXi53q.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--49-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--50-_jpg.rf.edQlEtLjH1mkPP3h7tGr.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--50-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--51-_jpg.rf.GPsbQyaQI5Xji2unusuZ.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--51-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--51-_jpg.rf.k7M4anqtm8izsKvQqT9M.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--51-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--6-_jpg.rf.0UWH9ZN7M6Kt9zCmidv1.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--6-_jpg"
+      },
+      {
+        "file": "unrecognizable-person-construction-site-wearing-protective-w--7-_jpg.rf.UKeyk4V8AdPmMKFDl9X6.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrecognizable-person-construction-site-wearing-protective-w--7-_jpg"
+      },
+      {
+        "file": "unrolling-grass-applying-turf-rolls-new-lawn-worker-safety-s_jpg.rf.EOanGfSqsjEG0wxsXibE.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "unrolling-grass-applying-turf-rolls-new-lawn-worker-safety-s_jpg"
+      },
+      {
+        "file": "wear-safety-shoes-to-ensure-safety-work-construction-workers--1-_jpg.rf.cbxrS0MFFiuIqO6jqiRv.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "wear-safety-shoes-to-ensure-safety-work-construction-workers--1-_jpg"
+      },
+      {
+        "file": "wear-safety-shoes-to-ensure-safety-work-construction-workers--2-_jpg.rf.buJPjnY3Eu3oTtlw3Mok.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "wear-safety-shoes-to-ensure-safety-work-construction-workers--2-_jpg"
+      },
+      {
+        "file": "welder-tube-photo-38134869_jpg.rf.Zb1qbf34Xd4bumq5PLwB.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "welder-tube-photo-38134869_jpg"
+      },
+      {
+        "file": "what-type-of-safety-footwear-do-you-need_jpg.rf.oLST8XxswnYfnfUXhN46.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "what-type-of-safety-footwear-do-you-need_jpg"
+      },
+      {
+        "file": "winter-boots-workers-store-244241002_jpg.rf.7ZODicOaySXAEbJN3m8D.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "winter-boots-workers-store-244241002_jpg"
+      },
+      {
+        "file": "woman-holding-screwdriver-sexy-electric-53443122_jpg.rf.aM4kt8j7KU2w0oWa4HwV.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "woman-holding-screwdriver-sexy-electric-53443122_jpg"
+      },
+      {
+        "file": "work-boot-brown-color-blue-jean-leg-isolated-white-backgroun_jpg.rf.ZqXJS95ONCgjQlehsmnh.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "work-boot-brown-color-blue-jean-leg-isolated-white-backgroun_jpg"
+      },
+      {
+        "file": "work-boots-construction-background-protective-workwear-site---1-_jpg.rf.z5rwBe3wBoft0R4GbXIo.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "work-boots-construction-background-protective-workwear-site---1-_jpg"
+      },
+      {
+        "file": "work-boots-rubble-safety-shoes-outdoor-use-black-169627429--1-_jpg.rf.dCc5ZSF6iNrvd60m1RB2.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "work-boots-rubble-safety-shoes-outdoor-use-black-169627429--1-_jpg"
+      },
+      {
+        "file": "worker-boots-brown-soil-worker-boots-soil-115929363_jpg.rf.F98Z5VLnnfkbaxXSUmn2.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "worker-boots-brown-soil-worker-boots-soil-115929363_jpg"
+      },
+      {
+        "file": "worker-boots-hazmat-suit-climbs-aluminum-ladder-worker-boots--1-_jpg.rf.1CWbBiV5CWoHfQNZFH55.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "worker-boots-hazmat-suit-climbs-aluminum-ladder-worker-boots--1-_jpg"
+      },
+      {
+        "file": "worker-height-sprinkle-safety-man-worker-sprinkle-height-wea_jpg.rf.0Zb85OaJANBosr12Uc3H.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-height-sprinkle-safety-man-worker-sprinkle-height-wea_jpg"
+      },
+      {
+        "file": "worker-laying-pebble-floor-cobblestone-flooring-138206178_jpg.rf.s90YdrW3NwVgX0OhludO.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-laying-pebble-floor-cobblestone-flooring-138206178_jpg"
+      },
+      {
+        "file": "worker-laying-pebble-floor-laying-cobblestone-flooring-13820--5-_jpg.rf.oQ2gdx6lLtoBvrfDGT8L.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "worker-laying-pebble-floor-laying-cobblestone-flooring-13820--5-_jpg"
+      },
+      {
+        "file": "worker-orange-jacket-outfit-holding-boot-worker-orange-jacke_jpg.rf.6KLmpbW8RGvCFo3FZeHK.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "worker-orange-jacket-outfit-holding-boot-worker-orange-jacke_jpg"
+      },
+      {
+        "file": "worker-putting-working-boots-locker-room-factory-worker-putt_jpg.rf.9PQPU6xOH9pY495EokUq.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "worker-putting-working-boots-locker-room-factory-worker-putt_jpg"
+      },
+      {
+        "file": "worker-safety-boots-steps-nail-36475287_jpg.rf.MLmE86s8fCelOsBmGgdh.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-safety-boots-steps-nail-36475287_jpg"
+      },
+      {
+        "file": "worker-safety-boots-steps-rusty-nail-man-36475559_jpg.rf.EWEiJuJ9uCczhHmJYdit.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-safety-boots-steps-rusty-nail-man-36475559_jpg"
+      },
+      {
+        "file": "worker-safety-shoes-walk-factory-189611890--1-_jpg.rf.TNdo3YrrAmZ8wjmyxhrV.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "worker-safety-shoes-walk-factory-189611890--1-_jpg"
+      },
+      {
+        "file": "worker-shoes-construction-site-worker-shoes-construction-sit_jpg.rf.lcIvh3RCtPgZvvQ3p310.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-shoes-construction-site-worker-shoes-construction-sit_jpg"
+      },
+      {
+        "file": "worker-shovel-construction-working-new-road-construction-578--1-_jpg.rf.pYwENOMIdgxuYnKlpqBV.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "worker-shovel-construction-working-new-road-construction-578--1-_jpg"
+      },
+      {
+        "file": "worker-shovel-construction-working-new-road-construction-578--1-_jpg.rf.MYPcG4bgYaiozxG8kzZq.jpg",
+        "from": "test",
+        "to": "valid",
+        "source_stem": "worker-shovel-construction-working-new-road-construction-578--1-_jpg"
+      },
+      {
+        "file": "worker-stepping-up-stair-person-step-back-pickup-truck-red-c_jpg.rf.X0GIv3QmzfupY51zWRDq.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "worker-stepping-up-stair-person-step-back-pickup-truck-red-c_jpg"
+      },
+      {
+        "file": "worker-toolbox-28009295_jpg.rf.4kWthcmOAR62bWpfNW2n.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "worker-toolbox-28009295_jpg"
+      },
+      {
+        "file": "worker-using-fiber-machine-cutting-steel-roof-structure-spar--1-_jpg.rf.GDt564NmqTbxylnVhSFL.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "worker-using-fiber-machine-cutting-steel-roof-structure-spar--1-_jpg"
+      },
+      {
+        "file": "worker-using-fiber-machine-cutting-steel-sparks-wearing-safe--3-_jpg.rf.kEb1Mky8MS1Hg1dvVREj.jpg",
+        "from": "train",
+        "to": "valid",
+        "source_stem": "worker-using-fiber-machine-cutting-steel-sparks-wearing-safe--3-_jpg"
+      },
+      {
+        "file": "workers-up-high-safety-equipment-safety-belts-safety-harness--5-_jpg.rf.isvBTf3AOepupDQeLOHI.jpg",
+        "from": "test",
+        "to": "train",
+        "source_stem": "workers-up-high-safety-equipment-safety-belts-safety-harness--5-_jpg"
+      },
+      {
+        "file": "workers-were-wearing-safety-shoes-600w-317177600_jpg.rf.vbqzhxRmr6nmIGH21Bzx.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "workers-were-wearing-safety-shoes-600w-317177600_jpg"
+      },
+      {
+        "file": "working-outside-2-1459307_jpg.rf.gxuvLHeJhmo13tE1xdK7.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "working-outside-2-1459307_jpg"
+      },
+      {
+        "file": "working-outside-771242_jpg.rf.z5XJpHRAeLjH92U1e2fG.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "working-outside-771242_jpg"
+      },
+      {
+        "file": "working-tools-protective-clothes-wooden-background-close-up-_jpg.rf.natxw0eadyM0svNN6Ota.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "working-tools-protective-clothes-wooden-background-close-up-_jpg"
+      },
+      {
+        "file": "workman-wearing-jeans-gloves-boots-holding-protective-equipm_jpg.rf.TXTfbr06YugmBUnhMap2.jpg",
+        "from": "valid",
+        "to": "train",
+        "source_stem": "workman-wearing-jeans-gloves-boots-holding-protective-equipm_jpg"
+      }
+    ]
   }
 }

@@ -80,13 +80,24 @@ def _check_dataset(config: TrainConfig) -> Path:
 def _resolve_batch(config: TrainConfig, device: str) -> float | int:
     """Adapte la taille de lot au device reellement utilise.
 
-    L'auto-batch d'Ultralytics (``batch=-1``) mesure l'occupation VRAM et n'a
-    aucun sens sur CPU : on retombe alors sur une valeur modeste.
+    Ultralytics accepte trois formes : un entier explicite, ``-1`` pour
+    l'auto-batch, ou une fraction de VRAM entre 0 et 1. Un entier fourni en
+    ligne de commande arrive sous forme de ``float`` (``12.0``) ; le
+    ``DataLoader`` de PyTorch exige un entier strict et leve sinon
+    ``ValueError: batch_size should be a positive integer value``. On
+    reconvertit donc les valeurs >= 1 en entier, tout en preservant la
+    semantique fractionnaire.
+
+    L'auto-batch mesure l'occupation VRAM et n'a aucun sens sur CPU : on
+    retombe alors sur une valeur modeste.
     """
-    if device == "cpu" and (isinstance(config.batch, (int, float)) and config.batch < 0):
+    batch = config.batch
+    if device == "cpu" and (isinstance(batch, (int, float)) and batch < 0):
         LOGGER.warning("Auto-batch indisponible sur CPU — batch=4 utilise.")
         return 4
-    return config.batch
+    if isinstance(batch, float) and batch >= 1 and batch.is_integer():
+        return int(batch)
+    return batch
 
 
 def _archive_run_metadata(run_dir: Path, config: TrainConfig, device: str, smoke: bool) -> None:

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-30T12:42:19.841840+00:00",
+  "generated_at": "2026-08-04T15:11:18.700074+00:00",
   "environment": {
-    "timestamp_utc": "2026-07-30T12:42:19.841840+00:00",
+    "timestamp_utc": "2026-08-04T15:11:18.700074+00:00",
     "python": "3.12.10",
     "platform": "Windows-11-10.0.26200-SP0",
     "machine": "AMD64",
@@ -44,130 +44,130 @@
     "device": "0"
   },
   "metrics": {
-    "precision": 0.8184,
-    "recall": 0.7869,
-    "mAP50": 0.8319,
-    "mAP50_95": 0.4696,
-    "mAP75": 0.4628
+    "precision": 0.8086,
+    "recall": 0.7539,
+    "mAP50": 0.7992,
+    "mAP50_95": 0.4326,
+    "mAP75": 0.4078
   },
   "per_class": {
     "Face Mask": {
-      "mAP50_95": 0.5649,
-      "mAP50": 0.9149,
-      "precision": 0.8673,
-      "recall": 0.769
+      "mAP50_95": 0.5595,
+      "mAP50": 0.9224,
+      "precision": 0.8606,
+      "recall": 0.8033
     },
     "Person": {
-      "mAP50_95": 0.5364,
-      "mAP50": 0.9009,
-      "precision": 0.8696,
-      "recall": 0.884
+      "mAP50_95": 0.5306,
+      "mAP50": 0.8927,
+      "precision": 0.8757,
+      "recall": 0.8754
     },
     "Safety Gloves": {
-      "mAP50_95": 0.3338,
-      "mAP50": 0.6695,
-      "precision": 0.7193,
-      "recall": 0.6784
+      "mAP50_95": 0.221,
+      "mAP50": 0.5483,
+      "precision": 0.6725,
+      "recall": 0.5547
     },
     "Safety Harness": {
-      "mAP50_95": 0.3962,
-      "mAP50": 0.7834,
-      "precision": 0.8285,
-      "recall": 0.7143
+      "mAP50_95": 0.4003,
+      "mAP50": 0.7821,
+      "precision": 0.8274,
+      "recall": 0.7117
     },
     "Safety Helmet": {
-      "mAP50_95": 0.3589,
-      "mAP50": 0.7987,
-      "precision": 0.7734,
-      "recall": 0.7878
+      "mAP50_95": 0.3524,
+      "mAP50": 0.7961,
+      "precision": 0.7761,
+      "recall": 0.7842
     },
     "Safety Shoes": {
-      "mAP50_95": 0.5545,
-      "mAP50": 0.8691,
-      "precision": 0.8527,
-      "recall": 0.7883
+      "mAP50_95": 0.4296,
+      "mAP50": 0.7751,
+      "precision": 0.7983,
+      "recall": 0.6793
     },
     "Safety Vest": {
-      "mAP50_95": 0.5423,
-      "mAP50": 0.8869,
-      "precision": 0.8179,
-      "recall": 0.8865
+      "mAP50_95": 0.5347,
+      "mAP50": 0.8777,
+      "precision": 0.8495,
+      "recall": 0.8684
     }
   },
   "speed_ms_per_image": {
-    "preprocess": 0.711,
-    "inference": 2.828,
-    "loss": 0.0,
-    "postprocess": 0.087
+    "preprocess": 0.705,
+    "inference": 2.732,
+    "loss": 0.006,
+    "postprocess": 0.164
   },
-  "throughput_fps": 275.79,
+  "throughput_fps": 277.24,
   "ultralytics_save_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\runs\\val\\evaluation_test",
   "error_analysis": {
     "iou_threshold": 0.5,
     "conf_threshold": 0.25,
-    "images_analysed": 698,
+    "images_analysed": 578,
     "per_class": {
       "Face Mask": {
-        "true_positives": 77,
-        "false_positives": 13,
-        "false_negatives": 8,
-        "precision": 0.8556,
-        "recall": 0.9059,
-        "f1": 0.88
+        "true_positives": 55,
+        "false_positives": 12,
+        "false_negatives": 6,
+        "precision": 0.8209,
+        "recall": 0.9016,
+        "f1": 0.8594
       },
       "Person": {
-        "true_positives": 657,
-        "false_positives": 144,
-        "false_negatives": 67,
-        "precision": 0.8202,
-        "recall": 0.9075,
-        "f1": 0.8616
+        "true_positives": 643,
+        "false_positives": 133,
+        "false_negatives": 71,
+        "precision": 0.8286,
+        "recall": 0.9006,
+        "f1": 0.8631
       },
       "Safety Gloves": {
-        "true_positives": 141,
-        "false_positives": 66,
-        "false_negatives": 58,
-        "precision": 0.6812,
-        "recall": 0.7085,
-        "f1": 0.6946
+        "true_positives": 78,
+        "false_positives": 44,
+        "false_negatives": 59,
+        "precision": 0.6393,
+        "recall": 0.5693,
+        "f1": 0.6023
       },
       "Safety Harness": {
-        "true_positives": 80,
+        "true_positives": 79,
         "false_positives": 23,
         "false_negatives": 32,
-        "precision": 0.7767,
-        "recall": 0.7143,
-        "f1": 0.7442
+        "precision": 0.7745,
+        "recall": 0.7117,
+        "f1": 0.7418
       },
       "Safety Helmet": {
-        "true_positives": 414,
-        "false_positives": 155,
-        "false_negatives": 95,
-        "precision": 0.7276,
-        "recall": 0.8134,
-        "f1": 0.7681
+        "true_positives": 401,
+        "false_positives": 148,
+        "false_negatives": 94,
+        "precision": 0.7304,
+        "recall": 0.8101,
+        "f1": 0.7682
       },
       "Safety Shoes": {
-        "true_positives": 500,
-        "false_positives": 100,
-        "false_negatives": 114,
-        "precision": 0.8333,
-        "recall": 0.8143,
-        "f1": 0.8237
+        "true_positives": 278,
+        "false_positives": 73,
+        "false_negatives": 118,
+        "precision": 0.792,
+        "recall": 0.702,
+        "f1": 0.7443
       },
       "Safety Vest": {
-        "true_positives": 205,
-        "false_positives": 63,
-        "false_negatives": 24,
-        "precision": 0.7649,
-        "recall": 0.8952,
-        "f1": 0.8249
+        "true_positives": 200,
+        "false_positives": 53,
+        "false_negatives": 28,
+        "precision": 0.7905,
+        "recall": 0.8772,
+        "f1": 0.8316
       }
     },
     "totals": {
-      "true_positives": 2074,
-      "false_positives": 564,
-      "false_negatives": 398
+      "true_positives": 1734,
+      "false_positives": 486,
+      "false_negatives": 408
     },
     "class_confusions": [
       {
@@ -369,12 +369,39 @@
         "score": 0.0
       },
       {
+        "image": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.Z88wKwYsIgJPMvg56sWB.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
+        "image": "Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.mL1277Me2sg2oLKmUCRF.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
         "image": "construction_jpg.rf.SMFRMj2KMSOkXT1rBaBp.jpg",
         "n_ground_truth": 7,
         "n_predictions": 0,
         "true_positives": 0,
         "false_positives": 0,
         "false_negatives": 7,
+        "score": 0.0
+      },
+      {
+        "image": "dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg.rf.Sv7mCwrlQT2axIjgcJBc.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 1,
         "score": 0.0
       },
       {
@@ -411,6 +438,15 @@
         "true_positives": 0,
         "false_positives": 2,
         "false_negatives": 0,
+        "score": 0.0
+      },
+      {
+        "image": "istockphoto-1484904613-612x612_jpg.rf.RjASIHlOnAC2hag8uloA.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 2,
         "score": 0.0
       },
       {
@@ -457,42 +493,6 @@
         "false_positives": 2,
         "false_negatives": 1,
         "score": 0.0
-      },
-      {
-        "image": "repairman-worker-standing-ladder-170164303_jpg.rf.3zfnZEfskCwo0y73QTR9.jpg",
-        "n_ground_truth": 2,
-        "n_predictions": 0,
-        "true_positives": 0,
-        "false_positives": 0,
-        "false_negatives": 2,
-        "score": 0.0
-      },
-      {
-        "image": "unrecognizable-person-construction-site-wearing-protective-w--43-_jpg.rf.1oLPI9JCN1jfSLROIjNo.jpg",
-        "n_ground_truth": 4,
-        "n_predictions": 2,
-        "true_positives": 0,
-        "false_positives": 2,
-        "false_negatives": 4,
-        "score": 0.0
-      },
-      {
-        "image": "worker-high-installation-scaffolding-wear-equipment-worker-h_jpg.rf.iYkjU4dxNb0ZuyN8kcFq.jpg",
-        "n_ground_truth": 2,
-        "n_predictions": 0,
-        "true_positives": 0,
-        "false_positives": 0,
-        "false_negatives": 2,
-        "score": 0.0
-      },
-      {
-        "image": "worker-putting-working-boots-locker-room-factory-worker-putt_jpg.rf.9PQPU6xOH9pY495EokUq.jpg",
-        "n_ground_truth": 1,
-        "n_predictions": 1,
-        "true_positives": 0,
-        "false_positives": 1,
-        "false_negatives": 1,
-        "score": 0.0
       }
     ],
     "confusion_matrix": {
@@ -508,40 +508,40 @@
       ],
       "matrix": [
         [
-          77,
+          55,
           0,
           0,
           0,
           0,
           0,
           0,
-          13
+          12
         ],
         [
           0,
-          657,
+          643,
           0,
           1,
           0,
           0,
           1,
-          142
+          131
         ],
         [
           0,
           0,
-          141,
+          78,
           0,
           0,
           1,
           2,
-          63
+          41
         ],
         [
           0,
           1,
           0,
-          80,
+          79,
           0,
           0,
           2,
@@ -552,10 +552,10 @@
           1,
           0,
           0,
-          414,
+          401,
           0,
           0,
-          154
+          147
         ],
         [
           0,
@@ -563,9 +563,9 @@
           0,
           0,
           0,
-          500,
+          278,
           0,
-          100
+          73
         ],
         [
           0,
@@ -574,17 +574,17 @@
           1,
           1,
           1,
-          205,
-          60
+          200,
+          50
         ],
         [
-          8,
-          65,
-          58,
+          6,
+          69,
+          59,
           30,
-          94,
-          112,
-          19,
+          93,
+          116,
+          23,
           0
         ]
       ],

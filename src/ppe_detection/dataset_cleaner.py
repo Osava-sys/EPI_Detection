@@ -197,7 +197,7 @@ def clean_dataset(
     overwrite: bool = False,
     dry_run: bool = False,
     strict: bool = False,
-    regroup_by_source: bool = False,
+    regroup_by_source: bool = True,
     clamp_tolerance: float = DEFAULT_CLAMP_TOLERANCE,
     min_box_side: float = DEFAULT_MIN_BOX_SIDE,
     seed: int = 42,
@@ -556,12 +556,24 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--strict", action="store_true", help="Echoue si au moins une ligne doit etre exclue."
     )
+    # Le regroupement est ACTIF PAR DEFAUT : sans lui, l'export Roboflow place
+    # des variantes augmentees d'une meme photo dans train et dans test, ce qui
+    # gonfle artificiellement les metriques (mesure : +0.033 de mAP@0.50).
+    # Le drapeau historique reste accepte pour ne pas casser les commandes
+    # existantes, mais il n'a plus d'effet puisqu'il decrit le defaut.
     parser.add_argument(
         "--regroup-by-source",
         action="store_true",
+        help="Sans effet : le regroupement anti-fuite est desormais applique par defaut.",
+    )
+    parser.add_argument(
+        "--allow-source-leak",
+        action="store_true",
         help=(
-            "Regroupe dans un seul split toutes les variantes d'une meme image source Roboflow. "
-            "Supprime la fuite inter-splits mais modifie la repartition d'origine."
+            "Desactive le regroupement anti-fuite et reproduit la repartition "
+            "train/valid/test exacte de l'export Roboflow. A n'utiliser que pour "
+            "comparer des resultats a ceux publies sur le decoupage d'origine : "
+            "les metriques obtenues seront optimistes."
         ),
     )
     parser.add_argument(
@@ -598,7 +610,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             overwrite=args.overwrite,
             dry_run=args.dry_run,
             strict=args.strict,
-            regroup_by_source=args.regroup_by_source,
+            regroup_by_source=not args.allow_source_leak,
             clamp_tolerance=args.clamp_tolerance,
             seed=args.seed,
         )

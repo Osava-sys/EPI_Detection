@@ -1,0 +1,922 @@
+{
+  "generated_at": "2026-08-04T11:14:19.502589+00:00",
+  "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best.pt",
+  "data": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_detection\\data.yaml",
+  "split": "valid",
+  "n_images": 1277,
+  "iou_threshold": 0.5,
+  "baseline_threshold": 0.25,
+  "min_recall": 0.0,
+  "classes": [
+    {
+      "class_id": 0,
+      "class_name": "Face Mask",
+      "n_ground_truth": 131,
+      "best_threshold": 0.25,
+      "best_f1": 0.8205,
+      "precision_at_best": 0.7887,
+      "recall_at_best": 0.855,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.8205,
+      "f1_gain": 0.0,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.5735,
+          "recall": 0.9237,
+          "f1": 0.7076
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.6283,
+          "recall": 0.916,
+          "f1": 0.7453
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.6484,
+          "recall": 0.9008,
+          "f1": 0.754
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.6744,
+          "recall": 0.8855,
+          "f1": 0.7657
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.7887,
+          "recall": 0.855,
+          "f1": 0.8205
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.8293,
+          "recall": 0.7786,
+          "f1": 0.8031
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.8407,
+          "recall": 0.7252,
+          "f1": 0.7787
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.8889,
+          "recall": 0.6718,
+          "f1": 0.7652
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.913,
+          "recall": 0.6412,
+          "f1": 0.7534
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.9412,
+          "recall": 0.6107,
+          "f1": 0.7407
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.9359,
+          "recall": 0.5573,
+          "f1": 0.6986
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.9333,
+          "recall": 0.5344,
+          "f1": 0.6796
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.9437,
+          "recall": 0.5115,
+          "f1": 0.6634
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.9437,
+          "recall": 0.5115,
+          "f1": 0.6634
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9636,
+          "recall": 0.4046,
+          "f1": 0.5699
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9623,
+          "recall": 0.3893,
+          "f1": 0.5543
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.9756,
+          "recall": 0.3053,
+          "f1": 0.4651
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.2214,
+          "f1": 0.3625
+        },
+        {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    },
+    {
+      "class_id": 1,
+      "class_name": "Person",
+      "n_ground_truth": 1500,
+      "best_threshold": 0.35,
+      "best_f1": 0.8649,
+      "precision_at_best": 0.8572,
+      "recall_at_best": 0.8727,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.8594,
+      "f1_gain": 0.0055,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.6722,
+          "recall": 0.9393,
+          "f1": 0.7836
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.7417,
+          "recall": 0.9247,
+          "f1": 0.8231
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.777,
+          "recall": 0.9173,
+          "f1": 0.8413
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.8048,
+          "recall": 0.91,
+          "f1": 0.8542
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.8235,
+          "recall": 0.8987,
+          "f1": 0.8594
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.8414,
+          "recall": 0.888,
+          "f1": 0.8641
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.8572,
+          "recall": 0.8727,
+          "f1": 0.8649
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.8704,
+          "recall": 0.8593,
+          "f1": 0.8648
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.8837,
+          "recall": 0.846,
+          "f1": 0.8644
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.8929,
+          "recall": 0.834,
+          "f1": 0.8625
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.9074,
+          "recall": 0.8167,
+          "f1": 0.8596
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.9175,
+          "recall": 0.7933,
+          "f1": 0.8509
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.9261,
+          "recall": 0.76,
+          "f1": 0.8349
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.9351,
+          "recall": 0.72,
+          "f1": 0.8136
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9375,
+          "recall": 0.66,
+          "f1": 0.7746
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9507,
+          "recall": 0.5273,
+          "f1": 0.6784
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.9494,
+          "recall": 0.2627,
+          "f1": 0.4115
+        },
+        {
+          "threshold": 0.9,
+          "precision": 0.9609,
+          "recall": 0.082,
+          "f1": 0.1511
+        },
+        {
+          "threshold": 0.95,
+          "precision": 1.0,
+          "recall": 0.0113,
+          "f1": 0.0224
+        }
+      ]
+    },
+    {
+      "class_id": 2,
+      "class_name": "Safety Gloves",
+      "n_ground_truth": 410,
+      "best_threshold": 0.3,
+      "best_f1": 0.5912,
+      "precision_at_best": 0.7037,
+      "recall_at_best": 0.5098,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.5886,
+      "f1_gain": 0.0027,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.459,
+          "recall": 0.6415,
+          "f1": 0.5351
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.516,
+          "recall": 0.5902,
+          "f1": 0.5506
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.5779,
+          "recall": 0.561,
+          "f1": 0.5693
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.6205,
+          "recall": 0.5463,
+          "f1": 0.5811
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.6667,
+          "recall": 0.5268,
+          "f1": 0.5886
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.7037,
+          "recall": 0.5098,
+          "f1": 0.5912
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.7269,
+          "recall": 0.4805,
+          "f1": 0.5786
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.7552,
+          "recall": 0.4439,
+          "f1": 0.5591
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.7783,
+          "recall": 0.4024,
+          "f1": 0.5305
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.7627,
+          "recall": 0.3293,
+          "f1": 0.46
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.7821,
+          "recall": 0.2976,
+          "f1": 0.4311
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.7926,
+          "recall": 0.261,
+          "f1": 0.3927
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.8053,
+          "recall": 0.222,
+          "f1": 0.348
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.8081,
+          "recall": 0.1951,
+          "f1": 0.3143
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.8182,
+          "recall": 0.1537,
+          "f1": 0.2587
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.8298,
+          "recall": 0.0951,
+          "f1": 0.1707
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.7692,
+          "recall": 0.0244,
+          "f1": 0.0473
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.0024,
+          "f1": 0.0049
+        },
+        {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    },
+    {
+      "class_id": 3,
+      "class_name": "Safety Harness",
+      "n_ground_truth": 249,
+      "best_threshold": 0.4,
+      "best_f1": 0.6745,
+      "precision_at_best": 0.809,
+      "recall_at_best": 0.5783,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.6695,
+      "f1_gain": 0.005,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.451,
+          "recall": 0.739,
+          "f1": 0.5601
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.546,
+          "recall": 0.6908,
+          "f1": 0.6099
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.6117,
+          "recall": 0.6707,
+          "f1": 0.6398
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.6545,
+          "recall": 0.6466,
+          "f1": 0.6505
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.7035,
+          "recall": 0.6386,
+          "f1": 0.6695
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.7333,
+          "recall": 0.6185,
+          "f1": 0.671
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.772,
+          "recall": 0.5984,
+          "f1": 0.6742
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.809,
+          "recall": 0.5783,
+          "f1": 0.6745
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.8144,
+          "recall": 0.5462,
+          "f1": 0.6538
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.8377,
+          "recall": 0.5181,
+          "f1": 0.6402
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.8671,
+          "recall": 0.498,
+          "f1": 0.6327
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.8837,
+          "recall": 0.4578,
+          "f1": 0.6032
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.8983,
+          "recall": 0.4257,
+          "f1": 0.5777
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.9143,
+          "recall": 0.3855,
+          "f1": 0.5424
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9457,
+          "recall": 0.3494,
+          "f1": 0.5103
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9565,
+          "recall": 0.2651,
+          "f1": 0.4151
+        },
+        {
+          "threshold": 0.85,
+          "precision": 1.0,
+          "recall": 0.1486,
+          "f1": 0.2587
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.0482,
+          "f1": 0.092
+        },
+        {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    },
+    {
+      "class_id": 4,
+      "class_name": "Safety Helmet",
+      "n_ground_truth": 1112,
+      "best_threshold": 0.3,
+      "best_f1": 0.7888,
+      "precision_at_best": 0.7801,
+      "recall_at_best": 0.7977,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.7713,
+      "f1_gain": 0.0175,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.507,
+          "recall": 0.884,
+          "f1": 0.6444
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.5813,
+          "recall": 0.8678,
+          "f1": 0.6962
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.6441,
+          "recall": 0.8543,
+          "f1": 0.7344
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.6871,
+          "recall": 0.8354,
+          "f1": 0.7541
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.7315,
+          "recall": 0.8156,
+          "f1": 0.7713
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.7801,
+          "recall": 0.7977,
+          "f1": 0.7888
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.8109,
+          "recall": 0.7635,
+          "f1": 0.7865
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.8325,
+          "recall": 0.7284,
+          "f1": 0.777
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.8604,
+          "recall": 0.6871,
+          "f1": 0.764
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.8756,
+          "recall": 0.6331,
+          "f1": 0.7349
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.8908,
+          "recall": 0.5647,
+          "f1": 0.6912
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.9083,
+          "recall": 0.4901,
+          "f1": 0.6367
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.9213,
+          "recall": 0.4209,
+          "f1": 0.5778
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.9225,
+          "recall": 0.3426,
+          "f1": 0.4997
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9427,
+          "recall": 0.2662,
+          "f1": 0.4151
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9578,
+          "recall": 0.2041,
+          "f1": 0.3365
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.9762,
+          "recall": 0.1106,
+          "f1": 0.1987
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.0333,
+          "f1": 0.0644
+        },
+        {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    },
+    {
+      "class_id": 5,
+      "class_name": "Safety Shoes",
+      "n_ground_truth": 992,
+      "best_threshold": 0.3,
+      "best_f1": 0.7154,
+      "precision_at_best": 0.7481,
+      "recall_at_best": 0.6855,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.7154,
+      "f1_gain": 0.0,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.5417,
+          "recall": 0.7792,
+          "f1": 0.6391
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.6201,
+          "recall": 0.7571,
+          "f1": 0.6818
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.6731,
+          "recall": 0.7389,
+          "f1": 0.7045
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.7064,
+          "recall": 0.7228,
+          "f1": 0.7145
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.7254,
+          "recall": 0.7056,
+          "f1": 0.7154
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.7481,
+          "recall": 0.6855,
+          "f1": 0.7154
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.7661,
+          "recall": 0.6704,
+          "f1": 0.7151
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.795,
+          "recall": 0.6452,
+          "f1": 0.7123
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.8154,
+          "recall": 0.619,
+          "f1": 0.7037
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.8383,
+          "recall": 0.5907,
+          "f1": 0.6931
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.8686,
+          "recall": 0.5665,
+          "f1": 0.6858
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.885,
+          "recall": 0.5353,
+          "f1": 0.6671
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.9091,
+          "recall": 0.504,
+          "f1": 0.6485
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.924,
+          "recall": 0.4657,
+          "f1": 0.6193
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9391,
+          "recall": 0.4042,
+          "f1": 0.5652
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9572,
+          "recall": 0.3155,
+          "f1": 0.4746
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.9615,
+          "recall": 0.1764,
+          "f1": 0.2981
+        },
+        {
+          "threshold": 0.9,
+          "precision": 0.9437,
+          "recall": 0.0675,
+          "f1": 0.1261
+        },
+        {
+          "threshold": 0.95,
+          "precision": 1.0,
+          "recall": 0.0081,
+          "f1": 0.016
+        }
+      ]
+    },
+    {
+      "class_id": 6,
+      "class_name": "Safety Vest",
+      "n_ground_truth": 454,
+      "best_threshold": 0.45,
+      "best_f1": 0.8369,
+      "precision_at_best": 0.8676,
+      "recall_at_best": 0.8084,
+      "baseline_threshold": 0.25,
+      "f1_at_baseline": 0.8211,
+      "f1_gain": 0.0159,
+      "curve": [
+        {
+          "threshold": 0.05,
+          "precision": 0.5762,
+          "recall": 0.9075,
+          "f1": 0.7049
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.6575,
+          "recall": 0.8965,
+          "f1": 0.7586
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.7057,
+          "recall": 0.8767,
+          "f1": 0.7819
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.7434,
+          "recall": 0.8678,
+          "f1": 0.8008
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.7863,
+          "recall": 0.859,
+          "f1": 0.8211
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.8067,
+          "recall": 0.8458,
+          "f1": 0.8258
+        },
+        {
+          "threshold": 0.35,
+          "precision": 0.8228,
+          "recall": 0.8282,
+          "f1": 0.8255
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.8432,
+          "recall": 0.8172,
+          "f1": 0.83
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.8676,
+          "recall": 0.8084,
+          "f1": 0.8369
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.8802,
+          "recall": 0.793,
+          "f1": 0.8343
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.8947,
+          "recall": 0.7489,
+          "f1": 0.8153
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.914,
+          "recall": 0.7026,
+          "f1": 0.7945
+        },
+        {
+          "threshold": 0.65,
+          "precision": 0.9369,
+          "recall": 0.6542,
+          "f1": 0.7704
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0.9464,
+          "recall": 0.5837,
+          "f1": 0.7221
+        },
+        {
+          "threshold": 0.75,
+          "precision": 0.9544,
+          "recall": 0.5066,
+          "f1": 0.6619
+        },
+        {
+          "threshold": 0.8,
+          "precision": 0.9448,
+          "recall": 0.3767,
+          "f1": 0.5386
+        },
+        {
+          "threshold": 0.85,
+          "precision": 0.9565,
+          "recall": 0.2423,
+          "f1": 0.3866
+        },
+        {
+          "threshold": 0.9,
+          "precision": 0.9796,
+          "recall": 0.1057,
+          "f1": 0.1909
+        },
+        {
+          "threshold": 0.95,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "macro_f1_baseline": 0.7494,
+    "macro_f1_calibrated": 0.756,
+    "macro_f1_gain": 0.0067
+  },
+  "class_conf": {
+    "Face Mask": 0.25,
+    "Person": 0.35,
+    "Safety Gloves": 0.3,
+    "Safety Harness": 0.4,
+    "Safety Helmet": 0.3,
+    "Safety Shoes": 0.3,
+    "Safety Vest": 0.45
+  }
+}

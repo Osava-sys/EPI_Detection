@@ -1,6 +1,6 @@
 # Rapport de normalisation du dataset (detection)
 
-- **Genere le** : 2026-07-30T10:00:51.312267+00:00
+- **Genere le** : 2026-08-04T11:07:55.896457+00:00
 - **Source** : `C:\Users\LENOVO LEGION\Downloads\PPE Detection Project.yolo26\data.yaml` (non modifiee)
 - **Destination** : `C:\Users\LENOVO LEGION\Downloads\PPE Detection Project.yolo26\artifacts\dataset_detection`
 - **Mode de copie** : copy
@@ -25,25 +25,25 @@
 
 | Split | Images |
 |-------|--------|
-| test  | 698    |
-| train | 4903   |
-| valid | 1399   |
+| test  | 578    |
+| train | 5145   |
+| valid | 1277   |
 
 ## Instances par classe et par split
 
 | Classe         | test | train | valid | Total |
 |----------------|------|-------|-------|-------|
-| Face Mask      | 85   | 551   | 152   | 788   |
-| Person         | 724  | 5389  | 1536  | 7649  |
-| Safety Gloves  | 199  | 1528  | 445   | 2172  |
-| Safety Harness | 112  | 811   | 252   | 1175  |
-| Safety Helmet  | 509  | 3800  | 1140  | 5449  |
-| Safety Shoes   | 614  | 4058  | 1203  | 5875  |
-| Safety Vest    | 229  | 1736  | 469   | 2434  |
+| Face Mask      | 61   | 596   | 131   | 788   |
+| Person         | 714  | 5435  | 1500  | 7649  |
+| Safety Gloves  | 137  | 1625  | 410   | 2172  |
+| Safety Harness | 111  | 815   | 249   | 1175  |
+| Safety Helmet  | 495  | 3842  | 1112  | 5449  |
+| Safety Shoes   | 396  | 4487  | 992   | 5875  |
+| Safety Vest    | 228  | 1752  | 454   | 2434  |
 
 ## Regroupement anti-fuite
 
-Le regroupement n'a **pas** ete applique : la repartition train/valid/test d'origine est conservee a l'identique. L'audit a identifie **390 groupe(s)** d'images partageant la meme image source repartis entre plusieurs splits. Relancez avec `--regroup-by-source` pour supprimer cette fuite.
+Le regroupement par image source a ete applique : **488 fichier(s)** deplace(s) pour que toutes les variantes d'une meme photo source restent dans un seul split (390 groupe(s) concerne(s)).
 
 ## Evenements par type
 

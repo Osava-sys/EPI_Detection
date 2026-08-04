@@ -9,6 +9,11 @@
 
 # --- Donnees ---------------------------------------------------------------
 # Dataset DERIVE (labels normalises a 5 champs), jamais l'export original.
+#
+# Ce dataset est construit avec le regroupement anti-fuite ACTIF PAR DEFAUT :
+# toutes les variantes augmentees d'une meme photo source restent dans un seul
+# split. Sans cela, 19,9 % des images de test se retrouvent dans le train et
+# les metriques sont surevaluees de ~0.033 de mAP@0.50 (mesure sur ce projet).
 data: artifacts/dataset_detection/data.yaml
 
 # --- Modele ----------------------------------------------------------------

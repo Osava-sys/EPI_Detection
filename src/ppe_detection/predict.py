@@ -162,6 +162,8 @@ class PPEDetector:
 
         self.config = config
         self.compliance_config = compliance
+        # Estimateur de pose optionnel, attache via attach_pose_estimator().
+        self.pose_estimator: Any = None
         weights_path = resolve_path(config.weights)
         if not weights_path.is_file():
             raise PredictionError(
@@ -268,11 +270,30 @@ class PPEDetector:
         return detections
 
     def _apply_compliance(
-        self, detections: list[dict[str, Any]], image_size: tuple[int, int] | None = None
+        self,
+        detections: list[dict[str, Any]],
+        image_size: tuple[int, int] | None = None,
+        image: np.ndarray | None = None,
     ) -> list[dict[str, Any]]:
-        """Applique la couche de conformite si elle est activee."""
+        """Applique la couche de conformite si elle est activee.
+
+        Lorsqu'un estimateur de pose est attache, les detections de personnes
+        sont d'abord enrichies de regions issues des points cles du corps, qui
+        remplacent le decoupage par fractions.
+        """
         if self.compliance_config is None or not self.compliance_config.enabled:
             return []
+        if self.pose_estimator is not None and image is not None:
+            try:
+                self.pose_estimator.annotate_detections(
+                    image, detections, self.compliance_config.person_class
+                )
+            except Exception as exc:  # noqa: BLE001 - la pose ne doit jamais casser l'inference
+                LOGGER.warning(
+                    "Estimation de pose ignoree pour cette image (%s). "
+                    "Repli sur le decoupage par fractions.",
+                    exc,
+                )
         return evaluate_compliance(detections, self.compliance_config, image_size=image_size)
 
     # ------------------------------------------------------------------ #
@@ -323,8 +344,44 @@ class PPEDetector:
             detections=detections,
             timing_ms=_extract_speed(result, elapsed),
         )
-        prediction.compliance = self._apply_compliance(detections, image_size=(width, height))
+        prediction.compliance = self._apply_compliance(
+            detections, image_size=(width, height), image=image
+        )
         return prediction
+
+    def attach_pose_estimator(
+        self,
+        weights: str = "",
+        *,
+        device: str | None = None,
+        min_keypoint_score: float = 0.5,
+    ) -> None:
+        """Active l'association EPI/personne fondee sur les points cles du corps.
+
+        Le decoupage par fractions suppose une personne debout vue de face ;
+        les points cles donnent la position reelle de la tete, du torse et des
+        pieds quelle que soit la posture. Le repli reste automatique lorsque la
+        pose est indisponible pour une personne donnee.
+
+        Args:
+            weights: Poids du modele de pose (defaut : ``yolo26n-pose.pt``).
+            device: Peripherique; par defaut celui du detecteur principal.
+            min_keypoint_score: Confiance minimale d'un point cle.
+
+        Raises:
+            PredictionError: Si le modele de pose ne peut pas etre charge.
+        """
+        from .pose import DEFAULT_POSE_MODEL, PoseError, PoseEstimator
+
+        try:
+            self.pose_estimator = PoseEstimator(
+                weights or DEFAULT_POSE_MODEL,
+                device=device or str(self.device),
+                imgsz=self.config.imgsz,
+                min_keypoint_score=min_keypoint_score,
+            )
+        except PoseError as exc:
+            raise PredictionError(str(exc)) from exc
 
     def predict_image(self, path: str | Path) -> ImagePrediction:
         """Infere sur un fichier image.
@@ -540,6 +597,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     # Options video / webcam
     parser.add_argument(
+        "--pose",
+        action="store_true",
+        help=(
+            "Associe les EPI aux personnes via les points cles du corps plutot que "
+            "par decoupage de la boite en fractions. Plus robuste aux postures "
+            "accroupies et aux prises de vue en plongee. Necessite un second modele."
+        ),
+    )
+    parser.add_argument(
+        "--pose-weights",
+        default="",
+        help="Poids du modele de pose (defaut : yolo26n-pose.pt, telecharge au besoin).",
+    )
+    parser.add_argument(
         "--track",
         action="store_true",
         help=(
@@ -615,6 +686,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         kind = classify_source(args.source)
         LOGGER.info("Source detectee : %s (%s)", args.source, kind)
         detector = PPEDetector(inference_config, compliance=compliance_config)
+        if args.pose:
+            if not compliance_config.enabled:
+                LOGGER.warning(
+                    "--pose est sans effet sans --compliance : les points cles ne servent "
+                    "qu'a associer les EPI aux personnes."
+                )
+            else:
+                detector.attach_pose_estimator(args.pose_weights)
     except (PredictionError, ValueError) as exc:
         LOGGER.error("%s", exc)
         return 2

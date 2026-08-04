@@ -403,6 +403,9 @@ class ComplianceConfig:
     )
     min_person_conf: float = 0.25
     min_ppe_conf: float = 0.25
+    # Classes dont le detecteur n'est pas assez fiable pour fonder une alerte.
+    # Les inscrire dans required_ppe declenche un avertissement au chargement.
+    unreliable_ppe: list[str] = field(default_factory=lambda: ["Safety Gloves"])
     # --- observabilite (niveau 1) ---
     min_region_height_px: float = 24.0
     edge_margin_px: float = 2.0
@@ -443,6 +446,17 @@ class ComplianceConfig:
         if self.temporal_min_observations < 1:
             raise ConfigError(
                 f"temporal_min_observations doit etre >= 1, recu {self.temporal_min_observations}."
+            )
+        # Avertissement, pas erreur : le choix reste a l'utilisateur, mais il doit
+        # etre pris en connaissance de cause.
+        risky = [name for name in self.required_ppe if name in self.unreliable_ppe]
+        if risky:
+            LOGGER.warning(
+                "EPI requis peu fiables : %s. Le detecteur les rate frequemment, "
+                "ce qui produira des alertes 'non conforme' largement erronees. "
+                "Retirez-les de required_ppe ou ameliorez le modele avant de vous "
+                "appuyer sur ces regles.",
+                ", ".join(risky),
             )
 
 
