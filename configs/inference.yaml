@@ -79,6 +79,19 @@ compliance:
   unreliable_ppe:
     - Safety Gloves
 
+  # --- Contre-preuve : taxonomie etendue a 10 classes ------------------------
+  # Detecter un objet « sosie » (casquette au lieu d'un casque) est une preuve
+  # POSITIVE de violation, bien plus fiable qu'une absence de detection. Elle
+  # prime sur le test d'observabilite : voir l'objet prouve que la zone est
+  # visible. Le verdict porte alors evidence=observed au lieu de evidence=absence.
+  #
+  # Inerte tant que le modele n'est pas entraine sur les classes negatives :
+  # decommentez apres avoir reentraine sur le schema a 10 classes.
+  counter_evidence: {}
+  #   Safety Helmet: [Non-Safety Headwear]
+  #   Safety Vest:   [Non-Safety Vest]
+  #   Safety Shoes:  [Non-Safety Footwear]
+
   # --- Observabilite : quand peut-on AFFIRMER qu'un EPI manque ? -------------
   # Ne pas detecter un gilet ne prouve pas son absence. Si la zone concernee
   # n'est pas observable, le verdict devient « indetermine » au lieu de
@@ -108,6 +121,10 @@ compliance:
     Safety Harness: torso
     Safety Gloves: any
     Safety Shoes: feet
+    # Classes negatives (schema etendu) : memes zones que l'EPI qu'elles remplacent.
+    Non-Safety Headwear: head
+    Non-Safety Vest: torso
+    Non-Safety Footwear: feet
 
   min_person_conf: 0.25
   min_ppe_conf: 0.25

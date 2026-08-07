@@ -832,6 +832,34 @@ Effet mesure sur une video de chantier de 122 frames :
 | Indetermines (retenus par le niveau 1) | 35                         | 2                             |
 | Alertes emises                         | 147                        | **5**                   |
 
+### Distinguer les vrais EPI de leurs sosies
+
+Le modele actuel etiquette un **casque de velo** comme `Safety Helmet` avec
+**0.84 de confiance** (verifie sur images de test). Il n'a pas appris « casque
+de chantier » mais « coque rigide bombee sur une tete ».
+
+Ce n'est pas un manque de donnees : le schema ne comporte que des classes
+**positives**, donc aucune sortie ne permet d'exprimer « ressemble a un casque
+mais n'en est pas un ». Ajouter des casques de chantier n'y changera rien.
+
+Le projet fournit l'outillage pour y remedier :
+
+- [`taxonomy.py`](src/ppe_detection/taxonomy.py) definit un **schema etendu a
+  10 classes** (`Non-Safety Headwear`, `Non-Safety Vest`, `Non-Safety Footwear`).
+  Les sept classes d'origine gardent leurs identifiants : un dataset etendu
+  reste retro-compatible.
+- [`dataset_merge.py`](src/ppe_detection/dataset_merge.py) assemble des datasets
+  publics en remappant leurs classes, ce qui evite d'annoter de zero.
+- Le mecanisme de **contre-preuve** distingue deux niveaux de preuve dans le
+  verdict : `evidence: absence` (rien detecte, peut etre un faux negatif) et
+  `evidence: observed` (couvre-chef non conforme vu — violation constatee).
+  Une contre-preuve prime sur le test d'observabilite : apercevoir l'objet
+  prouve que la zone est visible.
+
+Inerte tant que le modele n'est pas reentraine sur les classes negatives.
+Volumes a annoter, sources gratuites et regles d'annotation :
+[`docs/plan_donnees_epi_sosies.md`](docs/plan_donnees_epi_sosies.md).
+
 ### Limites persistantes
 
 Les garde-fous ci-dessus suppriment une large part des fausses alertes, mais

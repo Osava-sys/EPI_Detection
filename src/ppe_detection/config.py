@@ -371,6 +371,9 @@ class ComplianceConfig:
         region_by_class: Zone attendue par classe d'EPI.
         min_person_conf: Confiance minimale pour considerer une personne.
         min_ppe_conf: Confiance minimale pour considerer un EPI.
+        counter_evidence: EPI requis -> classes « sosies » dont la detection
+            prouve que l'EPI n'est pas porte (casquette a la place d'un casque).
+            Une contre-preuve est une constatation, pas une absence de preuve.
         min_region_height_px: Hauteur en pixels minimale d'une zone (tete, torse,
             pieds) pour que l'absence d'un EPI y soit affirmable. En dessous,
             le verdict est *indetermine* plutot que *non conforme* : a cette
@@ -406,6 +409,13 @@ class ComplianceConfig:
     # Classes dont le detecteur n'est pas assez fiable pour fonder une alerte.
     # Les inscrire dans required_ppe declenche un avertissement au chargement.
     unreliable_ppe: list[str] = field(default_factory=lambda: ["Safety Gloves"])
+    # --- contre-preuve (taxonomie etendue a 10 classes) ---
+    # {EPI requis: [classes dont la presence prouve qu'il n'est pas porte]}.
+    # Detecter un couvre-chef non conforme est une preuve POSITIVE de violation,
+    # bien plus fiable qu'une simple absence de detection.
+    # Vide par defaut : sans modele entraine sur les classes negatives, aucune
+    # contre-preuve ne peut apparaitre et le mecanisme reste inerte.
+    counter_evidence: dict[str, list[str]] = field(default_factory=dict)
     # --- observabilite (niveau 1) ---
     min_region_height_px: float = 24.0
     edge_margin_px: float = 2.0

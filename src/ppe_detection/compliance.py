@@ -90,6 +90,9 @@ class PersonCompliance:
     verdict_confidence: float
     reasons: list[str] = field(default_factory=list)
     track_id: int | None = None
+    # Violations constatees : un objet non conforme a ete vu a la place de l'EPI.
+    # A distinguer d'un simple `missing_ppe`, qui n'est qu'une absence de detection.
+    violations: list[dict[str, Any]] = field(default_factory=list)
 
     @property
     def compliant(self) -> bool:
@@ -115,6 +118,14 @@ class PersonCompliance:
             payload["reasons"] = self.reasons
         if self.track_id is not None:
             payload["track_id"] = self.track_id
+        if self.violations:
+            payload["violations"] = self.violations
+            # Une violation constatee ne repose pas sur l'absence d'une detection
+            # mais sur la presence d'un objet non conforme : le niveau de preuve
+            # n'est pas le meme, et l'exploitant doit pouvoir les distinguer.
+            payload["evidence"] = "observed"
+        elif self.missing_ppe:
+            payload["evidence"] = "absence"
         return payload
 
 
@@ -338,9 +349,35 @@ def evaluate_compliance(
         reasons: list[str] = []
         pose_regions = person.get("pose_regions")
 
+        violations: list[dict[str, Any]] = []
+
         for required in config.required_ppe:
             if required in detected_names:
                 continue
+
+            # Contre-preuve : a-t-on detecte un « sosie » a la place de l'EPI ?
+            # C'est une constatation, pas une absence de preuve : elle prime sur
+            # le test d'observabilite, puisque voir l'objet prouve que la zone
+            # est visible.
+            substitutes = config.counter_evidence.get(required, [])
+            found = next(
+                (item for item in matched if item["class_name"] in substitutes), None
+            )
+            if found is not None:
+                missing.append(required)
+                violations.append(
+                    {
+                        "required": required,
+                        "worn_instead": found["class_name"],
+                        "confidence": found["confidence"],
+                    }
+                )
+                reasons.append(
+                    f"{required} : porte '{found['class_name']}' a la place "
+                    f"(confiance {found['confidence']:.2f}) — violation constatee"
+                )
+                continue
+
             region = config.region_by_class.get(required, REGION_ANY)
             observability = region_observability(
                 person_box, region, config, image_size, pose_regions
@@ -366,6 +403,11 @@ def evaluate_compliance(
             verdict_conf = (
                 min([person_conf, *required_confidences]) if required_confidences else person_conf
             )
+        elif violations:
+            # Une violation constatee est etayee par deux detections concordantes
+            # (la personne et l'objet non conforme) : la confiance du verdict est
+            # celle du maillon le plus faible, mais elle porte sur un fait observe.
+            verdict_conf = min([person_conf, *(v["confidence"] for v in violations)])
         else:
             # Pour une non-conformite ou un indetermine, la confiance porte sur
             # la detection de la personne : l'absence d'un EPI peut resulter
@@ -384,6 +426,7 @@ def evaluate_compliance(
             matched=matched,
             verdict_confidence=verdict_conf,
             reasons=reasons,
+            violations=violations,
             track_id=int(track_id) if track_id is not None else None,
         ).to_dict()
         # Tracabilite : indique si le verdict repose sur les points cles du corps
