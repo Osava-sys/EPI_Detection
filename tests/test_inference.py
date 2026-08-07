@@ -31,6 +31,7 @@ from ppe_detection.predict import (
     save_predictions_json,
     save_yolo_txt,
 )
+from ppe_detection.taxonomy import BASE_CLASSES
 from ppe_detection.visualization import color_for_class, draw_detections, draw_yolo_labels
 
 
@@ -644,7 +645,10 @@ def test_detector_runs_on_real_weights(real_weights: Path, sample_image: Path) -
         assert len(item["bbox_xyxy"]) == 4
 
     info = detector.model_info()
-    assert info["num_classes"] == 7
+    # Voir test_api : le nombre de classes depend des poids (7 ou 8), seule la
+    # presence des classes d'origine est un invariant.
+    assert set(info["class_names"]) >= set(BASE_CLASSES)
+    assert info["num_classes"] == len(info["class_names"])
     assert info["parameters"] and info["parameters"] > 0
 
 

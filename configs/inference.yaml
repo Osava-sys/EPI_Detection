@@ -85,12 +85,16 @@ compliance:
   # prime sur le test d'observabilite : voir l'objet prouve que la zone est
   # visible. Le verdict porte alors evidence=observed au lieu de evidence=absence.
   #
-  # Inerte tant que le modele n'est pas entraine sur les classes negatives :
-  # decommentez apres avoir reentraine sur le schema a 10 classes.
-  counter_evidence: {}
-  #   Safety Helmet: [Non-Safety Headwear]
-  #   Safety Vest:   [Non-Safety Vest]
-  #   Safety Shoes:  [Non-Safety Footwear]
+  # ACTIF : le modele a 8 classes detecte Non-Safety Headwear avec 0.737 de
+  # mAP@0.50 (precision 0.829) sur le test — assez fiable pour fonder une
+  # alerte. Verifie : le casque de velo qui etait detecte 'Safety Helmet 0.84'
+  # est desormais 'Non-Safety Headwear 0.94'.
+  #
+  # Safety Vest et Safety Shoes n'ont pas d'equivalent negatif : ces classes
+  # n'ont aucune instance dans le dataset et ne sont pas apprises. Les activer
+  # serait sans effet.
+  counter_evidence:
+    Safety Helmet: [Non-Safety Headwear]
 
   # --- Observabilite : quand peut-on AFFIRMER qu'un EPI manque ? -------------
   # Ne pas detecter un gilet ne prouve pas son absence. Si la zone concernee

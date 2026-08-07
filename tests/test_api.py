@@ -12,6 +12,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from ppe_detection.taxonomy import BASE_CLASSES
+
 fastapi_testclient = pytest.importorskip("fastapi.testclient")
 TestClient = fastapi_testclient.TestClient
 
@@ -57,7 +59,11 @@ def test_model_info(client) -> None:  # noqa: ANN001
     response = client.get("/model-info")
     assert response.status_code == 200
     payload = response.json()
-    assert payload["num_classes"] == 7
+    # Le schema etendu conserve les identifiants des 7 classes d'origine et
+    # ajoute des classes negatives : le nombre exact depend des poids charges.
+    # L'invariant testable est la presence des classes de base.
+    assert set(payload["class_names"]) >= set(BASE_CLASSES)
+    assert payload["num_classes"] == len(payload["class_names"])
     assert "Safety Helmet" in payload["class_names"]
     assert payload["device"] == "cpu"
     assert payload["parameters"] > 0

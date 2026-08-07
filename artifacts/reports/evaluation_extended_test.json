@@ -1,0 +1,624 @@
+{
+  "generated_at": "2026-08-07T16:52:37.744191+00:00",
+  "environment": {
+    "timestamp_utc": "2026-08-07T16:52:37.744191+00:00",
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_total_memory_gb": 15.92,
+    "ultralytics": "8.4.112",
+    "cv2": "5.0.0",
+    "numpy": "2.4.4",
+    "onnxruntime": "1.28.0"
+  },
+  "model": {
+    "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best_8classes.pt",
+    "weights_size_bytes": 20304197,
+    "weights_size_human": "19.4 Mo",
+    "parameters": 9468276,
+    "class_names": [
+      "Face Mask",
+      "Person",
+      "Safety Gloves",
+      "Safety Harness",
+      "Safety Helmet",
+      "Safety Shoes",
+      "Safety Vest",
+      "Non-Safety Headwear"
+    ]
+  },
+  "evaluation": {
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_extended\\data.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 16,
+    "conf": 0.001,
+    "iou": 0.6,
+    "device": "0"
+  },
+  "metrics": {
+    "precision": 0.8126,
+    "recall": 0.7325,
+    "mAP50": 0.7906,
+    "mAP50_95": 0.4317,
+    "mAP75": 0.4178
+  },
+  "per_class": {
+    "Face Mask": {
+      "mAP50_95": 0.532,
+      "mAP50": 0.8955,
+      "precision": 0.8101,
+      "recall": 0.8392
+    },
+    "Person": {
+      "mAP50_95": 0.5279,
+      "mAP50": 0.8953,
+      "precision": 0.873,
+      "recall": 0.888
+    },
+    "Safety Gloves": {
+      "mAP50_95": 0.2373,
+      "mAP50": 0.5576,
+      "precision": 0.6913,
+      "recall": 0.5255
+    },
+    "Safety Harness": {
+      "mAP50_95": 0.4219,
+      "mAP50": 0.8075,
+      "precision": 0.7949,
+      "recall": 0.7117
+    },
+    "Safety Helmet": {
+      "mAP50_95": 0.3612,
+      "mAP50": 0.8063,
+      "precision": 0.7892,
+      "recall": 0.7697
+    },
+    "Safety Shoes": {
+      "mAP50_95": 0.4255,
+      "mAP50": 0.7515,
+      "precision": 0.8299,
+      "recall": 0.654
+    },
+    "Safety Vest": {
+      "mAP50_95": 0.5318,
+      "mAP50": 0.8733,
+      "precision": 0.8834,
+      "recall": 0.7978
+    },
+    "Non-Safety Headwear": {
+      "mAP50_95": 0.4161,
+      "mAP50": 0.7373,
+      "precision": 0.829,
+      "recall": 0.6741
+    }
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.669,
+    "inference": 2.19,
+    "loss": 0.001,
+    "postprocess": 0.135
+  },
+  "throughput_fps": 333.89,
+  "ultralytics_save_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\runs\\val\\evaluation_extended_test",
+  "error_analysis": {
+    "iou_threshold": 0.5,
+    "conf_threshold": 0.25,
+    "images_analysed": 698,
+    "per_class": {
+      "Face Mask": {
+        "true_positives": 54,
+        "false_positives": 18,
+        "false_negatives": 7,
+        "precision": 0.75,
+        "recall": 0.8852,
+        "f1": 0.812
+      },
+      "Person": {
+        "true_positives": 643,
+        "false_positives": 139,
+        "false_negatives": 71,
+        "precision": 0.8223,
+        "recall": 0.9006,
+        "f1": 0.8596
+      },
+      "Safety Gloves": {
+        "true_positives": 73,
+        "false_positives": 42,
+        "false_negatives": 64,
+        "precision": 0.6348,
+        "recall": 0.5328,
+        "f1": 0.5794
+      },
+      "Safety Harness": {
+        "true_positives": 84,
+        "false_positives": 31,
+        "false_negatives": 27,
+        "precision": 0.7304,
+        "recall": 0.7568,
+        "f1": 0.7434
+      },
+      "Safety Helmet": {
+        "true_positives": 408,
+        "false_positives": 152,
+        "false_negatives": 87,
+        "precision": 0.7286,
+        "recall": 0.8242,
+        "f1": 0.7735
+      },
+      "Safety Shoes": {
+        "true_positives": 260,
+        "false_positives": 82,
+        "false_negatives": 136,
+        "precision": 0.7602,
+        "recall": 0.6566,
+        "f1": 0.7046
+      },
+      "Safety Vest": {
+        "true_positives": 186,
+        "false_positives": 40,
+        "false_negatives": 42,
+        "precision": 0.823,
+        "recall": 0.8158,
+        "f1": 0.8194
+      },
+      "Non-Safety Headwear": {
+        "true_positives": 237,
+        "false_positives": 73,
+        "false_negatives": 101,
+        "precision": 0.7645,
+        "recall": 0.7012,
+        "f1": 0.7315
+      }
+    },
+    "totals": {
+      "true_positives": 1945,
+      "false_positives": 577,
+      "false_negatives": 535
+    },
+    "class_confusions": [
+      {
+        "predicted": "Safety Harness",
+        "actual": "Person",
+        "count": 5
+      },
+      {
+        "predicted": "Safety Harness",
+        "actual": "Safety Vest",
+        "count": 5
+      },
+      {
+        "predicted": "Person",
+        "actual": "Safety Harness",
+        "count": 2
+      },
+      {
+        "predicted": "Safety Gloves",
+        "actual": "Safety Vest",
+        "count": 2
+      },
+      {
+        "predicted": "Safety Vest",
+        "actual": "Safety Harness",
+        "count": 2
+      },
+      {
+        "predicted": "Safety Gloves",
+        "actual": "Safety Shoes",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Helmet",
+        "actual": "Person",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Vest",
+        "actual": "Safety Shoes",
+        "count": 1
+      }
+    ],
+    "best_examples": [
+      {
+        "image": "open-images__000c899427d321da__4649de57.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__000de2d23a112361__e7dddef1.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__002e81410ab5f932__faa68cac.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__0030a88574b9faea__83290c8a.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__004cbeaeec83badb__7ca7c9db.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__0056931e46ed0539__ecb3ae6e.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__00a19985a766d15d__49968f21.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__00a3cd901721e453__9a8a14c1.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__00b6d43aa9e4337e__72fe9d63.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__01449c6c1abed851__35b4b1d9.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__01635a298beae527__9d1e17a0.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__0174cacd2c701735__0c986a4c.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__0186004b3f1bfd74__e9fd1192.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__01d628f5cc36f1f4__16152d26.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "open-images__01fef516cc580aab__4c0f513b.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      }
+    ],
+    "worst_examples": [
+      {
+        "image": "open-images__0008fba87dd4aed2__a95f3b75.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__00c5fd925839f08d__91ff440e.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__00d36ecb99c04218__e503cc1f.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__010f0e8a3eae037f__d6180ec9.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__01272e1fba48e22b__8db61729.jpg",
+        "n_ground_truth": 5,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 5,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__01817498689fd9af__bc525455.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__01cc341122052975__58c091e2.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__026cc6d89ba92087__ff107659.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__028d2474f978f362__52b44f4a.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__03c1578416f806b5__f528e817.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__04604b0dca74e5b6__304aafff.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__65e09a0b34a86860__c522253d.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__a52d7879d01b7465__9ba77773.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.QSoK4kkwN4jlDtUxxl8y__5d3d6ec6.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.Z88wKwYsIgJPMvg56sWB__42422b29.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 3,
+        "score": 0.0
+      }
+    ],
+    "confusion_matrix": {
+      "labels": [
+        "Face Mask",
+        "Person",
+        "Safety Gloves",
+        "Safety Harness",
+        "Safety Helmet",
+        "Safety Shoes",
+        "Safety Vest",
+        "Non-Safety Headwear",
+        "background"
+      ],
+      "matrix": [
+        [
+          54,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          18
+        ],
+        [
+          0,
+          643,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          137
+        ],
+        [
+          0,
+          0,
+          73,
+          0,
+          0,
+          1,
+          2,
+          0,
+          39
+        ],
+        [
+          0,
+          5,
+          0,
+          84,
+          0,
+          0,
+          5,
+          0,
+          21
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          408,
+          0,
+          0,
+          0,
+          151
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          260,
+          0,
+          0,
+          82
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          186,
+          0,
+          37
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          237,
+          73
+        ],
+        [
+          7,
+          65,
+          64,
+          23,
+          87,
+          134,
+          35,
+          101,
+          0
+        ]
+      ],
+      "orientation": "matrix[predite][reelle]"
+    }
+  },
+  "known_limitations": [
+    "Le split de test provient du meme export Roboflow que l'entrainement : l'audit a identifie des images issues d'une meme photo source reparties entre plusieurs splits, ce qui rend les metriques optimistes par rapport a un deploiement sur un chantier inconnu.",
+    "Les metriques sont calculees sur des annotations dont 349 lignes ont ete converties depuis des polygones de segmentation : la boite englobante d'un polygone est systematiquement au moins aussi grande que l'objet reel.",
+    "Confusion la plus frequente : 5 objet(s) de classe 'Person' predits comme 'Safety Harness'."
+  ]
+}

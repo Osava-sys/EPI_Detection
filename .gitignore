@@ -39,6 +39,7 @@ test/
 artifacts/dataset_detection/
 artifacts/dataset_detection_*/
 artifacts/dataset_extended/
+artifacts/dataset_common_test/
 artifacts/models/
 artifacts/runs/
 artifacts/predictions/

@@ -856,9 +856,74 @@ Le projet fournit l'outillage pour y remedier :
   Une contre-preuve prime sur le test d'observabilite : apercevoir l'objet
   prouve que la zone est visible.
 
-Inerte tant que le modele n'est pas reentraine sur les classes negatives.
 Volumes a annoter, sources gratuites et regles d'annotation :
 [`docs/plan_donnees_epi_sosies.md`](docs/plan_donnees_epi_sosies.md).
+
+#### Resultats du modele a 8 classes
+
+Dataset etendu : 8 204 images, 29 079 annotations, dont **3 537 instances de
+`Non-Safety Headwear`** provenant d'Open Images V7 — sans annotation manuelle.
+Entrainement de 2 h 09 (91 epoques, early stopping, meilleure epoque 66).
+
+**Test 1 — les sosies.** C'est l'objectif poursuivi, et il est atteint :
+
+| Image | 7 classes | 8 classes |
+|-------|-----------|-----------|
+| Casque VTT | `Safety Helmet 0.32` | **`Non-Safety Headwear 0.94`** |
+| Casque velo route | `Safety Helmet 0.84` | **`Non-Safety Headwear 0.50`** |
+| Casquette baseball | *rien* | **`Non-Safety Headwear 0.41`** |
+| Casquette sport | *rien* | **`Non-Safety Headwear 0.95`** |
+
+Plus aucun faux `Safety Helmet`. Les casquettes, auparavant simplement ignorees,
+sont desormais **detectees activement**, ce qui permet a la contre-preuve de
+fonctionner.
+
+**Test 2 — non-regression sur les 578 memes images.** Comparer les mAP globales
+de deux modeles a nombre de classes different n'aurait aucun sens : la moyenne
+ne porte pas sur les memes classes. La comparaison se fait donc classe par
+classe, sur des images identiques.
+
+| Classe | mAP@0.50 7 cls | mAP@0.50 8 cls | Ecart |
+|--------|----------------|----------------|-------|
+| Safety Harness | 0.7821 | **0.8091** | +0.0270 |
+| Safety Gloves | 0.5483 | **0.5607** | +0.0124 |
+| Safety Helmet | 0.7961 | **0.8067** | +0.0106 |
+| Person | 0.8927 | **0.8960** | +0.0033 |
+| Safety Vest | 0.8777 | 0.8741 | −0.0036 |
+| Safety Shoes | 0.7751 | 0.7523 | −0.0228 |
+| Face Mask | 0.9224 | 0.8931 | −0.0293 |
+| **Global (7 classes)** | **0.7992** | **0.7988** | **−0.0004** |
+
+L'ecart global est dans le bruit. `Safety Helmet` **progresse** de +0.0106,
+contrairement a la degradation qu'on pouvait redouter : discriminer n'a pas
+coute en detection. Deux classes reculent au-dela de 0.02, `Face Mask` et
+`Safety Shoes`, sans lien evident avec le couvre-chef.
+
+**Test 3 — qualite de la nouvelle classe** : `Non-Safety Headwear` atteint
+**0.7373 de mAP@0.50** avec 0.829 de precision, soit la 5e classe sur 8 —
+devant `Safety Shoes` et loin devant `Safety Gloves`. Assez fiable pour fonder
+une alerte, d'ou l'activation de `counter_evidence` dans
+[`configs/inference.yaml`](configs/inference.yaml).
+
+#### Limite connue : personnes non detectees en contexte sportif
+
+Sur les photos issues d'Open Images — portraits de cyclistes, scenes de sport —
+le modele a 8 classes **ne detecte plus les personnes**. Sur l'image du
+cycliste, le modele a 7 classes voyait `Person 0.886` ; le nouveau ne voit que
+le couvre-chef.
+
+Cause : les images d'Open Images ont ete telechargees avec `only_matching=True`,
+qui ne conserve que les etiquettes de couvre-chef. Les personnes y figurent donc
+**sans annotation**, et le modele apprend a ne pas les detecter dans ce contexte
+visuel.
+
+Portee reelle : **nulle sur le domaine cible**. Sur 60 frames de chantier
+identiques, le modele a 8 classes detecte meme *plus* de personnes que le
+precedent (72 contre 65). La regression se limite a l'imagerie sportive.
+
+Correction pour une prochaine iteration : retelecharger avec
+`only_matching=False` et mapper aussi `Person=Person`, afin que les personnes
+des images Open Images soient annotees.
 
 ### Limites persistantes
 
