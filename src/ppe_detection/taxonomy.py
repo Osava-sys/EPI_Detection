@@ -31,6 +31,7 @@ Ce module ne definit que les schemas et leurs relations ; la logique vit dans
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -88,6 +89,68 @@ NEGATIVE_REGIONS: dict[str, str] = {
     "Non-Safety Footwear": "feet",
 }
 """Zone du corps ou chaque classe negative est attendue."""
+
+
+# --------------------------------------------------------------------------- #
+# Libelles d'affichage
+# --------------------------------------------------------------------------- #
+CLASS_LABELS_FR: dict[str, str] = {
+    "Face Mask": "Masque",
+    "Person": "Personne",
+    "Safety Gloves": "Gants de sécurité",
+    "Safety Harness": "Harnais de sécurité",
+    "Safety Helmet": "Casque de chantier",
+    "Safety Shoes": "Chaussures de sécurité",
+    "Safety Vest": "Gilet haute visibilité",
+    "Non-Safety Headwear": "Couvre-chef non conforme",
+    "Non-Safety Vest": "Vêtement non conforme",
+    "Non-Safety Footwear": "Chaussures non conformes",
+}
+"""Libelles francais affiches a l'ecran.
+
+Les noms **anglais restent les identifiants internes** : ce sont eux que
+contiennent les poids du modele, les cles de ``configs/inference.yaml``
+(``required_ppe``, ``region_by_class``, ``counter_evidence``...) et le champ
+``class_name`` des exports JSON. Traduire ces identifiants casserait les
+configurations et rendrait les exports incomparables d'une version a l'autre.
+
+Seul l'affichage est traduit : etiquettes dessinees sur les images, tableaux de
+l'interface, resumes lisibles. Les detections exposent en plus un champ
+``class_name_fr`` pour que l'API et les exports restent exploitables sans avoir
+a rejouer cette table.
+
+Deux choix de vocabulaire meritent explication :
+
+* « Casque de chantier » plutot que « Casque de sécurité » : depuis l'ajout de
+  ``Non-Safety Headwear``, un casque de vélo est aussi un casque. Preciser
+  « de chantier » leve l'ambiguite a l'ecran.
+* « Gilet haute visibilité » plutot que « Gilet de sécurité » : c'est la
+  haute visibilite qui constitue l'exigence reglementaire, pas le gilet en soi.
+"""
+
+
+def display_name(name: str, labels: Mapping[str, str] | None = None) -> str:
+    """Retourne le libelle affichable d'une classe.
+
+    Args:
+        name: Identifiant interne de la classe (anglais).
+        labels: Table de correspondance, par exemple issue de la configuration.
+            Par defaut :data:`CLASS_LABELS_FR`.
+
+    Returns:
+        Le libelle traduit, ou le nom d'origine si aucune traduction n'existe —
+        une classe inconnue reste ainsi visible plutot que d'etre masquee.
+    """
+    table = CLASS_LABELS_FR if labels is None else labels
+    return table.get(name, name)
+
+
+def display_names(labels: Mapping[str, str] | None = None) -> dict[str, str]:
+    """Table complete des libelles, utile pour l'interface et les rapports."""
+    table = dict(CLASS_LABELS_FR)
+    if labels:
+        table.update(labels)
+    return table
 
 
 # --------------------------------------------------------------------------- #

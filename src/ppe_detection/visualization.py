@@ -16,6 +16,7 @@ from typing import Any
 import cv2
 import numpy as np
 
+from .taxonomy import display_name
 from .utils import ensure_dir, get_logger
 
 LOGGER = get_logger(__name__)
@@ -125,6 +126,7 @@ def draw_detections(
     line_width: int | None = None,
     font_scale: float = 0.5,
     copy: bool = True,
+    labels: Mapping[str, str] | None = None,
 ) -> np.ndarray:
     """Dessine une liste de detections structurees sur une image.
 
@@ -137,6 +139,9 @@ def draw_detections(
         line_width: Epaisseur de trait.
         font_scale: Echelle de police.
         copy: Travaille sur une copie plutot que sur l'image d'origine.
+        labels: Libelles d'affichage par classe. Par defaut les libelles
+            francais. La couleur reste calculee sur le nom **interne**, pour
+            qu'un changement de traduction ne modifie pas les couleurs.
 
     Returns:
         L'image annotee.
@@ -149,7 +154,7 @@ def draw_detections(
             continue
         parts: list[str] = []
         if show_labels:
-            parts.append(class_name)
+            parts.append(display_name(class_name, labels))
         if show_conf:
             confidence = detection.get("confidence")
             if confidence is not None:
@@ -208,11 +213,11 @@ def draw_compliance(
             label = f"{prefix}CONFORME"
         elif status == "indeterminate":
             color = INDETERMINATE_COLOR_BGR
-            unknown = [str(item) for item in (person.get("indeterminate_ppe") or [])]
-            label = f"{prefix}INDETERMINE" + (f": {', '.join(unknown)}" if unknown else "")
+            unknown = [display_name(str(i)) for i in (person.get("indeterminate_ppe") or [])]
+            label = f"{prefix}INDÉTERMINÉ" + (f": {', '.join(unknown)}" if unknown else "")
         else:
             color = NON_COMPLIANT_COLOR_BGR
-            missing_list = [str(item) for item in (person.get("missing_ppe") or [])]
+            missing_list = [display_name(str(i)) for i in (person.get("missing_ppe") or [])]
             label = f"{prefix}NON CONFORME: " + (", ".join(missing_list) if missing_list else "?")
 
         draw_box(

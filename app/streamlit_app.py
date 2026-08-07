@@ -45,6 +45,7 @@ from ppe_detection.config import (  # noqa: E402
     load_inference_config,
 )
 from ppe_detection.predict import PPEDetector, PredictionError  # noqa: E402
+from ppe_detection.taxonomy import display_name  # noqa: E402
 from ppe_detection.utils import ensure_dir, is_video, project_root  # noqa: E402
 
 ROOT = project_root()
@@ -147,9 +148,15 @@ def compliance_table(persons: list[dict]) -> None:
                     "non_compliant": "NON CONFORME",
                     "indeterminate": "INDETERMINE",
                 }.get(str(status), str(status)),
-                "EPI detectes": ", ".join(person.get("detected_ppe") or []) or "-",
-                "EPI manquants": ", ".join(person.get("missing_ppe") or []) or "-",
-                "Indetermines": ", ".join(person.get("indeterminate_ppe") or []) or "-",
+                "EPI détectés": ", ".join(
+                    display_name(str(x)) for x in (person.get("detected_ppe") or [])
+                ) or "-",
+                "EPI manquants": ", ".join(
+                    display_name(str(x)) for x in (person.get("missing_ppe") or [])
+                ) or "-",
+                "Indéterminés": ", ".join(
+                    display_name(str(x)) for x in (person.get("indeterminate_ppe") or [])
+                ) or "-",
                 "Confiance": person.get("verdict_confidence"),
             }
         )
@@ -197,7 +204,7 @@ def mode_image(detector: PPEDetector) -> None:
         st.dataframe(
             [
                 {
-                    "Classe": d["class_name"],
+                    "Classe": d.get("class_name_fr") or display_name(d["class_name"]),
                     "Confiance": round(d["confidence"], 3),
                     "x1": d["bbox_xyxy"][0],
                     "y1": d["bbox_xyxy"][1],
@@ -211,7 +218,8 @@ def mode_image(detector: PPEDetector) -> None:
         )
         counts: dict[str, int] = {}
         for detection in prediction.detections:
-            counts[detection["class_name"]] = counts.get(detection["class_name"], 0) + 1
+            label = detection.get("class_name_fr") or display_name(detection["class_name"])
+            counts[label] = counts.get(label, 0) + 1
         st.bar_chart(counts)
     else:
         st.warning("Aucun objet detecte au seuil choisi. Essayez de l'abaisser.")
@@ -617,9 +625,14 @@ def main() -> None:
                 "Safety Helmet", "Safety Vest", "Safety Gloves",
                 "Safety Shoes", "Safety Harness", "Face Mask",
             ]
+            # Les options portent l'identifiant interne (les regles metier s'y
+            # referent) mais s'affichent en francais.
             required = tuple(
                 st.multiselect(
-                    "EPI obligatoires", options=options, default=base_config.required_ppe
+                    "EPI obligatoires",
+                    options=options,
+                    default=base_config.required_ppe,
+                    format_func=display_name,
                 )
             )
             track = st.checkbox(
@@ -658,7 +671,7 @@ def main() -> None:
     columns[2].metric("Device", info["device"])
     columns[3].metric("Taille d'inference", info["imgsz"])
     with st.expander("Classes reconnues"):
-        st.write(", ".join(info["class_names"]))
+        st.write(", ".join(display_name(n) for n in info["class_names"]))
 
     st.divider()
     image_tab, video_tab, webcam_tab, results_tab = st.tabs(

@@ -27,6 +27,7 @@ import numpy as np
 
 from .compliance import evaluate_compliance, summarise_compliance
 from .config import ComplianceConfig, InferenceConfig, load_compliance_config, load_inference_config
+from .taxonomy import display_name
 from .utils import (
     IMAGE_EXTENSIONS,
     VIDEO_EXTENSIONS,
@@ -259,7 +260,11 @@ class PPEDetector:
                 continue
             detection: dict[str, Any] = {
                 "class_id": int(class_id),
+                # 'class_name' reste l'identifiant interne (anglais) : c'est lui
+                # que referencent les configs et les exports comparables entre
+                # versions. 'class_name_fr' ne sert qu'a l'affichage.
                 "class_name": class_name,
+                "class_name_fr": display_name(class_name),
                 "confidence": round(float(confidence), 4),
                 "bbox_xyxy": [round(float(v), 2) for v in box],
             }
