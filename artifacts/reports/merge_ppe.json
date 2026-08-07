@@ -1,0 +1,19 @@
+{
+  "name": "ppe-original",
+  "images_copied": 7000,
+  "images_skipped": 0,
+  "labels_written": 7000,
+  "annotations_kept": 25542,
+  "annotations_dropped": 0,
+  "empty_labels": 0,
+  "per_class": {
+    "Person": 7649,
+    "Safety Shoes": 5875,
+    "Safety Helmet": 5449,
+    "Safety Vest": 2434,
+    "Safety Gloves": 2172,
+    "Safety Harness": 1175,
+    "Face Mask": 788
+  },
+  "dropped_classes": {}
+}

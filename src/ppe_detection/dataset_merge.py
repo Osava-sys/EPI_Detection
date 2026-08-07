@@ -56,6 +56,41 @@ LOGGER = get_logger(__name__)
 
 SPLITS: tuple[str, ...] = ("train", "valid", "test")
 
+# Les datasets YOLO circulent sous deux dispositions, et les exports FiftyOne
+# emploient la seconde. Un outil de fusion qui n'en gere qu'une est inutilisable
+# sur la moitie des sources publiques.
+SPLIT_ALIASES: dict[str, tuple[str, ...]] = {
+    "train": ("train",),
+    "valid": ("valid", "val", "validation"),
+    "test": ("test",),
+}
+
+
+def resolve_split_dirs(root: Path, split: str) -> tuple[Path, Path] | None:
+    """Localise les repertoires d'images et d'annotations d'un split.
+
+    Essaie les deux dispositions courantes et les alias de nommage :
+
+    * ``<racine>/<split>/images`` et ``<racine>/<split>/labels`` (Roboflow) ;
+    * ``<racine>/images/<split>`` et ``<racine>/labels/<split>`` (FiftyOne, YOLOv5).
+
+    Args:
+        root: Racine du dataset (repertoire contenant ``data.yaml``).
+        split: Split canonique (``train``, ``valid`` ou ``test``).
+
+    Returns:
+        ``(images, labels)``, ou ``None`` si le split est absent.
+    """
+    for alias in SPLIT_ALIASES.get(split, (split,)):
+        candidates = (
+            (root / alias / "images", root / alias / "labels"),
+            (root / "images" / alias, root / "labels" / alias),
+        )
+        for images, labels in candidates:
+            if images.is_dir():
+                return images, labels
+    return None
+
 
 class MergeError(RuntimeError):
     """Erreur de fusion, avec message actionnable."""
@@ -220,11 +255,11 @@ def merge_dataset(
 
     root = source_path.parent
     for split in splits:
-        images_dir = root / split / "images"
-        labels_dir = root / split / "labels"
-        if not images_dir.is_dir():
+        resolved = resolve_split_dirs(root, split)
+        if resolved is None:
             LOGGER.debug("Split absent de la source, ignore : %s", split)
             continue
+        images_dir, labels_dir = resolved
 
         out_images = target / split / "images"
         out_labels = target / split / "labels"

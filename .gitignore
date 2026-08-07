@@ -38,6 +38,7 @@ test/
 # ---------------------------------------------------------------------------
 artifacts/dataset_detection/
 artifacts/dataset_detection_*/
+artifacts/dataset_extended/
 artifacts/models/
 artifacts/runs/
 artifacts/predictions/
@@ -45,6 +46,14 @@ artifacts/exports/
 artifacts/logs/
 artifacts/samples/
 runs/
+
+# Datasets externes telecharges (Open Images, Roboflow...) : volumineux et
+# reconstructibles via docs/plan_donnees_epi_sosies.md
+datasets/
+
+# Venv isole pour FiftyOne : il exige opencv-python-headless, qui remplacerait
+# opencv-python dans le venv principal et casserait l'affichage video/webcam.
+.venv-tools/
 
 # Poids ou l'on se trouve (racine incluse : Ultralytics telecharge ici)
 *.pt

@@ -1,0 +1,13 @@
+{
+  "name": "open-images",
+  "images_copied": 1204,
+  "images_skipped": 0,
+  "labels_written": 1204,
+  "annotations_kept": 3537,
+  "annotations_dropped": 0,
+  "empty_labels": 0,
+  "per_class": {
+    "Non-Safety Headwear": 3537
+  },
+  "dropped_classes": {}
+}

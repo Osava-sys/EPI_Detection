@@ -11,6 +11,7 @@ from ppe_detection.dataset_merge import (
     MergeError,
     merge_dataset,
     render_merge_report,
+    resolve_split_dirs,
     write_target_yaml,
 )
 from ppe_detection.taxonomy import extended_schema
@@ -38,6 +39,80 @@ def _make_source(
         {"train": f"{split}/images", "val": f"{split}/images", "nc": len(names), "names": names},
     )
     return data_yaml
+
+
+def test_resolve_split_roboflow_layout(tmp_path: Path) -> None:
+    """Disposition Roboflow : <split>/images."""
+    (tmp_path / "train" / "images").mkdir(parents=True)
+    (tmp_path / "train" / "labels").mkdir(parents=True)
+    resolved = resolve_split_dirs(tmp_path, "train")
+    assert resolved is not None
+    assert resolved[0] == tmp_path / "train" / "images"
+
+
+def test_resolve_split_fiftyone_layout(tmp_path: Path) -> None:
+    """Disposition FiftyOne / YOLOv5 : images/<split>."""
+    (tmp_path / "images" / "train").mkdir(parents=True)
+    (tmp_path / "labels" / "train").mkdir(parents=True)
+    resolved = resolve_split_dirs(tmp_path, "train")
+    assert resolved is not None
+    assert resolved[0] == tmp_path / "images" / "train"
+
+
+def test_resolve_split_accepts_val_alias(tmp_path: Path) -> None:
+    """'val' et 'validation' designent le meme split que 'valid'."""
+    (tmp_path / "images" / "val").mkdir(parents=True)
+    (tmp_path / "labels" / "val").mkdir(parents=True)
+    resolved = resolve_split_dirs(tmp_path, "valid")
+    assert resolved is not None
+    assert resolved[0].name == "val"
+
+
+def test_resolve_split_returns_none_when_absent(tmp_path: Path) -> None:
+    assert resolve_split_dirs(tmp_path, "test") is None
+
+
+def test_merge_handles_fiftyone_layout(tmp_path: Path) -> None:
+    """Fusion depuis un export FiftyOne, disposition images/<split>."""
+    import cv2
+
+    root = tmp_path / "oi"
+    (root / "images" / "train").mkdir(parents=True)
+    (root / "labels" / "train").mkdir(parents=True)
+    cv2.imwrite(str(root / "images" / "train" / "a.jpg"), np.full((64, 64, 3), 100, dtype=np.uint8))
+    (root / "labels" / "train" / "a.txt").write_text("0 0.5 0.5 0.2 0.2\n", encoding="utf-8")
+    write_yaml(
+        root / "dataset.yaml",
+        {"train": "./images/train/", "nc": 1, "names": {0: "Bicycle helmet"}},
+    )
+
+    stats = merge_dataset(
+        root / "dataset.yaml",
+        tmp_path / "out",
+        {"Bicycle helmet": "Non-Safety Headwear"},
+        source_name="oi",
+    )
+    assert stats.annotations_kept == 1
+    assert stats.per_class["Non-Safety Headwear"] == 1
+
+
+def test_merge_reads_dict_style_names(tmp_path: Path) -> None:
+    """Les exports recents ecrivent names sous forme de dictionnaire indexe."""
+    import cv2
+
+    root = tmp_path / "d"
+    (root / "train" / "images").mkdir(parents=True)
+    (root / "train" / "labels").mkdir(parents=True)
+    cv2.imwrite(str(root / "train" / "images" / "a.jpg"), np.zeros((32, 32, 3), dtype=np.uint8))
+    (root / "train" / "labels" / "a.txt").write_text("1 0.5 0.5 0.2 0.2\n", encoding="utf-8")
+    write_yaml(
+        root / "data.yaml",
+        {"train": "train/images", "nc": 2, "names": {0: "zero", 1: "Hat"}},
+    )
+    stats = merge_dataset(
+        root / "data.yaml", tmp_path / "o", {"Hat": "Non-Safety Headwear"}
+    )
+    assert stats.annotations_kept == 1
 
 
 def test_merge_remaps_class_ids(tmp_path: Path) -> None:
