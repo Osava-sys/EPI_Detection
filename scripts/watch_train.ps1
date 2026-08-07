@@ -67,7 +67,9 @@ function Show-Progress {
     $tmp = [System.IO.Path]::GetTempFileName()
     try {
         Copy-Item $Csv $tmp -Force
-        $data = Import-Csv $tmp
+        # @() indispensable : avec une seule epoque ecrite, Import-Csv renvoie un
+        # objet unique et non un tableau, ce qui fausse .Count et l'indexation.
+        $data = @(Import-Csv $tmp)
     } catch {
         Write-Host "Lecture impossible (fichier en cours d'ecriture), nouvelle tentative..." -ForegroundColor DarkGray
         return
@@ -93,10 +95,14 @@ function Show-Progress {
     }
 
     $done = $data.Count
+    if ($done -lt 1) {
+        Write-Host "Aucune epoque terminee pour l'instant." -ForegroundColor Yellow
+        return
+    }
     $best = $data | Sort-Object { [double]$_.$mapCol } -Descending | Select-Object -First 1
     $bestEpoch = [int]$best.$epochCol
     $elapsed = [double]$data[-1].$timeCol
-    $perEpoch = $elapsed / $done
+    $perEpoch = if ($elapsed -gt 0) { $elapsed / $done } else { 0 }
 
     # Le total d'epoques vient de args.yaml : results.csv ne le contient pas.
     $argsFile = Join-Path (Split-Path $Csv -Parent) "args.yaml"
@@ -113,8 +119,10 @@ function Show-Progress {
         $done, $(if ($total) { $total } else { "?" }), $pct, $perEpoch, `
         ([TimeSpan]::FromSeconds($elapsed).ToString('hh\:mm\:ss')))
 
-    if ($total -gt $done) {
-        $remaining = [TimeSpan]::FromSeconds($perEpoch * ($total - $done))
+    # Borne de securite : sans epoque chronometree, l'estimation deborderait TimeSpan.
+    $eta = $perEpoch * ($total - $done)
+    if ($total -gt $done -and $perEpoch -gt 0 -and $eta -lt 864000) {
+        $remaining = [TimeSpan]::FromSeconds($eta)
         Write-Host ("Fin estimee dans {0} (vers {1:HH:mm})   |   early stopping possible avant" -f `
             $remaining.ToString('hh\:mm\:ss'), (Get-Date).Add($remaining)) -ForegroundColor DarkGray
     }
