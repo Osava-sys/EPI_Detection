@@ -77,8 +77,16 @@ def load_detector(
     device: str,
     compliance_enabled: bool,
     required: tuple[str, ...],
+    fingerprint: tuple[int, int] = (0, 0),  # noqa: ARG001 - cle de cache uniquement
 ) -> PPEDetector:
-    """Charge (et met en cache) un detecteur pour un jeu de parametres donne."""
+    """Charge (et met en cache) un detecteur pour un jeu de parametres donne.
+
+    Args:
+        fingerprint: ``(mtime_ns, taille)`` du fichier de poids. Indispensable :
+            un reentrainement reecrit ``best.pt`` sans changer son chemin, et le
+            cache indexe sur le seul chemin continuerait de servir l'ancien
+            modele. Ce couple force le rechargement des que le fichier change.
+    """
     inference_config: InferenceConfig = load_inference_config(
         CONFIG_PATH, weights=weights, conf=conf, iou=iou, device=device
     )
@@ -629,8 +637,15 @@ def main() -> None:
             )
 
     try:
+        stat = weights_path.stat()
         detector = load_detector(
-            str(weights_path), conf, iou, device, compliance_enabled, required
+            str(weights_path),
+            conf,
+            iou,
+            device,
+            compliance_enabled,
+            required,
+            fingerprint=(stat.st_mtime_ns, stat.st_size),
         )
     except PredictionError as exc:
         st.error(f"Chargement du modele impossible : {exc}")
