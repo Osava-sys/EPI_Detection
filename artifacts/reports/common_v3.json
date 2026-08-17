@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-08-17T18:42:14.341106+00:00",
+  "environment": {
+    "timestamp_utc": "2026-08-17T18:42:14.341106+00:00",
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_total_memory_gb": 15.92,
+    "ultralytics": "8.4.112",
+    "cv2": "5.0.0",
+    "numpy": "2.4.4",
+    "onnxruntime": "1.28.0"
+  },
+  "model": {
+    "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best_v3.pt",
+    "weights_size_bytes": 20311493,
+    "weights_size_human": "19.4 Mo",
+    "parameters": 9468663,
+    "class_names": [
+      "Face Mask",
+      "Person",
+      "Safety Gloves",
+      "Safety Harness",
+      "Safety Helmet",
+      "Safety Shoes",
+      "Safety Vest",
+      "Non-Safety Headwear",
+      "Uncovered Head"
+    ]
+  },
+  "evaluation": {
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_common_test\\data_9cls.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 16,
+    "conf": 0.001,
+    "iou": 0.6,
+    "device": "0"
+  },
+  "metrics": {
+    "precision": 0.825,
+    "recall": 0.7723,
+    "mAP50": 0.8077,
+    "mAP50_95": 0.4394,
+    "mAP75": 0.404
+  },
+  "per_class": {
+    "Face Mask": {
+      "mAP50_95": 0.5826,
+      "mAP50": 0.9592,
+      "precision": 0.9047,
+      "recall": 0.9338
+    },
+    "Person": {
+      "mAP50_95": 0.5264,
+      "mAP50": 0.8771,
+      "precision": 0.8733,
+      "recall": 0.8894
+    },
+    "Safety Gloves": {
+      "mAP50_95": 0.239,
+      "mAP50": 0.5535,
+      "precision": 0.699,
+      "recall": 0.5474
+    },
+    "Safety Harness": {
+      "mAP50_95": 0.4064,
+      "mAP50": 0.7969,
+      "precision": 0.8368,
+      "recall": 0.6929
+    },
+    "Safety Helmet": {
+      "mAP50_95": 0.3455,
+      "mAP50": 0.794,
+      "precision": 0.7856,
+      "recall": 0.7818
+    },
+    "Safety Shoes": {
+      "mAP50_95": 0.4212,
+      "mAP50": 0.7653,
+      "precision": 0.8177,
+      "recall": 0.697
+    },
+    "Safety Vest": {
+      "mAP50_95": 0.5544,
+      "mAP50": 0.9077,
+      "precision": 0.858,
+      "recall": 0.864
+    }
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.664,
+    "inference": 2.512,
+    "loss": 0.0,
+    "postprocess": 0.14
+  },
+  "throughput_fps": 301.57,
+  "ultralytics_save_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\runs\\val\\common_v3",
+  "known_limitations": [
+    "Le split de test provient du meme export Roboflow que l'entrainement : l'audit a identifie des images issues d'une meme photo source reparties entre plusieurs splits, ce qui rend les metriques optimistes par rapport a un deploiement sur un chantier inconnu.",
+    "Les metriques sont calculees sur des annotations dont 349 lignes ont ete converties depuis des polygones de segmentation : la boite englobante d'un polygone est systematiquement au moins aussi grande que l'objet reel."
+  ]
+}

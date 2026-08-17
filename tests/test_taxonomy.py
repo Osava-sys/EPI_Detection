@@ -40,11 +40,19 @@ def test_extended_schema_preserves_base_ids() -> None:
         assert base.id_of(name) == extended.id_of(name)
 
 
-def test_extended_schema_has_ten_classes() -> None:
+def test_extended_schema_appends_negatives_after_base() -> None:
+    """Les classes negatives se numerotent APRES les classes d'origine.
+
+    C'est ce qui rend un dataset etendu retro-compatible : les identifiants 0-6
+    designent les memes classes qu'avant.
+    """
     schema = extended_schema()
-    assert schema.size == 10
-    assert schema.names[:7] == list(BASE_CLASSES)
-    assert schema.names[7:] == list(NEGATIVE_CLASSES)
+    assert schema.size == len(BASE_CLASSES) + len(NEGATIVE_CLASSES)
+    assert schema.names[: len(BASE_CLASSES)] == list(BASE_CLASSES)
+    assert schema.names[len(BASE_CLASSES) :] == list(NEGATIVE_CLASSES)
+    # Non-Safety Headwear reste l'identifiant 7 : les poids deja entraines
+    # restent utilisables.
+    assert schema.id_of("Non-Safety Headwear") == 7
 
 
 def test_schema_rejects_duplicates() -> None:
@@ -78,8 +86,27 @@ def test_is_negative() -> None:
 
 def test_to_data_yaml() -> None:
     payload = extended_schema().to_data_yaml()
-    assert payload["nc"] == 10
+    assert payload["nc"] == len(payload["names"])
     assert payload["names"][7] == "Non-Safety Headwear"
+
+
+def test_annotation_conventions_are_declared() -> None:
+    """Fusionner des sources aux conventions differentes cree des contradictions.
+
+    ``Non-Safety Headwear`` encadre l'objet porte, ``Uncovered Head`` encadre la
+    tete : sur une casquette, les deux boites seraient quasi identiques avec des
+    etiquettes opposees. La convention doit donc etre explicite.
+    """
+    from ppe_detection.taxonomy import ANNOTATION_CONVENTIONS
+
+    assert ANNOTATION_CONVENTIONS["Non-Safety Headwear"] == "object"
+    assert ANNOTATION_CONVENTIONS["Uncovered Head"] == "region"
+
+
+def test_uncovered_head_counters_the_helmet_requirement() -> None:
+    """Une tete nue prouve l'absence de casque, comme un couvre-chef non conforme."""
+    assert "Uncovered Head" in COUNTER_EVIDENCE["Safety Helmet"]
+    assert "Non-Safety Headwear" in COUNTER_EVIDENCE["Safety Helmet"]
 
 
 # --------------------------------------------------------------------------- #

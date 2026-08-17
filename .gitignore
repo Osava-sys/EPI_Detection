@@ -87,3 +87,4 @@ desktop.ini
 .vscode/
 *.swp
 *~
+artifacts/dataset_v3/

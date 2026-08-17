@@ -1,0 +1,676 @@
+{
+  "generated_at": "2026-08-17T18:43:21.907010+00:00",
+  "environment": {
+    "timestamp_utc": "2026-08-17T18:43:21.907010+00:00",
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "torch": "2.9.1+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_total_memory_gb": 15.92,
+    "ultralytics": "8.4.112",
+    "cv2": "5.0.0",
+    "numpy": "2.4.4",
+    "onnxruntime": "1.28.0"
+  },
+  "model": {
+    "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best_v3.pt",
+    "weights_size_bytes": 20311493,
+    "weights_size_human": "19.4 Mo",
+    "parameters": 9468663,
+    "class_names": [
+      "Face Mask",
+      "Person",
+      "Safety Gloves",
+      "Safety Harness",
+      "Safety Helmet",
+      "Safety Shoes",
+      "Safety Vest",
+      "Non-Safety Headwear",
+      "Uncovered Head"
+    ]
+  },
+  "evaluation": {
+    "data_yaml": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\dataset_v3\\data.yaml",
+    "split": "test",
+    "imgsz": 640,
+    "batch": 16,
+    "conf": 0.001,
+    "iou": 0.6,
+    "device": "0"
+  },
+  "metrics": {
+    "precision": 0.836,
+    "recall": 0.8009,
+    "mAP50": 0.8368,
+    "mAP50_95": 0.5077,
+    "mAP75": 0.522
+  },
+  "per_class": {
+    "Face Mask": {
+      "mAP50_95": 0.5831,
+      "mAP50": 0.9584,
+      "precision": 0.9046,
+      "recall": 0.9323
+    },
+    "Person": {
+      "mAP50_95": 0.6777,
+      "mAP50": 0.9169,
+      "precision": 0.8581,
+      "recall": 0.9067
+    },
+    "Safety Gloves": {
+      "mAP50_95": 0.2257,
+      "mAP50": 0.5251,
+      "precision": 0.6691,
+      "recall": 0.5474
+    },
+    "Safety Harness": {
+      "mAP50_95": 0.4048,
+      "mAP50": 0.796,
+      "precision": 0.8368,
+      "recall": 0.6931
+    },
+    "Safety Helmet": {
+      "mAP50_95": 0.5907,
+      "mAP50": 0.9479,
+      "precision": 0.9092,
+      "recall": 0.9076
+    },
+    "Safety Shoes": {
+      "mAP50_95": 0.4194,
+      "mAP50": 0.762,
+      "precision": 0.8082,
+      "recall": 0.6944
+    },
+    "Safety Vest": {
+      "mAP50_95": 0.5521,
+      "mAP50": 0.903,
+      "precision": 0.8512,
+      "recall": 0.864
+    },
+    "Non-Safety Headwear": {
+      "mAP50_95": 0.4894,
+      "mAP50": 0.7721,
+      "precision": 0.7757,
+      "recall": 0.7632
+    },
+    "Uncovered Head": {
+      "mAP50_95": 0.6262,
+      "mAP50": 0.95,
+      "precision": 0.9112,
+      "recall": 0.8996
+    }
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.71,
+    "inference": 2.146,
+    "loss": 0.0,
+    "postprocess": 0.081
+  },
+  "throughput_fps": 340.48,
+  "ultralytics_save_dir": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\runs\\val\\evaluation_v3_test",
+  "error_analysis": {
+    "iou_threshold": 0.5,
+    "conf_threshold": 0.25,
+    "images_analysed": 1263,
+    "per_class": {
+      "Face Mask": {
+        "true_positives": 57,
+        "false_positives": 11,
+        "false_negatives": 4,
+        "precision": 0.8382,
+        "recall": 0.9344,
+        "f1": 0.8837
+      },
+      "Person": {
+        "true_positives": 2328,
+        "false_positives": 512,
+        "false_negatives": 202,
+        "precision": 0.8197,
+        "recall": 0.9202,
+        "f1": 0.867
+      },
+      "Safety Gloves": {
+        "true_positives": 73,
+        "false_positives": 48,
+        "false_negatives": 64,
+        "precision": 0.6033,
+        "recall": 0.5328,
+        "f1": 0.5659
+      },
+      "Safety Harness": {
+        "true_positives": 81,
+        "false_positives": 23,
+        "false_negatives": 30,
+        "precision": 0.7788,
+        "recall": 0.7297,
+        "f1": 0.7535
+      },
+      "Safety Helmet": {
+        "true_positives": 2401,
+        "false_positives": 333,
+        "false_negatives": 206,
+        "precision": 0.8782,
+        "recall": 0.921,
+        "f1": 0.8991
+      },
+      "Safety Shoes": {
+        "true_positives": 279,
+        "false_positives": 82,
+        "false_negatives": 117,
+        "precision": 0.7729,
+        "recall": 0.7045,
+        "f1": 0.7371
+      },
+      "Safety Vest": {
+        "true_positives": 197,
+        "false_positives": 50,
+        "false_negatives": 31,
+        "precision": 0.7976,
+        "recall": 0.864,
+        "f1": 0.8295
+      },
+      "Non-Safety Headwear": {
+        "true_positives": 286,
+        "false_positives": 103,
+        "false_negatives": 72,
+        "precision": 0.7352,
+        "recall": 0.7989,
+        "f1": 0.7657
+      },
+      "Uncovered Head": {
+        "true_positives": 471,
+        "false_positives": 71,
+        "false_negatives": 42,
+        "precision": 0.869,
+        "recall": 0.9181,
+        "f1": 0.8929
+      }
+    },
+    "totals": {
+      "true_positives": 6173,
+      "false_positives": 1233,
+      "false_negatives": 768
+    },
+    "class_confusions": [
+      {
+        "predicted": "Uncovered Head",
+        "actual": "Safety Helmet",
+        "count": 9
+      },
+      {
+        "predicted": "Safety Helmet",
+        "actual": "Uncovered Head",
+        "count": 3
+      },
+      {
+        "predicted": "Safety Gloves",
+        "actual": "Safety Vest",
+        "count": 2
+      },
+      {
+        "predicted": "Safety Harness",
+        "actual": "Safety Vest",
+        "count": 2
+      },
+      {
+        "predicted": "Person",
+        "actual": "Safety Harness",
+        "count": 1
+      },
+      {
+        "predicted": "Person",
+        "actual": "Non-Safety Headwear",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Gloves",
+        "actual": "Safety Helmet",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Gloves",
+        "actual": "Safety Shoes",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Harness",
+        "actual": "Person",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Vest",
+        "actual": "Safety Harness",
+        "count": 1
+      },
+      {
+        "predicted": "Safety Vest",
+        "actual": "Safety Shoes",
+        "count": 1
+      }
+    ],
+    "best_examples": [
+      {
+        "image": "hardhat-hf__hard_hat_workers1000__49f6cbf4.png",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1028__3b1acdc2.png",
+        "n_ground_truth": 4,
+        "n_predictions": 4,
+        "true_positives": 4,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1055__1f29a919.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1086__87b1676d.png",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1101__0562f878.png",
+        "n_ground_truth": 6,
+        "n_predictions": 6,
+        "true_positives": 6,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1104__f132c0ba.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers110__dd2ff4a3.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1126__c1dce8cb.png",
+        "n_ground_truth": 4,
+        "n_predictions": 4,
+        "true_positives": 4,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1136__342e6f3f.png",
+        "n_ground_truth": 7,
+        "n_predictions": 7,
+        "true_positives": 7,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1169__7760f573.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1178__844b999b.png",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers118__9b83022d.png",
+        "n_ground_truth": 3,
+        "n_predictions": 3,
+        "true_positives": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1214__d52a72f5.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1269__5de7fc0e.png",
+        "n_ground_truth": 8,
+        "n_predictions": 8,
+        "true_positives": 8,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      },
+      {
+        "image": "hardhat-hf__hard_hat_workers1300__b3ebbcd0.png",
+        "n_ground_truth": 2,
+        "n_predictions": 2,
+        "true_positives": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "score": 1.0
+      }
+    ],
+    "worst_examples": [
+      {
+        "image": "hardhat-hf__hard_hat_workers207__2c692339.png",
+        "n_ground_truth": 6,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 6,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__01012c2e299f281b__39dffa25.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__024a2c77ee7857fe__d24e7a93.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__5d2f872779c9eb77__1902f9e3.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "score": 0.0
+      },
+      {
+        "image": "open-images__5e432cf1a6415182__24746144.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__-2609-_png_jpg.rf.rl366pGPQbGlgxf1AuZm__07f07686.jpg",
+        "n_ground_truth": 8,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 8,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.QSoK4kkwN4jlDtUxxl8y__5d3d6ec6.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.Z88wKwYsIgJPMvg56sWB__42422b29.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__Construction-worker-wearing-safety-shoes-scaled-1_jpeg_jpg.rf.mL1277Me2sg2oLKmUCRF__89c1428f.jpg",
+        "n_ground_truth": 3,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__construction_jpg.rf.LNRJ3lNOWiB35KfZOqkd__e3c5651b.jpg",
+        "n_ground_truth": 2,
+        "n_predictions": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__dyRJH7cAFsizFZa0b455i81Kf9x48TXPtM7ApZBBSS4s2A26q3zUCnE9jMEK_jpeg_jpg.rf.Sv7mCwrlQT2axIjgcJBc__1b6f3200.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__full-body-harness-63-_jpg.rf.SJRgWmzNcAlu5RVSPt4a__3439000d.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__images (27)_jpg.rf.ElFcrFQLkv1GPeQBaZeR__fc496b65.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__images (6)_jpg.rf.mtqUILPYBu7WhA6xKhRh__1f064e4f.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 2,
+        "true_positives": 0,
+        "false_positives": 2,
+        "false_negatives": 0,
+        "score": 0.0
+      },
+      {
+        "image": "ppe-original__pos_2083_jpg.rf.tNhPzNcZwCmusUSg6S2X__2d64da1b.jpg",
+        "n_ground_truth": 1,
+        "n_predictions": 9,
+        "true_positives": 0,
+        "false_positives": 9,
+        "false_negatives": 0,
+        "score": 0.0
+      }
+    ],
+    "confusion_matrix": {
+      "labels": [
+        "Face Mask",
+        "Person",
+        "Safety Gloves",
+        "Safety Harness",
+        "Safety Helmet",
+        "Safety Shoes",
+        "Safety Vest",
+        "Non-Safety Headwear",
+        "Uncovered Head",
+        "background"
+      ],
+      "matrix": [
+        [
+          57,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11
+        ],
+        [
+          0,
+          2328,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          510
+        ],
+        [
+          0,
+          0,
+          73,
+          0,
+          1,
+          1,
+          2,
+          0,
+          0,
+          44
+        ],
+        [
+          0,
+          1,
+          0,
+          81,
+          0,
+          0,
+          2,
+          0,
+          0,
+          20
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2401,
+          0,
+          0,
+          0,
+          3,
+          330
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          279,
+          0,
+          0,
+          0,
+          82
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          197,
+          0,
+          0,
+          48
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          286,
+          0,
+          103
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0,
+          0,
+          471,
+          62
+        ],
+        [
+          4,
+          201,
+          64,
+          28,
+          196,
+          115,
+          27,
+          71,
+          39,
+          0
+        ]
+      ],
+      "orientation": "matrix[predite][reelle]"
+    }
+  },
+  "known_limitations": [
+    "Le split de test provient du meme export Roboflow que l'entrainement : l'audit a identifie des images issues d'une meme photo source reparties entre plusieurs splits, ce qui rend les metriques optimistes par rapport a un deploiement sur un chantier inconnu.",
+    "Les metriques sont calculees sur des annotations dont 349 lignes ont ete converties depuis des polygones de segmentation : la boite englobante d'un polygone est systematiquement au moins aussi grande que l'objet reel.",
+    "Confusion la plus frequente : 9 objet(s) de classe 'Safety Helmet' predits comme 'Uncovered Head'."
+  ]
+}

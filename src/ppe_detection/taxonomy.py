@@ -54,6 +54,10 @@ BASE_CLASSES: tuple[str, ...] = (
 # --------------------------------------------------------------------------- #
 NEGATIVE_CLASSES: tuple[str, ...] = (
     "Non-Safety Headwear",
+    # 'Uncovered Head' precede les deux classes suivantes parce qu'elle est la
+    # seule a disposer de donnees. Les classes vides placees avant elle
+    # occuperaient des identifiants et feraient entrainer des sorties mortes.
+    "Uncovered Head",
     "Non-Safety Vest",
     "Non-Safety Footwear",
 )
@@ -72,7 +76,7 @@ EXTENDED_CLASSES: tuple[str, ...] = BASE_CLASSES + NEGATIVE_CLASSES
 # Relations entre classes
 # --------------------------------------------------------------------------- #
 COUNTER_EVIDENCE: dict[str, tuple[str, ...]] = {
-    "Safety Helmet": ("Non-Safety Headwear",),
+    "Safety Helmet": ("Non-Safety Headwear", "Uncovered Head"),
     "Safety Vest": ("Non-Safety Vest",),
     "Safety Shoes": ("Non-Safety Footwear",),
 }
@@ -87,8 +91,26 @@ NEGATIVE_REGIONS: dict[str, str] = {
     "Non-Safety Headwear": "head",
     "Non-Safety Vest": "torso",
     "Non-Safety Footwear": "feet",
+    "Uncovered Head": "head",
 }
 """Zone du corps ou chaque classe negative est attendue."""
+
+ANNOTATION_CONVENTIONS: dict[str, str] = {
+    "Non-Safety Headwear": "object",
+    "Uncovered Head": "region",
+}
+"""Ce que delimite la boite : l'objet porte, ou la region du corps.
+
+Distinction cruciale au moment de fusionner des sources. ``Non-Safety Headwear``
+encadre **l'objet** (un casque de velo, un chapeau) ; ``Uncovered Head`` encadre
+**la tete** lorsqu'aucun casque de chantier ne la protege.
+
+Melanger les deux conventions sur une meme scene donnerait au modele des
+etiquettes contradictoires : une tete coiffee d'une casquette serait annotee
+``Uncovered Head`` par une source et ``Non-Safety Headwear`` par une autre, sur
+une boite quasi identique. Les datasets doivent donc etre choisis pour que
+chaque convention couvre un domaine visuel distinct.
+"""
 
 
 # --------------------------------------------------------------------------- #
@@ -105,6 +127,7 @@ CLASS_LABELS_FR: dict[str, str] = {
     "Non-Safety Headwear": "Couvre-chef non conforme",
     "Non-Safety Vest": "Vêtement non conforme",
     "Non-Safety Footwear": "Chaussures non conformes",
+    "Uncovered Head": "Tête sans casque",
 }
 """Libelles francais affiches a l'ecran.
 
@@ -193,6 +216,17 @@ FEASIBILITY: dict[str, ClassFeasibility] = {
             "Les bandes retroreflechissantes constituent un signal fort et apprenable. "
             "Mais une veste orange vive sans bandes reste confondue de loin, et de nuit "
             "le retroreflechissant sature et change d'aspect."
+        ),
+        recommended=True,
+    ),
+    "Uncovered Head": ClassFeasibility(
+        level="high",
+        rationale=(
+            "Une tete non protegee par un casque de chantier est bien delimitee et "
+            "abondamment annotee en contexte industriel (5 000 images CC0 disponibles). "
+            "C'est la reponse operationnelle directe a « cette personne porte-t-elle un "
+            "casque ? », et elle englobe les casquettes de travail, bonnets et casquettes "
+            "anti-heurt — qu'aucun dataset public n'annote comme tels."
         ),
         recommended=True,
     ),

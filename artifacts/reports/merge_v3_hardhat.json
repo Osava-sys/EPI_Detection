@@ -1,0 +1,15 @@
+{
+  "name": "hardhat-hf",
+  "images_copied": 5000,
+  "images_skipped": 0,
+  "labels_written": 5000,
+  "annotations_kept": 39039,
+  "annotations_dropped": 0,
+  "empty_labels": 0,
+  "per_class": {
+    "Safety Helmet": 18966,
+    "Person": 14288,
+    "Uncovered Head": 5785
+  },
+  "dropped_classes": {}
+}

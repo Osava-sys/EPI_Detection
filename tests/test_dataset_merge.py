@@ -235,8 +235,10 @@ def test_write_target_yaml_uses_extended_schema(tmp_path: Path) -> None:
     from ppe_detection.utils import read_yaml
 
     payload = read_yaml(path)
-    assert payload["nc"] == 10
+    assert payload["nc"] == len(payload["names"])
+    # Identifiant 7 stable : les poids deja entraines restent utilisables.
     assert payload["names"][7] == "Non-Safety Headwear"
+    assert "Uncovered Head" in payload["names"]
 
 
 def test_report_flags_classes_without_instances(tmp_path: Path) -> None:

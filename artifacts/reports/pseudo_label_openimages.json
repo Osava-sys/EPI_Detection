@@ -1,0 +1,31 @@
+{
+  "dataset": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\datasets\\open_images_headwear",
+  "class_name": "Person",
+  "class_id": 2,
+  "conf": 0.5,
+  "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best_7classes.pt",
+  "dry_run": false,
+  "totals": {
+    "images": 1853,
+    "added": 3231,
+    "skipped": 0
+  },
+  "per_split": {
+    "train": {
+      "images": 1297,
+      "added": 2298,
+      "already_labelled": 0
+    },
+    "valid": {
+      "images": 371,
+      "added": 657,
+      "already_labelled": 0
+    },
+    "test": {
+      "images": 185,
+      "added": 276,
+      "already_labelled": 0
+    }
+  },
+  "caveat": "Annotations produites par un modele, non verifiees humainement. Elles propagent les erreurs de ce modele."
+}

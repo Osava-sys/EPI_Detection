@@ -1,0 +1,31 @@
+{
+  "dataset": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\datasets\\hardhat_hf",
+  "class_name": "Person",
+  "class_id": 1,
+  "conf": 0.5,
+  "weights": "C:\\Users\\LENOVO LEGION\\Downloads\\PPE Detection Project.yolo26\\artifacts\\models\\best_8classes.pt",
+  "dry_run": false,
+  "totals": {
+    "images": 5000,
+    "added": 13537,
+    "skipped": 158
+  },
+  "per_split": {
+    "train": {
+      "images": 3500,
+      "added": 9454,
+      "already_labelled": 118
+    },
+    "valid": {
+      "images": 1000,
+      "added": 2584,
+      "already_labelled": 32
+    },
+    "test": {
+      "images": 500,
+      "added": 1499,
+      "already_labelled": 8
+    }
+  },
+  "caveat": "Annotations produites par un modele, non verifiees humainement. Elles propagent les erreurs de ce modele."
+}
