@@ -315,12 +315,12 @@ reproductible.
 
 Effet mesure sur ce projet :
 
-| | Decoupage Roboflow | Regroupe (defaut) |
-|---|---|---|
-| Repartition train/valid/test | 4903 / 1399 / 698 | 5145 / 1277 / 578 |
-| Photos sources a cheval sur plusieurs splits | 390 | **0** |
-| mAP@0.50 rapportee sur le test | 0.8319 | **0.7992** |
-| mAP@0.50:0.95 rapportee | 0.4696 | **0.4326** |
+|                                              | Decoupage Roboflow | Regroupe (defaut) |
+| -------------------------------------------- | ------------------ | ----------------- |
+| Repartition train/valid/test                 | 4903 / 1399 / 698  | 5145 / 1277 / 578 |
+| Photos sources a cheval sur plusieurs splits | 390                | **0**       |
+| mAP@0.50 rapportee sur le test               | 0.8319             | **0.7992**  |
+| mAP@0.50:0.95 rapportee                      | 0.4696             | **0.4326**  |
 
 Les chiffres de droite sont les vrais. L'ecart de +0.033 mesurait une fuite, pas
 une performance : 139 des 698 images de test (19,9 %) figuraient dans le train.
@@ -516,28 +516,27 @@ classes, meilleurs et pires exemples, et limites connues.
 
 ### Resultats de reference (`yolo26s`, 640 px, dataset sans fuite)
 
-| Metrique | Validation | Test |
-|----------|-----------|------|
-| mAP@0.50 | 0.7789 | 0.7992 |
-| mAP@0.50:0.95 | 0.4294 | 0.4326 |
-| Precision | 0.7855 | 0.8086 |
-| Rappel | 0.7333 | 0.7539 |
+| Metrique      | Validation | Test   |
+| ------------- | ---------- | ------ |
+| mAP@0.50      | 0.7789     | 0.7992 |
+| mAP@0.50:0.95 | 0.4294     | 0.4326 |
+| Precision     | 0.7855     | 0.8086 |
+| Rappel        | 0.7333     | 0.7539 |
 
 Par classe, sur le test :
 
-| Classe | Instances | Taille mediane @640 | mAP@0.50 | mAP@0.50:0.95 |
-|--------|-----------|--------------------|----------|---------------|
-| Face Mask | 788 | 46 px | **0.922** | 0.560 |
-| Person | 7 649 | 200 px | 0.893 | 0.531 |
-| Safety Vest | 2 434 | 136 px | 0.878 | 0.535 |
-| Safety Helmet | 5 449 | 50 px | 0.796 | 0.352 |
-| Safety Harness | 1 175 | 155 px | 0.782 | 0.400 |
-| Safety Shoes | 5 875 | 73 px | 0.775 | 0.430 |
-| Safety Gloves | 2 172 | 50 px | **0.548** | 0.221 |
+| Classe         | Instances | Taille mediane @640 | mAP@0.50        | mAP@0.50:0.95 |
+| -------------- | --------- | ------------------- | --------------- | ------------- |
+| Face Mask      | 788       | 46 px               | **0.922** | 0.560         |
+| Person         | 7 649     | 200 px              | 0.893           | 0.531         |
+| Safety Vest    | 2 434     | 136 px              | 0.878           | 0.535         |
+| Safety Helmet  | 5 449     | 50 px               | 0.796           | 0.352         |
+| Safety Harness | 1 175     | 155 px              | 0.782           | 0.400         |
+| Safety Shoes   | 5 875     | 73 px               | 0.775           | 0.430         |
+| Safety Gloves  | 2 172     | 50 px               | **0.548** | 0.221         |
 
 **La performance suit la taille des objets, pas leur frequence.** `Face Mask` est
-la classe la plus rare (3,1 % des annotations) et la mieux detectee ; `Safety
-Helmet` est la deuxieme plus frequente (21,3 %) et plafonne, car 25 % des casques
+la classe la plus rare (3,1 % des annotations) et la mieux detectee ; `Safety Helmet` est la deuxieme plus frequente (21,3 %) et plafonne, car 25 % des casques
 font moins de 32 px a 640. Rééquilibrer les classes serait donc inutile ici — le
 levier est la resolution.
 
@@ -551,27 +550,27 @@ confirmee au niveau global**.
 Comparaison sur le meme split de test, chaque modele evalue a sa resolution
 d'entrainement :
 
-| | 640 px | 960 px | Ecart |
-|---|--------|--------|-------|
-| mAP@0.50 | **0.7992** | 0.7980 | −0.0012 |
-| mAP@0.50:0.95 | **0.4326** | 0.4276 | −0.0050 |
-| Precision | **0.8086** | 0.8059 | −0.0027 |
-| Rappel | 0.7539 | **0.7572** | +0.0033 |
-| Inference | **2.76 ms** | 5.83 ms | ×2.1 |
-| Debit | **271 img/s** | 130 img/s | ÷2.1 |
+|               | 640 px              | 960 px           | Ecart    |
+| ------------- | ------------------- | ---------------- | -------- |
+| mAP@0.50      | **0.7992**    | 0.7980           | −0.0012 |
+| mAP@0.50:0.95 | **0.4326**    | 0.4276           | −0.0050 |
+| Precision     | **0.8086**    | 0.8059           | −0.0027 |
+| Rappel        | 0.7539              | **0.7572** | +0.0033  |
+| Inference     | **2.76 ms**   | 5.83 ms          | ×2.1    |
+| Debit         | **271 img/s** | 130 img/s        | ÷2.1    |
 
 Par classe, la prediction se verifie **partiellement** — les deux classes que
 l'analyse designait progressent bien :
 
-| Classe | % objets < 32 px | mAP@0.50 640 | mAP@0.50 960 | Ecart |
-|--------|------------------|--------------|--------------|-------|
-| Safety Gloves | 13 % | 0.5483 | **0.5757** | **+0.0274** |
-| Person | 0 % | 0.8927 | **0.9152** | +0.0225 |
-| Safety Helmet | 25 % | 0.7961 | **0.8096** | +0.0135 |
-| Safety Vest | 2 % | 0.8777 | 0.8733 | −0.0044 |
-| Safety Shoes | 9 % | 0.7751 | 0.7673 | −0.0078 |
-| Safety Harness | 2 % | 0.7821 | 0.7553 | −0.0268 |
-| Face Mask | 18 % | 0.9224 | 0.8892 | −0.0332 |
+| Classe         | % objets < 32 px | mAP@0.50 640 | mAP@0.50 960     | Ecart             |
+| -------------- | ---------------- | ------------ | ---------------- | ----------------- |
+| Safety Gloves  | 13 %             | 0.5483       | **0.5757** | **+0.0274** |
+| Person         | 0 %              | 0.8927       | **0.9152** | +0.0225           |
+| Safety Helmet  | 25 %             | 0.7961       | **0.8096** | +0.0135           |
+| Safety Vest    | 2 %              | 0.8777       | 0.8733           | −0.0044          |
+| Safety Shoes   | 9 %              | 0.7751       | 0.7673           | −0.0078          |
+| Safety Harness | 2 %              | 0.7821       | 0.7553           | −0.0268          |
+| Face Mask      | 18 %             | 0.9224       | 0.8892           | −0.0332          |
 
 `Safety Gloves`, la classe la plus faible, gagne 5 % en relatif. Mais le signal
 reste faible et bruite : les classes a petits objets gagnent +0.0026 en moyenne,
@@ -616,16 +615,16 @@ censees l'evaluer — la commande refuse d'ailleurs `--split test` sauf
 
 Resultats obtenus sur ce projet (seuils deja reportes dans `inference.yaml`) :
 
-| Classe | Seuil retenu | Gain de F1 sur le **test** |
-|--------|--------------|---------------------------|
-| Face Mask | 0.25 | +0.0000 |
-| Person | 0.35 | +0.0076 |
-| Safety Gloves | 0.30 | +0.0025 |
-| Safety Harness | 0.40 | **+0.0235** |
-| Safety Helmet | 0.30 | +0.0116 |
-| Safety Shoes | 0.30 | −0.0001 |
-| Safety Vest | 0.45 | +0.0127 |
-| **F1 macro** | | **+0.0083** |
+| Classe             | Seuil retenu | Gain de F1 sur le**test** |
+| ------------------ | ------------ | ------------------------------- |
+| Face Mask          | 0.25         | +0.0000                         |
+| Person             | 0.35         | +0.0076                         |
+| Safety Gloves      | 0.30         | +0.0025                         |
+| Safety Harness     | 0.40         | **+0.0235**               |
+| Safety Helmet      | 0.30         | +0.0116                         |
+| Safety Shoes       | 0.30         | −0.0001                        |
+| Safety Vest        | 0.45         | +0.0127                         |
+| **F1 macro** |              | **+0.0083**               |
 
 Concretement sur le split de test : **120 faux positifs en moins** pour 52 vrais
 positifs perdus. Les seuils choisis sur la validation generalisent donc bien
@@ -760,12 +759,12 @@ python -m ppe_detection.predict --weights artifacts/models/best.pt `
   --source chemin\image.jpg --compliance --pose --save --save-json
 ```
 
-| Zone | Points cles utilises | Remplace |
-|------|---------------------|----------|
-| `head` | nez, yeux, oreilles + echelle du buste | 35 % superieurs de la boite |
-| `torso` | epaules et hanches | tranche 20–80 % |
-| `feet` | chevilles | 30 % inferieurs |
-| `hands` | poignets | boite entiere |
+| Zone      | Points cles utilises                   | Remplace                    |
+| --------- | -------------------------------------- | --------------------------- |
+| `head`  | nez, yeux, oreilles + echelle du buste | 35 % superieurs de la boite |
+| `torso` | epaules et hanches                     | tranche 20–80 %            |
+| `feet`  | chevilles                              | 30 % inferieurs             |
+| `hands` | poignets                               | boite entiere               |
 
 Un casque masque le crane : la zone « tete » est donc extrapolee **au-dessus**
 des points du visage, a partir de la longueur du buste.
@@ -867,12 +866,12 @@ Entrainement de 2 h 09 (91 epoques, early stopping, meilleure epoque 66).
 
 **Test 1 — les sosies.** C'est l'objectif poursuivi, et il est atteint :
 
-| Image | 7 classes | 8 classes |
-|-------|-----------|-----------|
-| Casque VTT | `Safety Helmet 0.32` | **`Non-Safety Headwear 0.94`** |
-| Casque velo route | `Safety Helmet 0.84` | **`Non-Safety Headwear 0.50`** |
-| Casquette baseball | *rien* | **`Non-Safety Headwear 0.41`** |
-| Casquette sport | *rien* | **`Non-Safety Headwear 0.95`** |
+| Image              | 7 classes              | 8 classes                              |
+| ------------------ | ---------------------- | -------------------------------------- |
+| Casque VTT         | `Safety Helmet 0.32` | **`Non-Safety Headwear 0.94`** |
+| Casque velo route  | `Safety Helmet 0.84` | **`Non-Safety Headwear 0.50`** |
+| Casquette baseball | *rien*               | **`Non-Safety Headwear 0.41`** |
+| Casquette sport    | *rien*               | **`Non-Safety Headwear 0.95`** |
 
 Plus aucun faux `Safety Helmet`. Les casquettes, auparavant simplement ignorees,
 sont desormais **detectees activement**, ce qui permet a la contre-preuve de
@@ -883,15 +882,15 @@ de deux modeles a nombre de classes different n'aurait aucun sens : la moyenne
 ne porte pas sur les memes classes. La comparaison se fait donc classe par
 classe, sur des images identiques.
 
-| Classe | mAP@0.50 7 cls | mAP@0.50 8 cls | Ecart |
-|--------|----------------|----------------|-------|
-| Safety Harness | 0.7821 | **0.8091** | +0.0270 |
-| Safety Gloves | 0.5483 | **0.5607** | +0.0124 |
-| Safety Helmet | 0.7961 | **0.8067** | +0.0106 |
-| Person | 0.8927 | **0.8960** | +0.0033 |
-| Safety Vest | 0.8777 | 0.8741 | −0.0036 |
-| Safety Shoes | 0.7751 | 0.7523 | −0.0228 |
-| Face Mask | 0.9224 | 0.8931 | −0.0293 |
+| Classe                       | mAP@0.50 7 cls   | mAP@0.50 8 cls   | Ecart              |
+| ---------------------------- | ---------------- | ---------------- | ------------------ |
+| Safety Harness               | 0.7821           | **0.8091** | +0.0270            |
+| Safety Gloves                | 0.5483           | **0.5607** | +0.0124            |
+| Safety Helmet                | 0.7961           | **0.8067** | +0.0106            |
+| Person                       | 0.8927           | **0.8960** | +0.0033            |
+| Safety Vest                  | 0.8777           | 0.8741           | −0.0036           |
+| Safety Shoes                 | 0.7751           | 0.7523           | −0.0228           |
+| Face Mask                    | 0.9224           | 0.8931           | −0.0293           |
 | **Global (7 classes)** | **0.7992** | **0.7988** | **−0.0004** |
 
 L'ecart global est dans le bruit. `Safety Helmet` **progresse** de +0.0106,
