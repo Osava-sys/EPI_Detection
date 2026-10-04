@@ -1,70 +1,95 @@
-# Detection d'equipements de protection individuelle (EPI)
+# Personal Protective Equipment (PPE) Detection
 
-Projet complet de detection d'objets pour la securite au travail : audit du
-dataset, normalisation des annotations, entrainement, evaluation, inference
-(image / dossier / video / webcam), logique de conformite, API REST, interface
-locale et export ONNX.
+**English** | [Français](README.fr.md)
 
-Construit avec **Ultralytics YOLO26** et **PyTorch**, testé sous **Windows 11**
-avec une **NVIDIA RTX 5080 Laptop (16 Go)**.
+End-to-end object detection project for workplace safety: dataset audit,
+annotation normalization, training, evaluation, inference
+(image / folder / video / webcam), compliance logic, REST API, local
+interface and ONNX export.
+
+Built with **Ultralytics YOLO26** and **PyTorch**, tested on **Windows 11**
+with an **NVIDIA RTX 5080 Laptop (16 GB)**.
 
 ---
 
-## Table des matieres
+## Table of contents
 
-1. [Presentation](#1-presentation)
+1. [Overview](#1-overview)
 2. [Architecture](#2-architecture)
-3. [Dataset et licence](#3-dataset-et-licence)
-4. [Prerequis](#4-prerequis)
+3. [Dataset and license](#3-dataset-and-license)
+4. [Prerequisites](#4-prerequisites)
 5. [Installation](#5-installation)
-6. [Audit du dataset](#6-audit-du-dataset)
-7. [Conversion des annotations](#7-conversion-des-annotations)
+6. [Dataset audit](#6-dataset-audit)
+7. [Annotation conversion](#7-annotation-conversion)
 8. [Smoke test](#8-smoke-test)
-9. [Entrainement complet](#9-entrainement-complet)
+9. [Full training](#9-full-training)
 10. [Evaluation](#10-evaluation)
 11. [Inference](#11-inference)
-12. [Conformite EPI](#12-conformite-epi)
-13. [API REST](#13-api-rest)
-14. [Interface Streamlit](#14-interface-streamlit)
-15. [Export ONNX](#15-export-onnx)
-16. [Structure des sorties](#16-structure-des-sorties)
-17. [Qualite du code et tests](#17-qualite-du-code-et-tests)
-18. [Depannage](#18-depannage)
-19. [Limites connues](#19-limites-connues)
-20. [Pistes d&#39;amelioration](#20-pistes-damelioration)
+12. [PPE compliance](#12-ppe-compliance)
+13. [REST API](#13-rest-api)
+14. [Streamlit interface](#14-streamlit-interface)
+15. [ONNX export](#15-onnx-export)
+16. [Output structure](#16-output-structure)
+17. [Code quality and tests](#17-code-quality-and-tests)
+18. [Troubleshooting](#18-troubleshooting)
+19. [Known limitations](#19-known-limitations)
+20. [Future work](#20-future-work)
 
 ---
 
-## 1. Presentation
+## 1. Overview
 
-Le systeme detecte **7 classes** d'equipements et de personnes sur des images
-de chantier ou de site industriel :
+The current model (`artifacts/models/best.pt`, trained on the v3 dataset)
+detects **9 classes** of equipment, people and PPE "look-alikes" in images of
+construction or industrial sites:
 
-| ID | Classe         | Instances | Part    |
-| -- | -------------- | --------- | ------- |
-| 0  | Face Mask      | 788       | 3,09 %  |
-| 1  | Person         | 7 649     | 29,95 % |
-| 2  | Safety Gloves  | 2 172     | 8,50 %  |
-| 3  | Safety Harness | 1 175     | 4,60 %  |
-| 4  | Safety Helmet  | 5 449     | 21,33 % |
-| 5  | Safety Shoes   | 5 875     | 23,00 % |
-| 6  | Safety Vest    | 2 434     | 9,53 %  |
+| ID | Class               | Instances (v3) | Share  |
+| -- | ------------------- | -------------- | ------ |
+| 0  | Face Mask           | 788            | 1.09%  |
+| 1  | Person              | 25,168         | 34.93% |
+| 2  | Safety Gloves       | 2,172          | 3.01%  |
+| 3  | Safety Harness      | 1,175          | 1.63%  |
+| 4  | Safety Helmet       | 24,415         | 33.88% |
+| 5  | Safety Shoes        | 5,875          | 8.15%  |
+| 6  | Safety Vest         | 2,434          | 3.38%  |
+| 7  | Non-Safety Headwear | 4,248          | 5.90%  |
+| 8  | Uncovered Head      | 5,785          | 8.03%  |
 
-Une couche metier **optionnelle** associe ensuite les EPI aux personnes
-detectees pour produire un statut de conformite. Cette association est une
-heuristique geometrique, pas une mesure certaine : voir la
-[section 12](#12-conformite-epi).
+Classes 0 to 6 come from the original Roboflow export. Classes 7 and 8 are
+**negative** classes, added so that a bicycle helmet or a bare head is no
+longer mistaken for a hard hat (see
+[section 12](#telling-real-ppe-apart-from-look-alikes)). The English names are
+the internal identifiers; the interface currently displays French labels.
 
-### Decisions d'ingenierie notables
+### Model versions
 
-| Sujet                | Decision                                     | Raison                                                                                                                                                                                       |
-| -------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Modele               | `yolo26s.pt` (Ultralytics 8.4)             | Roboflow annonce un export « YOLO26 » : verification faite,**YOLO26 existe reellement** dans Ultralytics 8.4 (`yolo26n/s/m/l/x`). Les annotations restent du YOLO standard.        |
-| Python               | 3.12 dans un venv dedie                      | Python 3.14 est installe globalement, mais PyTorch ne publie pas encore de roues pour cette version.                                                                                         |
-| PyTorch              | `2.9.1+cu128`                              | La RTX 5080 est une puce**Blackwell (sm_120)**. Les builds CUDA anterieures a 12.8 ne contiennent aucun noyau pour cette architecture. Verifie via `torch.cuda.get_arch_list()`.     |
-| Polygones            | Conversion en boites dans une**copie** | 349 lignes de segmentation coexistent avec les boites. Le dataset original n'est jamais modifie.                                                                                             |
-| Chemins`data.yaml` | Resolution multi-candidats                   | L'export Roboflow ecrit`../train/images`, qui ne se resout pas correctement depuis la racine du dataset. Le code teste plusieurs interpretations et retient celle qui existe.              |
-| Verification ONNX    | Comparaison**fonctionnelle**           | YOLO26 s'exporte « end-to-end » (sortie`(1, 300, 6)` deja filtree). Comparer les tenseurs bruts terme a terme n'a pas de sens : on compare les detections produites sur une vraie image. |
+| Version          | Classes                       | Weights                            | mAP@0.50 (test)                                |
+| ---------------- | ----------------------------- | ---------------------------------- | ---------------------------------------------- |
+| 7 classes        | 7 Roboflow classes            | `best_7classes.pt`               | 0.7992                                         |
+| 8 classes        | + `Non-Safety Headwear`     | `best_8classes.pt`               | 0.7988 (on the 7 shared classes)               |
+| **v3 (current)** | + `Uncovered Head`         | `best.pt` (= `best_v3.pt`)     | **0.8368** (v3 test, 9 classes)          |
+
+The v3 figure is measured on the v3 dataset's test split, which is larger than
+the original one: it is not directly comparable to the other two. On the
+**same 578 original test images**, the fair comparison gives 0.7992
+(7 classes), 0.7988 (8 classes) and **0.8077 (v3)**. Details in
+[section 10](#current-model-v3-9-classes).
+
+An **optional** business layer then associates PPE items with the detected
+people to produce a compliance status. This association is a geometric
+heuristic, not a certain measurement: see
+[section 12](#12-ppe-compliance).
+
+### Notable engineering decisions
+
+| Topic                | Decision                                     | Rationale                                                                                                                                                                                         |
+| -------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model                | `yolo26s.pt` (Ultralytics 8.4)             | Roboflow advertises a "YOLO26" export: checked, **YOLO26 really exists** in Ultralytics 8.4 (`yolo26n/s/m/l/x`). The annotations remain standard YOLO.                                     |
+| Python               | 3.12 in a dedicated venv                     | Python 3.14 is installed globally, but PyTorch does not publish wheels for that version yet.                                                                                                     |
+| PyTorch              | `2.9.1+cu128`                              | The RTX 5080 is a **Blackwell (sm_120)** chip. CUDA builds older than 12.8 contain no kernels for this architecture. Verified via `torch.cuda.get_arch_list()`.                         |
+| Polygons             | Converted to boxes in a **copy**       | 349 segmentation lines coexist with the boxes. The original dataset is never modified.                                                                                                           |
+| `data.yaml` paths  | Multi-candidate resolution                   | The Roboflow export writes `../train/images`, which does not resolve correctly from the dataset root. The code tries several interpretations and keeps the one that exists.                   |
+| ONNX verification    | **Functional** comparison              | YOLO26 exports "end-to-end" (output `(1, 300, 6)` already filtered). Comparing raw tensors element by element makes no sense: we compare the detections produced on a real image. |
 
 ---
 
@@ -72,73 +97,100 @@ heuristique geometrique, pas une mesure certaine : voir la
 
 ```
 .
-├── data.yaml                     # Export Roboflow original (jamais modifie)
-├── train/ valid/ test/           # Images et labels originaux (intacts)
+├── data.yaml                     # Original Roboflow export (never modified)
+├── train/ valid/ test/           # Original images and labels (untouched)
 │
 ├── configs/
-│   ├── train.yaml                # Hyperparametres d'entrainement
-│   └── inference.yaml            # Seuils d'inference + regles de conformite
+│   ├── train.yaml                # Training hyperparameters
+│   └── inference.yaml            # Inference thresholds + compliance rules
 │
 ├── src/ppe_detection/
-│   ├── annotations.py            # Parsing/validation/conversion des labels (sans dependance lourde)
-│   ├── config.py                 # Dataclasses de configuration typees
-│   ├── utils.py                  # Logging, seed, device, E/S, securite des noms de fichiers
-│   ├── dataset_audit.py          # Audit complet du dataset
-│   ├── dataset_cleaner.py        # Construction du dataset de detection normalise
-│   ├── train.py                  # Entrainement
-│   ├── evaluate.py               # Evaluation + analyse d'erreurs
-│   ├── calibrate.py              # Calibration des seuils par classe (validation)
-│   ├── pose.py                   # Association EPI/personne par points cles
-│   ├── predict.py                # Inference unifiee (image/dossier/video/webcam/flux)
-│   ├── video.py                  # Boucle video et webcam
-│   ├── compliance.py             # Association geometrique EPI <-> personne
-│   ├── visualization.py          # Rendu des detections et graphiques
-│   ├── export.py                 # Export ONNX + verification reelle
-│   └── api.py                    # API REST FastAPI
+│   ├── annotations.py            # Label parsing/validation/conversion (no heavy dependency)
+│   ├── config.py                 # Typed configuration dataclasses
+│   ├── utils.py                  # Logging, seed, device, I/O, filename sanitization
+│   ├── dataset_audit.py          # Full dataset audit
+│   ├── dataset_cleaner.py        # Builds the normalized detection dataset
+│   ├── dataset_merge.py          # Merges public datasets, remapping their classes
+│   ├── pseudo_label.py           # Pre-annotates a missing class with an existing model
+│   ├── taxonomy.py               # Extended class schema, counter-evidence, French labels
+│   ├── train.py                  # Training
+│   ├── evaluate.py               # Evaluation + error analysis
+│   ├── calibrate.py              # Per-class threshold calibration (validation)
+│   ├── pose.py                   # PPE/person association via keypoints
+│   ├── predict.py                # Unified inference (image/folder/video/webcam/stream)
+│   ├── video.py                  # Video and webcam loop
+│   ├── compliance.py             # Geometric PPE <-> person association
+│   ├── visualization.py          # Detection rendering and charts
+│   ├── export.py                 # ONNX export + real verification
+│   └── api.py                    # FastAPI REST API
 │
-├── app/streamlit_app.py          # Interface locale
-├── docs/plan_ecart_terrain.md    # Plan de collecte pour le deploiement reel
-├── scripts/*.ps1                 # Scripts PowerShell de bout en bout
-├── tests/                        # 116 tests unitaires et d'integration
-└── artifacts/                    # Sorties generees (hors Git)
-    ├── dataset_detection/        # Dataset normalise (labels 5 champs)
+├── app/streamlit_app.py          # Local interface
+├── docs/plan_ecart_terrain.md    # Data collection plan for real-world deployment
+├── docs/plan_donnees_epi_sosies.md  # Sources and annotation rules for negative classes
+├── scripts/*.ps1                 # End-to-end PowerShell scripts
+├── tests/                        # 221 unit and integration tests
+└── artifacts/                    # Generated outputs (not tracked by Git)
+    ├── dataset_detection/        # Normalized dataset (5-field labels)
     ├── models/                   # best.pt, last.pt
-    ├── runs/                     # Runs Ultralytics
-    ├── reports/                  # Rapports JSON + Markdown
-    ├── predictions/              # Resultats d'inference
-    └── exports/                  # Modeles exportes
+    ├── runs/                     # Ultralytics runs
+    ├── reports/                  # JSON + Markdown reports
+    ├── predictions/              # Inference results
+    └── exports/                  # Exported models
 ```
 
 ---
 
-## 3. Dataset et licence
+## 3. Dataset and license
 
-- **Source** : [Roboflow Universe — PPE Detection Project](https://universe.roboflow.com/ousmane-savadogo/ppe-detection-project-jeezl-p9ncg)
-- **Licence** : **CC BY 4.0** — reutilisation permise avec attribution.
-- **Export** : 30 juillet 2026, format annonce « YOLO26 ».
-- **Volume** : 7 000 images, 25 542 annotations, 857 Mo.
+- **Source**: [Roboflow Universe — PPE Detection Project](https://universe.roboflow.com/ousmane-savadogo/ppe-detection-project-jeezl-p9ncg)
+- **License**: **CC BY 4.0** — reuse allowed with attribution.
+- **Export**: July 30, 2026, advertised format "YOLO26".
+- **Size**: 7,000 images, 25,542 annotations, 857 MB.
 
 | Split | Images | Labels | Annotations |
 | ----- | ------ | ------ | ----------- |
-| train | 4 903  | 4 903  | 17 873      |
-| valid | 1 399  | 1 399  | 5 197       |
-| test  | 698    | 698    | 2 472       |
+| train | 4,903  | 4,903  | 17,873      |
+| valid | 1,399  | 1,399  | 5,197       |
+| test  | 698    | 698    | 2,472       |
 
-L'appariement image ↔ label est **parfait** : aucune image orpheline, aucun
-label sans image.
+Image ↔ label pairing is **perfect**: no orphan image, no label without an
+image.
+
+Sections 6 to 9 describe how this original dataset is processed.
+
+### v3 dataset (current model)
+
+The current model is trained on a merge of three sources, assembled by
+[`dataset_merge.py`](src/ppe_detection/dataset_merge.py):
+
+| Source                                                | License                                          | Images | Contribution                                                 |
+| ----------------------------------------------------- | ------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| Roboflow — PPE Detection Project                      | CC BY 4.0                                        | 7,000  | The 7 original classes                                       |
+| Open Images V7                                        | annotations CC BY 4.0, images under their own license | 1,853  | `Non-Safety Headwear` (4,248), `Person` (3,231, pseudo-labeled) |
+| Voxel51 `hard-hat-detection` (Hugging Face)           | CC0                                              | 5,000  | `Uncovered Head` (5,785), `Safety Helmet` (18,966), `Person` (pseudo-labeled) |
+
+| Split     | Images | Annotations |
+| --------- | ------ | ----------- |
+| train     | 9,942  | 51,151      |
+| valid     | 2,648  | 13,968      |
+| test      | 1,263  | 6,941       |
+| **Total** | 13,853 | 72,060      |
+
+v3 dataset audit: 0 errors, 0 polygon lines, 0 exact binary duplicates.
+Report: `artifacts/reports/audit_v3.md`.
 
 ---
 
-## 4. Prerequis
+## 4. Prerequisites
 
-- **Windows 10/11** avec PowerShell (le code reste portable Linux/macOS).
-- **Python 3.10 a 3.13** (3.12 recommande). Python 3.14 n'est pas encore
-  supporte par PyTorch.
-- **GPU NVIDIA** optionnel mais fortement recommande. Le CPU fonctionne mais
-  l'entrainement complet y serait deraisonnablement long.
-- ~10 Go d'espace disque (dataset original + copie normalisee + poids).
+- **Windows 10/11** with PowerShell (the code remains portable to Linux/macOS).
+- **Python 3.10 to 3.13** (3.12 recommended). Python 3.14 is not yet
+  supported by PyTorch.
+- **NVIDIA GPU** optional but strongly recommended. CPU works, but full
+  training would be unreasonably long.
+- ~10 GB of disk space (original dataset + normalized copy + weights).
 
-Environnement de reference valide :
+Validated reference environment:
 
 ```
 Python        3.12.10
@@ -146,32 +198,32 @@ torch         2.9.1+cu128
 ultralytics   8.4.112
 opencv        5.0.0
 onnxruntime   1.28.0
-GPU           NVIDIA GeForce RTX 5080 Laptop (16 Go, sm_120)
-Pilote        596.36 (CUDA 13.2)
+GPU           NVIDIA GeForce RTX 5080 Laptop (16 GB, sm_120)
+Driver        596.36 (CUDA 13.2)
 ```
 
 ---
 
 ## 5. Installation
 
-### Installation automatique (recommandee)
+### Automatic installation (recommended)
 
 ```powershell
 .\scripts\setup.ps1
 ```
 
-Le script cree le venv, detecte le GPU, installe la variante PyTorch adaptee,
-installe le projet, puis **verifie que la build PyTorch contient bien des
-noyaux pour votre GPU**.
+The script creates the venv, detects the GPU, installs the matching PyTorch
+variant, installs the project, then **checks that the PyTorch build actually
+contains kernels for your GPU**.
 
-Variantes :
+Variants:
 
 ```powershell
-.\scripts\setup.ps1 -Cuda cpu                    # machine sans GPU
-.\scripts\setup.ps1 -PythonVersion 3.11 -Force   # autre version, recreation
+.\scripts\setup.ps1 -Cuda cpu                    # machine without a GPU
+.\scripts\setup.ps1 -PythonVersion 3.11 -Force   # other version, recreate
 ```
 
-### Installation manuelle
+### Manual installation
 
 ```powershell
 py -3.12 -m venv .venv
@@ -179,31 +231,31 @@ py -3.12 -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-**GPU (Blackwell / RTX 50xx — CUDA 12.8) :**
+**GPU (Blackwell / RTX 50xx — CUDA 12.8):**
 
 ```powershell
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
 ```
 
-**GPU (Ampere / Ada — RTX 30xx, 40xx) :**
+**GPU (Ampere / Ada — RTX 30xx, 40xx):**
 
 ```powershell
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
 ```
 
-**CPU uniquement :**
+**CPU only:**
 
 ```powershell
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 ```
 
-Puis le projet :
+Then the project:
 
 ```powershell
 python -m pip install -e ".[api,ui,export,audit,dev]"
 ```
 
-Verification :
+Check:
 
 ```powershell
 python -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.cuda.get_arch_list())"
@@ -211,133 +263,132 @@ python -c "import torch; print(torch.__version__, torch.cuda.is_available(), tor
 
 ---
 
-## 6. Audit du dataset
+## 6. Dataset audit
 
 ```powershell
 python -m ppe_detection.dataset_audit --data data.yaml --output artifacts/reports/dataset_audit_original.json
 ```
 
-Options utiles :
+Useful options:
 
 ```powershell
-# Audit rapide, sans recherche de quasi-doublons visuels
+# Fast audit, without searching for visual near-duplicates
 python -m ppe_detection.dataset_audit --data data.yaml --output artifacts/reports/audit.json --skip-perceptual-hash
 
-# Echoue si des erreurs bloquantes ou des polygones subsistent (utile en CI)
+# Fail if blocking errors or polygons remain (useful in CI)
 python -m ppe_detection.dataset_audit --data data.yaml --output artifacts/reports/audit.json --fail-on-error --fail-on-polygon
 ```
 
-L'audit verifie : existence des splits, validite du `data.yaml`, appariement
-image/label, extensions, images corrompues, dimensions et rapports d'aspect,
-labels vides, identifiants de classes, valeurs non numeriques, coordonnees hors
-`[0, 1]`, tailles nulles ou negatives, boites debordant du cadre, boites
-minuscules, lignes a 5 champs, lignes polygonales, distribution par classe,
-desequilibre, doublons binaires, quasi-doublons perceptuels et fuites entre
-splits.
+The audit checks: existence of the splits, validity of `data.yaml`,
+image/label pairing, extensions, corrupted images, dimensions and aspect
+ratios, empty labels, class IDs, non-numeric values, coordinates outside
+`[0, 1]`, zero or negative sizes, boxes overflowing the frame, tiny boxes,
+5-field lines, polygon lines, per-class distribution, imbalance, exact binary
+duplicates, perceptual near-duplicates and leakage between splits.
 
-### Resultats sur ce dataset
+### Results on this dataset
 
-| Constat                                     | Valeur                                       |
-| ------------------------------------------- | -------------------------------------------- |
-| Images / annotations                        | 7 000 / 25 542                               |
-| Appariement image ↔ label                  | parfait sur les 3 splits                     |
-| Images illisibles ou corrompues             | 0                                            |
-| Lignes malformees                           | 0                                            |
-| **Lignes polygonales (segmentation)** | **349** (285 train, 46 valid, 18 test) |
-| Derives numeriques infimes corrigees        | 457                                          |
-| Doublons binaires exacts                    | 0                                            |
-| Desequilibre (max/min)                      | **9,71** (Person vs Face Mask)         |
-| Petits objets (aire < 1 % de l'image)       | ~35 % des boites                             |
-| Resolutions distinctes                      | 256 (train), de 55×87 a 5178×3884          |
+| Finding                                      | Value                                         |
+| -------------------------------------------- | --------------------------------------------- |
+| Images / annotations                         | 7,000 / 25,542                                |
+| Image ↔ label pairing                       | perfect on all 3 splits                       |
+| Unreadable or corrupted images               | 0                                             |
+| Malformed lines                              | 0                                             |
+| **Polygon lines (segmentation)**       | **349** (285 train, 46 valid, 18 test)  |
+| Tiny numerical drifts corrected              | 457                                           |
+| Exact binary duplicates                      | 0                                             |
+| Imbalance (max/min)                          | **9.71** (Person vs Face Mask)          |
+| Small objects (area < 1% of the image)       | ~35% of boxes                                 |
+| Distinct resolutions                         | 256 (train), from 55×87 to 5178×3884        |
 
-> Les 349 lignes polygonales ne sont **pas** comptees comme des erreurs :
-> ce sont des annotations de segmentation valides qui doivent etre converties
-> en boites englobantes pour une tache de detection.
+> The 349 polygon lines are **not** counted as errors: they are valid
+> segmentation annotations that must be converted to bounding boxes for a
+> detection task.
 
-### Fuite entre splits — constat important
+### Leakage between splits — an important finding
 
-L'audit met en evidence un probleme reel et significatif :
+The audit reveals a real and significant problem:
 
-| Indicateur                                                                             | Valeur                         |
-| -------------------------------------------------------------------------------------- | ------------------------------ |
-| Groupes d'images issues d'une**meme photo source** repartis sur plusieurs splits | **390** (1 252 fichiers) |
-| Clusters d'images visuellement quasi identiques                                        | 296 (2 654 images)             |
-| dont clusters s'etendant sur plusieurs splits                                          | 173 (2 368 images)             |
-| Plus grand cluster                                                                     | 1 032 images                   |
-| Sequences numerotees (`frame_000324`, …) reparties sur plusieurs splits             | 58 prefixes (3 241 images)     |
+| Indicator                                                                          | Value                          |
+| ---------------------------------------------------------------------------------- | ------------------------------ |
+| Groups of images from the **same source photo** spread across several splits | **390** (1,252 files)    |
+| Clusters of visually near-identical images                                         | 296 (2,654 images)             |
+| of which clusters spanning several splits                                          | 173 (2,368 images)             |
+| Largest cluster                                                                    | 1,032 images                   |
+| Numbered sequences (`frame_000324`, …) spread across several splits             | 58 prefixes (3,241 images)     |
 
-Deux mecanismes distincts sont a l'oeuvre :
+Two distinct mechanisms are at play:
 
-1. **Variantes augmentees d'une meme photo.** Roboflow nomme les fichiers
-   `photo_jpg.rf.<hash>.jpg` ; le prefixe avant `.rf.` identifie la photo
-   source. 390 photos sources apparaissent dans plusieurs splits. Une
-   comparaison pixel a pixel confirme qu'il s'agit bien de transformations
-   geometriques de la meme image (rotation de 180° verifiee sur
-   `101307074_544e234e97`), **alors que le README Roboflow affirme
-   « No pre-processing or augmentation was applied »**.
-2. **Frames video consecutives.** 1 785 images se nomment `frame_NNNNNN` et
-   proviennent de sequences video. Deux frames voisines sont quasi identiques ;
-   reparties aleatoirement entre train et test, elles rendent l'evaluation
-   optimiste.
+1. **Augmented variants of the same photo.** Roboflow names files
+   `photo_jpg.rf.<hash>.jpg`; the prefix before `.rf.` identifies the source
+   photo. 390 source photos appear in several splits. A pixel-by-pixel
+   comparison confirms that these are indeed geometric transformations of the
+   same image (180° rotation verified on `101307074_544e234e97`), **even
+   though the Roboflow README states "No pre-processing or augmentation was
+   applied"**.
+2. **Consecutive video frames.** 1,785 images are named `frame_NNNNNN` and
+   come from video sequences. Two neighboring frames are nearly identical;
+   randomly split between train and test, they make the evaluation
+   optimistic.
 
-**Consequence : les metriques mesurees sur ce decoupage surestiment la
-performance reelle sur un chantier jamais vu.** Voir la
-[section 7](#option-anti-fuite) pour l'attenuation disponible.
+**Consequence: metrics measured on this split overestimate real-world
+performance on a never-seen site.** See
+[section 7](#anti-leak-option) for the available mitigation.
 
 ---
 
-## 7. Conversion des annotations
+## 7. Annotation conversion
 
-Le dataset original n'est **jamais** modifie. Une copie normalisee est
-construite, ne contenant que des lignes YOLO detection a 5 champs.
+The original dataset is **never** modified. A normalized copy is built,
+containing only 5-field YOLO detection lines.
 
 ```powershell
 python -m ppe_detection.dataset_cleaner --source data.yaml --output artifacts/dataset_detection --mode copy
 ```
 
-Ou, en une seule commande avec audit avant/apres :
+Or, in a single command with a before/after audit:
 
 ```powershell
 .\scripts\audit_dataset.ps1
 ```
 
-### Regroupement anti-fuite (actif par defaut)
+### Anti-leak regrouping (enabled by default)
 
-L'export Roboflow place des **variantes augmentees d'une meme photo** dans des
-splits differents : 390 photos sources se retrouvaient reparties entre train,
-valid et test. Un modele evalue dans ces conditions est note sur des images
-qu'il a deja apprises.
+The Roboflow export places **augmented variants of the same photo** in
+different splits: 390 source photos were spread across train, valid and
+test. A model evaluated under these conditions is scored on images it has
+already learned.
 
-Le nettoyeur regroupe donc, **par defaut**, toutes les variantes d'une meme
-photo source dans un seul split. Le split retenu est celui ou reside deja la
-majorite des fichiers ; les egalites sont tranchees par un hachage stable, donc
-reproductible.
+The cleaner therefore regroups, **by default**, all variants of the same
+source photo into a single split. The chosen split is the one already holding
+the majority of the files; ties are broken by a stable hash, so the result is
+reproducible.
 
-Effet mesure sur ce projet :
+Measured effect on this project:
 
-|                                              | Decoupage Roboflow | Regroupe (defaut) |
-| -------------------------------------------- | ------------------ | ----------------- |
-| Repartition train/valid/test                 | 4903 / 1399 / 698  | 5145 / 1277 / 578 |
-| Photos sources a cheval sur plusieurs splits | 390                | **0**       |
-| mAP@0.50 rapportee sur le test               | 0.8319             | **0.7992**  |
-| mAP@0.50:0.95 rapportee                      | 0.4696             | **0.4326**  |
+|                                         | Roboflow split    | Regrouped (default) |
+| --------------------------------------- | ----------------- | ------------------- |
+| Train/valid/test split                  | 4903 / 1399 / 698 | 5145 / 1277 / 578   |
+| Source photos spanning several splits   | 390               | **0**         |
+| mAP@0.50 reported on test               | 0.8319            | **0.7992**    |
+| mAP@0.50:0.95 reported                  | 0.4696            | **0.4326**    |
 
-Les chiffres de droite sont les vrais. L'ecart de +0.033 mesurait une fuite, pas
-une performance : 139 des 698 images de test (19,9 %) figuraient dans le train.
+The numbers on the right are the real ones. The +0.033 gap measured leakage,
+not performance: 139 of the 698 test images (19.9%) were also in train.
 
-Pour reproduire le decoupage d'origine — par exemple afin de comparer a des
-resultats publies sur le dataset Roboflow — utilisez `--allow-source-leak`, en
-sachant que les metriques obtenues seront optimistes.
+To reproduce the original split — for example to compare with results
+published on the Roboflow dataset — use `--allow-source-leak`, keeping in mind
+that the resulting metrics will be optimistic.
 
-**Fuite residuelle assumee** : 78 clusters de quasi-doublons traversent encore
-les splits. Ce sont des frames video consecutives (`frame_000324`,
-`frame_000325`...), formellement des images sources distinctes que le
-regroupement par nom ne peut pas rapprocher. Les eliminer demanderait de
-re-stratifier par sequence video, ce qui releve d'une decision de protocole.
+**Accepted residual leakage**: 78 near-duplicate clusters still cross the
+splits. These are consecutive video frames (`frame_000324`,
+`frame_000325`...), formally distinct source images that name-based
+regrouping cannot match. Removing them would require re-stratifying by video
+sequence, which is a protocol decision.
 
-### Regle de conversion
+### Conversion rule
 
-Pour une ligne polygonale `class_id x1 y1 x2 y2 …` :
+For a polygon line `class_id x1 y1 x2 y2 …`:
 
 ```
 xmin = min(x)      center_x = (xmin + xmax) / 2
@@ -346,115 +397,118 @@ xmax = max(x)      width    = xmax - xmin
 ymax = max(y)      height   = ymax - ymin
 ```
 
-### Politique de correction
+### Correction policy
 
-| Situation                                                                      | Traitement                                                                     |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Ligne a 5 champs valide                                                        | conservee telle quelle                                                         |
-| Polygone (≥ 3 points, coordonnees paires)                                     | converti en boite englobante, journalise                                       |
-| Ecart hors`[0, 1]` ≤ 1e-3                                                   | ramene aux bornes (derive numerique de l'exporteur)                            |
-| Boite depassant le cadre, centre valide                                        | rognee sur l'image, journalisee                                                |
-| Centre hors image, taille nulle/negative, classe inconnue, champ non numerique | **ligne exclue** et journalisee — aucune boite plausible n'est inventee |
+| Situation                                                                       | Handling                                                                         |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Valid 5-field line                                                              | kept as is                                                                       |
+| Polygon (≥ 3 points, paired coordinates)                                       | converted to a bounding box, logged                                              |
+| Deviation outside `[0, 1]` ≤ 1e-3                                            | clamped to the bounds (numerical drift from the exporter)                        |
+| Box overflowing the frame, valid center                                         | clipped to the image, logged                                                     |
+| Center outside the image, zero/negative size, unknown class, non-numeric field | **line excluded** and logged — no plausible box is invented               |
 
 ### Options
 
 ```
---source          data.yaml du dataset original
---output          repertoire du dataset derive
+--source          data.yaml of the original dataset
+--output          directory of the derived dataset
 --mode            copy | symlink
---overwrite       remplace explicitement un dataset existant
---dry-run         analyse sans rien ecrire
---strict          echoue si au moins une ligne doit etre exclue
---regroup-by-source  regroupe les variantes d'une meme photo dans un seul split
---no-audit        n'execute pas l'audit de verification
+--overwrite       explicitly replaces an existing dataset
+--dry-run         analyze without writing anything
+--strict          fail if at least one line must be excluded
+--allow-source-leak  disable anti-leak regrouping (original Roboflow split)
+--regroup-by-source  no effect, kept for compatibility (regrouping is the default)
+--no-audit        do not run the verification audit
 ```
 
-Toujours faire un essai a blanc avant :
+Always do a dry run first:
 
 ```powershell
 python -m ppe_detection.dataset_cleaner --source data.yaml --output artifacts/dataset_detection --dry-run
 ```
 
-### Resultat obtenu
+### Result obtained
 
 ```
-25 542 lignes lues → 25 542 conservées (0 perdue)
-   349 converties depuis un polygone
-   457 derives numeriques corrigees
-     0 exclues
+25,542 lines read → 25,542 kept (0 lost)
+   349 converted from a polygon
+   457 numerical drifts corrected
+     0 excluded
 ```
 
-L'audit de verification relance automatiquement confirme : **0 ligne
-polygonale, 0 ligne malformee, 100 % de lignes a 5 champs**.
+The automatically rerun verification audit confirms: **0 polygon lines,
+0 malformed lines, 100% 5-field lines**.
 
-### Option anti-fuite
+### Anti-leak option
 
-Pour supprimer la fuite decrite en section 6 :
+The leakage described in section 6 is removed **by default**: the conversion
+command above already regroups all variants of the same source photo into a
+single split (the one already holding the majority of the files; ties are
+broken by a stable hash, so reproducibly). The legacy `--regroup-by-source`
+flag is still accepted but no longer has any effect.
+
+To go back to the original Roboflow split, for example to compare with
+published results:
 
 ```powershell
-python -m ppe_detection.dataset_cleaner --source data.yaml --output artifacts/dataset_detection_nofleak --mode copy --regroup-by-source
+python -m ppe_detection.dataset_cleaner --source data.yaml --output artifacts/dataset_detection_leak --mode copy --allow-source-leak
 ```
 
-Toutes les variantes d'une meme photo source sont regroupees dans un seul
-split (celui ou reside deja la majorite des fichiers ; les egalites sont
-tranchees par un hachage stable, donc de facon reproductible).
+Measured effect of regrouping:
 
-Effet mesure :
+| Indicator                                       | Original splits       | After regrouping      |
+| ----------------------------------------------- | --------------------- | --------------------- |
+| Source groups spread across several splits      | 390 (1,252 files)     | **0**           |
+| Numbered sequences spread across several splits | 58 prefixes           | 19 prefixes           |
+| Train / valid / test split                      | 4,903 / 1,399 / 698   | 5,145 / 1,277 / 578   |
 
-| Indicateur                                          | Splits d'origine     | Apres regroupement  |
-| --------------------------------------------------- | -------------------- | ------------------- |
-| Groupes source repartis sur plusieurs splits        | 390 (1 252 fichiers) | **0**         |
-| Sequences numerotees reparties sur plusieurs splits | 58 prefixes          | 19 prefixes         |
-| Repartition train / valid / test                    | 4 903 / 1 399 / 698  | 5 145 / 1 277 / 578 |
+488 files are moved. The accepted trade-off: the resulting numbers are not
+directly comparable with those published on the original Roboflow split, hence
+the `--allow-source-leak` option to reproduce them.
 
-488 fichiers sont deplaces. **Cette option n'est pas activee par defaut** :
-elle modifie le protocole d'evaluation et rend les chiffres non comparables a
-ceux publies sur le decoupage Roboflow d'origine. Le choix est laisse explicite.
-
-> Limite : le regroupement par photo source ne resout **pas** la fuite due aux
-> sequences video, car deux frames voisines sont des images sources
-> differentes. Apres regroupement, 78 clusters de quasi-doublons s'etendent
-> encore sur plusieurs splits.
+> Limitation: regrouping by source photo does **not** solve leakage due to
+> video sequences, since two neighboring frames are different source images.
+> After regrouping, 78 near-duplicate clusters still span several splits.
 
 ---
 
 ## 8. Smoke test
 
-**A executer systematiquement avant tout entrainement long.**
+**Run it systematically before any long training.**
 
 ```powershell
 .\scripts\smoke_train.ps1
 ```
 
-ou :
+or:
 
 ```powershell
 python -m ppe_detection.train --config configs/train.yaml --smoke
 ```
 
-Le smoke test lance 2 epoques sur 4 % des donnees et verifie que la chaine
-complete produit bien poids et metriques.
+The smoke test runs 2 epochs on 4% of the data and checks that the full
+pipeline does produce weights and metrics.
 
-**Resultat obtenu sur la machine de reference : reussi en 70 secondes**, poids
-ecrits dans `artifacts/models/smoke_best.pt`. Les metriques associees
-(mAP@0.50 = 0,095) n'ont aucune valeur predictive — c'est attendu apres
-2 epoques sur 4 % des donnees.
+**Result on the reference machine: passed in 70 seconds**, weights written to
+`artifacts/models/smoke_best.pt`. The associated metrics
+(mAP@0.50 = 0.095) have no predictive value — this is expected after
+2 epochs on 4% of the data.
 
 ---
 
-## 9. Entrainement complet
+## 9. Full training
 
 ```powershell
 .\scripts\train.ps1
 ```
 
-ou, en commande directe :
+or, as a direct command:
 
 ```powershell
 python -m ppe_detection.train --config configs/train.yaml
 ```
 
-Surcharges frequentes :
+Common overrides:
 
 ```powershell
 python -m ppe_detection.train --config configs/train.yaml --epochs 150 --batch 24
@@ -462,34 +516,34 @@ python -m ppe_detection.train --config configs/train.yaml --model yolo26m.pt --i
 python -m ppe_detection.train --config configs/train.yaml --device cpu
 ```
 
-### Configuration retenue (`configs/train.yaml`)
+### Chosen configuration (`configs/train.yaml`)
 
-| Parametre                              | Valeur         | Justification                                                                  |
-| -------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
-| `model`                              | `yolo26s.pt` | Compromis vitesse/precision comme baseline                                     |
-| `imgsz`                              | 640            | Standard ; ~35 % des objets sont petits, une taille inferieure les degraderait |
-| `epochs`                             | 100            | Avec early stopping (`patience: 25`)                                         |
-| `batch`                              | `-1` (auto)  | Ultralytics calibre a ~60 % de la VRAM                                         |
-| `workers`                            | 8              | Sous Windows chaque worker est un processus complet                            |
-| `amp`                                | `true`       | Indispensable sur Blackwell                                                    |
-| `seed` / `deterministic`           | 42 /`true`   | Reproductibilite                                                               |
-| `degrees`, `flipud`                | 0.0            | Les EPI ont une orientation stable (casque en haut)                            |
-| `mixup`, `erasing`, `copy_paste` | 0.0            | Risquent de faire disparaitre les petits EPI                                   |
-| `close_mosaic`                       | 10             | Desactive la mosaique en fin d'entrainement                                    |
+| Parameter                              | Value          | Rationale                                                                  |
+| -------------------------------------- | -------------- | -------------------------------------------------------------------------- |
+| `model`                              | `yolo26s.pt` | Speed/accuracy trade-off as a baseline                                     |
+| `imgsz`                              | 640            | Standard; ~35% of objects are small, a smaller size would degrade them     |
+| `epochs`                             | 100            | With early stopping (`patience: 25`)                                     |
+| `batch`                              | `-1` (auto)  | Ultralytics calibrates to ~60% of VRAM                                     |
+| `workers`                            | 8              | On Windows, each worker is a full process                                  |
+| `amp`                                | `true`       | Essential on Blackwell                                                     |
+| `seed` / `deterministic`           | 42 / `true`  | Reproducibility                                                            |
+| `degrees`, `flipud`                | 0.0            | PPE has a stable orientation (helmet on top)                               |
+| `mixup`, `erasing`, `copy_paste` | 0.0            | Risk making small PPE items disappear                                      |
+| `close_mosaic`                       | 10             | Disables mosaic at the end of training                                     |
 
-### Reprise apres interruption
+### Resuming after an interruption
 
-`Ctrl+C` interrompt proprement ; `last.pt` reste exploitable.
+`Ctrl+C` stops cleanly; `last.pt` remains usable.
 
 ```powershell
 python -m ppe_detection.train --resume artifacts/runs/ppe_yolo26s/weights/last.pt
 ```
 
-### Elements archives a chaque run
+### Items archived with each run
 
 `best.pt`, `last.pt`, `resolved_train_config.yaml`, `run_metadata.json`
-(environnement, `pip freeze`, seed, device), `results.csv`, courbes,
-matrice de confusion, exemples de predictions, `training_summary.json`.
+(environment, `pip freeze`, seed, device), `results.csv`, curves,
+confusion matrix, prediction samples, `training_summary.json`.
 
 ---
 
@@ -499,185 +553,235 @@ matrice de confusion, exemples de predictions, `training_summary.json`.
 python -m ppe_detection.evaluate --weights artifacts/models/best.pt --data artifacts/dataset_detection/data.yaml --split test
 ```
 
-ou, validation puis test :
+or, validation then test:
 
 ```powershell
 .\scripts\evaluate.ps1
 ```
 
-> **Protocole** : les seuils et hyperparametres se choisissent sur le split de
-> **validation**. Le split de test ne sert qu'une fois les choix arretes.
+> **Protocol**: thresholds and hyperparameters are chosen on the
+> **validation** split. The test split is only used once the choices are
+> final.
 
-Le rapport contient : precision, rappel, mAP@0.50, mAP@0.50:0.95, mAP@0.75,
-metriques par classe, matrice de confusion, temps de pretraitement /
-inference / post-traitement, debit en images/s, taille des poids, nombre de
-parametres, analyse d'erreurs (VP / FP / FN par classe), confusions entre
-classes, meilleurs et pires exemples, et limites connues.
+The report contains: precision, recall, mAP@0.50, mAP@0.50:0.95, mAP@0.75,
+per-class metrics, confusion matrix, preprocessing / inference /
+postprocessing times, throughput in images/s, weights size, parameter count,
+error analysis (TP / FP / FN per class), confusions between classes, best and
+worst examples, and known limitations.
 
-### Resultats de reference (`yolo26s`, 640 px, dataset sans fuite)
+### Current model (v3, 9 classes)
 
-| Metrique      | Validation | Test   |
+`yolo26s`, 640 px, v3 dataset (section 3). v3 test split: 1,263 images.
+
+| Metric        | v3 test |
+| ------------- | ------- |
+| mAP@0.50      | 0.8368  |
+| mAP@0.50:0.95 | 0.5077  |
+| Precision     | 0.8360  |
+| Recall        | 0.8009  |
+| Inference     | 2.15 ms / image (RTX 5080 Laptop) |
+| Throughput    | 340 img/s |
+
+| Class               | Precision | Recall | mAP@0.50        | mAP@0.50:0.95 |
+| ------------------- | --------- | ------ | --------------- | ------------- |
+| Face Mask           | 0.905     | 0.932  | **0.958** | 0.583         |
+| Uncovered Head      | 0.911     | 0.900  | 0.950           | 0.626         |
+| Safety Helmet       | 0.909     | 0.908  | 0.948           | 0.591         |
+| Person              | 0.858     | 0.907  | 0.917           | 0.678         |
+| Safety Vest         | 0.851     | 0.864  | 0.903           | 0.552         |
+| Safety Harness      | 0.837     | 0.693  | 0.796           | 0.405         |
+| Non-Safety Headwear | 0.776     | 0.763  | 0.772           | 0.489         |
+| Safety Shoes        | 0.808     | 0.694  | 0.762           | 0.419         |
+| Safety Gloves       | 0.669     | 0.547  | **0.525** | 0.226         |
+
+This v3 test set contains many `hard-hat-detection` images, on which the model
+does markedly better: `Safety Helmet` reaches 0.948 mAP@0.50 there, versus
+0.794 on the original images alone. The global score is therefore more
+flattering than on the original domain. The fair comparison with the previous
+models is done on the **same 578 original test images**, class by class:
+
+|               | 7 classes | 8 classes | v3               |
+| ------------- | --------- | --------- | ---------------- |
+| mAP@0.50      | 0.7992    | 0.7988    | **0.8077** |
+| Recall        | 0.7539    | 0.7451    | **0.7723** |
+| Face Mask     | 0.9224    | 0.8931    | **0.9592** |
+| Safety Vest   | 0.8777    | 0.8741    | **0.9077** |
+| Safety Helmet | 0.7961    | **0.8067** | 0.7940          |
+
+Reports: `artifacts/reports/evaluation_v3_test.md` and
+`artifacts/reports/common_v3.md`. The results below concern the 7-class model,
+which served as the baseline for every analysis in this section.
+
+### Reference results of the 7-class model (`yolo26s`, 640 px, leak-free dataset)
+
+| Metric        | Validation | Test   |
 | ------------- | ---------- | ------ |
 | mAP@0.50      | 0.7789     | 0.7992 |
 | mAP@0.50:0.95 | 0.4294     | 0.4326 |
 | Precision     | 0.7855     | 0.8086 |
-| Rappel        | 0.7333     | 0.7539 |
+| Recall        | 0.7333     | 0.7539 |
 
-Par classe, sur le test :
+Per class, on test:
 
-| Classe         | Instances | Taille mediane @640 | mAP@0.50        | mAP@0.50:0.95 |
-| -------------- | --------- | ------------------- | --------------- | ------------- |
-| Face Mask      | 788       | 46 px               | **0.922** | 0.560         |
-| Person         | 7 649     | 200 px              | 0.893           | 0.531         |
-| Safety Vest    | 2 434     | 136 px              | 0.878           | 0.535         |
-| Safety Helmet  | 5 449     | 50 px               | 0.796           | 0.352         |
-| Safety Harness | 1 175     | 155 px              | 0.782           | 0.400         |
-| Safety Shoes   | 5 875     | 73 px               | 0.775           | 0.430         |
-| Safety Gloves  | 2 172     | 50 px               | **0.548** | 0.221         |
+| Class          | Instances | Median size @640 | mAP@0.50        | mAP@0.50:0.95 |
+| -------------- | --------- | ---------------- | --------------- | ------------- |
+| Face Mask      | 788       | 46 px            | **0.922** | 0.560         |
+| Person         | 7,649     | 200 px           | 0.893           | 0.531         |
+| Safety Vest    | 2,434     | 136 px           | 0.878           | 0.535         |
+| Safety Helmet  | 5,449     | 50 px            | 0.796           | 0.352         |
+| Safety Harness | 1,175     | 155 px           | 0.782           | 0.400         |
+| Safety Shoes   | 5,875     | 73 px            | 0.775           | 0.430         |
+| Safety Gloves  | 2,172     | 50 px            | **0.548** | 0.221         |
 
-**La performance suit la taille des objets, pas leur frequence.** `Face Mask` est
-la classe la plus rare (3,1 % des annotations) et la mieux detectee ; `Safety Helmet` est la deuxieme plus frequente (21,3 %) et plafonne, car 25 % des casques
-font moins de 32 px a 640. Rééquilibrer les classes serait donc inutile ici — le
-levier est la resolution.
+**Performance follows object size, not frequency.** `Face Mask` is the rarest
+class (3.1% of annotations) and the best detected; `Safety Helmet` is the
+second most frequent (21.3%) and plateaus, because 25% of helmets are smaller
+than 32 px at 640. Rebalancing the classes would therefore be useless here —
+the lever is resolution.
 
-### Le reentrainement a 960 px : hypothese testee, resultat negatif
+### Retraining at 960 px: hypothesis tested, negative result
 
-L'hypothese etait qu'entrainer a 960 px ferait progresser les classes a petits
-objets. Elle a ete testee jusqu'au bout — un entrainement complet de 3 h 36
-(97 epoques, early stopping, meilleure epoque 72) — et **elle n'est pas
-confirmee au niveau global**.
+The hypothesis was that training at 960 px would improve the small-object
+classes. It was tested all the way through — a full 3 h 36 min training run
+(97 epochs, early stopping, best epoch 72) — and **it is not confirmed at the
+global level**.
 
-Comparaison sur le meme split de test, chaque modele evalue a sa resolution
-d'entrainement :
+Comparison on the same test split, each model evaluated at its training
+resolution:
 
-|               | 640 px              | 960 px           | Ecart    |
+|               | 640 px              | 960 px           | Delta    |
 | ------------- | ------------------- | ---------------- | -------- |
 | mAP@0.50      | **0.7992**    | 0.7980           | −0.0012 |
 | mAP@0.50:0.95 | **0.4326**    | 0.4276           | −0.0050 |
 | Precision     | **0.8086**    | 0.8059           | −0.0027 |
-| Rappel        | 0.7539              | **0.7572** | +0.0033  |
+| Recall        | 0.7539              | **0.7572** | +0.0033  |
 | Inference     | **2.76 ms**   | 5.83 ms          | ×2.1    |
-| Debit         | **271 img/s** | 130 img/s        | ÷2.1    |
+| Throughput    | **271 img/s** | 130 img/s        | ÷2.1    |
 
-Par classe, la prediction se verifie **partiellement** — les deux classes que
-l'analyse designait progressent bien :
+Per class, the prediction is **partially** confirmed — the two classes
+singled out by the analysis do improve:
 
-| Classe         | % objets < 32 px | mAP@0.50 640 | mAP@0.50 960     | Ecart             |
-| -------------- | ---------------- | ------------ | ---------------- | ----------------- |
-| Safety Gloves  | 13 %             | 0.5483       | **0.5757** | **+0.0274** |
-| Person         | 0 %              | 0.8927       | **0.9152** | +0.0225           |
-| Safety Helmet  | 25 %             | 0.7961       | **0.8096** | +0.0135           |
-| Safety Vest    | 2 %              | 0.8777       | 0.8733           | −0.0044          |
-| Safety Shoes   | 9 %              | 0.7751       | 0.7673           | −0.0078          |
-| Safety Harness | 2 %              | 0.7821       | 0.7553           | −0.0268          |
-| Face Mask      | 18 %             | 0.9224       | 0.8892           | −0.0332          |
+| Class          | % objects < 32 px | mAP@0.50 640 | mAP@0.50 960     | Delta             |
+| -------------- | ----------------- | ------------ | ---------------- | ----------------- |
+| Safety Gloves  | 13%               | 0.5483       | **0.5757** | **+0.0274** |
+| Person         | 0%                | 0.8927       | **0.9152** | +0.0225           |
+| Safety Helmet  | 25%               | 0.7961       | **0.8096** | +0.0135           |
+| Safety Vest    | 2%                | 0.8777       | 0.8733           | −0.0044          |
+| Safety Shoes   | 9%                | 0.7751       | 0.7673           | −0.0078          |
+| Safety Harness | 2%                | 0.7821       | 0.7553           | −0.0268          |
+| Face Mask      | 18%               | 0.9224       | 0.8892           | −0.0332          |
 
-`Safety Gloves`, la classe la plus faible, gagne 5 % en relatif. Mais le signal
-reste faible et bruite : les classes a petits objets gagnent +0.0026 en moyenne,
-les autres perdent −0.0041. Surtout, **`Face Mask` regresse le plus fortement
-alors que 18 % de ses objets sont minuscules**, ce qui contredit une explication
-purement fondee sur la taille.
+`Safety Gloves`, the weakest class, gains 5% in relative terms. But the signal
+remains weak and noisy: small-object classes gain +0.0026 on average, the
+others lose −0.0041. Above all, **`Face Mask` regresses the most even though
+18% of its objects are tiny**, which contradicts a purely size-based
+explanation.
 
-**Decision : `best.pt` reste le modele 640 px.** Il est meilleur ou equivalent
-sur toutes les metriques globales et deux fois plus rapide. Le modele 960 est
-conserve sous `artifacts/models/best_960.pt` : il peut se justifier si la
-detection des gants devient prioritaire, au prix du debit.
+**Decision: `best.pt` remains the 640 px model.** It is better or equivalent
+on every global metric and twice as fast. The 960 model is kept under
+`artifacts/models/best_960.pt`: it may be justified if glove detection becomes
+a priority, at the cost of throughput.
 
-Ce que cela apprend : **la resolution seule ne compense pas un manque de
-diversite dans les donnees.** Le levier restant est la collecte de donnees de
-terrain — voir [`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
+What this teaches: **resolution alone does not make up for a lack of
+diversity in the data.** The remaining lever is collecting field data — see
+[`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
 
-À noter egalement : evaluer les poids 640 px a 960 px sans reentrainer degrade
-le resultat (0.780 vs 0.799). **Augmenter la resolution a l'inference seule ne
-fonctionne pas** — le modele attend l'echelle sur laquelle il a ete entraine.
+Also note: evaluating the 640 px weights at 960 px without retraining degrades
+the result (0.780 vs 0.799). **Increasing resolution at inference time alone
+does not work** — the model expects the scale it was trained on.
 
 ---
 
-### Calibration des seuils par classe
+### Per-class threshold calibration
 
-Un seuil unique pour toutes les classes est un compromis mediocre : chaque
-classe a sa propre distribution de scores. La commande suivante balaie les
-seuils et retient, pour chaque classe, celui qui maximise le F1 :
+A single threshold for all classes is a poor compromise: each class has its
+own score distribution. The following command sweeps the thresholds and
+keeps, for each class, the one that maximizes F1:
 
 ```powershell
 python -m ppe_detection.calibrate --weights artifacts/models/best.pt `
   --data artifacts/dataset_detection/data.yaml --split valid
 ```
 
-Ajoutez `--apply` pour ecrire directement les seuils dans
-`configs/inference.yaml` (attention : la reecriture YAML supprime les
-commentaires du fichier ; le rapport fournit toujours l'extrait a recopier).
+Add `--apply` to write the thresholds directly into
+`configs/inference.yaml` (beware: rewriting the YAML removes the file's
+comments; the report always provides the snippet to copy).
 
-**Protocole** : la calibration s'effectue sur la **validation** uniquement.
-Choisir des seuils sur le test reviendrait a ajuster le modele sur les donnees
-censees l'evaluer — la commande refuse d'ailleurs `--split test` sauf
-`--allow-test-split` assume explicitement.
+**Protocol**: calibration is performed on **validation** only. Choosing
+thresholds on test would amount to fitting the model on the data meant to
+evaluate it — the command actually refuses `--split test` unless
+`--allow-test-split` is explicitly passed.
 
-Resultats obtenus sur ce projet (seuils deja reportes dans `inference.yaml`) :
+Results on this project (thresholds already applied in `inference.yaml`):
 
-| Classe             | Seuil retenu | Gain de F1 sur le**test** |
-| ------------------ | ------------ | ------------------------------- |
-| Face Mask          | 0.25         | +0.0000                         |
-| Person             | 0.35         | +0.0076                         |
-| Safety Gloves      | 0.30         | +0.0025                         |
-| Safety Harness     | 0.40         | **+0.0235**               |
-| Safety Helmet      | 0.30         | +0.0116                         |
-| Safety Shoes       | 0.30         | −0.0001                        |
-| Safety Vest        | 0.45         | +0.0127                         |
-| **F1 macro** |              | **+0.0083**               |
+| Class              | Chosen threshold | F1 gain on **test** |
+| ------------------ | ---------------- | ------------------------- |
+| Face Mask          | 0.25             | +0.0000                   |
+| Person             | 0.35             | +0.0076                   |
+| Safety Gloves      | 0.30             | +0.0025                   |
+| Safety Harness     | 0.40             | **+0.0235**         |
+| Safety Helmet      | 0.30             | +0.0116                   |
+| Safety Shoes       | 0.30             | −0.0001                  |
+| Safety Vest        | 0.45             | +0.0127                   |
+| **Macro F1**       |                  | **+0.0083**         |
 
-Concretement sur le split de test : **120 faux positifs en moins** pour 52 vrais
-positifs perdus. Les seuils choisis sur la validation generalisent donc bien
-(+0.0067 attendu, +0.0083 constate).
+In practice on the test split: **120 fewer false positives** for 52 true
+positives lost. Thresholds chosen on validation therefore generalize well
+(+0.0067 expected, +0.0083 observed).
 
-Une contrainte metier de rappel minimal est disponible via `--min-recall` :
-utile lorsque manquer un EPI coute plus cher qu'une fausse alerte.
+> These thresholds were calibrated on the 7-class model and **have not been
+> recomputed for the v3 model**. The `Non-Safety Headwear` and
+> `Uncovered Head` classes use the global `conf` threshold. Rerunning
+> `calibrate` on the v3 validation split is the logical next step.
+
+A business constraint on minimum recall is available via `--min-recall`:
+useful when missing a PPE item costs more than a false alarm.
 
 ## 11. Inference
 
-Interface unique pour toutes les sources.
+Single interface for all sources.
 
 ```powershell
 # Image
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source chemin\image.jpg --save --save-json
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source path\to\image.jpg --save --save-json
 
-# Dossier
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source chemin\dossier --save --save-txt --save-json --save-csv
+# Folder
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source path\to\folder --save --save-txt --save-json --save-csv
 
 # Video
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source chemin\video.mp4 --save --save-json
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source path\to\video.mp4 --save --save-json
 
-# Webcam (fenetre temps reel, 'q' ou Echap pour quitter)
+# Webcam (real-time window, 'q' or Esc to quit)
 python -m ppe_detection.predict --weights artifacts/models/best.pt --source 0 --show
 
-# Flux RTSP
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source "rtsp://user:motdepasse@192.168.1.10:554/stream" --show
+# RTSP stream
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source "rtsp://user:password@192.168.1.10:554/stream" --show
 ```
 
-Options principales :
+Main options:
 
 ```
---conf / --iou       seuils de confiance et de NMS
+--conf / --iou       confidence and NMS thresholds
 --device             auto | cpu | cuda | 0
---imgsz              taille d'inference
---max-det            detections maximales par image
---half               FP16 (GPU uniquement)
---save               images/video annotees
---save-txt           labels YOLO (class cx cy w h conf)
---save-json          rapport JSON structure
---save-csv           rapport CSV a plat
---recursive          parcourt les sous-dossiers
---hide-labels        masque les noms de classes
---hide-conf          masque les scores
---compliance         active la conformite EPI
---track              suivi d'objets + lissage temporel des verdicts
---tracker            bytetrack.yaml (rapide) | botsort.yaml (occlusions)
---show               fenetre temps reel (video/webcam)
---frame-skip N       n'infere qu'une frame sur N+1
---max-frames N       limite le nombre de frames
+--imgsz              inference size
+--max-det            maximum detections per image
+--half               FP16 (GPU only)
+--save               annotated images/video
+--save-txt           YOLO labels (class cx cy w h conf)
+--save-json          structured JSON report
+--save-csv           flat CSV report
+--recursive          walk subfolders
+--hide-labels        hide class names
+--hide-conf          hide scores
+--compliance         enable PPE compliance
+--track              object tracking + temporal smoothing of verdicts
+--tracker            bytetrack.yaml (fast) | botsort.yaml (occlusions)
+--show               real-time window (video/webcam)
+--frame-skip N       only run inference on one frame out of N+1
+--max-frames N       limit the number of frames
 ```
 
-Les seuils **par classe** se definissent dans `configs/inference.yaml` :
+**Per-class** thresholds are defined in `configs/inference.yaml`:
 
 ```yaml
 inference:
@@ -687,32 +791,32 @@ inference:
     Safety Gloves: 0.40
 ```
 
-> Un seuil par classe ne peut que **durcir** le seuil global : Ultralytics
-> filtre deja a `conf` avant que ces seuils s'appliquent. Pour reellement
-> abaisser un seuil, baissez `conf` puis remontez les autres classes.
+> A per-class threshold can only **tighten** the global threshold:
+> Ultralytics already filters at `conf` before these thresholds apply. To
+> actually lower a threshold, lower `conf` and then raise the other classes.
 
-Comportement video verifie : le modele n'est charge qu'une fois, l'ordre des
-frames est preserve, les FPS sont affiches en incrustation, la camera et le
-`VideoWriter` sont liberes dans un bloc `finally`, et les proprietes de la
-video de sortie (resolution, FPS, nombre de frames) sont conservees.
+Verified video behavior: the model is loaded only once, frame order is
+preserved, FPS is shown as an overlay, the camera and the `VideoWriter` are
+released in a `finally` block, and the output video's properties
+(resolution, FPS, frame count) are preserved.
 
 ---
 
-## 12. Conformite EPI
+## 12. PPE compliance
 
-> **Avertissement.** Le modele detecte des objets **independamment**. Rien dans
-> ses sorties ne relie formellement un casque a une personne. La couche de
-> conformite applique une **heuristique geometrique** : un EPI est attribue a
-> la personne dont la region attendue contient la plus grande fraction de la
-> boite de l'EPI. Un statut « non conforme » est une **alerte a verifier**,
-> jamais un constat automatique.
+> **Warning.** The model detects objects **independently**. Nothing in its
+> outputs formally links a helmet to a person. The compliance layer applies a
+> **geometric heuristic**: a PPE item is assigned to the person whose
+> expected region contains the largest fraction of the PPE box. A
+> "non-compliant" status is an **alert to be checked**, never an automatic
+> finding.
 
 ```powershell
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source chemin\image.jpg --compliance --save --save-json
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source path\to\image.jpg --compliance --save --save-json
 python -m ppe_detection.predict --weights artifacts/models/best.pt --source 0 --show --compliance --required-ppe "Safety Helmet" "Safety Vest"
 ```
 
-Configuration (`configs/inference.yaml`) :
+Configuration (`configs/inference.yaml`):
 
 ```yaml
 compliance:
@@ -722,9 +826,9 @@ compliance:
     - Safety Helmet
     - Safety Vest
   association:
-    containment_threshold: 0.50   # fraction de la boite EPI dans la zone attendue
-    helmet_region: 0.35           # 35 % superieurs de la personne
-    shoes_region: 0.30            # 30 % inferieurs
+    containment_threshold: 0.50   # fraction of the PPE box inside the expected region
+    helmet_region: 0.35           # top 35% of the person
+    shoes_region: 0.30            # bottom 30%
     torso_region: [0.20, 0.80]
   region_by_class:
     Safety Helmet: head
@@ -734,155 +838,159 @@ compliance:
     Safety Gloves: any
     Safety Shoes: feet
 
-  # Observabilite : quand peut-on AFFIRMER qu'un EPI manque ?
-  min_region_height_px: 24   # sous ce seuil, l'objet n'est pas resoluble
-  edge_margin_px: 2          # zone touchant le bord = tronquee
+  # Observability: when can we ASSERT that a PPE item is missing?
+  min_region_height_px: 24   # below this threshold, the object cannot be resolved
+  edge_margin_px: 2          # region touching the edge = truncated
 
-  # Lissage temporel (option --track)
+  # Temporal smoothing (--track option)
   temporal_window: 15
   temporal_min_ratio: 0.70
   temporal_min_observations: 5
 ```
 
-### Association par points cles du corps (recommande)
+### Association via body keypoints (recommended)
 
-Le decoupage par fractions suppose une personne **debout et vue de face**. Cette
-hypothese tombe des que la personne est accroupie, penchee, assise, ou filmee en
-plongee — le cas courant en videosurveillance.
+Fraction-based splitting assumes a person **standing and seen from the
+front**. That assumption breaks as soon as the person is crouching, leaning,
+sitting, or filmed from above — the usual case in video surveillance.
 
-L'option `--pose` remplace ce decoupage par la position **reelle** des parties du
-corps, obtenue via un modele d'estimation de pose (17 points cles COCO,
-`yolo26n-pose.pt`, telecharge automatiquement) :
+The `--pose` option replaces this splitting with the **actual** position of
+body parts, obtained from a pose estimation model (17 COCO keypoints,
+`yolo26n-pose.pt`, downloaded automatically):
 
 ```powershell
 python -m ppe_detection.predict --weights artifacts/models/best.pt `
-  --source chemin\image.jpg --compliance --pose --save --save-json
+  --source path\to\image.jpg --compliance --pose --save --save-json
 ```
 
-| Zone      | Points cles utilises                   | Remplace                    |
-| --------- | -------------------------------------- | --------------------------- |
-| `head`  | nez, yeux, oreilles + echelle du buste | 35 % superieurs de la boite |
-| `torso` | epaules et hanches                     | tranche 20–80 %            |
-| `feet`  | chevilles                              | 30 % inferieurs             |
-| `hands` | poignets                               | boite entiere               |
+| Region    | Keypoints used                        | Replaces                  |
+| --------- | ------------------------------------- | ------------------------- |
+| `head`  | nose, eyes, ears + torso scale        | top 35% of the box        |
+| `torso` | shoulders and hips                    | 20–80% band              |
+| `feet`  | ankles                                | bottom 30%                |
+| `hands` | wrists                                | whole box                 |
 
-Un casque masque le crane : la zone « tete » est donc extrapolee **au-dessus**
-des points du visage, a partir de la longueur du buste.
+A helmet hides the skull: the "head" region is therefore extrapolated
+**above** the face keypoints, based on torso length.
 
-Mesure sur une ouvriere accroupie (frame reelle) — la zone du torse passe de
-`x[387-1133] y[144-576]` (fractions) a `x[719-999] y[262-679]` (pose), soit un
-recentrage conforme a sa posture.
+Measured on a crouching worker (real frame) — the torso region goes from
+`x[387-1133] y[144-576]` (fractions) to `x[719-999] y[262-679]` (pose), a
+re-centering consistent with her posture.
 
-**Repli automatique** : si les points cles necessaires manquent (personne de dos,
-trop petite, occultee), le systeme revient au decoupage par fractions pour cette
-zone. Le champ `association_method` de chaque verdict indique la methode
-reellement employee, `pose` ou `bbox_fractions`.
+**Automatic fallback**: if the required keypoints are missing (person seen
+from behind, too small, occluded), the system falls back to fraction-based
+splitting for that region. The `association_method` field of each verdict
+indicates the method actually used, `pose` or `bbox_fractions`.
 
-Cout : un second modele en memoire et une inference supplementaire par image.
+Cost: a second model in memory and one extra inference per image.
 
-### Trois etats, pas deux
+### Three states, not two
 
-Un detecteur qui ne voit pas un gilet ne prouve pas son absence. Declarer
-« non conforme » une personne dont la zone concernee n'est pas observable
-produit des fausses alertes en masse. Le systeme distingue donc :
+A detector that does not see a vest does not prove its absence. Declaring a
+person "non-compliant" when the relevant region is not observable produces
+false alarms en masse. The system therefore distinguishes:
 
-| Statut            | Signification                                                     | Couleur |
-| ----------------- | ----------------------------------------------------------------- | ------- |
-| `compliant`     | Tous les EPI requis sont detectes et attribues                    | vert    |
-| `non_compliant` | Un EPI requis manque**dans une zone reellement observable** | rouge   |
-| `indeterminate` | La zone n'est pas observable — aucune conclusion                 | ambre   |
+| Status            | Meaning                                                              | Color |
+| ----------------- | -------------------------------------------------------------------- | ----- |
+| `compliant`     | All required PPE is detected and assigned                            | green |
+| `non_compliant` | A required PPE item is missing **in a truly observable region** | red   |
+| `indeterminate` | The region is not observable — no conclusion                        | amber |
 
-Une zone est jugee non observable dans deux cas : elle **touche un bord du
-cadre** (personne tronquee, typiquement la tete qui depasse par le haut), ou
-elle est **trop petite en pixels** pour que le detecteur y resolve un objet.
+A region is deemed not observable in two cases: it **touches an edge of the
+frame** (truncated person, typically the head sticking out at the top), or it
+is **too small in pixels** for the detector to resolve an object in it.
 
-Le champ `reasons` de chaque personne indique precisement pourquoi un EPI est
-indetermine, par exemple `Safety Helmet : zone 'head' tronquee par le bord haut du cadre`.
+Each person's `reasons` field states precisely why a PPE item is
+indeterminate, for example `Safety Helmet : zone 'head' tronquee par le bord haut du cadre`
+(i.e. "head region truncated by the top edge of the frame" — messages are
+currently emitted in French).
 
-Le taux de conformite est calcule sur les seules personnes **jugeables** :
-inclure les indetermines au denominateur ferait baisser artificiellement le taux
-a cause de gens qu'on n'a simplement pas pu observer.
+The compliance rate is computed over **assessable** people only: including
+indeterminate people in the denominator would artificially lower the rate
+because of people we simply could not observe.
 
-### Suivi et lissage temporel (video)
+### Tracking and temporal smoothing (video)
 
 ```powershell
-python -m ppe_detection.predict --weights artifacts/models/best.pt --source chemin\video.mp4 --compliance --track --save --save-json
+python -m ppe_detection.predict --weights artifacts/models/best.pt --source path\to\video.mp4 --compliance --track --save --save-json
 ```
 
-Avec `--track`, chaque personne recoit un identifiant persistant (ByteTrack par
-defaut, `botsort.yaml` disponible pour plus de robustesse aux occlusions), et le
-verdict est lisse sur une fenetre glissante : il ne bascule qu'apres une
-majorite nette d'observations concordantes. Une alerte est levee **une fois par
-personne**, pas a chaque frame.
+With `--track`, each person gets a persistent ID (ByteTrack by default,
+`botsort.yaml` available for more robustness to occlusions), and the verdict
+is smoothed over a sliding window: it only flips after a clear majority of
+consistent observations. An alert is raised **once per person**, not on every
+frame.
 
-Le rapport distingue alors deux vues :
+The report then distinguishes two views:
 
-- `tracked_compliance` — le bilan **par personne**, seule vue ayant un sens
-  operationnel ;
-- `per_detection_compliance` — l'ancien decompte par detection, conserve pour
-  comparaison.
+- `tracked_compliance` — the **per-person** summary, the only view that is
+  operationally meaningful;
+- `per_detection_compliance` — the former per-detection count, kept for
+  comparison.
 
-Effet mesure sur une video de chantier de 122 frames :
+Measured effect on a 122-frame construction site video:
 
-| Vue                                    | Sans suivi                 | Avec`--track`               |
-| -------------------------------------- | -------------------------- | ----------------------------- |
-| Unites comptees                        | 194 detections de personne | **6 personnes suivies** |
-| Non conformes                          | 147                        | 4                             |
-| Indetermines (retenus par le niveau 1) | 35                         | 2                             |
-| Alertes emises                         | 147                        | **5**                   |
+| View                                     | Without tracking          | With `--track`              |
+| ---------------------------------------- | ------------------------- | ----------------------------- |
+| Units counted                            | 194 person detections     | **6 tracked people**    |
+| Non-compliant                            | 147                       | 4                             |
+| Indeterminate (held back by level 1)     | 35                        | 2                             |
+| Alerts raised                            | 147                       | **5**                   |
 
-### Distinguer les vrais EPI de leurs sosies
+### Telling real PPE apart from look-alikes
 
-Le modele actuel etiquette un **casque de velo** comme `Safety Helmet` avec
-**0.84 de confiance** (verifie sur images de test). Il n'a pas appris « casque
-de chantier » mais « coque rigide bombee sur une tete ».
+The 7-class model labeled a **bicycle helmet** as `Safety Helmet` with
+**0.84 confidence** (verified on test images). It had not learned "hard hat"
+but "rigid domed shell on a head".
 
-Ce n'est pas un manque de donnees : le schema ne comporte que des classes
-**positives**, donc aucune sortie ne permet d'exprimer « ressemble a un casque
-mais n'en est pas un ». Ajouter des casques de chantier n'y changera rien.
+This is not a lack of data: the schema only contains **positive** classes, so
+no output can express "looks like a helmet but isn't one". Adding more hard
+hats won't change that.
 
-Le projet fournit l'outillage pour y remedier :
+The project provides the tooling to fix this:
 
-- [`taxonomy.py`](src/ppe_detection/taxonomy.py) definit un **schema etendu a
-  10 classes** (`Non-Safety Headwear`, `Non-Safety Vest`, `Non-Safety Footwear`).
-  Les sept classes d'origine gardent leurs identifiants : un dataset etendu
-  reste retro-compatible.
-- [`dataset_merge.py`](src/ppe_detection/dataset_merge.py) assemble des datasets
-  publics en remappant leurs classes, ce qui evite d'annoter de zero.
-- Le mecanisme de **contre-preuve** distingue deux niveaux de preuve dans le
-  verdict : `evidence: absence` (rien detecte, peut etre un faux negatif) et
-  `evidence: observed` (couvre-chef non conforme vu — violation constatee).
-  Une contre-preuve prime sur le test d'observabilite : apercevoir l'objet
-  prouve que la zone est visible.
+- [`taxonomy.py`](src/ppe_detection/taxonomy.py) defines an **extended
+  11-class schema** (`Non-Safety Headwear`, `Uncovered Head`, `Non-Safety Vest`,
+  `Non-Safety Footwear`). The v3 model learns 9 of them: the last two have no
+  data yet.
+  The seven original classes keep their IDs: an extended dataset stays
+  backward compatible.
+- [`dataset_merge.py`](src/ppe_detection/dataset_merge.py) assembles public
+  datasets by remapping their classes, which avoids annotating from scratch.
+- The **counter-evidence** mechanism distinguishes two levels of evidence in
+  the verdict: `evidence: absence` (nothing detected, may be a false negative)
+  and `evidence: observed` (non-compliant headwear seen — violation observed).
+  Counter-evidence takes precedence over the observability test: seeing the
+  object proves the region is visible.
 
-Volumes a annoter, sources gratuites et regles d'annotation :
+Volumes to annotate, free sources and annotation rules:
 [`docs/plan_donnees_epi_sosies.md`](docs/plan_donnees_epi_sosies.md).
 
-#### Resultats du modele a 8 classes
+#### Results of the 8-class model
 
-Dataset etendu : 8 204 images, 29 079 annotations, dont **3 537 instances de
-`Non-Safety Headwear`** provenant d'Open Images V7 — sans annotation manuelle.
-Entrainement de 2 h 09 (91 epoques, early stopping, meilleure epoque 66).
+Extended dataset: 8,204 images, 29,079 annotations, including **3,537
+`Non-Safety Headwear` instances** from Open Images V7 — with no manual
+annotation. Training took 2 h 09 min (91 epochs, early stopping, best
+epoch 66).
 
-**Test 1 — les sosies.** C'est l'objectif poursuivi, et il est atteint :
+**Test 1 — look-alikes.** This is the goal being pursued, and it is reached:
 
 | Image              | 7 classes              | 8 classes                              |
 | ------------------ | ---------------------- | -------------------------------------- |
-| Casque VTT         | `Safety Helmet 0.32` | **`Non-Safety Headwear 0.94`** |
-| Casque velo route  | `Safety Helmet 0.84` | **`Non-Safety Headwear 0.50`** |
-| Casquette baseball | *rien*               | **`Non-Safety Headwear 0.41`** |
-| Casquette sport    | *rien*               | **`Non-Safety Headwear 0.95`** |
+| MTB helmet         | `Safety Helmet 0.32` | **`Non-Safety Headwear 0.94`** |
+| Road bike helmet   | `Safety Helmet 0.84` | **`Non-Safety Headwear 0.50`** |
+| Baseball cap       | *nothing*            | **`Non-Safety Headwear 0.41`** |
+| Sports cap         | *nothing*            | **`Non-Safety Headwear 0.95`** |
 
-Plus aucun faux `Safety Helmet`. Les casquettes, auparavant simplement ignorees,
-sont desormais **detectees activement**, ce qui permet a la contre-preuve de
-fonctionner.
+No more false `Safety Helmet`. Caps, previously simply ignored, are now
+**actively detected**, which lets counter-evidence work.
 
-**Test 2 — non-regression sur les 578 memes images.** Comparer les mAP globales
-de deux modeles a nombre de classes different n'aurait aucun sens : la moyenne
-ne porte pas sur les memes classes. La comparaison se fait donc classe par
-classe, sur des images identiques.
+**Test 2 — non-regression on the same 578 images.** Comparing the global mAP
+of two models with a different number of classes would be meaningless: the
+average does not cover the same classes. The comparison is therefore done
+class by class, on identical images.
 
-| Classe                       | mAP@0.50 7 cls   | mAP@0.50 8 cls   | Ecart              |
+| Class                        | mAP@0.50 7 cls   | mAP@0.50 8 cls   | Delta              |
 | ---------------------------- | ---------------- | ---------------- | ------------------ |
 | Safety Harness               | 0.7821           | **0.8091** | +0.0270            |
 | Safety Gloves                | 0.5483           | **0.5607** | +0.0124            |
@@ -893,89 +1001,136 @@ classe, sur des images identiques.
 | Face Mask                    | 0.9224           | 0.8931           | −0.0293           |
 | **Global (7 classes)** | **0.7992** | **0.7988** | **−0.0004** |
 
-L'ecart global est dans le bruit. `Safety Helmet` **progresse** de +0.0106,
-contrairement a la degradation qu'on pouvait redouter : discriminer n'a pas
-coute en detection. Deux classes reculent au-dela de 0.02, `Face Mask` et
-`Safety Shoes`, sans lien evident avec le couvre-chef.
+The global gap is within noise. `Safety Helmet` **improves** by +0.0106,
+contrary to the degradation one might have feared: discriminating did not
+cost detection performance. Two classes drop by more than 0.02, `Face Mask`
+and `Safety Shoes`, with no obvious link to headwear.
 
-**Test 3 — qualite de la nouvelle classe** : `Non-Safety Headwear` atteint
-**0.7373 de mAP@0.50** avec 0.829 de precision, soit la 5e classe sur 8 —
-devant `Safety Shoes` et loin devant `Safety Gloves`. Assez fiable pour fonder
-une alerte, d'ou l'activation de `counter_evidence` dans
+**Test 3 — quality of the new class**: `Non-Safety Headwear` reaches
+**0.7373 mAP@0.50** with 0.829 precision, i.e. 5th class out of 8 —
+ahead of `Safety Shoes` and far ahead of `Safety Gloves`. Reliable enough to
+base an alert on, hence `counter_evidence` being enabled in
 [`configs/inference.yaml`](configs/inference.yaml).
 
-#### Limite connue : personnes non detectees en contexte sportif
+#### Known limitation: people not detected in sports contexts
 
-Sur les photos issues d'Open Images — portraits de cyclistes, scenes de sport —
-le modele a 8 classes **ne detecte plus les personnes**. Sur l'image du
-cycliste, le modele a 7 classes voyait `Person 0.886` ; le nouveau ne voit que
-le couvre-chef.
+On photos from Open Images — portraits of cyclists, sports scenes — the
+8-class model **no longer detects people**. On the cyclist image, the 7-class
+model saw `Person 0.886`; the new one only sees the headwear.
 
-Cause : les images d'Open Images ont ete telechargees avec `only_matching=True`,
-qui ne conserve que les etiquettes de couvre-chef. Les personnes y figurent donc
-**sans annotation**, et le modele apprend a ne pas les detecter dans ce contexte
-visuel.
+Cause: the Open Images pictures were downloaded with `only_matching=True`,
+which only keeps the headwear labels. People therefore appear **unannotated**,
+and the model learns not to detect them in that visual context.
 
-Portee reelle : **nulle sur le domaine cible**. Sur 60 frames de chantier
-identiques, le modele a 8 classes detecte meme *plus* de personnes que le
-precedent (72 contre 65). La regression se limite a l'imagerie sportive.
+Actual impact: **none on the target domain**. On the same 60 construction
+site frames, the 8-class model even detects *more* people than the previous
+one (72 vs 65). The regression is limited to sports imagery.
 
-Correction pour une prochaine iteration : retelecharger avec
-`only_matching=False` et mapper aussi `Person=Person`, afin que les personnes
-des images Open Images soient annotees.
+Fix applied in the v3 dataset: people in the Open Images pictures are
+pre-annotated there through pseudo-labeling (3,231 people added, see below).
 
-### Limites persistantes
+#### Results of the 9-class v3 model (current model)
 
-Les garde-fous ci-dessus suppriment une large part des fausses alertes, mais
-l'heuristique reste faillible :
+**Why an `Uncovered Head` class.** No accessible public dataset annotates bump
+caps, work caps or beanies as such. On the other hand, `hard-hat-detection`
+(Voxel51, 5,000 images, CC0) provides 5,785 **unprotected** heads in an
+industrial context. Rather than naming the type of headwear, the model
+therefore answers the operational question: "is this head protected?".
 
-- **Personnes proches ou qui se chevauchent** : le casque de l'une peut etre
-  attribue a l'autre.
-- **Plongee ou contre-plongee forte** : l'hypothese « la tete est en haut de la
-  boite » ne tient plus. Seule une approche par pose corrigerait ce cas.
-- **EPI non porte** : un casque pose sur une table dans la zone tete d'une
-  personne assise sera compte comme porte.
-- **Faux negatif de detection dans une zone observable** : un gilet bien visible
-  mais non detecte produit toujours un « non conforme » a tort. C'est
-  aujourd'hui la principale source d'erreur restante, et elle releve du
-  detecteur, pas de la regle metier. L'option `--pose` ne la corrige pas : en
-  rendant l'evaluation de l'observabilite plus juste, elle a meme tendance a
-  **exposer** ces echecs plutot qu'a les masquer derriere un « indetermine ».
-- **Classes peu fiables** : `Safety Gloves` plafonne a 0.55 de mAP@0.50 et 0.57
-  de rappel. Elle figure dans `unreliable_ppe` : l'inscrire dans `required_ppe`
-  declenche un avertissement au chargement, car la regle produirait une majorite
-  de fausses alertes.
-- Le champ `verdict_confidence` porte sur la **detection**, pas sur la justesse
-  de la regle metier.
-- Une personne qui se met en conformite puis redevient non conforme genere
-  **deux** evenements d'alerte : c'est voulu, mais cela distingue
-  `n_alerts` (evenements) de `persons_currently_alerted` (etat final).
+**Incompatible annotation conventions.** Open Images boxes the hat, Voxel51
+boxes the head. On a cap, both boxes would be nearly identical with opposite
+labels. Hence a separate `Uncovered Head` class, and `ANNOTATION_CONVENTIONS`
+in `taxonomy.py`, which documents what each box delimits so the two
+conventions are never mixed.
+
+**Pseudo-labeling people.** `hard-hat-detection` only annotates 751 people
+across 5,000 images: merging it as is would have reproduced the disappearance
+of people observed with the 8-class model.
+[`pseudo_label.py`](src/ppe_detection/pseudo_label.py) pre-annotates the missing
+class with an existing model, preserving the real annotations:
+
+| Source               | Model used     | People added |
+| -------------------- | -------------- | ------------ |
+| `hard-hat-detection` | 8-class model  | 13,537       |
+| Open Images          | 7-class model  | 3,231        |
+
+Pitfall encountered: pre-annotating Open Images with the 8-class model only
+yielded 14 people across 1,853 images — the regression was blocking its own
+fix. The 7-class model, sound on this point, was used instead.
+
+**Cleanup.** Football helmets (1,329 instances, 37.6% of the raw
+`Non-Safety Headwear` class) were removed: they are irrelevant on a
+construction site.
+
+**Results.** On the 578 original test images, v3 is the best of the three
+models (0.8077 mAP@0.50 vs 0.7992 and 0.7988), with higher recall (0.7723).
+`Uncovered Head` reaches **0.950 mAP@0.50**, 2nd class out of 9. Full tables in
+[section 10](#current-model-v3-9-classes).
+
+**Measured limitation.** A white cap seen from behind is now detected as
+`Safety Helmet 0.80`, whereas the 8-class model detected nothing: the 24,415
+added helmets reinforce the prior "light dome on a head in an industrial
+context = hard hat". Three other caps out of four are correctly classified as
+`Non-Safety Headwear`.
+
+**Counter-evidence status.** `taxonomy.py` lists `Non-Safety Headwear` and
+`Uncovered Head` as counter-evidence for `Safety Helmet`, but
+`configs/inference.yaml` currently only enables `Non-Safety Headwear`.
+`Uncovered Head` is detected and displayed, but does not yet feed the
+compliance verdict.
+
+### Remaining limitations
+
+The safeguards above remove a large share of false alarms, but the heuristic
+remains fallible:
+
+- **People close to or overlapping each other**: one person's helmet may be
+  assigned to the other.
+- **Strong high or low camera angle**: the "head is at the top of the box"
+  assumption no longer holds. Only a pose-based approach would fix this case.
+- **PPE not worn**: a helmet lying on a table inside the head region of a
+  seated person will be counted as worn.
+- **Detection false negative in an observable region**: a clearly visible
+  vest that goes undetected still produces a wrong "non-compliant". This is
+  currently the main remaining source of error, and it comes from the
+  detector, not from the business rule. The `--pose` option does not fix it:
+  by making the observability assessment more accurate, it actually tends to
+  **expose** these failures rather than hide them behind an "indeterminate".
+- **Unreliable classes**: `Safety Gloves` plateaus at 0.53 mAP@0.50 and 0.55
+  recall (v3 model). It is listed in `unreliable_ppe`: adding it to `required_ppe`
+  triggers a warning at load time, because the rule would produce a majority
+  of false alarms.
+- The `verdict_confidence` field relates to **detection**, not to the
+  correctness of the business rule.
+- A person who becomes compliant and then non-compliant again generates
+  **two** alert events: this is intended, but it distinguishes `n_alerts`
+  (events) from `persons_currently_alerted` (final state).
 
 ---
 
-## 13. API REST
+## 13. REST API
 
 ```powershell
 .\scripts\run_api.ps1
 .\scripts\run_api.ps1 -Weights artifacts/models/best.pt -Port 8080 -Compliance
 ```
 
-ou :
+or:
 
 ```powershell
 python -m uvicorn ppe_detection.api:app --host 127.0.0.1 --port 8000
 ```
 
-Documentation interactive : [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+Interactive documentation: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-| Methode | Route              | Description                             |
+| Method  | Route              | Description                             |
 | ------- | ------------------ | --------------------------------------- |
-| GET     | `/health`        | Etat du service (`ok` / `degraded`) |
-| GET     | `/model-info`    | Metadonnees du modele charge            |
-| POST    | `/predict/image` | Inference sur une image                 |
-| POST    | `/predict/batch` | Inference sur plusieurs images          |
+| GET     | `/health`        | Service status (`ok` / `degraded`)  |
+| GET     | `/model-info`    | Metadata of the loaded model            |
+| POST    | `/predict/image` | Inference on one image                  |
+| POST    | `/predict/batch` | Inference on several images             |
 
-Exemple de reponse :
+Sample response:
 
 ```json
 {
@@ -995,359 +1150,371 @@ Exemple de reponse :
 }
 ```
 
-Configuration par variables d'environnement (voir `.env.example`) :
+Configuration via environment variables (see `.env.example`):
 `PPE_API_WEIGHTS`, `PPE_API_DEVICE`, `PPE_API_CONF`, `PPE_API_IOU`,
 `PPE_API_COMPLIANCE`, `PPE_API_MAX_FILE_MB`, `PPE_API_MAX_BATCH`.
 
-### Choix de securite
+### Security choices
 
-- Le modele n'est charge **qu'une fois**, au demarrage.
-- Les fichiers recus sont decodes **entierement en memoire** : aucun contenu
-  fourni par un client n'atteint le disque, ce qui elimine tout risque
-  d'ecriture arbitraire via un nom de fichier hostile.
-- Le nom renvoye dans la reponse est neutralise (`../../etc/passwd` devient
-  un nom inoffensif).
-- Type MIME et taille sont valides **avant** tout decodage.
-- Les journaux ne contiennent ni le contenu des images ni le nom brut soumis.
-- Une exception non geree renvoie un JSON avec un identifiant d'erreur, sans
-  divulguer de trace interne.
-- Si les poids sont absents, le service demarre quand meme : `/health` repond
-  `degraded` et les routes d'inference renvoient **503** avec un message
-  actionnable, plutot que de faire echouer le demarrage.
+- The model is loaded **only once**, at startup.
+- Received files are decoded **entirely in memory**: no client-supplied
+  content ever reaches the disk, which removes any risk of arbitrary writes
+  through a hostile filename.
+- The filename returned in the response is sanitized (`../../etc/passwd`
+  becomes a harmless name).
+- MIME type and size are validated **before** any decoding.
+- Logs contain neither image content nor the raw submitted filename.
+- An unhandled exception returns a JSON with an error ID, without leaking any
+  internal stack trace.
+- If the weights are missing, the service still starts: `/health` responds
+  `degraded` and the inference routes return **503** with an actionable
+  message, rather than making startup fail.
 
 ---
 
-## 14. Interface Streamlit
+## 14. Streamlit interface
 
 ```powershell
 .\.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py
 ```
 
-Puis [http://localhost:8501](http://localhost:8501).
+Then open [http://localhost:8501](http://localhost:8501).
 
-L'interface comporte quatre onglets.
+The interface has four tabs (UI labels are currently in French).
 
-| Onglet                    | Fonction                                                                                                                                                                     |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Image**           | Televersement d'une photo, image annotee, tableau des detections, conformite, telechargement JSON/JPEG.                                                                      |
-| **Video**           | Televersement d'un fichier, traitement,**lecture directe de la video annotee**, journal des alertes, telechargements.                                                  |
-| **Webcam (direct)** | Inference**en continu** sur la camera locale, avec FPS, suivi, alertes en temps reel et enregistrement optionnel. Un mode « photo ponctuelle » est aussi disponible. |
-| **Resultats**       | Relecture de toutes les videos annotees deja produites dans`artifacts/predictions/`.                                                                                       |
+| Tab                       | Purpose                                                                                                                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Image**           | Upload a photo, annotated image, detections table, compliance, JSON/JPEG download.                                                                                   |
+| **Video**           | Upload a file, processing, **direct playback of the annotated video**, alert log, downloads.                                                                   |
+| **Webcam (live)**   | **Continuous** inference on the local camera, with FPS, tracking, real-time alerts and optional recording. A "single snapshot" mode is also available.         |
+| **Results**         | Replay of all annotated videos already produced in `artifacts/predictions/`.                                                                                       |
 
-Reglages communs dans la barre laterale : poids, device, seuils de confiance et
-d'IoU, activation de la conformite, choix des EPI obligatoires et activation du
-suivi temporel.
+Shared settings in the sidebar: weights, device, confidence and IoU
+thresholds, enabling compliance, choice of required PPE and enabling
+temporal tracking.
 
-### Webcam en direct
+### Live webcam
 
-La camera est ouverte **cote serveur**, par le processus Streamlit. C'est adapte
-a un usage local, ou le navigateur et la camera sont sur la meme machine ; un
-deploiement distant necessiterait WebRTC (`streamlit-webrtc`).
+The camera is opened **server-side**, by the Streamlit process. This suits
+local use, where the browser and the camera are on the same machine; a remote
+deployment would require WebRTC (`streamlit-webrtc`).
 
-Le bouton « Demarrer la camera » lance une boucle d'inference continue ;
-« Arreter » l'interrompt. Un garde-fou de duree (120 s par defaut) coupe
-automatiquement la boucle, et la camera est toujours liberee dans un bloc
-`finally`, meme en cas d'erreur ou de rerun Streamlit.
+The "Demarrer la camera" (Start camera) button launches a continuous
+inference loop; "Arreter" (Stop) interrupts it. A duration safeguard (120 s
+by default) automatically stops the loop, and the camera is always released
+in a `finally` block, even on an error or a Streamlit rerun.
 
-Debit mesure sur la machine de reference : **~14 FPS en 640×480** avec suivi et
-conformite actives, annotation comprise.
+Throughput measured on the reference machine: **~14 FPS at 640×480** with
+tracking and compliance enabled, annotation included.
 
-### Lecture des videos annotees — codec
+### Playing annotated videos — codec
 
-Si vos videos annotees restaient noires dans le navigateur, c'est un probleme de
-codec, desormais corrige.
+If your annotated videos stayed black in the browser, this was a codec issue,
+now fixed.
 
-OpenCV ecrivait en `mp4v`, qui produit un flux **MPEG-4 Part 2** (FOURCC
-`FMP4`) qu'aucun navigateur ne decode nativement. Le projet demande maintenant
-`avc1` (**H.264**), lu partout.
+OpenCV was writing with `mp4v`, which produces an **MPEG-4 Part 2** stream
+(FOURCC `FMP4`) that no browser decodes natively. The project now requests
+`avc1` (**H.264**), which plays everywhere.
 
-Deux precautions ont ete necessaires :
+Two precautions were necessary:
 
-- OpenCV affiche parfois `Could not open codec libopenh264` sur la sortie
-  d'erreur puis **bascule silencieusement sur un autre encodeur H.264**. Le
-  fichier produit est valide : ce message est benin et peut etre ignore.
-- OpenCV **substitue un codec sans le signaler** lorsque celui demande est
-  indisponible : `isOpened()` renvoie `True` meme avec un FOURCC fantaisiste.
-  Le projet relit donc le fichier apres fermeture pour connaitre le codec
-  reellement ecrit (`probe_video_codec`). Le champ `output_codec` du resume
-  reflete la realite, et `browser_playable` en decoule.
+- OpenCV sometimes prints `Could not open codec libopenh264` on stderr and
+  then **silently falls back to another H.264 encoder**. The produced file is
+  valid: this message is harmless and can be ignored.
+- OpenCV **substitutes a codec without reporting it** when the requested one
+  is unavailable: `isOpened()` returns `True` even with a bogus FOURCC. The
+  project therefore re-reads the file after closing it to find out which
+  codec was actually written (`probe_video_codec`). The `output_codec` field
+  of the summary reflects reality, and `browser_playable` follows from it.
 
-Les videos produites avant cette correction restent en `FMP4` : l'onglet
-« Resultats » les signale explicitement et propose leur telechargement.
+Videos produced before this fix remain in `FMP4`: the "Results" tab
+flags them explicitly and offers to download them.
 
-**L'interface n'entraine jamais de modele.** Si aucun poids n'est disponible,
-elle affiche les commandes exactes a executer.
+**The interface never trains a model.** If no weights are available, it
+displays the exact commands to run.
 
 ---
 
-## 15. Export ONNX
+## 15. ONNX export
 
 ```powershell
 python -m ppe_detection.export --weights artifacts/models/best.pt --format onnx --imgsz 640 --simplify
 ```
 
-Formats optionnels : `torchscript`, `openvino`, `engine` (TensorRT, necessite
-une installation dediee).
+Optional formats: `torchscript`, `openvino`, `engine` (TensorRT, requires a
+dedicated installation).
 
-### Verification reellement effectuee
+### Verification actually performed
 
-Un export n'est jamais considere comme reussi au seul motif qu'un fichier
-existe. La verification comprend :
+An export is never considered successful just because a file exists. The
+verification includes:
 
-1. fichier present et non vide ;
-2. graphe valide (`onnx.checker`) ;
-3. session ONNX Runtime chargeable ;
-4. inference sur une entree factice de forme attendue ;
-5. **comparaison des detections** entre PyTorch et ONNX Runtime sur une vraie
-   image, avec appariement par IoU.
+1. file present and non-empty;
+2. valid graph (`onnx.checker`);
+3. ONNX Runtime session loadable;
+4. inference on a dummy input of the expected shape;
+5. **comparison of detections** between PyTorch and ONNX Runtime on a real
+   image, with IoU matching.
 
-Resultat mesure sur les poids du smoke test :
+Result measured on the smoke test weights:
 
-| Controle                   | Resultat                  |
+| Check                      | Result                    |
 | -------------------------- | ------------------------- |
-| Graphe ONNX (opset 20)     | valide                    |
-| Session ONNX Runtime       | chargeable                |
-| Forme de sortie            | `(1, 300, 6)`           |
-| Detections PyTorch vs ONNX | **9 / 9 appariees** |
-| IoU moyen                  | **0,999999**        |
-| Ecart max de confiance     | 6 × 10⁻⁶               |
-| Decalage max de boite      | 0,0002 px                 |
-| Classes divergentes        | 0                         |
+| ONNX graph (opset 20)      | valid                     |
+| ONNX Runtime session       | loadable                  |
+| Output shape               | `(1, 300, 6)`           |
+| PyTorch vs ONNX detections | **9 / 9 matched**   |
+| Mean IoU                   | **0.999999**        |
+| Max confidence gap         | 6 × 10⁻⁶               |
+| Max box offset             | 0.0002 px                 |
+| Diverging classes          | 0                         |
 
-### Differences de post-traitement a connaitre
+### Post-processing differences to be aware of
 
-- Le modele exporte attend une image normalisee dans `[0, 1]`, en NCHW
-  (`1×3×H×W`), RGB, redimensionnee par letterbox vers la taille figee.
-- YOLO26 s'exporte **end-to-end** : la sortie contient deja des detections
-  filtrees et triees par confiance. Comparer les tenseurs bruts terme a terme
-  n'aurait pas de sens, car un ecart numerique infime reordonne les lignes.
-- Les coordonnees se rapportent a l'image redimensionnee : il faut annuler le
-  letterbox (echelle et decalage) pour revenir a l'image d'origine.
+- The exported model expects an image normalized to `[0, 1]`, in NCHW
+  (`1×3×H×W`), RGB, letterbox-resized to the fixed size.
+- YOLO26 exports **end-to-end**: the output already contains detections
+  filtered and sorted by confidence. Comparing raw tensors element by element
+  would make no sense, because a tiny numerical difference reorders the rows.
+- Coordinates refer to the resized image: the letterbox (scale and offset)
+  must be undone to map back to the original image.
 
 ---
 
-## 16. Structure des sorties
+## 16. Output structure
 
 ```
 artifacts/
 ├── reports/
-│   ├── dataset_audit_original.{json,md}    # Audit du dataset original
-│   ├── dataset_audit_detection.{json,md}   # Audit du dataset normalise
-│   ├── dataset_cleaning.{json,md}          # Journal de conversion
-│   ├── evaluation_{valid,test}.{json,md}   # Rapports d'evaluation
-│   ├── export.{json,md}                    # Rapport d'export
-│   └── *_assets/                           # Graphiques et exemples annotes
-├── dataset_detection/          # Dataset normalise (data.yaml + train/valid/test)
-├── models/                     # best.pt, last.pt, smoke_best.pt
+│   ├── dataset_audit_original.{json,md}    # Audit of the original dataset
+│   ├── dataset_audit_detection.{json,md}   # Audit of the normalized dataset
+│   ├── dataset_cleaning.{json,md}          # Conversion log
+│   ├── evaluation_{valid,test}.{json,md}   # Evaluation reports
+│   ├── export.{json,md}                    # Export report
+│   └── *_assets/                           # Charts and annotated examples
+├── dataset_detection/          # Normalized dataset (data.yaml + train/valid/test)
+├── models/                     # best.pt (= v3), best_7classes.pt, best_8classes.pt, best_960.pt, smoke_best.pt
 ├── runs/
-│   ├── <experience>/           # Poids, courbes, matrice de confusion
-│   └── val/                    # Sorties de validation
-├── predictions/<nom>/
-│   ├── images/                 # Images annotees
-│   ├── labels/                 # Labels YOLO predits
+│   ├── <experiment>/           # Weights, curves, confusion matrix
+│   └── val/                    # Validation outputs
+├── predictions/<name>/
+│   ├── images/                 # Annotated images
+│   ├── labels/                 # Predicted YOLO labels
 │   ├── predictions.{json,csv}
 │   └── video_{summary,predictions}.json
 ├── exports/                    # *.onnx, *.torchscript
-└── logs/                       # Journaux par commande
+└── logs/                       # Per-command logs
 ```
 
 ---
 
-## 17. Qualite du code et tests
+## 17. Code quality and tests
 
 ```powershell
-python -m pytest tests -q          # 116 tests
+python -m pytest tests -q          # 221 tests
 python -m ruff check src tests app # linting
-python -m mypy                     # verification de types
+python -m mypy                     # type checking
 ```
 
-Etat verifie : **116 tests passent, ruff sans erreur, mypy sans erreur**.
+Verified state: **221 tests pass, ruff clean, mypy clean**.
 
-Les tests n'exigent aucun entrainement complet : ils s'appuient sur des
-fixtures synthetiques (mini dataset couvrant tous les cas limites d'annotation)
-et ignorent automatiquement les tests d'inference si aucun poids n'est present.
+The tests do not require any full training: they rely on synthetic fixtures
+(a mini dataset covering every annotation edge case) and automatically skip
+inference tests when no weights are present.
 
-Couverture : parsing et conversion des annotations, resolution des chemins
-`data.yaml` (y compris la convention Roboflow `../train/images`), audit,
-nettoyage, preservation du dataset source, geometrie de la conformite,
-neutralisation des noms de fichiers, formats de sortie, et les quatre routes
-de l'API via le client de test FastAPI.
+Coverage: annotation parsing and conversion, `data.yaml` path resolution
+(including the Roboflow `../train/images` convention), audit, cleaning,
+preservation of the source dataset, compliance geometry, filename
+sanitization, output formats, taxonomy and counter-evidence, dataset merging,
+keypoint association, threshold calibration, French labels, and the four API
+routes via the FastAPI test client.
 
 ---
 
-## 18. Depannage
+## 18. Troubleshooting
 
-### CUDA indisponible alors qu'un GPU est present
+### CUDA unavailable even though a GPU is present
 
 ```powershell
 nvidia-smi
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 ```
 
-Si `torch.__version__` ne contient pas `+cuXXX`, la version CPU est installee :
+If `torch.__version__` does not contain `+cuXXX`, the CPU build is installed:
 
 ```powershell
 python -m pip uninstall -y torch torchvision
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
 ```
 
-### « no kernel image is available for execution on the device »
+### "no kernel image is available for execution on the device"
 
-La build PyTorch ne contient pas de noyaux pour votre GPU. Typique des
-RTX 50xx (Blackwell, `sm_120`) avec une build anterieure a CUDA 12.8.
+The PyTorch build contains no kernels for your GPU. Typical of
+RTX 50xx (Blackwell, `sm_120`) with a build older than CUDA 12.8.
 
 ```powershell
 python -c "import torch; print(torch.cuda.get_device_capability(0), torch.cuda.get_arch_list())"
 ```
 
-Si `sm_120` est absent de la liste, reinstallez en `cu128`.
+If `sm_120` is missing from the list, reinstall with `cu128`.
 
-### Memoire GPU insuffisante (CUDA out of memory)
+### Insufficient GPU memory (CUDA out of memory)
 
-Par ordre d'efficacite :
+In order of effectiveness:
 
 ```powershell
-python -m ppe_detection.train --config configs/train.yaml --batch 16   # puis 8
+python -m ppe_detection.train --config configs/train.yaml --batch 16   # then 8
 python -m ppe_detection.train --config configs/train.yaml --imgsz 512
 python -m ppe_detection.train --config configs/train.yaml --model yolo26n.pt
 ```
 
-Verifiez aussi `cache: false` dans `configs/train.yaml` et fermez les autres
-applications utilisant le GPU (`nvidia-smi`).
+Also check `cache: false` in `configs/train.yaml` and close other
+applications using the GPU (`nvidia-smi`).
 
-### Entrainement tres lent sous Windows
+### Very slow training on Windows
 
-Reduisez `workers` (chaque worker est un processus complet) et activez
-`cache: disk` si le disque le permet.
+Reduce `workers` (each worker is a full process) and enable `cache: disk` if
+the disk allows it.
 
-### Webcam inaccessible
+### Webcam not accessible
 
-Verifiez qu'aucune autre application n'utilise la camera et que l'acces est
-autorise dans **Parametres > Confidentialite > Camera**. Essayez un autre
-index (`--source 1`).
+Check that no other application is using the camera and that access is
+allowed in **Settings > Privacy > Camera**. Try another index
+(`--source 1`).
 
-### La video annotee n'est pas produite
+### The annotated video is not produced
 
-Le codec `mp4v` peut manquer selon la build d'OpenCV. Le message est explicite
-et les detections restent exportables en JSON.
+The `mp4v` codec may be missing depending on the OpenCV build. The message is
+explicit and detections remain exportable as JSON.
 
-### Chemins contenant des espaces
+### Paths containing spaces
 
-Encadrez-les de guillemets :
+Wrap them in quotes:
 
 ```powershell
-python -m ppe_detection.predict --weights "artifacts/models/best.pt" --source "C:\Mes Images\chantier.jpg"
+python -m ppe_detection.predict --weights "artifacts/models/best.pt" --source "C:\My Images\site.jpg"
 ```
 
 ---
 
-## 19. Limites connues
+## 19. Known limitations
 
-Cette section liste ce qui est **reellement** limitant. Rien n'est passe sous
-silence.
+This section lists what is **actually** limiting. Nothing is swept under the
+rug.
 
-### Donnees
+### Data
 
-1. **Fuite residuelle par sequence video.** Le regroupement par photo source est
-   desormais actif par defaut et supprime les 390 groupes concernes. Il reste
-   **78 clusters de quasi-doublons a cheval sur les splits** : des frames video
-   consecutives, formellement distinctes, que le regroupement par nom ne peut
-   pas rapprocher. Les metriques restent donc legerement optimistes.
-2. **Documentation source inexacte.** Le README Roboflow annonce « No
-   pre-processing or augmentation was applied », ce que l'analyse pixel
-   contredit (variantes pivotees d'une meme photo).
-3. **Diversite reelle inferieure au volume affiche.** Sur 7 000 images, environ
-   1 785 sont des frames extraites de quelques sequences video, tres
-   redondantes entre elles.
-4. **Boites issues de polygones.** 349 boites proviennent d'une conversion
-   min/max : la boite englobante d'un polygone est toujours au moins aussi
-   grande que l'objet reel. Cela contribue au faible mAP@0.50:0.95 (0.433
-   contre 0.799 a IoU 0.50).
-5. **Petits objets — facteur limitant principal.** 25 % des casques et 13 % des
-   gants font moins de 32 px a 640. Cela pese davantage que le desequilibre des
-   classes : `Face Mask`, la classe la plus rare, est la mieux detectee (0.922),
-   tandis que `Safety Helmet`, la deuxieme plus frequente, plafonne a 0.796.
-6. **Ecart au terrain non mesure.** Le dataset ne couvre ni la nuit, ni la
-   pluie, ni le contre-jour, ni les angles de videosurveillance. Sur une video
-   de chantier reelle, `Safety Vest` (0.878 de mAP@0.50 en test) n'a ete detecte
-   que 15 fois sur 122 images. Plan de correction :
+1. **Residual leakage through video sequences.** Regrouping by source photo
+   is now enabled by default and removes the 390 affected groups. There remain
+   **78 near-duplicate clusters spanning the splits**: consecutive video
+   frames, formally distinct, that name-based regrouping cannot match. Metrics
+   therefore remain slightly optimistic.
+2. **Inaccurate source documentation.** The Roboflow README states "No
+   pre-processing or augmentation was applied", which pixel analysis
+   contradicts (rotated variants of the same photo).
+3. **Real diversity lower than the advertised volume.** Out of 7,000 images,
+   about 1,785 are frames extracted from a few video sequences, highly
+   redundant with each other.
+4. **Boxes derived from polygons.** 349 boxes come from a min/max conversion:
+   the bounding box of a polygon is always at least as large as the actual
+   object. This contributes to the low mAP@0.50:0.95 (0.433 vs 0.799 at
+   IoU 0.50).
+5. **Small objects — the main limiting factor.** 25% of helmets and 13% of
+   gloves are smaller than 32 px at 640. This weighs more than class
+   imbalance: `Face Mask`, the rarest class, is the best detected (0.922),
+   while `Safety Helmet`, the second most frequent, plateaus at 0.796.
+6. **Gap to the field not measured.** The dataset covers neither night, rain,
+   backlight, nor video surveillance angles. On a real construction site
+   video, `Safety Vest` (0.878 mAP@0.50 on test) was detected only 15 times
+   over 122 images. Remediation plan:
    [`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
+7. **Pseudo-labeled people in the v3 dataset.** 16,768 `Person` boxes
+   (13,537 + 3,231) were produced by a model, without human review. They
+   propagate that model's errors: missed people or imprecise boxes on the
+   `hard-hat-detection` and Open Images pictures.
 
-### Modele et pipeline
+### Model and pipeline
 
-7. **`Safety Gloves` n'est pas exploitable en production** : 0.548 de mAP@0.50 et
-   0.555 de rappel — plus d'un gant sur quatre est manque. La classe figure dans
-   `unreliable_ppe` et declenche un avertissement si elle est inscrite dans
-   `required_ppe`.
-8. **La conformite EPI reste une heuristique**, meme avec `--pose`. Les points
-   cles suppriment l'hypothese « personne debout vue de face », mais ni la pose
-   ni la geometrie ne prouvent qu'un EPI est effectivement **porte** : un casque
-   pose sur une table dans la zone tete sera compte comme porte. Limites
-   detaillees en [section 12](#12-conformite-epi).
-9. **La verification ONNX porte sur une seule image.** Elle prouve la fidelite
-   de la conversion, pas l'equivalence sur toute distribution d'entrees.
-10. **Les exports TensorRT et OpenVINO ne sont pas verifies automatiquement**
-    (seul ONNX l'est) et n'ont pas ete testes ici.
-11. **Le mode `symlink` retombe silencieusement sur la copie** sous Windows si
-    les droits ne permettent pas la creation de liens (mode developpeur requis).
-12. **Couverture de tests a 51 %.** Les chemins lourds (entrainement, export,
-    audit complet) sont peu couverts : les exercer demanderait un GPU et le
-    dataset complet.
-13. **Incoherence de l'option `--output`.** Elle designe un **repertoire** dans
-    `evaluate`, `export`, `predict` et `dataset_cleaner`, mais un **fichier**
-    dans `dataset_audit`. Piege a eviter tant que ce n'est pas uniformise.
+8. **`Safety Gloves` is not production-ready**: 0.525 mAP@0.50 and 0.547
+   recall on the v3 test — nearly one glove in two is missed. The class is listed in
+   `unreliable_ppe` and triggers a warning if added to `required_ppe`.
+9. **PPE compliance remains a heuristic**, even with `--pose`. Keypoints
+   remove the "person standing, seen from the front" assumption, but neither
+   pose nor geometry proves that a PPE item is actually **worn**: a helmet
+   lying on a table in the head region will be counted as worn. Detailed
+   limitations in [section 12](#12-ppe-compliance).
+10. **ONNX verification covers a single image.** It proves the fidelity of the
+   conversion, not equivalence over every input distribution.
+11. **TensorRT and OpenVINO exports are not automatically verified** (only
+    ONNX is) and have not been tested here.
+12. **`symlink` mode silently falls back to copying** on Windows if
+    permissions do not allow creating links (developer mode required).
+13. **53% test coverage.** Heavy paths (training, export, full audit) are
+    poorly covered: exercising them would require a GPU and the full dataset.
+14. **Inconsistent `--output` option.** It refers to a **directory** in
+    `evaluate`, `export`, `predict` and `dataset_cleaner`, but to a **file**
+    in `dataset_audit`. A pitfall to avoid until it is unified.
 
 ---
 
-## 20. Pistes d'amelioration
+## 20. Future work
 
-### Deja fait
+### Already done
 
-- Regroupement anti-fuite par photo source, **actif par defaut** (section 7).
-- Etat `indeterminate` : ne pas accuser une personne qu'on ne peut pas observer.
-- Suivi multi-objets et lissage temporel des verdicts (`--track`).
-- Association par points cles du corps (`--pose`).
-- Calibration des seuils par classe sur la validation (`calibrate`).
+- Anti-leak regrouping by source photo, **enabled by default** (section 7).
+- `indeterminate` state: do not blame a person we cannot observe.
+- Multi-object tracking and temporal smoothing of verdicts (`--track`).
+- Association via body keypoints (`--pose`).
+- Per-class threshold calibration on validation (`calibrate`).
+- Negative classes `Non-Safety Headwear` and `Uncovered Head` to tell a real
+  hard hat apart from its look-alikes (v3 model, section 12).
+- Merging public datasets and pseudo-labeling missing classes
+  (`dataset_merge`, `pseudo_label`).
 
-### Priorites restantes
+### Remaining priorities
 
-**1. Mesurer l'ecart au terrain.** Constituer un jeu de test de 150 a 200
-images issues des conditions reelles de deploiement, jamais melangees a
-l'entrainement. C'est le seul juge honnete de la performance en production, et
-le prealable a toute autre optimisation. Voir
+**1. Finalize the v3 model.** Recalibrate per-class thresholds on the v3
+validation split, and enable `Uncovered Head` as counter-evidence in
+`configs/inference.yaml`.
+
+**2. Measure the gap to the field.** Build a test set of 150 to 200 images
+from real deployment conditions, never mixed into training. It is the only
+honest judge of production performance, and the prerequisite to any other
+optimization. See
 [`docs/plan_ecart_terrain.md`](docs/plan_ecart_terrain.md).
 
-**2. Resolution : piste testee, a ne pas relancer telle quelle.** Un
-entrainement complet a 960 px n'a apporte aucun gain global (voir section 10).
-Inutile d'y revenir sans changer autre chose. Restent a essayer :
-l'entrainement multi-echelle (`multi_scale: true`), qui expose le modele aux
-deux regimes plutot que d'en privilegier un, et un modele plus capacitaire
-(`yolo26m`) a 640 px, moins couteux a l'inference qu'un `yolo26s` a 960 px.
+**3. Resolution: tested lead, not to be rerun as is.** A full training run at
+960 px brought no global gain (see section 10). No point going back to it
+without changing something else. Still to try: multi-scale training
+(`multi_scale: true`), which exposes the model to both regimes rather than
+favoring one, and a higher-capacity model (`yolo26m`) at 640 px, cheaper at
+inference than a `yolo26s` at 960 px.
 
-**3. `Safety Gloves`.** Campagne d'annotation dediee, ou retrait assume des
-regles de conformite. En l'etat, la classe ne supporte aucune decision.
+**4. `Safety Gloves`.** A dedicated annotation campaign, or a deliberate
+removal from the compliance rules. As it stands, the class supports no
+decision.
 
-**4. Stratification par sequence video.** Eliminer les 78 clusters de
-quasi-doublons restants exige de repartir les splits par sequence source, et non
-par nom de fichier.
+**5. Stratification by video sequence.** Removing the 78 remaining
+near-duplicate clusters requires splitting by source sequence, not by
+filename.
 
-**5. Conformite avancee.** Verifier qu'un EPI est *porte* et non simplement
-present dans la zone (coherence temporelle du port, orientation du casque).
+**6. Advanced compliance.** Check that a PPE item is *worn* and not merely
+present in the region (temporal consistency of wearing, helmet orientation).
 
-**6. Industrialisation.** Quantification INT8 pour l'embarque ; export TensorRT
-verifie ; conteneurisation de l'API ; supervision de la derive du modele.
+**7. Production readiness.** INT8 quantization for embedded targets; verified
+TensorRT export; containerizing the API; monitoring model drift.
 
-**7. Dette technique.** Uniformiser la semantique de `--output` ; monter la
-couverture de tests sur `train.py` et `export.py`.
+**8. Technical debt.** Unify the semantics of `--output`; raise test coverage
+on `train.py` and `export.py`.
 
 ---
 
-## Licence et attribution
+## License and attribution
 
-Code sous licence MIT. Le dataset provient de Roboflow Universe sous licence
-**CC BY 4.0** et doit etre attribue a son auteur :
+Code under the MIT license. The dataset comes from Roboflow Universe under the
+**CC BY 4.0** license and must be attributed to its author:
 [https://universe.roboflow.com/ousmane-savadogo/ppe-detection-project-jeezl-p9ncg](https://universe.roboflow.com/ousmane-savadogo/ppe-detection-project-jeezl-p9ncg)
 
-Ce systeme est une aide a la detection. **Il ne remplace pas l'inspection
-humaine de securite** et ne doit pas etre utilise comme unique mecanisme de
-controle de conformite sur un site reel.
+This system is a detection aid. **It does not replace human safety
+inspection** and must not be used as the sole compliance control mechanism on
+a real site.
